@@ -1,0 +1,16 @@
+﻿@if (ViewBag.ErrorMessage != null)
+{
+    <script>
+        $(function () {
+            showError('@ViewBag.ErrorMessage', '');
+        });
+    </script>
+}
+@if (ViewBag.SuccessMessage != null)
+{
+    <script>
+        $(function () {
+            showSuccess('@ViewBag.SuccessMessage', '');
+        });
+    </script>
+}

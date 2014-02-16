@@ -1,0 +1,8 @@
+﻿@model TestCard.Web.Models.ToolbarButton
+
+<a class="x-toolbar-button @Model.ButtonType" href="@Model.Url">
+    <span class="btn-wrapper">
+        <span class="icon"></span>
+        <span class="text @Model.Type.ToString().ToLower()">@Model.Text</span>
+    </span>
+</a>

@@ -1,0 +1,37 @@
+﻿<div id="header">
+    <div class="x-top-section">
+        @{ Html.RenderAction("UserOptions", "Home"); }
+    </div>
+    <ul class="x-toolbar">
+        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+                                       {
+                                           ButtonType = "company",
+                                           Text = GeneralResource.Company,
+                                           Url = "/Company/List"
+                                       })
+        </li>
+        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+                                       {
+                                           ButtonType = "users",
+                                           Text = GeneralResource.Users
+                                       })</li>
+        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+                                       {
+                                           ButtonType = "user-edit",
+                                           Text = GeneralResource.EditRequest,
+                                           Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline
+                                       })</li>
+        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+                                       {
+                                           ButtonType = "card",
+                                           Text = GeneralResource.TestCard,
+                                           Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline
+                                       })</li>
+        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+                                       {
+                                           ButtonType = "card-edit",
+                                           Text = GeneralResource.EditRequest,
+                                           Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline
+                                       })</li>
+    </ul>
+</div>

@@ -1,0 +1,13 @@
+﻿@model TestCard.Web.Models.UserOptions
+
+<div id="user-options">
+    <div class="drop-down">
+        <span class="text">
+            @string.Format("{0}: {1}", Model.AccountType, Model.FullName)<span class="arrow"></span>
+        </span>
+        <ul class="list" style="display: none;">
+            <li>@Html.ActionLink(@GeneralResource.Logout, "Logout", "Authorization")</li>
+        </ul>
+    </div>
+    <div class="x-clear"></div>
+</div>

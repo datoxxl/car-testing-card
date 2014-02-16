@@ -1,0 +1,10 @@
+﻿@model List<ActionButton>
+
+<ul class="x-action-bar">
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href="@item.Url" class="item @item.Type.ToString().ToLower()">@item.Text</a>
+        </li>   
+    }
+</ul>

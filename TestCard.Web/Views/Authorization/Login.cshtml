@@ -1,0 +1,33 @@
+﻿@model TestCard.Web.Models.LoginModel
+@{
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<div id="login" class="x-shadow">
+    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="x-top-section">
+            @Html.ActionLink(GeneralResource.Register, "Register")<span class="x-toolbar-sep-hor"></span>@Html.ActionLink(GeneralResource.RecoverPassword, "Register")
+        </div>
+        <fieldset>
+            <legend></legend>
+            <ol>
+                <li>
+                    @Html.LabelFor(x => x.IdNumber)
+                    @Html.TextBoxFor(x => x.IdNumber)
+                    @Html.ValidationMessageFor(x => x.IdNumber)
+                </li>
+                <li>
+                    @Html.LabelFor(x => x.Password)
+                    @Html.PasswordFor(x => x.Password)
+                    @Html.ValidationMessageFor(x => x.Password)
+                </li>
+            </ol>
+            <div class="x-actions">
+                <input type="submit" value="@GeneralResource.Login" />
+            </div>
+        </fieldset>
+    }
+</div>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TestCard.Web.Models.CompanyListModel>
+
+@{
+    ViewBag.Title = "List";
+}
+<p>
+    @{ Html.RenderPartial("_ActionBar", new List<TestCard.Web.Models.ActionButton>
+       {
+           new TestCard.Web.Models.ActionButton { 
+               Type = ActionButton.ActionType.Add, 
+               Text = GeneralResource.Add,
+               Url = "/Company/Add"
+           },
+           new TestCard.Web.Models.ActionButton { 
+               Type = ActionButton.ActionType.Edit, 
+               Text = GeneralResource.Edit,
+               Url = "/Company/Edit"
+           },
+       }); }
+</p>
+<table class="x-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccreditationScope)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccreditationNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccreditationExpireDate)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.CompanyName, "View")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccreditationScope)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccreditationNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccreditationExpireDate)
+            </td>
+        </tr>
+    }
+
+</table>
