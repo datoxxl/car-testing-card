@@ -7,6 +7,9 @@ namespace TestCard.Web.Models
 {
     public class RegisterModel
     {
+        public int? PersonID { get; set; }
+        public int? PersonChangeRequestID { get; set; }
+
         [Required(ErrorMessage = "",
            ErrorMessageResourceName = "FillRequiredField",
            ErrorMessageResourceType = typeof(GeneralResource))]
@@ -51,11 +54,17 @@ namespace TestCard.Web.Models
         [Display(Name = "Company", ResourceType = typeof(GeneralResource))]
         public Nullable<int> CompanyID { get; set; }
 
+        [Display(Name = "Company", ResourceType = typeof(GeneralResource))]
+        public string CompanyName { get; set; }
+
         [Required(ErrorMessage = "",
            ErrorMessageResourceName = "FillRequiredField",
            ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "Type", ResourceType = typeof(GeneralResource))]
         public int AccountTypeID { get; set; }
+
+        [Display(Name = "Type", ResourceType = typeof(GeneralResource))]
+        public string AccountTypeName{ get; set; }
 
         [Required(ErrorMessage = "",
            ErrorMessageResourceName = "FillRequiredField",

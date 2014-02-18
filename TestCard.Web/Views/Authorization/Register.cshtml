@@ -7,77 +7,7 @@
 {
     <div id="register" class="x-shadow">
         <h3>@GeneralResource.RegistrationRequest</h3>
-        <table class="x-form">
-            <tr>
-                <td>
-                    <fieldset>
-                        <legend>@GeneralResource.General</legend>
-                        <ol>
-                            <li>
-                                @Html.LabelFor(x => x.IDNo)
-                                @Html.TextBoxFor(x => x.IDNo)
-                                @Html.ValidationMessageFor(x => x.IDNo)
-                            </li>
-                            <li>
-                                @Html.LabelFor(x => x.FirstName)
-                                @Html.TextBoxFor(x => x.FirstName)
-                                @Html.ValidationMessageFor(x => x.FirstName)
-                            </li>
-                            <li>
-                                @Html.LabelFor(x => x.LastName)
-                                @Html.TextBoxFor(x => x.LastName)
-                                @Html.ValidationMessageFor(x => x.LastName)
-                            </li>
-                            <li>
-                                @Html.LabelFor(x => x.AccountTypeID)
-                                @Html.DropDownListFor(x => x.AccountTypeID, Model.AccountTypes, string.Empty)
-                                @Html.ValidationMessageFor(x => x.AccountTypeID)
-                            </li>
-                            <li>
-                                @Html.LabelFor(x => x.Password)
-                                @Html.PasswordFor(x => x.Password)
-                                @Html.ValidationMessageFor(x => x.Password)
-                            </li>
-                            <li>
-                                @Html.LabelFor(x => x.RepeatPassword)
-                                @Html.PasswordFor(x => x.RepeatPassword)
-                                @Html.ValidationMessageFor(x => x.RepeatPassword)
-                            </li>
-                        </ol>
-                    </fieldset>
-                </td>
-                <td>
-                    <fieldset>
-                        <legend>@GeneralResource.ContactInformation</legend>
-                        <ol>
-                            <li>
-                                @Html.LabelFor(x => x.Email)
-                                @Html.TextBoxFor(x => x.Email)
-                                @Html.ValidationMessageFor(x => x.Email)
-                            </li>
-                            <li>
-                                @Html.LabelFor(x => x.Mobile)
-                                @Html.TextBoxFor(x => x.Mobile)
-                                @Html.ValidationMessageFor(x => x.Mobile)
-                            </li>
-                            <li>
-                                @Html.LabelFor(x => x.CompanyID)
-                                @Html.TextBoxFor(x => x.CompanyID)
-                                @Html.ValidationMessageFor(x => x.CompanyID)
-                            </li>
-                        </ol>
-                    </fieldset>
-                </td>
-            </tr>
-           @* <tr>
-                <td colspan="2">
-                    @{Html.RenderPartial("_PersonSchedule", Model.Schedule, new ViewDataDictionary
-                    {
-                        TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "Schedule" }
-                    }); }
-                </td>
-            </tr>*@
-        </table>
+        @Html.EditorForModel()
         <div class="x-actions">
             <input type="submit" value="@GeneralResource.Register" />
             @Html.ActionLink(GeneralResource.Cancel, "Login")

@@ -35,7 +35,7 @@ namespace TestCard.Web.Controllers
                 }
             }
 
-            ViewBag.ErrorMessage = GeneralResource.PasswordNotValid;
+            SetErrorMessage(GeneralResource.PasswordNotValid);
             return View(model);
         }
 
@@ -61,18 +61,20 @@ namespace TestCard.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    using (var service = new PersonService())
+                    using (var service = new PersonChangeRequestService())
                     {
                         var per = AutoMapper.Mapper.Map<Models.RegisterModel, TestCard.Domain.PersonChangeRequest>(model);
-                        service.SavePersonChangeRequest(per);
+                        service.SavePersonChangeRequest(per, null, null);
                     }
 
-                    ViewBag.SuccessMessage = GeneralResource.RegistrationComplete;
+                   SetSuccessMessage(GeneralResource.RegistrationComplete);
+
+                   return RedirectTo();
                 }
             }
             catch
             {
-                ViewBag.ErrorMessage = GeneralResource.ErrorOccured;
+                SetErrorMessage();
             }
 
             ModelDataHelper.PopulateRegisterModel(model);

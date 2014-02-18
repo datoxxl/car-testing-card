@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TestCard.Domain.Services;
-using TestCard.Web.Models;
 
 namespace TestCard.Web.Helpers
 {
     public static class ModelDataHelper
     {
-        public static List<SelectListItem> GetWorkHours()
+        private static List<SelectListItem> GetWorkHours()
         {
             var list = new List<SelectListItem>();
 
@@ -31,7 +31,7 @@ namespace TestCard.Web.Helpers
             return list;
         }
 
-        public static List<SelectListItem> GetBreakHours()
+        private static List<SelectListItem> GetBreakHours()
         {
             var list = new List<SelectListItem>();
 
@@ -50,19 +50,44 @@ namespace TestCard.Web.Helpers
             return list;
         }
 
-        public static List<TestCard.Web.Models.PersonScheduleModel.Day> GetScheduleDays()
+        private static List<Models.PersonScheduleModel.Day> PopulateScheduleDays(List<Models.PersonScheduleModel.Day> days)
         {
-            var days = new List<TestCard.Web.Models.PersonScheduleModel.Day>();
-
-            foreach (var item in Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>())
+            if (days == null)
             {
-                days.Add(new TestCard.Web.Models.PersonScheduleModel.Day { WeekDay = item });
+                days = new List<Models.PersonScheduleModel.Day>();
+            }
+
+            for (int i = 1; i <= 7; i++)
+            {
+                var dayOfWeek = (DayOfWeek)(i == 7 ? 0 : i);
+                var weekDayName = CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dayOfWeek);
+
+                var day = days.FirstOrDefault(x => x.WeekDayNumber == i);
+
+                if (day == null)
+                {
+                    day = new Models.PersonScheduleModel.Day
+                    {
+                        WeekDayNumber = i
+                    };
+
+                    days.Add(day);
+                }
+
+                day.WeekDayName = weekDayName;
             }
 
             return days;
         }
 
-        public static void PopulateRegisterModel(RegisterModel model)
+        public static void PopulatePersonScheduleModel(Models.PersonScheduleModel model)
+        {
+            model.Days = PopulateScheduleDays(model.Days);
+            model.BreakHours = GetBreakHours();
+            model.WorkHours = GetWorkHours();
+        }
+
+        public static void PopulateRegisterModel(Models.RegisterModel model)
         {
             using (var service = new AccountTypeService())
             {

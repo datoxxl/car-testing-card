@@ -14,6 +14,11 @@ namespace TestCard.Domain
     
     public partial class PersonChangeRequest
     {
+        public PersonChangeRequest()
+        {
+            this.PersonScheduleChangeRequests = new HashSet<PersonScheduleChangeRequest>();
+        }
+    
         public int PersonChangeRequestID { get; set; }
         public Nullable<int> PersonID { get; set; }
         public string FirstName { get; set; }
@@ -38,12 +43,13 @@ namespace TestCard.Domain
     
         public virtual AccountType AccountType { get; set; }
         public virtual Company Company { get; set; }
-        public virtual ConfirmStatus ConfirmStatu { get; set; }
-        public virtual ConfirmStatus ConfirmStatu1 { get; set; }
-        public virtual Person Person { get; set; }
-        public virtual Person Person1 { get; set; }
-        public virtual Person Person2 { get; set; }
-        public virtual Person Person3 { get; set; }
+        public virtual ConfirmStatus AdminConfirmStatus { get; set; }
+        public virtual ConfirmStatus QualityManagerConfirmStatus { get; set; }
         public virtual File File { get; set; }
+        public virtual Person AdminPerson { get; set; }
+        public virtual Person Person { get; set; }
+        public virtual Person QualityManagerPerson { get; set; }
+        public virtual Person ResponsiblePerson { get; set; }
+        public virtual ICollection<PersonScheduleChangeRequest> PersonScheduleChangeRequests { get; set; }
     }
 }

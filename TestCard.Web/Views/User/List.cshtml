@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "List";
+}
+<p>
+    @{ Html.RenderPartial("_ActionBar", new List<TestCard.Web.Models.ActionButton>
+       {
+           new TestCard.Web.Models.ActionButton { 
+               Type = ActionButton.ActionType.Add, 
+               Text = GeneralResource.Add,
+               Url = "/User/Add"
+           },
+           new TestCard.Web.Models.ActionButton { 
+               Type = ActionButton.ActionType.Edit, 
+               Text = GeneralResource.Edit,
+               Url = "/User/Edit"
+           },
+       }); }
+</p>
+@{ Html.RenderAction("Person", "List"); }

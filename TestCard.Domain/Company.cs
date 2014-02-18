@@ -18,9 +18,9 @@ namespace TestCard.Domain
         {
             this.CompanyChangeRequests = new HashSet<CompanyChangeRequest>();
             this.CompanyHistories = new HashSet<CompanyHistory>();
+            this.PersonHistories = new HashSet<PersonHistory>();
             this.People = new HashSet<Person>();
             this.PersonChangeRequests = new HashSet<PersonChangeRequest>();
-            this.PersonHistories = new HashSet<PersonHistory>();
         }
     
         public int CompanyID { get; set; }
@@ -36,13 +36,13 @@ namespace TestCard.Domain
         public Nullable<int> FileID { get; set; }
         public string Address { get; set; }
     
-        public virtual Person Person { get; set; }
-        public virtual Person Person1 { get; set; }
         public virtual ICollection<CompanyChangeRequest> CompanyChangeRequests { get; set; }
         public virtual ICollection<CompanyHistory> CompanyHistories { get; set; }
-        public virtual ICollection<Person> People { get; set; }
-        public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
         public virtual ICollection<PersonHistory> PersonHistories { get; set; }
         public virtual File File { get; set; }
+        public virtual Person Person { get; set; }
+        public virtual Person Person1 { get; set; }
+        public virtual ICollection<Person> People { get; set; }
+        public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
     }
 }

@@ -22,5 +22,10 @@ namespace TestCard.Web.Controllers
 
             return PartialView(new Models.UserOptions { AccountType = user.AccountTypeName, FullName = user.FirstName + " " + user.LastName });
         }
+
+        public ImageResult GetImage(string id)
+        {
+            return new ImageResult(Properties.Config.FilePath + id);
+        }
     }
 }

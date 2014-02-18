@@ -1,0 +1,49 @@
+﻿@model IEnumerable<TestCard.Web.Models.PersonListModel>
+
+<table class="x-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountTypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDNo)
+            </td>
+            <td>
+                @Html.ActionLink(item.FullName, "Edit", "User", new { @id = item.PersonID }, null)
+            </td>
+            <td>
+                @Html.ActionLink(item.CompanyName, "Edit", "Company", new { @id = item.CompanyID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+        </tr>
+    }
+
+</table>

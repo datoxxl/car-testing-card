@@ -76,13 +76,14 @@ input, textarea, select
     color: #333;
     /*font-size: 1.2em;*/
     padding: 5px;
-    width: 180px;
+    width: 250px;
+    vertical-align: middle;
 }
 
 textarea
 {
-    font-family: inherit;
-    width: 500px;
+    vertical-align: top;
+    height: 150px;
 }
 
     input:focus, textarea:focus
@@ -117,6 +118,11 @@ td button
     font-size: 1em;
     padding: 4px;
     margin-right: 4px;
+}
+
+#content
+{
+    padding: 20px;
 }
 
 /* info and errors */
@@ -160,6 +166,7 @@ td button
     background: url('images/exclamation.png') no-repeat center center;
     overflow: hidden;
     padding-left: 16px;
+    vertical-align: middle;
 }
 
     .field-validation-error:hover span
@@ -374,11 +381,6 @@ div.watermark
         padding: 20px 15px;
     }
 
-        .x-error-window .content *
-        {
-            vertical-align: middle;
-        }
-
     .x-success-window span.icon,
     .x-error-window span.icon
     {
@@ -386,6 +388,7 @@ div.watermark
         height: 32px;
         display: inline-block;
         margin-right: 10px;
+        vertical-align: middle;
     }
 
     .x-error-window span.icon
@@ -576,6 +579,13 @@ table.x-form
     width: 800px;
 }
 
+    #register input[type="text"],
+    #register input[type="password"],
+    #register select
+    {
+        width: 180px;
+    }
+
 #login
 {
     width: 450px;
@@ -728,3 +738,11 @@ ul.x-action-bar
     {
         width: auto;
     }
+
+.x-picture-area
+{
+    width: 300px;
+    display: block;
+    border: 1px solid #555;
+    margin-top: 10px;
+}

@@ -12,9 +12,10 @@ namespace TestCard.Web.Models
 
         public class Day
         {
-            public DayOfWeek WeekDay { get; set; }
-            public TimeSpan? WorkStartTime { get; set; }
-            public TimeSpan? WorkEndTime { get; set; }
+            public int WeekDayNumber { get; set; }
+            public string WeekDayName { get; set; }
+            public TimeSpan? StartTime { get; set; }
+            public TimeSpan? EndTime { get; set; }
             public TimeSpan? BreakStartTime { get; set; }
             public TimeSpan? BreakEndTime { get; set; }
         }

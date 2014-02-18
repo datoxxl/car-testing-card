@@ -9,37 +9,69 @@ namespace TestCard.Domain.Services
 {
     public class CompanyService : DomainServiceBase<Company>
     {
-        public bool AddCompany(Company company, int responsiblePersonID, byte[] companyLogo)
+        public bool SaveCompany(Company company, int responsiblePersonID, byte[] companyLogo)
         {
-            if (companyLogo != null)
+            string fileName = null;
+            string filePath = null;
+            string oldFilePath = null;
+
+            try
             {
-                var fileName = string.Empty;
-                var filePath = string.Empty;
-
-                do
+                if (companyLogo != null)
                 {
-                    fileName = Guid.NewGuid().ToString() + ".jpeg";
-                    filePath = System.IO.Path.GetFullPath(Config.FilePath + fileName);
-                } while (System.IO.File.Exists(filePath));
+                    do
+                    {
+                        fileName = Guid.NewGuid().ToString() + ".jpeg";
+                        filePath = System.IO.Path.GetFullPath(Config.FilePath + fileName);
+                    } while (System.IO.File.Exists(filePath));
 
-                using (var file = System.IO.File.Open(filePath, System.IO.FileMode.OpenOrCreate))
-                {
-                    file.Write(companyLogo, 0, companyLogo.Length);
+                    using (var file = System.IO.File.Open(filePath, System.IO.FileMode.OpenOrCreate))
+                    {
+                        file.Write(companyLogo, 0, companyLogo.Length);
+                    }
+
+                    if (company.File != null)
+                    {
+                        oldFilePath = company.File.FilePath;
+                    }
+
+                    company.File = new File { FileName = fileName, FilePath = filePath };
                 }
 
-                company.File = new File { FileName = fileName, FilePath = filePath };
+                var today = DateTime.Now;
+
+                company.EffectiveDate = today;
+                company.ResponsiblePersonID = responsiblePersonID;
+
+                if (company.CompanyID == 0)
+                {
+                    Add(company);
+                }
+                else
+                {
+                    Update(company);
+                }
+
+                SaveChanges();
+
+                if (oldFilePath != null)
+                {
+                    System.IO.File.Delete(oldFilePath);
+                }
             }
+            catch(Exception ex)
+            {
+                if (filePath != null)
+                {
+                    System.IO.File.Delete(filePath);
+                }
 
-            var today = DateTime.Now;
-
-            company.EffectiveDate = today;
-            company.ResponsiblePersonID = responsiblePersonID;
-
-            _DbContext.Companies.Add(company);
-
-            SaveChanges();
+                throw ex;
+            }
 
             return company.CompanyID > 0;
         }
+
+
     }
 }

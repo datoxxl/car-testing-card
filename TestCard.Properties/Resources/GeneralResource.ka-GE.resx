@@ -267,4 +267,22 @@
   <data name="YourEmail" xml:space="preserve">
     <value>თქვენი ელ-ფოსტა</value>
   </data>
+  <data name="RecordNotExists" xml:space="preserve">
+    <value>ჩანაწერი არ არსებობს</value>
+  </data>
+  <data name="CompanyLogo" xml:space="preserve">
+    <value>კომპანიის ლოგო</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>მომხმარებელი</value>
+  </data>
+  <data name="WorkSchedule" xml:space="preserve">
+    <value>სამუშაო გრაფიკი</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>დადასტურება</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>უარყოფა</value>
+  </data>
 </root>

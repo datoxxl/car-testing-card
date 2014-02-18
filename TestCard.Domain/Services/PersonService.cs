@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace TestCard.Domain.Services
 {
@@ -36,20 +37,6 @@ namespace TestCard.Domain.Services
             }
 
             return null;
-        }
-
-        public bool SavePersonChangeRequest(PersonChangeRequest person)
-        {
-            var today = DateTime.Now;
-
-            person.EffectiveDate = today;
-            person.CreateDate = today;
-
-            _DbContext.PersonChangeRequests.Add(person);
-
-            SaveChanges();
-
-            return person.PersonChangeRequestID > 0;
         }
     }
 }

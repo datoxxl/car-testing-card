@@ -852,3 +852,17 @@ function initValidation() {
 //    if (divnode.scrollWidth > divnode.clientWidth)
 //        return true;
 //}
+
+function initDataTable() {
+    $('.x-table').each(function (index, elem) {
+        var $table = $(elem);
+
+        $table.append();
+        $table.find('tbody>tr').click(function () {
+            var $t = $(this);
+
+            $t.siblings().removeClass('selected');
+            $t.addClass('selected');
+        });
+    });
+}

@@ -97,6 +97,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Approve.
+        /// </summary>
+        public static string Approve {
+            get {
+                return ResourceManager.GetString("Approve", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
         public static string Back {
@@ -138,6 +147,15 @@ namespace TestCard.Properties.Resources {
         public static string Company {
             get {
                 return ResourceManager.GetString("Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company logo.
+        /// </summary>
+        public static string CompanyLogo {
+            get {
+                return ResourceManager.GetString("CompanyLogo", resourceCulture);
             }
         }
         
@@ -358,6 +376,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Record doesn&apos;t exist.
+        /// </summary>
+        public static string RecordNotExists {
+            get {
+                return ResourceManager.GetString("RecordNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recover password.
         /// </summary>
         public static string RecoverPassword {
@@ -390,6 +417,15 @@ namespace TestCard.Properties.Resources {
         public static string RegistrationRequest {
             get {
                 return ResourceManager.GetString("RegistrationRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reject.
+        /// </summary>
+        public static string Reject {
+            get {
+                return ResourceManager.GetString("Reject", resourceCulture);
             }
         }
         
@@ -484,6 +520,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        public static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Users.
         /// </summary>
         public static string Users {
@@ -498,6 +543,15 @@ namespace TestCard.Properties.Resources {
         public static string WorkHours {
             get {
                 return ResourceManager.GetString("WorkHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work schedule.
+        /// </summary>
+        public static string WorkSchedule {
+            get {
+                return ResourceManager.GetString("WorkSchedule", resourceCulture);
             }
         }
         

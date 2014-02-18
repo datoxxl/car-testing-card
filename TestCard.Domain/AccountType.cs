@@ -16,16 +16,16 @@ namespace TestCard.Domain
     {
         public AccountType()
         {
+            this.PersonHistories = new HashSet<PersonHistory>();
             this.People = new HashSet<Person>();
             this.PersonChangeRequests = new HashSet<PersonChangeRequest>();
-            this.PersonHistories = new HashSet<PersonHistory>();
         }
     
         public int AccountTypeID { get; set; }
         public string AccountTypeName { get; set; }
     
+        public virtual ICollection<PersonHistory> PersonHistories { get; set; }
         public virtual ICollection<Person> People { get; set; }
         public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
-        public virtual ICollection<PersonHistory> PersonHistories { get; set; }
     }
 }

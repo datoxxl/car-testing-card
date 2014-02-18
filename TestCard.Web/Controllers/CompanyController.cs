@@ -21,16 +21,7 @@ namespace TestCard.Web.Controllers
 
         public ActionResult List()
         {
-            var list = new List<Models.CompanyListModel>();
-
-            using (var service = new CompanyService())
-            {
-                service.GetAll()
-                    .ToList()
-                    .ForEach(x => list.Add(AutoMapper.Mapper.Map<TestCard.Domain.Company, Models.CompanyListModel>(x)));
-            }
-
-            return View(list);
+            return View();
         }
 
         public ActionResult Add()
@@ -49,34 +40,93 @@ namespace TestCard.Web.Controllers
                 {
                     if (file != null && file.ContentType != MediaTypeNames.Image.Jpeg)
                     {
-                        ViewBag.ErrorMessage = GeneralResource.ImageAllowedMessage;
+                        SetErrorMessage(GeneralResource.ImageAllowedMessage);
                     }
                     else
                     {
                         using (var service = new CompanyService())
                         {
-                            var per = AutoMapper.Mapper.Map<Models.CompanyModel, TestCard.Domain.Company>(model);
-                            per.ResponsiblePersonID = CurrentUser.PersonID;
+                            var company = AutoMapper.Mapper.Map<Models.CompanyModel, TestCard.Domain.Company>(model);
 
-                            service.AddCompany(per, CurrentUser.PersonID, GetFileData(file));
+                            service.SaveCompany(company, CurrentUser.PersonID, GetFileData(file));
+                        
+                            SetSuccessMessage();
+
+                            return RedirectToAction("Edit", new { @id = company.CompanyID });
                         }
-
-                        ViewBag.SuccessMessage = GeneralResource.DataSaved;
                     }
                 }
             }
             catch
             {
-                ViewBag.ErrorMessage = GeneralResource.ErrorOccured;
+                SetErrorMessage();
             }
 
             return View(model);
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
+            try
+            {
+                using (var service = new CompanyService())
+                {
+                    var source = service.Get(id);
 
-            return View();
+                    if (source != null)
+                    {
+                        var model = AutoMapper.Mapper.Map<Models.CompanyModel>(source);
+
+                        return View(model);
+                    }
+                    else
+                    {
+                        SetErrorMessage(GeneralResource.RecordNotExists);
+                    }
+                }
+            }
+            catch
+            {
+                SetErrorMessage();
+            }
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, Models.CompanyModel model, HttpPostedFileWrapper file)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (file != null && file.ContentType != MediaTypeNames.Image.Jpeg)
+                    {
+                        SetErrorMessage(GeneralResource.ImageAllowedMessage);
+                    }
+                    else
+                    {
+                        using (var service = new CompanyService())
+                        {
+                            var company = service.Get(id);
+
+                            company = AutoMapper.Mapper.Map(model, company);
+
+                            service.SaveCompany(company, CurrentUser.PersonID, GetFileData(file));
+                        }
+
+                        SetSuccessMessage();
+                        return RedirectToAction("Edit", RouteData.Values);
+                    }
+                }
+            }
+            catch
+            {
+                SetErrorMessage();
+            }
+
+
+            return View(model);
         }
     }
 }

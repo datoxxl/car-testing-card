@@ -6,11 +6,27 @@
         });
     </script>
 }
-@if (ViewBag.SuccessMessage != null)
+else if (TempData["SuccessMessage"] != null)
 {
     <script>
         $(function () {
-            showSuccess('@ViewBag.SuccessMessage', '');
+            showSuccess('@TempData["SuccessMessage"]', '');
         });
     </script>
 }
+@*else if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        $(function () {
+            showError('@TempData["ErrorMessage"]', '');
+        });
+    </script>
+}
+else if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        $(function () {
+            showSuccess('@TempData["SuccessMessage"]', '');
+        });
+    </script>
+}*@

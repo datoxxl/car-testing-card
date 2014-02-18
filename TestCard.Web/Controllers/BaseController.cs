@@ -244,6 +244,20 @@ namespace TestCard.Web.Controllers
             return Json(new { Message = GeneralResource.ErrorOccured });
         }
 
+        protected void SetErrorMessage(string message = null)
+        {
+            message = message ?? GeneralResource.ErrorOccured;
+            ViewBag.ErrorMessage = message;
+            TempData["ErrorMessage"] = message;
+        }
+
+        protected void SetSuccessMessage(string message = null)
+        {
+            message = message ?? GeneralResource.DataSaved;
+            ViewBag.SuccessMessage = message;
+            TempData["SuccessMessage"] = message;
+        }
+
         protected ActionResult RedirectTo(string url = null)
         {
             if (url != null)
@@ -256,7 +270,7 @@ namespace TestCard.Web.Controllers
 
         protected byte[] GetFileData(HttpPostedFileWrapper file)
         {
-            if(file == null)
+            if (file == null)
             {
                 return null;
             }

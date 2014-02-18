@@ -1,0 +1,33 @@
+﻿@model TestCard.Web.Models.PersonScheduleModel
+
+<table class="x-table x-schedule">
+    <tr>
+        <th rowspan="2">@GeneralResource.Day</th>
+        <th colspan="2">@GeneralResource.WorkHours</th>
+        <th colspan="2">@GeneralResource.BreakHours</th>
+    </tr>
+    <tr>
+        <th>@GeneralResource.From</th>
+        <th>@GeneralResource.To</th>
+        <th>@GeneralResource.From</th>
+        <th>@GeneralResource.To</th>
+    </tr>
+    @for (var i = 0; i < Model.Days.Count; i++)
+    {
+        <tr>
+            <td>
+                @Model.Days[i].WeekDayName
+                @Html.HiddenFor(x => x.Days[i].WeekDayNumber)
+            </td>
+            <td>
+                @Html.DropDownListFor(x => x.Days[i].StartTime, new SelectList(Model.WorkHours, "Value", "Text", Model.Days[i].StartTime), string.Empty)
+            </td>
+            <td>@Html.DropDownListFor(x => x.Days[i].EndTime, new SelectList(Model.WorkHours, "Value", "Text", Model.Days[i].EndTime), string.Empty)
+            </td>
+            <td>@Html.DropDownListFor(x => x.Days[i].BreakStartTime, new SelectList(Model.BreakHours, "Value", "Text", Model.Days[i].BreakStartTime), string.Empty)
+            </td>
+            <td>@Html.DropDownListFor(x => x.Days[i].BreakEndTime, new SelectList(Model.BreakHours, "Value", "Text", Model.Days[i].BreakEndTime), string.Empty)
+            </td>
+        </tr>
+    }
+</table>

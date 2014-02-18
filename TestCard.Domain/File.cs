@@ -17,11 +17,11 @@ namespace TestCard.Domain
         public File()
         {
             this.Companies = new HashSet<Company>();
-            this.People = new HashSet<Person>();
-            this.PersonChangeRequests = new HashSet<PersonChangeRequest>();
             this.PersonHistories = new HashSet<PersonHistory>();
             this.TestingCardFileChangeRequests = new HashSet<TestingCardFileChangeRequest>();
             this.TestingCards = new HashSet<TestingCard>();
+            this.People = new HashSet<Person>();
+            this.PersonChangeRequests = new HashSet<PersonChangeRequest>();
         }
     
         public int FileID { get; set; }
@@ -29,10 +29,10 @@ namespace TestCard.Domain
         public string FilePath { get; set; }
     
         public virtual ICollection<Company> Companies { get; set; }
-        public virtual ICollection<Person> People { get; set; }
-        public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
         public virtual ICollection<PersonHistory> PersonHistories { get; set; }
         public virtual ICollection<TestingCardFileChangeRequest> TestingCardFileChangeRequests { get; set; }
         public virtual ICollection<TestingCard> TestingCards { get; set; }
+        public virtual ICollection<Person> People { get; set; }
+        public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
     }
 }

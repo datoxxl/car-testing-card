@@ -267,4 +267,22 @@
   <data name="YourEmail" xml:space="preserve">
     <value>Your email</value>
   </data>
+  <data name="RecordNotExists" xml:space="preserve">
+    <value>Record doesn't exist</value>
+  </data>
+  <data name="CompanyLogo" xml:space="preserve">
+    <value>Company logo</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="WorkSchedule" xml:space="preserve">
+    <value>Work schedule</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
 </root>

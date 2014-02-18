@@ -1,0 +1,79 @@
+﻿@model TestCard.Web.Models.CompanyModel
+
+<div class="x-form-container">
+    <span class="header">@GeneralResource.Company</span>
+    <div class="top-actions">
+        @Html.ActionLink(GeneralResource.Back, "List")
+    </div>
+    <div class="form-inner">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(x => x.CompanyID)
+            <table class="x-form">
+                <tr>
+                    <td>
+                        <fieldset>
+                            <legend></legend>
+                            <ol>
+                                <li>
+                                    @Html.LabelFor(x => x.IDNo)
+                                    @Html.TextBoxFor(x => x.IDNo)
+                                    @Html.ValidationMessageFor(x => x.IDNo)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(x => x.CompanyName)
+                                    @Html.TextBoxFor(x => x.CompanyName)
+                                    @Html.ValidationMessageFor(x => x.CompanyName)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(x => x.Phone)
+                                    @Html.TextBoxFor(x => x.Phone)
+                                    @Html.ValidationMessageFor(x => x.Phone)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(x => x.AccreditationScope)
+                                    @Html.TextAreaFor(x => x.AccreditationScope)
+                                    @Html.ValidationMessageFor(x => x.AccreditationScope)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(x => x.AccreditationNumber)
+                                    @Html.TextBoxFor(x => x.AccreditationNumber)
+                                    @Html.ValidationMessageFor(x => x.AccreditationNumber)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(x => x.AccreditationExpireDate)
+                                    @Html.TextBoxFor(x => x.AccreditationExpireDate)
+                                    @Html.ValidationMessageFor(x => x.AccreditationExpireDate)
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </td>
+                    <td>
+                        <fieldset>
+                            <legend></legend>
+                            <ol>
+                                <li>
+                                    <label for="file">@GeneralResource.CompanyLogo</label>
+                                    <input type="file" name="file" id="file" />
+                                    <img class="x-picture-area" src="/Home/GetImage/?id=@Model.FileName" />
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </td>
+                </tr>
+                @* <tr>
+                <td colspan="2">
+                    @{Html.RenderPartial("_PersonSchedule", Model.Schedule, new ViewDataDictionary
+                    {
+                        TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "Schedule" }
+                    }); }
+                </td>
+            </tr>*@
+            </table>
+            <div class="x-actions">
+                <input type="submit" value="@GeneralResource.Save" />
+                @Html.ActionLink(GeneralResource.Cancel, "List")
+            </div>
+        }
+    </div>
+</div>

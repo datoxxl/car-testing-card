@@ -1,0 +1,41 @@
+﻿@model IEnumerable<TestCard.Web.Models.CompanyListModel>
+
+<table class="x-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccreditationScope)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccreditationNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccreditationExpireDate)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.CompanyName, "Edit", "Company", new { @id = item.CompanyID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccreditationScope)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccreditationNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccreditationExpireDate)
+            </td>
+        </tr>
+    }
+</table>

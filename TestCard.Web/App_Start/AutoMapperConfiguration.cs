@@ -21,10 +21,27 @@ namespace TestCard.Web
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<Models.RegisterModel, TestCard.Domain.PersonChangeRequest>();
-            Mapper.CreateMap<Models.CompanyListModel, TestCard.Domain.Company>();
-            Mapper.CreateMap<TestCard.Domain.Company, Models.CompanyListModel>();
-            Mapper.CreateMap<Models.CompanyModel, TestCard.Domain.Company>();
+            Mapper.CreateMap<Models.RegisterModel, Domain.PersonChangeRequest>();
+            Mapper.CreateMap<Models.PersonScheduleModel.Day, Domain.PersonScheduleChangeRequest>();
+            Mapper.CreateMap<Models.CompanyModel, Domain.Company>();
+
+            Mapper.CreateMap<Domain.Person, Models.RegisterModel>()
+                .ForMember(dest => dest.CompanyName, src => src.MapFrom(x => x.Company.CompanyName))
+                .ForMember(dest => dest.AccountTypeName, src => src.MapFrom(x => x.AccountType.AccountTypeName));
+            Mapper.CreateMap<Domain.PersonChangeRequest, Models.RegisterModel>()
+                .ForMember(dest => dest.CompanyName, src => src.MapFrom(x => x.Company.CompanyName))
+                .ForMember(dest => dest.AccountTypeName, src => src.MapFrom(x => x.AccountType.AccountTypeName));
+            Mapper.CreateMap<Domain.PersonScheduleChangeRequest, Models.PersonScheduleModel.Day>();
+            Mapper.CreateMap<Domain.PersonSchedule, Models.PersonScheduleModel.Day>();
+            Mapper.CreateMap<Domain.Company, Models.CompanyListModel>();
+            Mapper.CreateMap<Domain.Company, Models.CompanyModel>()
+                .ForMember(dest => dest.FileName, src => src.MapFrom(x => x.File.FileName));
+            Mapper.CreateMap<Domain.Person, Models.PersonListModel>()
+                .ForMember(dest => dest.CompanyName, src => src.MapFrom(x => x.Company.CompanyName))
+                .ForMember(dest => dest.AccountTypeName, src => src.MapFrom(x => x.AccountType.AccountTypeName));
+            Mapper.CreateMap<Domain.PersonChangeRequest, Models.PersonListModel>()
+                .ForMember(dest => dest.CompanyName, src => src.MapFrom(x => x.Company.CompanyName))
+                .ForMember(dest => dest.AccountTypeName, src => src.MapFrom(x => x.AccountType.AccountTypeName));
         }
     }
 }

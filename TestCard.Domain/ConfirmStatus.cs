@@ -18,14 +18,14 @@ namespace TestCard.Domain
         {
             this.CompanyChangeRequests = new HashSet<CompanyChangeRequest>();
             this.CompanyChangeRequests1 = new HashSet<CompanyChangeRequest>();
-            this.PersonChangeRequests = new HashSet<PersonChangeRequest>();
-            this.PersonChangeRequests1 = new HashSet<PersonChangeRequest>();
             this.PersonLeaveChangeRequests = new HashSet<PersonLeaveChangeRequest>();
             this.PersonLeaveChangeRequests1 = new HashSet<PersonLeaveChangeRequest>();
             this.PersonScheduleChangeRequests = new HashSet<PersonScheduleChangeRequest>();
             this.PersonScheduleChangeRequests1 = new HashSet<PersonScheduleChangeRequest>();
             this.TestingCardChangeRequests = new HashSet<TestingCardChangeRequest>();
             this.TestingCardChangeRequests1 = new HashSet<TestingCardChangeRequest>();
+            this.PersonChangeRequests = new HashSet<PersonChangeRequest>();
+            this.PersonChangeRequests1 = new HashSet<PersonChangeRequest>();
         }
     
         public int ConfirmStatusID { get; set; }
@@ -33,13 +33,13 @@ namespace TestCard.Domain
     
         public virtual ICollection<CompanyChangeRequest> CompanyChangeRequests { get; set; }
         public virtual ICollection<CompanyChangeRequest> CompanyChangeRequests1 { get; set; }
-        public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
-        public virtual ICollection<PersonChangeRequest> PersonChangeRequests1 { get; set; }
         public virtual ICollection<PersonLeaveChangeRequest> PersonLeaveChangeRequests { get; set; }
         public virtual ICollection<PersonLeaveChangeRequest> PersonLeaveChangeRequests1 { get; set; }
         public virtual ICollection<PersonScheduleChangeRequest> PersonScheduleChangeRequests { get; set; }
         public virtual ICollection<PersonScheduleChangeRequest> PersonScheduleChangeRequests1 { get; set; }
         public virtual ICollection<TestingCardChangeRequest> TestingCardChangeRequests { get; set; }
         public virtual ICollection<TestingCardChangeRequest> TestingCardChangeRequests1 { get; set; }
+        public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
+        public virtual ICollection<PersonChangeRequest> PersonChangeRequests1 { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace TestCard.Web.Models
 {
     public class CompanyListModel
     {
+        public int CompanyID { get; set; }
         [Display(Name = "Title", ResourceType = typeof(GeneralResource))]
         public string CompanyName { get; set; }
         [Display(Name = "Telephone", ResourceType = typeof(GeneralResource))]
@@ -18,6 +19,7 @@ namespace TestCard.Web.Models
         [Display(Name = "AccreditationNumber", ResourceType = typeof(GeneralResource))]
         public string AccreditationNumber { get; set; }
         [Display(Name = "AccreditationDate", ResourceType = typeof(GeneralResource))]
+        [DisplayFormat(DataFormatString="{0:dd.MM.yyyy}")]
         public Nullable<System.DateTime> AccreditationExpireDate { get; set; }
     }
 }

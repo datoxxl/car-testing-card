@@ -42,7 +42,6 @@ namespace TestCard.Domain
         public Nullable<int> ResponsiblePersonID { get; set; }
         public Nullable<System.DateTime> EffectiveDate { get; set; }
     
-        public virtual Person Person { get; set; }
         public virtual ICollection<TestingCardChangeRequest> TestingCardChangeRequests { get; set; }
         public virtual ICollection<TestingCardDetail> TestingCardDetails { get; set; }
         public virtual ICollection<TestingCardDetailChangeRequest> TestingCardDetailChangeRequests { get; set; }
@@ -50,5 +49,6 @@ namespace TestCard.Domain
         public virtual ICollection<TestingCardFileChangeRequest> TestingCardFileChangeRequests { get; set; }
         public virtual ICollection<TestingCardHistory> TestingCardHistories { get; set; }
         public virtual ICollection<File> Files { get; set; }
+        public virtual Person Person { get; set; }
     }
 }

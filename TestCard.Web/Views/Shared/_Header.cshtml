@@ -13,25 +13,29 @@
         <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
                                        {
                                            ButtonType = "users",
-                                           Text = GeneralResource.Users
+                                           Text = GeneralResource.Users,
+                                           Url = "/User/List"
                                        })</li>
         <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
                                        {
                                            ButtonType = "user-edit",
                                            Text = GeneralResource.EditRequest,
-                                           Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline
+                                           Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline,
+                                           Url = "/UserChangeRequest/List"
                                        })</li>
         <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
                                        {
                                            ButtonType = "card",
                                            Text = GeneralResource.TestCard,
-                                           Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline
+                                           Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline,
+                                           Url = "/User/List"
                                        })</li>
         <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
                                        {
                                            ButtonType = "card-edit",
                                            Text = GeneralResource.EditRequest,
-                                           Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline
+                                           Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline,
+                                           Url = "/User/List"
                                        })</li>
     </ul>
 </div>

@@ -53,6 +53,6 @@ namespace TestCard.Web.Models
         [Display(Name = "IdentificationNumber", ResourceType = typeof(GeneralResource))]
         public string IDNo { get; set; }
 
-        public Nullable<int> FileID { get; set; }
+        public string FileName { get; set; }
     }
 }

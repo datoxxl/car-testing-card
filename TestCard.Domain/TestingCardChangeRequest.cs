@@ -47,12 +47,12 @@ namespace TestCard.Domain
     
         public virtual ConfirmStatus ConfirmStatu { get; set; }
         public virtual ConfirmStatus ConfirmStatu1 { get; set; }
+        public virtual TestingCard TestingCard { get; set; }
+        public virtual ICollection<TestingCardDetailChangeRequest> TestingCardDetailChangeRequests { get; set; }
+        public virtual ICollection<TestingCardFileChangeRequest> TestingCardFileChangeRequests { get; set; }
         public virtual Person Person { get; set; }
         public virtual Person Person1 { get; set; }
         public virtual Person Person2 { get; set; }
         public virtual Person Person3 { get; set; }
-        public virtual TestingCard TestingCard { get; set; }
-        public virtual ICollection<TestingCardDetailChangeRequest> TestingCardDetailChangeRequests { get; set; }
-        public virtual ICollection<TestingCardFileChangeRequest> TestingCardFileChangeRequests { get; set; }
     }
 }

@@ -31,8 +31,6 @@ namespace TestCard.Domain
         public DbSet<CompanyHistory> CompanyHistories { get; set; }
         public DbSet<ConfirmStatus> ConfirmStatus1 { get; set; }
         public DbSet<ErrorCode> ErrorCodes { get; set; }
-        public DbSet<Person> People { get; set; }
-        public DbSet<PersonChangeRequest> PersonChangeRequests { get; set; }
         public DbSet<PersonDay> PersonDays { get; set; }
         public DbSet<PersonHistory> PersonHistories { get; set; }
         public DbSet<PersonLeave> PersonLeaves { get; set; }
@@ -57,5 +55,7 @@ namespace TestCard.Domain
         public DbSet<v_TestingCardDetail> v_TestingCardDetail { get; set; }
         public DbSet<v_TestingCardDetailChangeRequest> v_TestingCardDetailChangeRequest { get; set; }
         public DbSet<File> Files { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<PersonChangeRequest> PersonChangeRequests { get; set; }
     }
 }

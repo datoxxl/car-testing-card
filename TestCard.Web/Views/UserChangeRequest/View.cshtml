@@ -1,0 +1,21 @@
+﻿@model TestCard.Web.Models.PersonModel
+
+<div class="x-form-container">
+    <span class="header">@GeneralResource.User</span>
+    <div class="top-actions">
+        @Html.ActionLink(GeneralResource.Back, "List")
+    </div>
+    <div class="form-inner">
+        @using (Html.BeginForm())
+        {
+            @Html.DisplayFor(x => x.UserInfo, "RegisterModel")
+            <span class="header">@GeneralResource.WorkSchedule</span>
+            @Html.DisplayFor(x => x.Schedule, "PersonScheduleModel")
+            <div class="x-actions">
+                <input type="submit" value="@GeneralResource.Approve" />
+                <input type="submit" value="@GeneralResource.Reject" />
+                @Html.ActionLink(GeneralResource.Cancel, "List")
+            </div>
+        }
+    </div>
+</div>
