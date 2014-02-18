@@ -4,7 +4,7 @@
 }
 
 <div id="login" class="x-shadow">
-    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
