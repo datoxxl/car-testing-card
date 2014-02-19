@@ -22,6 +22,11 @@ a
     cursor: pointer;
 }
 
+.x-table a
+{
+    color: #4183c4;
+}
+
 /* forms */
 fieldset
 {

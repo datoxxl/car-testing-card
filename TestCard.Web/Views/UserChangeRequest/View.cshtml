@@ -6,16 +6,19 @@
         @Html.ActionLink(GeneralResource.Back, "List")
     </div>
     <div class="form-inner">
-        @using (Html.BeginForm())
-        {
-            @Html.DisplayFor(x => x.UserInfo, "RegisterModel")
-            <span class="header">@GeneralResource.WorkSchedule</span>
-            @Html.DisplayFor(x => x.Schedule, "PersonScheduleModel")
-            <div class="x-actions">
+        @Html.DisplayFor(x => x.UserInfo, "RegisterModel")
+        <span class="header">@GeneralResource.WorkSchedule</span>
+        @Html.DisplayFor(x => x.Schedule, "PersonScheduleModel")
+        <div class="x-actions">
+            @using (Html.BeginForm("ProcessRequest", "UserChangeRequest", new { @id = Model.UserInfo.PersonChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Approved }, FormMethod.Post))
+            {
                 <input type="submit" value="@GeneralResource.Approve" />
+            }
+            @using (Html.BeginForm("ProcessRequest", "UserChangeRequest", new { @id = Model.UserInfo.PersonChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Rejected }, FormMethod.Post))
+            {
                 <input type="submit" value="@GeneralResource.Reject" />
-                @Html.ActionLink(GeneralResource.Cancel, "List")
-            </div>
-        }
+            }
+            @Html.ActionLink(GeneralResource.Cancel, "List")
+        </div>
     </div>
 </div>
