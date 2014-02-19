@@ -30,7 +30,7 @@
                 @Html.DisplayFor(modelItem => item.IDNo)
             </td>
             <td>
-                @Html.ActionLink(item.FullName, "View", "User", new { @id = item.PersonID }, null)
+                @Html.ActionLink(item.FullName, "View", "Person", new { @id = item.PersonID }, null)
             </td>
             <td>
                 @Html.ActionLink(item.CompanyName, "Edit", "Company", new { @id = item.CompanyID }, null)
@@ -45,12 +45,12 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td style="width: 1px;">
-                @Html.ActionLink(GeneralResource.View, "View", "UserChangeRequest", new { @id = item.PersonChangeRequestID }, new { @class = "x-button" })
-                @using (Html.BeginForm("ProcessRequest", "UserChangeRequest", new { @id = item.PersonChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Approved }, FormMethod.Post))
+                @Html.ActionLink(GeneralResource.View, "View", "PersonChangeRequest", new { @id = item.PersonChangeRequestID }, new { @class = "x-button" })
+                @using (Html.BeginForm("ProcessRequest", "PersonChangeRequest", new { @id = item.PersonChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Approved }, FormMethod.Post))
                 {
                     <input type="submit" value="@GeneralResource.Approve" />
                 }
-                @using (Html.BeginForm("ProcessRequest", "UserChangeRequest", new { @id = item.PersonChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Rejected }, FormMethod.Post))
+                @using (Html.BeginForm("ProcessRequest", "PersonChangeRequest", new { @id = item.PersonChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Rejected }, FormMethod.Post))
                 {
                     <input type="submit" value="@GeneralResource.Reject" />
                 }

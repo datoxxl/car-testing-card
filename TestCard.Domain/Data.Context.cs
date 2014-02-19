@@ -37,7 +37,6 @@ namespace TestCard.Domain
         public DbSet<PersonLeaveChangeRequest> PersonLeaveChangeRequests { get; set; }
         public DbSet<PersonLeaveHistory> PersonLeaveHistories { get; set; }
         public DbSet<PersonSchedule> PersonSchedules { get; set; }
-        public DbSet<PersonScheduleChangeRequest> PersonScheduleChangeRequests { get; set; }
         public DbSet<PersonScheduleHistory> PersonScheduleHistories { get; set; }
         public DbSet<TestingCard> TestingCards { get; set; }
         public DbSet<TestingCardChangeRequest> TestingCardChangeRequests { get; set; }
@@ -57,5 +56,7 @@ namespace TestCard.Domain
         public DbSet<File> Files { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<PersonChangeRequest> PersonChangeRequests { get; set; }
+        public DbSet<PersonScheduleChangeRequest> PersonScheduleChangeRequests { get; set; }
+        public DbSet<PersonScheduleChangeRequestDetail> PersonScheduleChangeRequestDetails { get; set; }
     }
 }

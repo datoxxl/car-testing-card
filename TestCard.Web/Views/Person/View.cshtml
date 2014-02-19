@@ -7,13 +7,9 @@
     <span class="header">@GeneralResource.User</span>
     <div class="top-actions">
         @Html.ActionLink(GeneralResource.Back, "List")
+        @Html.ActionLink(GeneralResource.WorkSchedule, "View", "PersonSchedule", new { id = Model.PersonID }, null)
     </div>
     <div class="form-inner">
-        @using (Html.BeginForm())
-        {
-            @Html.DisplayFor(x => x.UserInfo, "RegisterModel")
-            <span class="header">@GeneralResource.WorkSchedule</span>
-            @Html.DisplayFor(x => x.Schedule, "PersonScheduleModel")
-        }
+        @Html.DisplayForModel()
     </div>
 </div>

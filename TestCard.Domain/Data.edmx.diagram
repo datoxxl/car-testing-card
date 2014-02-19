@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="TestCardModel.PersonLeaveChangeRequest" Width="1.5" PointX="16.5" PointY="38.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.PersonLeaveHistory" Width="1.5" PointX="13.5" PointY="64.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.PersonSchedule" Width="1.5" PointX="13.5" PointY="67.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestCardModel.PersonScheduleChangeRequest" Width="1.5" PointX="19.5" PointY="38.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.PersonScheduleHistory" Width="1.5" PointX="13.5" PointY="71.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.TestingCard" Width="1.5" PointX="13.5" PointY="37.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.TestingCardChangeRequest" Width="1.5" PointX="21.75" PointY="37" IsExpanded="true" />
@@ -42,8 +41,6 @@
         <AssociationConnector Association="TestCardModel.FK_CompanyChangeRequest_ConfirmStatus1" ManuallyRouted="false" />
         <AssociationConnector Association="TestCardModel.FK_PersonLeaveChangeRequest_ConfirmStatus" ManuallyRouted="false" />
         <AssociationConnector Association="TestCardModel.FK_PersonLeaveChangeRequest_ConfirmStatus1" ManuallyRouted="false" />
-        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_ConfirmStatus" ManuallyRouted="false" />
-        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_ConfirmStatus1" ManuallyRouted="false" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_ConfirmStatus" ManuallyRouted="false" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_ConfirmStatus1" ManuallyRouted="false" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_TestingCard" ManuallyRouted="false" />
@@ -90,10 +87,6 @@
         <AssociationConnector Association="TestCardModel.FK_PersonLeaveHistory_Person1" />
         <AssociationConnector Association="TestCardModel.FK_PersonSchedule_Person" />
         <AssociationConnector Association="TestCardModel.FK_PersonSchedule_Person1" />
-        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_Person" />
-        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_Person1" />
-        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_Person2" />
-        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_Person3" />
         <AssociationConnector Association="TestCardModel.FK_PersonScheduleHistory_Person" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_Person" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_Person1" />
@@ -110,11 +103,19 @@
         <AssociationConnector Association="TestCardModel.FK_PersonChangeRequest_Person" />
         <AssociationConnector Association="TestCardModel.FK_PersonChangeRequest_QualityManagerPerson" />
         <AssociationConnector Association="TestCardModel.FK_PersonChangeRequest_ResponsiblePerson" />
-        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_PersonChangeRequest" />
         <AssociationConnector Association="TestCardModel.FK_PersonHistory_Person" />
         <AssociationConnector Association="TestCardModel.FK_PersonLeave_Person" />
         <AssociationConnector Association="TestCardModel.FK_PersonScheduleHistory_Person1" />
         <AssociationConnector Association="TestCardModel.FK_TestingCard_Person" />
+        <EntityTypeShape EntityType="TestCardModel.PersonScheduleChangeRequest" Width="1.5" PointX="4.75" PointY="8.75" />
+        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_AdminConfirmStatus" />
+        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_QualityManagerConfirmStatus" />
+        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_Person" />
+        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_Person1" />
+        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_Person2" />
+        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequest_Person3" />
+        <EntityTypeShape EntityType="TestCardModel.PersonScheduleChangeRequestDetail" Width="1.5" PointX="4.9106931355365981" PointY="29.831628902736878" />
+        <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

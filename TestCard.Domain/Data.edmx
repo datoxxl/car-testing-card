@@ -22,6 +22,7 @@
           <EntitySet Name="PersonLeaveHistory" EntityType="CarTestingCardModel.Store.PersonLeaveHistory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PersonSchedule" EntityType="CarTestingCardModel.Store.PersonSchedule" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PersonScheduleChangeRequest" EntityType="CarTestingCardModel.Store.PersonScheduleChangeRequest" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PersonScheduleChangeRequestDetail" EntityType="CarTestingCardModel.Store.PersonScheduleChangeRequestDetail" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PersonScheduleHistory" EntityType="CarTestingCardModel.Store.PersonScheduleHistory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestingCard" EntityType="CarTestingCardModel.Store.TestingCard" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestingCardChangeRequest" EntityType="CarTestingCardModel.Store.TestingCardChangeRequest" store:Type="Tables" Schema="dbo" />
@@ -360,13 +361,13 @@
             <End Role="Person" EntitySet="Person" />
             <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequest" />
           </AssociationSet>
-          <AssociationSet Name="FK_PersonScheduleChangeRequest_PersonChangeRequest" Association="CarTestingCardModel.Store.FK_PersonScheduleChangeRequest_PersonChangeRequest">
-            <End Role="PersonChangeRequest" EntitySet="PersonChangeRequest" />
-            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequest" />
-          </AssociationSet>
           <AssociationSet Name="FK_PersonScheduleChangeRequest_QualityManagerConfirmStatus" Association="CarTestingCardModel.Store.FK_PersonScheduleChangeRequest_QualityManagerConfirmStatus">
             <End Role="ConfirmStatus" EntitySet="ConfirmStatus" />
             <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest" Association="CarTestingCardModel.Store.FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest">
+            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequest" />
+            <End Role="PersonScheduleChangeRequestDetail" EntitySet="PersonScheduleChangeRequestDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_PersonScheduleHistory_Person" Association="CarTestingCardModel.Store.FK_PersonScheduleHistory_Person">
             <End Role="Person" EntitySet="Person" />
@@ -691,15 +692,8 @@
             <PropertyRef Name="PersonScheduleChangeRequestID" />
           </Key>
           <Property Name="PersonScheduleChangeRequestID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="PersonChangeRequestID" Type="int" Nullable="false" />
           <Property Name="PersonID" Type="int" />
-          <Property Name="WeekDayNumber" Type="int" Nullable="false" />
-          <Property Name="StartTime" Type="time" Precision="0" />
-          <Property Name="EndTime" Type="time" Precision="0" />
-          <Property Name="BreakStartTime" Type="time" Precision="0" />
-          <Property Name="BreakEndTime" Type="time" Precision="0" />
           <Property Name="ResponsiblePersonID" Type="int" />
-          <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="QualityManagerConfirmStatusID" Type="int" />
           <Property Name="QualityManagerConfirmDate" Type="datetime" />
@@ -707,6 +701,18 @@
           <Property Name="AdministratorConfirmStatusID" Type="int" />
           <Property Name="AdministratorConfirmDate" Type="datetime" />
           <Property Name="AdministratorPersonID" Type="int" />
+        </EntityType>
+        <EntityType Name="PersonScheduleChangeRequestDetail">
+          <Key>
+            <PropertyRef Name="PersonScheduleChangeRequestID" />
+            <PropertyRef Name="WeekDayNumber" />
+          </Key>
+          <Property Name="PersonScheduleChangeRequestID" Type="int" Nullable="false" />
+          <Property Name="WeekDayNumber" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="0" />
+          <Property Name="EndTime" Type="time" Precision="0" />
+          <Property Name="BreakStartTime" Type="time" Precision="0" />
+          <Property Name="BreakEndTime" Type="time" Precision="0" />
         </EntityType>
         <EntityType Name="PersonScheduleHistory">
           <Key>
@@ -1643,18 +1649,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PersonScheduleChangeRequest_PersonChangeRequest">
-          <End Role="PersonChangeRequest" Type="CarTestingCardModel.Store.PersonChangeRequest" Multiplicity="1" />
-          <End Role="PersonScheduleChangeRequest" Type="CarTestingCardModel.Store.PersonScheduleChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PersonChangeRequest">
-              <PropertyRef Name="PersonChangeRequestID" />
-            </Principal>
-            <Dependent Role="PersonScheduleChangeRequest">
-              <PropertyRef Name="PersonChangeRequestID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PersonScheduleChangeRequest_QualityManagerConfirmStatus">
           <End Role="ConfirmStatus" Type="CarTestingCardModel.Store.ConfirmStatus" Multiplicity="0..1" />
           <End Role="PersonScheduleChangeRequest" Type="CarTestingCardModel.Store.PersonScheduleChangeRequest" Multiplicity="*" />
@@ -1664,6 +1658,18 @@
             </Principal>
             <Dependent Role="PersonScheduleChangeRequest">
               <PropertyRef Name="QualityManagerConfirmStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest">
+          <End Role="PersonScheduleChangeRequest" Type="CarTestingCardModel.Store.PersonScheduleChangeRequest" Multiplicity="1" />
+          <End Role="PersonScheduleChangeRequestDetail" Type="CarTestingCardModel.Store.PersonScheduleChangeRequestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonScheduleChangeRequest">
+              <PropertyRef Name="PersonScheduleChangeRequestID" />
+            </Principal>
+            <Dependent Role="PersonScheduleChangeRequestDetail">
+              <PropertyRef Name="PersonScheduleChangeRequestID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1984,7 +1990,6 @@
           <EntitySet Name="PersonLeaveChangeRequests" EntityType="TestCardModel.PersonLeaveChangeRequest" />
           <EntitySet Name="PersonLeaveHistories" EntityType="TestCardModel.PersonLeaveHistory" />
           <EntitySet Name="PersonSchedules" EntityType="TestCardModel.PersonSchedule" />
-          <EntitySet Name="PersonScheduleChangeRequests" EntityType="TestCardModel.PersonScheduleChangeRequest" />
           <EntitySet Name="PersonScheduleHistories" EntityType="TestCardModel.PersonScheduleHistory" />
           <EntitySet Name="TestingCards" EntityType="TestCardModel.TestingCard" />
           <EntitySet Name="TestingCardChangeRequests" EntityType="TestCardModel.TestingCardChangeRequest" />
@@ -2032,14 +2037,6 @@
           <AssociationSet Name="FK_PersonLeaveChangeRequest_ConfirmStatus1" Association="TestCardModel.FK_PersonLeaveChangeRequest_ConfirmStatus1">
             <End Role="ConfirmStatus" EntitySet="ConfirmStatus1" />
             <End Role="PersonLeaveChangeRequest" EntitySet="PersonLeaveChangeRequests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonScheduleChangeRequest_ConfirmStatus" Association="TestCardModel.FK_PersonScheduleChangeRequest_ConfirmStatus">
-            <End Role="ConfirmStatus" EntitySet="ConfirmStatus1" />
-            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonScheduleChangeRequest_ConfirmStatus1" Association="TestCardModel.FK_PersonScheduleChangeRequest_ConfirmStatus1">
-            <End Role="ConfirmStatus" EntitySet="ConfirmStatus1" />
-            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
           </AssociationSet>
           <AssociationSet Name="FK_TestingCardChangeRequest_ConfirmStatus" Association="TestCardModel.FK_TestingCardChangeRequest_ConfirmStatus">
             <End Role="ConfirmStatus" EntitySet="ConfirmStatus1" />
@@ -2219,22 +2216,6 @@
             <End Role="Person" EntitySet="People" />
             <End Role="PersonSchedule" EntitySet="PersonSchedules" />
           </AssociationSet>
-          <AssociationSet Name="FK_PersonScheduleChangeRequest_Person" Association="TestCardModel.FK_PersonScheduleChangeRequest_Person">
-            <End Role="Person" EntitySet="People" />
-            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonScheduleChangeRequest_Person1" Association="TestCardModel.FK_PersonScheduleChangeRequest_Person1">
-            <End Role="Person" EntitySet="People" />
-            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonScheduleChangeRequest_Person2" Association="TestCardModel.FK_PersonScheduleChangeRequest_Person2">
-            <End Role="Person" EntitySet="People" />
-            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonScheduleChangeRequest_Person3" Association="TestCardModel.FK_PersonScheduleChangeRequest_Person3">
-            <End Role="Person" EntitySet="People" />
-            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
-          </AssociationSet>
           <AssociationSet Name="FK_PersonScheduleHistory_Person" Association="TestCardModel.FK_PersonScheduleHistory_Person">
             <End Role="Person" EntitySet="People" />
             <End Role="PersonScheduleHistory" EntitySet="PersonScheduleHistories" />
@@ -2296,10 +2277,6 @@
             <End Role="Person" EntitySet="People" />
             <End Role="PersonChangeRequest" EntitySet="PersonChangeRequests" />
           </AssociationSet>
-          <AssociationSet Name="FK_PersonScheduleChangeRequest_PersonChangeRequest" Association="TestCardModel.FK_PersonScheduleChangeRequest_PersonChangeRequest">
-            <End Role="PersonChangeRequest" EntitySet="PersonChangeRequests" />
-            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
-          </AssociationSet>
           <AssociationSet Name="FK_PersonHistory_Person" Association="TestCardModel.FK_PersonHistory_Person">
             <End Role="Person" EntitySet="People" />
             <End Role="PersonHistory" EntitySet="PersonHistories" />
@@ -2315,6 +2292,36 @@
           <AssociationSet Name="FK_TestingCard_Person" Association="TestCardModel.FK_TestingCard_Person">
             <End Role="Person" EntitySet="People" />
             <End Role="TestingCard" EntitySet="TestingCards" />
+          </AssociationSet>
+          <EntitySet Name="PersonScheduleChangeRequests" EntityType="TestCardModel.PersonScheduleChangeRequest" />
+          <AssociationSet Name="FK_PersonScheduleChangeRequest_AdminConfirmStatus" Association="TestCardModel.FK_PersonScheduleChangeRequest_AdminConfirmStatus">
+            <End Role="ConfirmStatus" EntitySet="ConfirmStatus1" />
+            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonScheduleChangeRequest_QualityManagerConfirmStatus" Association="TestCardModel.FK_PersonScheduleChangeRequest_QualityManagerConfirmStatus">
+            <End Role="ConfirmStatus" EntitySet="ConfirmStatus1" />
+            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonScheduleChangeRequest_Person" Association="TestCardModel.FK_PersonScheduleChangeRequest_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonScheduleChangeRequest_Person1" Association="TestCardModel.FK_PersonScheduleChangeRequest_Person1">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonScheduleChangeRequest_Person2" Association="TestCardModel.FK_PersonScheduleChangeRequest_Person2">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonScheduleChangeRequest_Person3" Association="TestCardModel.FK_PersonScheduleChangeRequest_Person3">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
+          </AssociationSet>
+          <EntitySet Name="PersonScheduleChangeRequestDetails" EntityType="TestCardModel.PersonScheduleChangeRequestDetail" />
+          <AssociationSet Name="FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest" Association="TestCardModel.FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest">
+            <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
+            <End Role="PersonScheduleChangeRequestDetail" EntitySet="PersonScheduleChangeRequestDetails" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountType">
@@ -2414,12 +2421,12 @@
           <NavigationProperty Name="CompanyChangeRequests1" Relationship="TestCardModel.FK_CompanyChangeRequest_ConfirmStatus1" FromRole="ConfirmStatus" ToRole="CompanyChangeRequest" />
           <NavigationProperty Name="PersonLeaveChangeRequests" Relationship="TestCardModel.FK_PersonLeaveChangeRequest_ConfirmStatus" FromRole="ConfirmStatus" ToRole="PersonLeaveChangeRequest" />
           <NavigationProperty Name="PersonLeaveChangeRequests1" Relationship="TestCardModel.FK_PersonLeaveChangeRequest_ConfirmStatus1" FromRole="ConfirmStatus" ToRole="PersonLeaveChangeRequest" />
-          <NavigationProperty Name="PersonScheduleChangeRequests" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_ConfirmStatus" FromRole="ConfirmStatus" ToRole="PersonScheduleChangeRequest" />
-          <NavigationProperty Name="PersonScheduleChangeRequests1" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_ConfirmStatus1" FromRole="ConfirmStatus" ToRole="PersonScheduleChangeRequest" />
           <NavigationProperty Name="TestingCardChangeRequests" Relationship="TestCardModel.FK_TestingCardChangeRequest_ConfirmStatus" FromRole="ConfirmStatus" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="TestingCardChangeRequests1" Relationship="TestCardModel.FK_TestingCardChangeRequest_ConfirmStatus1" FromRole="ConfirmStatus" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="PersonChangeRequests" Relationship="TestCardModel.FK_PersonChangeRequest_AdminConfirmStatus" FromRole="ConfirmStatus" ToRole="PersonChangeRequest" />
           <NavigationProperty Name="PersonChangeRequests1" Relationship="TestCardModel.FK_PersonChangeRequest_QualityManagerConfirmStatus" FromRole="ConfirmStatus" ToRole="PersonChangeRequest" />
+          <NavigationProperty Name="PersonScheduleChangeRequests" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_AdminConfirmStatus" FromRole="ConfirmStatus" ToRole="PersonScheduleChangeRequest" />
+          <NavigationProperty Name="PersonScheduleChangeRequests1" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_QualityManagerConfirmStatus" FromRole="ConfirmStatus" ToRole="PersonScheduleChangeRequest" />
         </EntityType>
         <EntityType Name="ErrorCode">
           <Key>
@@ -2534,35 +2541,6 @@
           <NavigationProperty Name="Person" Relationship="TestCardModel.FK_PersonSchedule_Person" FromRole="PersonSchedule" ToRole="Person" />
           <NavigationProperty Name="Person1" Relationship="TestCardModel.FK_PersonSchedule_Person1" FromRole="PersonSchedule" ToRole="Person" />
         </EntityType>
-        <EntityType Name="PersonScheduleChangeRequest">
-          <Key>
-            <PropertyRef Name="PersonScheduleChangeRequestID" />
-          </Key>
-          <Property Name="PersonScheduleChangeRequestID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="PersonID" Type="Int32" />
-          <Property Name="WeekDayNumber" Type="Int32" Nullable="false" />
-          <Property Name="StartTime" Type="Time" Precision="0" />
-          <Property Name="EndTime" Type="Time" Precision="0" />
-          <Property Name="BreakStartTime" Type="Time" Precision="0" />
-          <Property Name="BreakEndTime" Type="Time" Precision="0" />
-          <Property Name="ResponsiblePersonID" Type="Int32" />
-          <Property Name="EffectiveDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="QualityManagerConfirmStatusID" Type="Int32" />
-          <Property Name="QualityManagerConfirmDate" Type="DateTime" Precision="3" />
-          <Property Name="QualityManagerPersonID" Type="Int32" />
-          <Property Name="AdministratorConfirmStatusID" Type="Int32" />
-          <Property Name="AdministratorConfirmDate" Type="DateTime" Precision="3" />
-          <Property Name="AdministratorPersonID" Type="Int32" />
-          <NavigationProperty Name="QualityManagerConfirmStatus" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_ConfirmStatus" FromRole="PersonScheduleChangeRequest" ToRole="ConfirmStatus" />
-          <NavigationProperty Name="AdminConfirmStatus" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_ConfirmStatus1" FromRole="PersonScheduleChangeRequest" ToRole="ConfirmStatus" />
-          <NavigationProperty Name="Person" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person" FromRole="PersonScheduleChangeRequest" ToRole="Person" />
-          <NavigationProperty Name="ResponsiblePerson" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person1" FromRole="PersonScheduleChangeRequest" ToRole="Person" />
-          <NavigationProperty Name="AdminPerson" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person2" FromRole="PersonScheduleChangeRequest" ToRole="Person" />
-          <NavigationProperty Name="QualityManagerPerson" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person3" FromRole="PersonScheduleChangeRequest" ToRole="Person" />
-          <Property Type="Int32" Name="PersonChangeRequestID" Nullable="false" />
-          <NavigationProperty Name="PersonChangeRequest" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_PersonChangeRequest" FromRole="PersonScheduleChangeRequest" ToRole="PersonChangeRequest" />
-          </EntityType>
         <EntityType Name="PersonScheduleHistory">
           <Key>
             <PropertyRef Name="PersonScheduleHistoryID" />
@@ -2980,30 +2958,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PersonScheduleChangeRequest_ConfirmStatus">
-          <End Role="ConfirmStatus" Type="TestCardModel.ConfirmStatus" Multiplicity="0..1" />
-          <End Role="PersonScheduleChangeRequest" Type="TestCardModel.PersonScheduleChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ConfirmStatus">
-              <PropertyRef Name="ConfirmStatusID" />
-            </Principal>
-            <Dependent Role="PersonScheduleChangeRequest">
-              <PropertyRef Name="QualityManagerConfirmStatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonScheduleChangeRequest_ConfirmStatus1">
-          <End Role="ConfirmStatus" Type="TestCardModel.ConfirmStatus" Multiplicity="0..1" />
-          <End Role="PersonScheduleChangeRequest" Type="TestCardModel.PersonScheduleChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ConfirmStatus">
-              <PropertyRef Name="ConfirmStatusID" />
-            </Principal>
-            <Dependent Role="PersonScheduleChangeRequest">
-              <PropertyRef Name="AdministratorConfirmStatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TestingCardChangeRequest_ConfirmStatus">
           <End Role="ConfirmStatus" Type="TestCardModel.ConfirmStatus" Multiplicity="0..1" />
           <End Role="TestingCardChangeRequest" Type="TestCardModel.TestingCardChangeRequest" Multiplicity="*" />
@@ -3270,10 +3224,6 @@
           <NavigationProperty Name="PersonLeaveHistories1" Relationship="TestCardModel.FK_PersonLeaveHistory_Person1" FromRole="Person" ToRole="PersonLeaveHistory" />
           <NavigationProperty Name="PersonSchedules" Relationship="TestCardModel.FK_PersonSchedule_Person" FromRole="Person" ToRole="PersonSchedule" />
           <NavigationProperty Name="ResponsiblePersonSchedules" Relationship="TestCardModel.FK_PersonSchedule_Person1" FromRole="Person" ToRole="PersonSchedule" />
-          <NavigationProperty Name="PersonScheduleChangeRequests" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
-          <NavigationProperty Name="ResponsiblePersonScheduleChangeRequests" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person1" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
-          <NavigationProperty Name="AdminPersonScheduleChangeRequests" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person2" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
-          <NavigationProperty Name="QualityManagerPersonScheduleChangeRequests" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person3" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
           <NavigationProperty Name="PersonScheduleHistories" Relationship="TestCardModel.FK_PersonScheduleHistory_Person" FromRole="Person" ToRole="PersonScheduleHistory" />
           <NavigationProperty Name="TestingCardChangeRequests" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person" FromRole="Person" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="TestingCardChangeRequests1" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person1" FromRole="Person" ToRole="TestingCardChangeRequest" />
@@ -3288,6 +3238,10 @@
           <NavigationProperty Name="PersonLeaves" Relationship="TestCardModel.FK_PersonLeave_Person" FromRole="Person" ToRole="PersonLeave" />
           <NavigationProperty Name="PersonScheduleHistories1" Relationship="TestCardModel.FK_PersonScheduleHistory_Person1" FromRole="Person" ToRole="PersonScheduleHistory" />
           <NavigationProperty Name="TestingCards" Relationship="TestCardModel.FK_TestingCard_Person" FromRole="Person" ToRole="TestingCard" />
+          <NavigationProperty Name="PersonScheduleChangeRequests" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
+          <NavigationProperty Name="PersonScheduleChangeRequests1" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person1" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
+          <NavigationProperty Name="PersonScheduleChangeRequests2" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person2" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
+          <NavigationProperty Name="PersonScheduleChangeRequests3" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person3" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
         </EntityType>
         <Association Name="FK_Person_AccountType">
           <End Type="TestCardModel.AccountType" Role="AccountType" Multiplicity="1" />
@@ -3601,54 +3555,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PersonScheduleChangeRequest_Person">
-          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
-          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="PersonScheduleChangeRequest">
-              <PropertyRef Name="PersonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonScheduleChangeRequest_Person1">
-          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
-          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="PersonScheduleChangeRequest">
-              <PropertyRef Name="ResponsiblePersonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonScheduleChangeRequest_Person2">
-          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
-          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="PersonScheduleChangeRequest">
-              <PropertyRef Name="AdministratorPersonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonScheduleChangeRequest_Person3">
-          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
-          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="PersonScheduleChangeRequest">
-              <PropertyRef Name="QualityManagerPersonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PersonScheduleHistory_Person">
           <End Type="TestCardModel.Person" Role="Person" Multiplicity="1" />
           <End Type="TestCardModel.PersonScheduleHistory" Role="PersonScheduleHistory" Multiplicity="*" />
@@ -3755,7 +3661,6 @@
           <NavigationProperty Name="Person" Relationship="TestCardModel.FK_PersonChangeRequest_Person" FromRole="PersonChangeRequest" ToRole="Person" />
           <NavigationProperty Name="QualityManagerPerson" Relationship="TestCardModel.FK_PersonChangeRequest_QualityManagerPerson" FromRole="PersonChangeRequest" ToRole="Person" />
           <NavigationProperty Name="ResponsiblePerson" Relationship="TestCardModel.FK_PersonChangeRequest_ResponsiblePerson" FromRole="PersonChangeRequest" ToRole="Person" />
-          <NavigationProperty Name="PersonScheduleChangeRequests" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_PersonChangeRequest" FromRole="PersonChangeRequest" ToRole="PersonScheduleChangeRequest" />
         </EntityType>
         <Association Name="FK_PersonChangeRequest_AccountType">
           <End Type="TestCardModel.AccountType" Role="AccountType" Multiplicity="1" />
@@ -3865,18 +3770,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PersonScheduleChangeRequest_PersonChangeRequest">
-          <End Type="TestCardModel.PersonChangeRequest" Role="PersonChangeRequest" Multiplicity="1" />
-          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PersonChangeRequest">
-              <PropertyRef Name="PersonChangeRequestID" />
-            </Principal>
-            <Dependent Role="PersonScheduleChangeRequest">
-              <PropertyRef Name="PersonChangeRequestID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PersonHistory_Person">
           <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
           <End Type="TestCardModel.PersonHistory" Role="PersonHistory" Multiplicity="*" />
@@ -3922,6 +3815,125 @@
             </Principal>
             <Dependent Role="TestingCard">
               <PropertyRef Name="ResponsiblePersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PersonScheduleChangeRequest">
+          <Key>
+            <PropertyRef Name="PersonScheduleChangeRequestID" />
+          </Key>
+          <Property Type="Int32" Name="PersonScheduleChangeRequestID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PersonID" />
+          <Property Type="Int32" Name="ResponsiblePersonID" />
+          <Property Type="DateTime" Name="CreateDate" Precision="3" />
+          <Property Type="Int32" Name="QualityManagerConfirmStatusID" />
+          <Property Type="DateTime" Name="QualityManagerConfirmDate" Precision="3" />
+          <Property Type="Int32" Name="QualityManagerPersonID" />
+          <Property Type="Int32" Name="AdministratorConfirmStatusID" />
+          <Property Type="DateTime" Name="AdministratorConfirmDate" Precision="3" />
+          <Property Type="Int32" Name="AdministratorPersonID" />
+          <NavigationProperty Name="AdminConfirmStatus" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_AdminConfirmStatus" FromRole="PersonScheduleChangeRequest" ToRole="ConfirmStatus" />
+          <NavigationProperty Name="QualityManagerConfirmStatus" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_QualityManagerConfirmStatus" FromRole="PersonScheduleChangeRequest" ToRole="ConfirmStatus" />
+          <NavigationProperty Name="Person" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person" FromRole="PersonScheduleChangeRequest" ToRole="Person" />
+          <NavigationProperty Name="ResponsiblePerson" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person1" FromRole="PersonScheduleChangeRequest" ToRole="Person" />
+          <NavigationProperty Name="AdminPerson" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person2" FromRole="PersonScheduleChangeRequest" ToRole="Person" />
+          <NavigationProperty Name="QualityManagerPerson" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person3" FromRole="PersonScheduleChangeRequest" ToRole="Person" />
+          <NavigationProperty Name="PersonScheduleChangeRequestDetails" Relationship="TestCardModel.FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest" FromRole="PersonScheduleChangeRequest" ToRole="PersonScheduleChangeRequestDetail" />
+        </EntityType>
+        <Association Name="FK_PersonScheduleChangeRequest_AdminConfirmStatus">
+          <End Type="TestCardModel.ConfirmStatus" Role="ConfirmStatus" Multiplicity="0..1" />
+          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConfirmStatus">
+              <PropertyRef Name="ConfirmStatusID" />
+            </Principal>
+            <Dependent Role="PersonScheduleChangeRequest">
+              <PropertyRef Name="AdministratorConfirmStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonScheduleChangeRequest_QualityManagerConfirmStatus">
+          <End Type="TestCardModel.ConfirmStatus" Role="ConfirmStatus" Multiplicity="0..1" />
+          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConfirmStatus">
+              <PropertyRef Name="ConfirmStatusID" />
+            </Principal>
+            <Dependent Role="PersonScheduleChangeRequest">
+              <PropertyRef Name="QualityManagerConfirmStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonScheduleChangeRequest_Person">
+          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonScheduleChangeRequest">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonScheduleChangeRequest_Person1">
+          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonScheduleChangeRequest">
+              <PropertyRef Name="ResponsiblePersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonScheduleChangeRequest_Person2">
+          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonScheduleChangeRequest">
+              <PropertyRef Name="AdministratorPersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonScheduleChangeRequest_Person3">
+          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonScheduleChangeRequest">
+              <PropertyRef Name="QualityManagerPersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PersonScheduleChangeRequestDetail">
+          <Key>
+            <PropertyRef Name="PersonScheduleChangeRequestID" />
+            <PropertyRef Name="WeekDayNumber" />
+          </Key>
+          <Property Type="Int32" Name="PersonScheduleChangeRequestID" Nullable="false" />
+          <Property Type="Int32" Name="WeekDayNumber" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Precision="0" />
+          <Property Type="Time" Name="EndTime" Precision="0" />
+          <Property Type="Time" Name="BreakStartTime" Precision="0" />
+          <Property Type="Time" Name="BreakEndTime" Precision="0" />
+          <NavigationProperty Name="PersonScheduleChangeRequest" Relationship="TestCardModel.FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest" FromRole="PersonScheduleChangeRequestDetail" ToRole="PersonScheduleChangeRequest" />
+        </EntityType>
+        <Association Name="FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest">
+          <End Type="TestCardModel.PersonScheduleChangeRequest" Role="PersonScheduleChangeRequest" Multiplicity="1" />
+          <End Type="TestCardModel.PersonScheduleChangeRequestDetail" Role="PersonScheduleChangeRequestDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonScheduleChangeRequest">
+              <PropertyRef Name="PersonScheduleChangeRequestID" />
+            </Principal>
+            <Dependent Role="PersonScheduleChangeRequestDetail">
+              <PropertyRef Name="PersonScheduleChangeRequestID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4102,29 +4114,6 @@
                 <ScalarProperty Name="BreakEndTime" ColumnName="BreakEndTime" />
                 <ScalarProperty Name="ResponsiblePersonID" ColumnName="ResponsiblePersonID" />
                 <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PersonScheduleChangeRequests">
-            <EntityTypeMapping TypeName="TestCardModel.PersonScheduleChangeRequest">
-              <MappingFragment StoreEntitySet="PersonScheduleChangeRequest">
-                <ScalarProperty Name="PersonChangeRequestID" ColumnName="PersonChangeRequestID" />
-                <ScalarProperty Name="PersonScheduleChangeRequestID" ColumnName="PersonScheduleChangeRequestID" />
-                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
-                <ScalarProperty Name="WeekDayNumber" ColumnName="WeekDayNumber" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="BreakStartTime" ColumnName="BreakStartTime" />
-                <ScalarProperty Name="BreakEndTime" ColumnName="BreakEndTime" />
-                <ScalarProperty Name="ResponsiblePersonID" ColumnName="ResponsiblePersonID" />
-                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="QualityManagerConfirmStatusID" ColumnName="QualityManagerConfirmStatusID" />
-                <ScalarProperty Name="QualityManagerConfirmDate" ColumnName="QualityManagerConfirmDate" />
-                <ScalarProperty Name="QualityManagerPersonID" ColumnName="QualityManagerPersonID" />
-                <ScalarProperty Name="AdministratorConfirmStatusID" ColumnName="AdministratorConfirmStatusID" />
-                <ScalarProperty Name="AdministratorConfirmDate" ColumnName="AdministratorConfirmDate" />
-                <ScalarProperty Name="AdministratorPersonID" ColumnName="AdministratorPersonID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4468,6 +4457,34 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="PersonID" ColumnName="PersonID" />
                 <ScalarProperty Name="PersonChangeRequestID" ColumnName="PersonChangeRequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonScheduleChangeRequests">
+            <EntityTypeMapping TypeName="TestCardModel.PersonScheduleChangeRequest">
+              <MappingFragment StoreEntitySet="PersonScheduleChangeRequest">
+                <ScalarProperty Name="AdministratorPersonID" ColumnName="AdministratorPersonID" />
+                <ScalarProperty Name="AdministratorConfirmDate" ColumnName="AdministratorConfirmDate" />
+                <ScalarProperty Name="AdministratorConfirmStatusID" ColumnName="AdministratorConfirmStatusID" />
+                <ScalarProperty Name="QualityManagerPersonID" ColumnName="QualityManagerPersonID" />
+                <ScalarProperty Name="QualityManagerConfirmDate" ColumnName="QualityManagerConfirmDate" />
+                <ScalarProperty Name="QualityManagerConfirmStatusID" ColumnName="QualityManagerConfirmStatusID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ResponsiblePersonID" ColumnName="ResponsiblePersonID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="PersonScheduleChangeRequestID" ColumnName="PersonScheduleChangeRequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonScheduleChangeRequestDetails">
+            <EntityTypeMapping TypeName="TestCardModel.PersonScheduleChangeRequestDetail">
+              <MappingFragment StoreEntitySet="PersonScheduleChangeRequestDetail">
+                <ScalarProperty Name="BreakEndTime" ColumnName="BreakEndTime" />
+                <ScalarProperty Name="BreakStartTime" ColumnName="BreakStartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="WeekDayNumber" ColumnName="WeekDayNumber" />
+                <ScalarProperty Name="PersonScheduleChangeRequestID" ColumnName="PersonScheduleChangeRequestID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

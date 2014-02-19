@@ -74,30 +74,13 @@ namespace TestCard.Domain.Services
                     CreateDate = now
                 });
 
-                foreach (var sch in person.PersonSchedules.ToList())
-                {
-                    _DbContext.PersonSchedules.Remove(sch);
-
-                    _DbContext.PersonScheduleHistories.Add(new PersonScheduleHistory
-                    {
-                        BreakEndTime = sch.BreakEndTime,
-                        BreakStartTime = sch.BreakStartTime,
-                        EffectiveDate = sch.EffectiveDate,
-                        EndTime = sch.EndTime,
-                        PersonID = sch.PersonID,
-                        ResponsiblePersonID = sch.ResponsiblePersonID,
-                        StartTime = sch.StartTime,
-                        WeekDayNumber = sch.WeekDayNumber,
-                        CreateDate = now
-                    });
-                }
-
                 Update(person);
             }
             else
             {
                 person = new Person();
                 person.EffectiveDate = now;
+                person.Password = request.Password;
 
                 Add(person);
             }
@@ -111,24 +94,8 @@ namespace TestCard.Domain.Services
             person.IDNo = request.IDNo;
             person.LastName = request.LastName;
             person.Mobile = request.Mobile;
-            person.Password = request.Password;
             person.ResponsiblePersonID = request.ResponsiblePersonID;
             person.SystemIDNo = request.SystemIDNo;
-
-            foreach (var sch in request.PersonScheduleChangeRequests)
-            {
-                person.PersonSchedules.Add(new PersonSchedule
-                {
-                    BreakEndTime = sch.BreakEndTime,
-                    BreakStartTime = sch.BreakStartTime,
-                    EffectiveDate = sch.EffectiveDate,
-                    EndTime = sch.EndTime,
-                    PersonID = sch.PersonID ?? 0,
-                    ResponsiblePersonID = sch.ResponsiblePersonID,
-                    StartTime = sch.StartTime,
-                    WeekDayNumber = sch.WeekDayNumber
-                });
-            }
 
             return true;
         }

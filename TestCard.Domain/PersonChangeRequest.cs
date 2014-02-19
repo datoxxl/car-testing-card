@@ -14,11 +14,6 @@ namespace TestCard.Domain
     
     public partial class PersonChangeRequest
     {
-        public PersonChangeRequest()
-        {
-            this.PersonScheduleChangeRequests = new HashSet<PersonScheduleChangeRequest>();
-        }
-    
         public int PersonChangeRequestID { get; set; }
         public Nullable<int> PersonID { get; set; }
         public string FirstName { get; set; }
@@ -50,6 +45,5 @@ namespace TestCard.Domain
         public virtual Person Person { get; set; }
         public virtual Person QualityManagerPerson { get; set; }
         public virtual Person ResponsiblePerson { get; set; }
-        public virtual ICollection<PersonScheduleChangeRequest> PersonScheduleChangeRequests { get; set; }
     }
 }

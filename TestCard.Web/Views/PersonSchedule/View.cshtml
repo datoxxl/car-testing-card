@@ -1,0 +1,14 @@
+﻿@model TestCard.Web.Models.PersonScheduleModel
+
+@{
+    ViewBag.Title = "View";
+}
+<div class="x-form-container">
+    <span class="header">@GeneralResource.User</span>
+    <div class="top-actions">
+        <a href="@Request.UrlReferrer.OriginalString">@GeneralResource.Back</a>
+    </div>
+    <div class="form-inner">
+        @Html.DisplayForModel()
+    </div>
+</div>

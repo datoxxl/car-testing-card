@@ -49,7 +49,7 @@ namespace TestCard.Web.Controllers
         public ActionResult Register()
         {
             var model = new TestCard.Web.Models.RegisterModel();
-            ModelDataHelper.PopulateRegisterModel(model);
+            ModelDataHelper.Populate(model);
 
             return View(model);
         }
@@ -64,7 +64,7 @@ namespace TestCard.Web.Controllers
                     using (var service = new PersonChangeRequestService())
                     {
                         var per = AutoMapper.Mapper.Map<Models.RegisterModel, TestCard.Domain.PersonChangeRequest>(model);
-                        service.SavePersonChangeRequest(per, null, null);
+                        service.SaveChangeRequest(per, null);
                     }
 
                    SetSuccessMessage(GeneralResource.RegistrationComplete);
@@ -77,7 +77,7 @@ namespace TestCard.Web.Controllers
                 SetErrorMessage();
             }
 
-            ModelDataHelper.PopulateRegisterModel(model);
+            ModelDataHelper.Populate(model);
 
             return View(model);
         }

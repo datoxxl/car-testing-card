@@ -67,7 +67,25 @@ namespace TestCard.Web.Controllers
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.PersonListModel>>(service.GetList(CurrentUser.CompanyID.Value, (Domain.AccountTypes)CurrentUser.AccountTypeID, filter));
+                var list = AutoMapper.Mapper.Map<List<Models.PersonListModel>>(service.GetList(CurrentUser, filter));
+
+                return PartialView(list);
+            }
+        }
+
+        public PartialViewResult PersonScheduleChangeRequest()
+        {
+            using (var service = new PersonScheduleChangeRequestService())
+            {
+                var filter = new DataFilterOption
+                {
+                    StartRowIndex = 0,
+                    MaximumRows = 100,
+                    SortByExpression = "CreateDate DESC",
+                    //FilterExpression = string.Format("CompanyID == {0}", companyID)
+                };
+
+                var list = AutoMapper.Mapper.Map<List<Models.PersonScheduleChangeRequestListModel>>(service.GetList(CurrentUser, filter));
 
                 return PartialView(list);
             }

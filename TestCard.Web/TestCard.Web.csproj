@@ -137,10 +137,12 @@
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\PersonScheduleChangeRequestController.cs" />
+    <Compile Include="Controllers\PersonScheduleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListController.cs" />
-    <Compile Include="Controllers\UserChangeRequestController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\PersonChangeRequestController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Filters\AuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -151,6 +153,7 @@
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PersonListModel.cs" />
+    <Compile Include="Models\PersonScheduleChangeRequestListModel.cs" />
     <Compile Include="Models\PersonScheduleModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\ToolbarButton.cs" />
@@ -288,26 +291,33 @@
     <Content Include="Views\Company\Add.cshtml" />
     <Content Include="Views\Company\EditorTemplates\CompanyModel.cshtml" />
     <Content Include="Views\Company\Edit.cshtml" />
-    <Content Include="Views\User\List.cshtml" />
-    <Content Include="Views\User\Edit.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\RegisterModel.cshtml" />
-    <Content Include="Views\User\EditorTemplates\PersonModel.cshtml" />
+    <Content Include="Views\Person\List.cshtml" />
+    <Content Include="Views\Person\Edit.cshtml" />
+    <Content Include="Views\Authorization\EditorTemplates\RegisterModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PersonModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PersonScheduleModel.cshtml" />
     <Content Include="Views\List\Person.cshtml" />
     <Content Include="Views\List\Company.cshtml" />
     <Content Include="Views\List\PersonChangeRequest.cshtml" />
-    <Content Include="Views\UserChangeRequest\List.cshtml" />
-    <Content Include="Views\UserChangeRequest\View.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\RegisterModel.cshtml" />
+    <Content Include="Views\PersonChangeRequest\List.cshtml" />
+    <Content Include="Views\PersonChangeRequest\View.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PersonScheduleModel.cshtml" />
-    <Content Include="Views\User\View.cshtml" />
+    <Content Include="Views\Person\View.cshtml" />
     <Content Include="Views\Company\DisplayTemplates\CompanyModel.cshtml" />
     <Content Include="Views\Company\View.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PersonModel.cshtml" />
+    <Content Include="Views\PersonSchedule\View.cshtml" />
+    <Content Include="Views\PersonSchedule\Edit.cshtml" />
+    <Content Include="Views\PersonScheduleChangeRequest\List.cshtml" />
+    <Content Include="Views\List\PersonScheduleChangeRequest.cshtml" />
+    <Content Include="Views\PersonScheduleChangeRequest\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="CustomAttributes\" />
     <Folder Include="ModelBinders\" />
+    <Folder Include="Views\Person\DisplayTemplates\" />
+    <Folder Include="Views\Person\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

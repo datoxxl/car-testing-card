@@ -8,6 +8,7 @@ namespace TestCard.Web.Models
 {
     public class PersonScheduleModel
     {
+        public int personID { get; set; }
         public List<Day> Days { get; set; }
 
         public class Day

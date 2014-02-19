@@ -11,7 +11,7 @@ using TestCard.Web.Helpers;
 namespace TestCard.Web.Controllers
 {
     [AuthorizationFilter]
-    public class UserController : BaseController
+    public class PersonController : BaseController
     {
         public ActionResult List()
         {
@@ -37,13 +37,11 @@ namespace TestCard.Web.Controllers
                 {
                     using (var service = new PersonChangeRequestService())
                     {
-                        var per = AutoMapper.Mapper.Map<Domain.PersonChangeRequest>(model.UserInfo);
+                        var per = AutoMapper.Mapper.Map<Domain.PersonChangeRequest>(model);
 
                         List<Domain.PersonScheduleChangeRequest> scheduleList = new List<Domain.PersonScheduleChangeRequest>();
 
-                        scheduleList = AutoMapper.Mapper.Map<List<Domain.PersonScheduleChangeRequest>>(model.Schedule.Days);
-
-                        service.SavePersonChangeRequest(per, scheduleList, CurrentUser.PersonID);
+                        service.SaveChangeRequest(per, CurrentUser.PersonID);
                     }
 
                     SetSuccessMessage();
@@ -55,8 +53,7 @@ namespace TestCard.Web.Controllers
                 SetErrorMessage();
             }
 
-            ModelDataHelper.PopulateRegisterModel(model.UserInfo);
-            ModelDataHelper.PopulatePersonScheduleModel(model.Schedule);
+            ModelDataHelper.Populate(model);
 
             return View(model);
         }
@@ -72,12 +69,12 @@ namespace TestCard.Web.Controllers
                     if (source != null)
                     {
                         var model = new Models.PersonModel();
-                        model.UserInfo = AutoMapper.Mapper.Map(source, model.UserInfo);
-                        model.Schedule = new Models.PersonScheduleModel();
-                        model.Schedule.Days = AutoMapper.Mapper.Map<List<Models.PersonScheduleModel.Day>>(source.PersonSchedules.ToList());
+                        model = AutoMapper.Mapper.Map(source, model);
+                        //model.Schedule = new Models.PersonScheduleModel();
+                        //model.Schedule.Days = AutoMapper.Mapper.Map<List<Models.PersonScheduleModel.Day>>(source.PersonSchedules.ToList());
 
-                        ModelDataHelper.PopulateRegisterModel(model.UserInfo);
-                        ModelDataHelper.PopulatePersonScheduleModel(model.Schedule);
+                        ModelDataHelper.Populate(model);
+                        //ModelDataHelper.PopulatePersonScheduleModel(model.Schedule);
 
                         return View(model);
                     }

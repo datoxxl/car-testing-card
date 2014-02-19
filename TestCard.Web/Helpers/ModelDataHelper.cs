@@ -50,7 +50,7 @@ namespace TestCard.Web.Helpers
             return list;
         }
 
-        private static List<Models.PersonScheduleModel.Day> PopulateScheduleDays(List<Models.PersonScheduleModel.Day> days)
+        private static List<Models.PersonScheduleModel.Day> Populate(List<Models.PersonScheduleModel.Day> days)
         {
             if (days == null)
             {
@@ -80,14 +80,27 @@ namespace TestCard.Web.Helpers
             return days;
         }
 
-        public static void PopulatePersonScheduleModel(Models.PersonScheduleModel model)
+        public static void Populate(Models.PersonScheduleModel model)
         {
-            model.Days = PopulateScheduleDays(model.Days);
+            model.Days = Populate(model.Days);
             model.BreakHours = GetBreakHours();
             model.WorkHours = GetWorkHours();
         }
 
-        public static void PopulateRegisterModel(Models.RegisterModel model)
+        public static void Populate(Models.RegisterModel model)
+        {
+            using (var service = new AccountTypeService())
+            {
+                model.AccountTypeSelectList = new SelectList(service.GetAll().ToList(), "AccountTypeID", "AccountTypeName");
+            }
+
+            using (var service = new CompanyService())
+            {
+                model.CompanySelectList = new SelectList(service.GetAll().ToList(), "CompanyID", "CompanyName");
+            }
+        }
+
+        public static void Populate(Models.PersonModel model)
         {
             using (var service = new AccountTypeService())
             {

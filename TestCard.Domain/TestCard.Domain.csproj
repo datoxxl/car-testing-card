@@ -114,6 +114,9 @@
     <Compile Include="PersonScheduleChangeRequest.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="PersonScheduleChangeRequestDetail.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="PersonScheduleHistory.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
@@ -122,6 +125,8 @@
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="Services\DomainServiceBase.cs" />
     <Compile Include="Services\PersonChangeRequestService.cs" />
+    <Compile Include="Services\PersonScheduleChangeRequestService.cs" />
+    <Compile Include="Services\PersonScheduleService.cs" />
     <Compile Include="Services\PersonService.cs" />
     <Compile Include="TestingCard.cs">
       <DependentUpon>Data.tt</DependentUpon>

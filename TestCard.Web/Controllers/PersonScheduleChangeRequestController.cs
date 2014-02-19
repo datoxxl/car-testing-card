@@ -11,7 +11,7 @@ using TestCard.Web.Helpers;
 namespace TestCard.Web.Controllers
 {
     [AuthorizationFilter]
-    public class UserChangeRequestController : BaseController
+    public class PersonScheduleChangeRequestController : BaseController
     {
         public static object lockObject = new object();
 
@@ -24,19 +24,19 @@ namespace TestCard.Web.Controllers
         {
             try
             {
-                using (var service = new PersonChangeRequestService())
+                using (var service = new PersonScheduleChangeRequestService())
                 {
                     var source = service.Get(id);
 
                     if (source != null)
                     {
-                        var model = new Models.PersonModel();
-                        model.UserInfo = AutoMapper.Mapper.Map(source, model.UserInfo);
-                        model.Schedule = new Models.PersonScheduleModel();
-                        model.Schedule.Days = AutoMapper.Mapper.Map<List<Models.PersonScheduleModel.Day>>(source.PersonScheduleChangeRequests.ToList());
+                        var model = new Models.PersonScheduleModel();
+                        model.Days = AutoMapper.Mapper.Map(source.PersonScheduleChangeRequestDetails, model.Days);
+                        //model.Schedule = new Models.PersonScheduleModel();
+                        //model.Schedule.Days = AutoMapper.Mapper.Map<List<Models.PersonScheduleModel.Day>>(source.PersonScheduleChangeRequests.ToList());
 
-                        ModelDataHelper.PopulateRegisterModel(model.UserInfo);
-                        ModelDataHelper.PopulatePersonScheduleModel(model.Schedule);
+                        ModelDataHelper.Populate(model);
+                        //ModelDataHelper.PopulatePersonScheduleModel(model.Schedule);
 
                         return View(model);
                     }
@@ -51,7 +51,7 @@ namespace TestCard.Web.Controllers
                 SetErrorMessage();
             }
 
-            return RedirectToAction("List");
+            return RedirectToAction("List", "PersonChangeRequest");
         }
 
         [HttpPost]
@@ -61,7 +61,7 @@ namespace TestCard.Web.Controllers
             {
                 lock (lockObject)
                 {
-                    using (var service = new PersonChangeRequestService())
+                    using (var service = new PersonScheduleChangeRequestService())
                     {
                         bool? alreadyProcessed = null;
                         bool? notApprovedByQualityManager = null;
@@ -104,7 +104,7 @@ namespace TestCard.Web.Controllers
                 SetErrorMessage();
             }
 
-            return RedirectToAction("List");
+            return RedirectToAction("List", "PersonChangeRequest");
         }
     }
 }

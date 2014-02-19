@@ -7,28 +7,34 @@ using TestCard.Domain.Helpers;
 
 namespace TestCard.Domain.Services
 {
-    public class PersonChangeRequestService : DomainServiceBase<PersonChangeRequest>
+    public class PersonScheduleChangeRequestService : DomainServiceBase<PersonScheduleChangeRequest>
     {
-        public bool SaveChangeRequest(PersonChangeRequest personRequest, int? responsiblePerson)
+        public bool SaveChangeRequest(int personID, List<PersonScheduleChangeRequestDetail> scheduleRequestDetails, int? responsiblePersonID)
         {
             var now = DateTime.Now;
 
-            personRequest.EffectiveDate = now;
-            personRequest.CreateDate = now;
-            personRequest.ResponsiblePersonID = responsiblePerson;
+            var request = new PersonScheduleChangeRequest();
+            request.CreateDate = now;
+            request.ResponsiblePersonID = responsiblePersonID;
+            request.PersonID = personID;
 
-            Add(personRequest);
+            Add(request);
+
+            foreach (var item in scheduleRequestDetails)
+            {
+                request.PersonScheduleChangeRequestDetails.Add(item);
+            }
 
             SaveChanges();
 
-            return personRequest.PersonChangeRequestID > 0;
+            return request.PersonScheduleChangeRequestID > 0;
         }
 
         public bool ChangeRequestStatus(int id, ConfirmStatuses status, AccountTypes type, int personID, ref bool? alreadyProcessed, ref bool? notApprovedByQualityManager)
         {
             var now = DateTime.Now;
 
-            PersonChangeRequest request = Get(id);
+            var request = Get(id);
 
             if (request == null)
             {
@@ -49,7 +55,7 @@ namespace TestCard.Domain.Services
 
                             Update(request);
 
-                            new PersonService(_DbContext).SavePerson(request);
+                            new PersonScheduleService(_DbContext).SavePersonSchedule(request.PersonID.Value, request.ResponsiblePersonID, request.PersonScheduleChangeRequestDetails.ToList());
 
                             SaveChanges();
 
@@ -91,7 +97,7 @@ namespace TestCard.Domain.Services
             return false;
         }
 
-        public List<PersonChangeRequest> GetList(v_person person, DataFilterOption filter)
+        public List<PersonScheduleChangeRequest> GetList(v_person person, DataFilterOption filter)
         {
             var type = (AccountTypes)person.AccountTypeID;
             var result = GetAll().Where(x => x.Person.CompanyID == person.CompanyID);

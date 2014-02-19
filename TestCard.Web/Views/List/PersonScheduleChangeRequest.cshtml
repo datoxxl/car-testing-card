@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TestCard.Web.Models.PersonScheduleChangeRequestListModel>
+
+<table class="x-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AdministratorConfirmStatusName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QualityManagerConfirmStatusName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResponsiblePersonFullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonFullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdministratorConfirmStatusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QualityManagerConfirmStatusName)
+            </td>
+            <td>
+                @Html.ActionLink(item.ResponsiblePersonFullName, "View", "Person", new { @id = item.ResponsiblePersonID }, null)
+            </td>
+            <td>
+                @Html.ActionLink(item.PersonFullName, "View", "Person", new { @id = item.PersonID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td style="width: 1px;">
+                @Html.ActionLink(GeneralResource.View, "View", "PersonScheduleChangeRequest", new { @id = item.PersonScheduleChangeRequestID }, new { @class = "x-button" })
+                @using (Html.BeginForm("ProcessRequest", "PersonScheduleChangeRequest", new { @id = item.PersonScheduleChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Approved }, FormMethod.Post))
+                {
+                    <input type="submit" value="@GeneralResource.Approve" />
+                }
+                @using (Html.BeginForm("ProcessRequest", "PersonScheduleChangeRequest", new { @id = item.PersonScheduleChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Rejected }, FormMethod.Post))
+                {
+                    <input type="submit" value="@GeneralResource.Reject" />
+                }
+            </td>
+        </tr>
+    }
+
+</table>

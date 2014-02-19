@@ -30,7 +30,7 @@
                 @Html.DisplayFor(modelItem => item.IDNo)
             </td>
             <td>
-                @Html.ActionLink(item.FullName, "View", "User", new { @id = item.PersonID }, null)
+                @Html.ActionLink(item.FullName, "View", "Person", new { @id = item.PersonID }, null)
             </td>
             <td>
                 @Html.ActionLink(item.CompanyName, "View", "Company", new { @id = item.CompanyID }, null)
@@ -44,7 +44,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>@Html.ActionLink(GeneralResource.Edit, "Edit", "User", new { @id = item.PersonID }, null)
+            <td>@Html.ActionLink(GeneralResource.Edit, "Edit", "Person", new { @id = item.PersonID }, null)
             </td>
         </tr>
     }

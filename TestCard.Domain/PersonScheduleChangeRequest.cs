@@ -14,15 +14,14 @@ namespace TestCard.Domain
     
     public partial class PersonScheduleChangeRequest
     {
+        public PersonScheduleChangeRequest()
+        {
+            this.PersonScheduleChangeRequestDetails = new HashSet<PersonScheduleChangeRequestDetail>();
+        }
+    
         public int PersonScheduleChangeRequestID { get; set; }
         public Nullable<int> PersonID { get; set; }
-        public int WeekDayNumber { get; set; }
-        public Nullable<System.TimeSpan> StartTime { get; set; }
-        public Nullable<System.TimeSpan> EndTime { get; set; }
-        public Nullable<System.TimeSpan> BreakStartTime { get; set; }
-        public Nullable<System.TimeSpan> BreakEndTime { get; set; }
         public Nullable<int> ResponsiblePersonID { get; set; }
-        public System.DateTime EffectiveDate { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> QualityManagerConfirmStatusID { get; set; }
         public Nullable<System.DateTime> QualityManagerConfirmDate { get; set; }
@@ -30,14 +29,13 @@ namespace TestCard.Domain
         public Nullable<int> AdministratorConfirmStatusID { get; set; }
         public Nullable<System.DateTime> AdministratorConfirmDate { get; set; }
         public Nullable<int> AdministratorPersonID { get; set; }
-        public int PersonChangeRequestID { get; set; }
     
-        public virtual ConfirmStatus QualityManagerConfirmStatus { get; set; }
         public virtual ConfirmStatus AdminConfirmStatus { get; set; }
+        public virtual ConfirmStatus QualityManagerConfirmStatus { get; set; }
         public virtual Person Person { get; set; }
         public virtual Person ResponsiblePerson { get; set; }
         public virtual Person AdminPerson { get; set; }
         public virtual Person QualityManagerPerson { get; set; }
-        public virtual PersonChangeRequest PersonChangeRequest { get; set; }
+        public virtual ICollection<PersonScheduleChangeRequestDetail> PersonScheduleChangeRequestDetails { get; set; }
     }
 }
