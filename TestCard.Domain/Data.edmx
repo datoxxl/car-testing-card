@@ -623,12 +623,12 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
           <Property Name="IDNo" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="SystemIDNo" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SystemIDNo" Type="nvarchar" MaxLength="50" />
           <Property Name="CompanyID" Type="int" Nullable="false" />
           <Property Name="AccountTypeID" Type="int" Nullable="false" />
           <Property Name="FileID" Type="int" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
-          <Property Name="ResponsiblePersonID" Type="int" Nullable="false" />
+          <Property Name="ResponsiblePersonID" Type="int" />
           <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
@@ -719,7 +719,7 @@
           <Property Name="EndTime" Type="time" Precision="0" />
           <Property Name="BreakStartTime" Type="time" Precision="0" />
           <Property Name="BreakEndTime" Type="time" Precision="0" />
-          <Property Name="ResponsiblePersonID" Type="int" Nullable="false" />
+          <Property Name="ResponsiblePersonID" Type="int" />
           <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
@@ -1404,7 +1404,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PersonHistory_Person">
-          <End Role="Person" Type="CarTestingCardModel.Store.Person" Multiplicity="1" />
+          <End Role="Person" Type="CarTestingCardModel.Store.Person" Multiplicity="0..1" />
           <End Role="PersonHistory" Type="CarTestingCardModel.Store.PersonHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Person">
@@ -1680,7 +1680,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PersonScheduleHistory_Person1">
-          <End Role="Person" Type="CarTestingCardModel.Store.Person" Multiplicity="1" />
+          <End Role="Person" Type="CarTestingCardModel.Store.Person" Multiplicity="0..1" />
           <End Role="PersonScheduleHistory" Type="CarTestingCardModel.Store.PersonScheduleHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Person">
@@ -2175,17 +2175,9 @@
             <End Role="Person" EntitySet="People" />
             <End Role="PersonDay" EntitySet="PersonDays" />
           </AssociationSet>
-          <AssociationSet Name="FK_PersonHistory_Person" Association="TestCardModel.FK_PersonHistory_Person">
-            <End Role="Person" EntitySet="People" />
-            <End Role="PersonHistory" EntitySet="PersonHistories" />
-          </AssociationSet>
           <AssociationSet Name="FK_PersonHistory_Person1" Association="TestCardModel.FK_PersonHistory_Person1">
             <End Role="Person" EntitySet="People" />
             <End Role="PersonHistory" EntitySet="PersonHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonLeave_Person" Association="TestCardModel.FK_PersonLeave_Person">
-            <End Role="Person" EntitySet="People" />
-            <End Role="PersonLeave" EntitySet="PersonLeaves" />
           </AssociationSet>
           <AssociationSet Name="FK_PersonLeave_Person1" Association="TestCardModel.FK_PersonLeave_Person1">
             <End Role="Person" EntitySet="People" />
@@ -2247,14 +2239,6 @@
             <End Role="Person" EntitySet="People" />
             <End Role="PersonScheduleHistory" EntitySet="PersonScheduleHistories" />
           </AssociationSet>
-          <AssociationSet Name="FK_PersonScheduleHistory_Person1" Association="TestCardModel.FK_PersonScheduleHistory_Person1">
-            <End Role="Person" EntitySet="People" />
-            <End Role="PersonScheduleHistory" EntitySet="PersonScheduleHistories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TestingCard_Person" Association="TestCardModel.FK_TestingCard_Person">
-            <End Role="Person" EntitySet="People" />
-            <End Role="TestingCard" EntitySet="TestingCards" />
-          </AssociationSet>
           <AssociationSet Name="FK_TestingCardChangeRequest_Person" Association="TestCardModel.FK_TestingCardChangeRequest_Person">
             <End Role="Person" EntitySet="People" />
             <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequests" />
@@ -2315,6 +2299,22 @@
           <AssociationSet Name="FK_PersonScheduleChangeRequest_PersonChangeRequest" Association="TestCardModel.FK_PersonScheduleChangeRequest_PersonChangeRequest">
             <End Role="PersonChangeRequest" EntitySet="PersonChangeRequests" />
             <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonHistory_Person" Association="TestCardModel.FK_PersonHistory_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonHistory" EntitySet="PersonHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonLeave_Person" Association="TestCardModel.FK_PersonLeave_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonLeave" EntitySet="PersonLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonScheduleHistory_Person1" Association="TestCardModel.FK_PersonScheduleHistory_Person1">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonScheduleHistory" EntitySet="PersonScheduleHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestingCard_Person" Association="TestCardModel.FK_TestingCard_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="TestingCard" EntitySet="TestingCards" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountType">
@@ -2453,19 +2453,19 @@
           <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Mobile" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="IDNo" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="SystemIDNo" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SystemIDNo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="CompanyID" Type="Int32" Nullable="false" />
           <Property Name="AccountTypeID" Type="Int32" Nullable="false" />
           <Property Name="FileID" Type="Int32" />
           <Property Name="Password" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="ResponsiblePersonID" Type="Int32" Nullable="false" />
+          <Property Name="ResponsiblePersonID" Type="Int32" />
           <Property Name="EffectiveDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AccountType" Relationship="TestCardModel.FK_PersonHistory_AccountType" FromRole="PersonHistory" ToRole="AccountType" />
           <NavigationProperty Name="Company" Relationship="TestCardModel.FK_PersonHistory_Company" FromRole="PersonHistory" ToRole="Company" />
           <NavigationProperty Name="File" Relationship="TestCardModel.FK_PersonHistory_File" FromRole="PersonHistory" ToRole="File" />
-          <NavigationProperty Name="Person" Relationship="TestCardModel.FK_PersonHistory_Person" FromRole="PersonHistory" ToRole="Person" />
           <NavigationProperty Name="Person1" Relationship="TestCardModel.FK_PersonHistory_Person1" FromRole="PersonHistory" ToRole="Person" />
+          <NavigationProperty Name="Person" Relationship="TestCardModel.FK_PersonHistory_Person" FromRole="PersonHistory" ToRole="Person" />
         </EntityType>
         <EntityType Name="PersonLeave">
           <Key>
@@ -2477,8 +2477,8 @@
           <Property Name="EndDate" Type="DateTime" Precision="0" />
           <Property Name="ResponsiblePersonID" Type="Int32" Nullable="false" />
           <Property Name="EffectiveDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Person" Relationship="TestCardModel.FK_PersonLeave_Person" FromRole="PersonLeave" ToRole="Person" />
           <NavigationProperty Name="Person1" Relationship="TestCardModel.FK_PersonLeave_Person1" FromRole="PersonLeave" ToRole="Person" />
+          <NavigationProperty Name="Person" Relationship="TestCardModel.FK_PersonLeave_Person" FromRole="PersonLeave" ToRole="Person" />
           </EntityType>
         <EntityType Name="PersonLeaveChangeRequest">
           <Key>
@@ -2574,7 +2574,7 @@
           <Property Name="EndTime" Type="Time" Precision="0" />
           <Property Name="BreakStartTime" Type="Time" Precision="0" />
           <Property Name="BreakEndTime" Type="Time" Precision="0" />
-          <Property Name="ResponsiblePersonID" Type="Int32" Nullable="false" />
+          <Property Name="ResponsiblePersonID" Type="Int32" />
           <Property Name="EffectiveDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Person" Relationship="TestCardModel.FK_PersonScheduleHistory_Person" FromRole="PersonScheduleHistory" ToRole="Person" />
@@ -3259,9 +3259,7 @@
           <NavigationProperty Name="Person1" Relationship="TestCardModel.FK_Person_Person" FromRole="Person" ToRole="Person1" />
           <NavigationProperty Name="Person2" Relationship="TestCardModel.FK_Person_Person" FromRole="Person1" ToRole="Person" />
           <NavigationProperty Name="PersonDays" Relationship="TestCardModel.FK_PersonDay_Person" FromRole="Person" ToRole="PersonDay" />
-          <NavigationProperty Name="PersonHistories" Relationship="TestCardModel.FK_PersonHistory_Person" FromRole="Person" ToRole="PersonHistory" />
           <NavigationProperty Name="PersonHistories1" Relationship="TestCardModel.FK_PersonHistory_Person1" FromRole="Person" ToRole="PersonHistory" />
-          <NavigationProperty Name="PersonLeaves" Relationship="TestCardModel.FK_PersonLeave_Person" FromRole="Person" ToRole="PersonLeave" />
           <NavigationProperty Name="PersonLeaves1" Relationship="TestCardModel.FK_PersonLeave_Person1" FromRole="Person" ToRole="PersonLeave" />
           <NavigationProperty Name="PersonLeaveChangeRequests" Relationship="TestCardModel.FK_PersonLeaveChangeRequest_Person" FromRole="Person" ToRole="PersonLeaveChangeRequest" />
           <NavigationProperty Name="PersonLeaveChangeRequests1" Relationship="TestCardModel.FK_PersonLeaveChangeRequest_Person1" FromRole="Person" ToRole="PersonLeaveChangeRequest" />
@@ -3277,8 +3275,6 @@
           <NavigationProperty Name="AdminPersonScheduleChangeRequests" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person2" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
           <NavigationProperty Name="QualityManagerPersonScheduleChangeRequests" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person3" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
           <NavigationProperty Name="PersonScheduleHistories" Relationship="TestCardModel.FK_PersonScheduleHistory_Person" FromRole="Person" ToRole="PersonScheduleHistory" />
-          <NavigationProperty Name="ResponsiblePersonScheduleHistories" Relationship="TestCardModel.FK_PersonScheduleHistory_Person1" FromRole="Person" ToRole="PersonScheduleHistory" />
-          <NavigationProperty Name="TestingCards" Relationship="TestCardModel.FK_TestingCard_Person" FromRole="Person" ToRole="TestingCard" />
           <NavigationProperty Name="TestingCardChangeRequests" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person" FromRole="Person" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="TestingCardChangeRequests1" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person1" FromRole="Person" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="TestingCardChangeRequests2" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person2" FromRole="Person" ToRole="TestingCardChangeRequest" />
@@ -3288,6 +3284,10 @@
           <NavigationProperty Name="PersonChangeRequests" Relationship="TestCardModel.FK_PersonChangeRequest_Person" FromRole="Person" ToRole="PersonChangeRequest" />
           <NavigationProperty Name="QualityManagerPersonChangeRequests" Relationship="TestCardModel.FK_PersonChangeRequest_QualityManagerPerson" FromRole="Person" ToRole="PersonChangeRequest" />
           <NavigationProperty Name="ResponsiblePersonChangeRequests3" Relationship="TestCardModel.FK_PersonChangeRequest_ResponsiblePerson" FromRole="Person" ToRole="PersonChangeRequest" />
+          <NavigationProperty Name="PersonHistories" Relationship="TestCardModel.FK_PersonHistory_Person" FromRole="Person" ToRole="PersonHistory" />
+          <NavigationProperty Name="PersonLeaves" Relationship="TestCardModel.FK_PersonLeave_Person" FromRole="Person" ToRole="PersonLeave" />
+          <NavigationProperty Name="PersonScheduleHistories1" Relationship="TestCardModel.FK_PersonScheduleHistory_Person1" FromRole="Person" ToRole="PersonScheduleHistory" />
+          <NavigationProperty Name="TestingCards" Relationship="TestCardModel.FK_TestingCard_Person" FromRole="Person" ToRole="TestingCard" />
         </EntityType>
         <Association Name="FK_Person_AccountType">
           <End Type="TestCardModel.AccountType" Role="AccountType" Multiplicity="1" />
@@ -3469,18 +3469,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PersonHistory_Person">
-          <End Type="TestCardModel.Person" Role="Person" Multiplicity="1" />
-          <End Type="TestCardModel.PersonHistory" Role="PersonHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="PersonHistory">
-              <PropertyRef Name="ResponsiblePersonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PersonHistory_Person1">
           <End Type="TestCardModel.Person" Role="Person" Multiplicity="1" />
           <End Type="TestCardModel.PersonHistory" Role="PersonHistory" Multiplicity="*" />
@@ -3490,18 +3478,6 @@
             </Principal>
             <Dependent Role="PersonHistory">
               <PropertyRef Name="PersonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonLeave_Person">
-          <End Type="TestCardModel.Person" Role="Person" Multiplicity="1" />
-          <End Type="TestCardModel.PersonLeave" Role="PersonLeave" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="PersonLeave">
-              <PropertyRef Name="ResponsiblePersonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3682,30 +3658,6 @@
             </Principal>
             <Dependent Role="PersonScheduleHistory">
               <PropertyRef Name="PersonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonScheduleHistory_Person1">
-          <End Type="TestCardModel.Person" Role="Person" Multiplicity="1" />
-          <End Type="TestCardModel.PersonScheduleHistory" Role="PersonScheduleHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="PersonScheduleHistory">
-              <PropertyRef Name="ResponsiblePersonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TestingCard_Person">
-          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
-          <End Type="TestCardModel.TestingCard" Role="TestingCard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="TestingCard">
-              <PropertyRef Name="ResponsiblePersonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3922,6 +3874,54 @@
             </Principal>
             <Dependent Role="PersonScheduleChangeRequest">
               <PropertyRef Name="PersonChangeRequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonHistory_Person">
+          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="TestCardModel.PersonHistory" Role="PersonHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonHistory">
+              <PropertyRef Name="ResponsiblePersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonLeave_Person">
+          <End Type="TestCardModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="TestCardModel.PersonLeave" Role="PersonLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonLeave">
+              <PropertyRef Name="ResponsiblePersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonScheduleHistory_Person1">
+          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="TestCardModel.PersonScheduleHistory" Role="PersonScheduleHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonScheduleHistory">
+              <PropertyRef Name="ResponsiblePersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestingCard_Person">
+          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="TestCardModel.TestingCard" Role="TestingCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="TestingCard">
+              <PropertyRef Name="ResponsiblePersonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

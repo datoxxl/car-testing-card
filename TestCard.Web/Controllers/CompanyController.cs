@@ -14,9 +14,9 @@ namespace TestCard.Web.Controllers
     [AuthorizationFilter]
     public class CompanyController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult View(int id)
         {
-            return View();
+            return GetModel(id);
         }
 
         public ActionResult List()
@@ -49,7 +49,7 @@ namespace TestCard.Web.Controllers
                             var company = AutoMapper.Mapper.Map<Models.CompanyModel, TestCard.Domain.Company>(model);
 
                             service.SaveCompany(company, CurrentUser.PersonID, GetFileData(file));
-                        
+
                             SetSuccessMessage();
 
                             return RedirectToAction("Edit", new { @id = company.CompanyID });
@@ -67,30 +67,7 @@ namespace TestCard.Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            try
-            {
-                using (var service = new CompanyService())
-                {
-                    var source = service.Get(id);
-
-                    if (source != null)
-                    {
-                        var model = AutoMapper.Mapper.Map<Models.CompanyModel>(source);
-
-                        return View(model);
-                    }
-                    else
-                    {
-                        SetErrorMessage(GeneralResource.RecordNotExists);
-                    }
-                }
-            }
-            catch
-            {
-                SetErrorMessage();
-            }
-
-            return RedirectToAction("List");
+            return GetModel(id);
         }
 
         [HttpPost]
@@ -127,6 +104,34 @@ namespace TestCard.Web.Controllers
 
 
             return View(model);
+        }
+
+        private ActionResult GetModel(int id)
+        {
+            try
+            {
+                using (var service = new CompanyService())
+                {
+                    var source = service.Get(id);
+
+                    if (source != null)
+                    {
+                        var model = AutoMapper.Mapper.Map<Models.CompanyModel>(source);
+
+                        return View(model);
+                    }
+                    else
+                    {
+                        SetErrorMessage(GeneralResource.RecordNotExists);
+                    }
+                }
+            }
+            catch
+            {
+                SetErrorMessage();
+            }
+
+            return RedirectToAction("List");
         }
     }
 }

@@ -28,9 +28,7 @@ namespace TestCard.Domain
             this.CompanyHistories3 = new HashSet<CompanyHistory>();
             this.Person1 = new HashSet<Person>();
             this.PersonDays = new HashSet<PersonDay>();
-            this.PersonHistories = new HashSet<PersonHistory>();
             this.PersonHistories1 = new HashSet<PersonHistory>();
-            this.PersonLeaves = new HashSet<PersonLeave>();
             this.PersonLeaves1 = new HashSet<PersonLeave>();
             this.PersonLeaveChangeRequests = new HashSet<PersonLeaveChangeRequest>();
             this.PersonLeaveChangeRequests1 = new HashSet<PersonLeaveChangeRequest>();
@@ -46,8 +44,6 @@ namespace TestCard.Domain
             this.AdminPersonScheduleChangeRequests = new HashSet<PersonScheduleChangeRequest>();
             this.QualityManagerPersonScheduleChangeRequests = new HashSet<PersonScheduleChangeRequest>();
             this.PersonScheduleHistories = new HashSet<PersonScheduleHistory>();
-            this.ResponsiblePersonScheduleHistories = new HashSet<PersonScheduleHistory>();
-            this.TestingCards = new HashSet<TestingCard>();
             this.TestingCardChangeRequests = new HashSet<TestingCardChangeRequest>();
             this.TestingCardChangeRequests1 = new HashSet<TestingCardChangeRequest>();
             this.TestingCardChangeRequests2 = new HashSet<TestingCardChangeRequest>();
@@ -57,6 +53,10 @@ namespace TestCard.Domain
             this.PersonChangeRequests = new HashSet<PersonChangeRequest>();
             this.QualityManagerPersonChangeRequests = new HashSet<PersonChangeRequest>();
             this.ResponsiblePersonChangeRequests3 = new HashSet<PersonChangeRequest>();
+            this.PersonHistories = new HashSet<PersonHistory>();
+            this.PersonLeaves = new HashSet<PersonLeave>();
+            this.PersonScheduleHistories1 = new HashSet<PersonScheduleHistory>();
+            this.TestingCards = new HashSet<TestingCard>();
         }
     
         public int PersonID { get; set; }
@@ -89,9 +89,7 @@ namespace TestCard.Domain
         public virtual ICollection<Person> Person1 { get; set; }
         public virtual Person Person2 { get; set; }
         public virtual ICollection<PersonDay> PersonDays { get; set; }
-        public virtual ICollection<PersonHistory> PersonHistories { get; set; }
         public virtual ICollection<PersonHistory> PersonHistories1 { get; set; }
-        public virtual ICollection<PersonLeave> PersonLeaves { get; set; }
         public virtual ICollection<PersonLeave> PersonLeaves1 { get; set; }
         public virtual ICollection<PersonLeaveChangeRequest> PersonLeaveChangeRequests { get; set; }
         public virtual ICollection<PersonLeaveChangeRequest> PersonLeaveChangeRequests1 { get; set; }
@@ -107,8 +105,6 @@ namespace TestCard.Domain
         public virtual ICollection<PersonScheduleChangeRequest> AdminPersonScheduleChangeRequests { get; set; }
         public virtual ICollection<PersonScheduleChangeRequest> QualityManagerPersonScheduleChangeRequests { get; set; }
         public virtual ICollection<PersonScheduleHistory> PersonScheduleHistories { get; set; }
-        public virtual ICollection<PersonScheduleHistory> ResponsiblePersonScheduleHistories { get; set; }
-        public virtual ICollection<TestingCard> TestingCards { get; set; }
         public virtual ICollection<TestingCardChangeRequest> TestingCardChangeRequests { get; set; }
         public virtual ICollection<TestingCardChangeRequest> TestingCardChangeRequests1 { get; set; }
         public virtual ICollection<TestingCardChangeRequest> TestingCardChangeRequests2 { get; set; }
@@ -118,5 +114,9 @@ namespace TestCard.Domain
         public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
         public virtual ICollection<PersonChangeRequest> QualityManagerPersonChangeRequests { get; set; }
         public virtual ICollection<PersonChangeRequest> ResponsiblePersonChangeRequests3 { get; set; }
+        public virtual ICollection<PersonHistory> PersonHistories { get; set; }
+        public virtual ICollection<PersonLeave> PersonLeaves { get; set; }
+        public virtual ICollection<PersonScheduleHistory> PersonScheduleHistories1 { get; set; }
+        public virtual ICollection<TestingCard> TestingCards { get; set; }
     }
 }

@@ -17,12 +17,13 @@
         <th>
             @Html.DisplayNameFor(model => model.AccreditationExpireDate)
         </th>
+        <th></th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.ActionLink(item.CompanyName, "Edit", "Company", new { @id = item.CompanyID }, null)
+                @Html.ActionLink(item.CompanyName, "View", "Company", new { @id = item.CompanyID }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Phone)
@@ -35,6 +36,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AccreditationExpireDate)
+            </td>
+            <td>
+                @Html.ActionLink(GeneralResource.Edit, "Edit", "Company", new { @id = item.CompanyID }, null)
             </td>
         </tr>
     }

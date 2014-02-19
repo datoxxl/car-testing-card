@@ -71,7 +71,5 @@ namespace TestCard.Domain.Services
 
             return company.CompanyID > 0;
         }
-
-
     }
 }

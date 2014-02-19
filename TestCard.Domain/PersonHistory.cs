@@ -26,14 +26,14 @@ namespace TestCard.Domain
         public int AccountTypeID { get; set; }
         public Nullable<int> FileID { get; set; }
         public string Password { get; set; }
-        public int ResponsiblePersonID { get; set; }
+        public Nullable<int> ResponsiblePersonID { get; set; }
         public System.DateTime EffectiveDate { get; set; }
         public System.DateTime CreateDate { get; set; }
     
         public virtual AccountType AccountType { get; set; }
         public virtual Company Company { get; set; }
         public virtual File File { get; set; }
-        public virtual Person Person { get; set; }
         public virtual Person Person1 { get; set; }
+        public virtual Person Person { get; set; }
     }
 }

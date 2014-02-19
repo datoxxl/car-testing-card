@@ -1,8 +1,8 @@
-﻿@if (ViewBag.ErrorMessage != null)
+﻿@if (TempData["ErrorMessage"] != null)
 {
     <script>
         $(function () {
-            showError('@ViewBag.ErrorMessage', '');
+            showError('@TempData["ErrorMessage"]', '');
         });
     </script>
 }

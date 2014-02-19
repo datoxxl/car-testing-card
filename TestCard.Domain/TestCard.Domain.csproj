@@ -77,12 +77,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Data.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Enums.cs" />
     <Compile Include="ErrorCode.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
     <Compile Include="File.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DomainServiceHelper.cs" />
+    <Compile Include="Helpers\DynamicLibrary.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Person.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>

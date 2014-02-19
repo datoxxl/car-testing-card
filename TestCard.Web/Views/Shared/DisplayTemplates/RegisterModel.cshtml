@@ -6,43 +6,43 @@
             @Html.HiddenFor(x => x.PersonID)
             <fieldset>
                 <legend>@GeneralResource.General</legend>
-                <ol>
-                    <li>
-                        @Html.LabelFor(x => x.IDNo)
-                        @Html.DisplayFor(x => x.IDNo)
-                    </li>
-                    <li>
-                        @Html.LabelFor(x => x.FirstName)
-                        @Html.DisplayFor(x => x.FirstName)
-                    </li>
-                    <li>
-                        @Html.LabelFor(x => x.LastName)
-                        @Html.DisplayFor(x => x.LastName)
-                    </li>
-                    <li>
-                        @Html.LabelFor(x => x.AccountTypeName)
-                        @Html.DisplayFor(x => x.AccountTypeName)
-                    </li>
-                </ol>
+                <table class="x-details-table">
+                    <tr>
+                        <td>@Html.DisplayNameFor(x => x.IDNo)</td>
+                        <td>@Html.DisplayFor(x => x.IDNo)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(x => x.FirstName)</td>
+                        <td>@Html.DisplayFor(x => x.FirstName)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(x => x.LastName)</td>
+                        <td>@Html.DisplayFor(x => x.LastName)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(x => x.AccountTypeName)</td>
+                        <td>@Html.DisplayFor(x => x.AccountTypeName)</td>
+                    </tr>
+                </table>
             </fieldset>
         </td>
         <td>
             <fieldset>
                 <legend>@GeneralResource.ContactInformation</legend>
-                <ol>
-                    <li>
-                        @Html.LabelFor(x => x.Email)
-                        @Html.DisplayFor(x => x.Email)
-                    </li>
-                    <li>
-                        @Html.LabelFor(x => x.Mobile)
-                        @Html.DisplayFor(x => x.Mobile)
-                    </li>
-                    <li>
-                        @Html.LabelFor(x => x.CompanyName)
-                        @Html.DisplayFor(x => x.CompanyName)
-                    </li>
-                </ol>
+                <table class="x-details-table">
+                    <tr>
+                        <td>@Html.DisplayNameFor(x => x.Email)</td>
+                        <td>@Html.DisplayFor(x => x.Email)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(x => x.Mobile)</td>
+                        <td>@Html.DisplayFor(x => x.Mobile)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(x => x.CompanyName)</td>
+                        <td>@Html.DisplayFor(x => x.CompanyName)</td>
+                    </tr>
+                </table>
             </fieldset>
         </td>
     </tr>

@@ -1,0 +1,19 @@
+﻿@model TestCard.Web.Models.PersonModel
+
+@{
+    ViewBag.Title = "View";
+}
+<div class="x-form-container">
+    <span class="header">@GeneralResource.User</span>
+    <div class="top-actions">
+        @Html.ActionLink(GeneralResource.Back, "List")
+    </div>
+    <div class="form-inner">
+        @using (Html.BeginForm())
+        {
+            @Html.DisplayFor(x => x.UserInfo, "RegisterModel")
+            <span class="header">@GeneralResource.WorkSchedule</span>
+            @Html.DisplayFor(x => x.Schedule, "PersonScheduleModel")
+        }
+    </div>
+</div>

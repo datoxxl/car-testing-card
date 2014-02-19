@@ -8,12 +8,7 @@
                Type = ActionButton.ActionType.Add, 
                Text = GeneralResource.Add,
                Url = "/User/Add"
-           },
-           new TestCard.Web.Models.ActionButton { 
-               Type = ActionButton.ActionType.Edit, 
-               Text = GeneralResource.Edit,
-               Url = "/User/Edit"
-           },
+           }
        }); }
 </p>
 @{ Html.RenderAction("Person", "List"); }

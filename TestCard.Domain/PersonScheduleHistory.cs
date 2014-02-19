@@ -21,7 +21,7 @@ namespace TestCard.Domain
         public Nullable<System.TimeSpan> EndTime { get; set; }
         public Nullable<System.TimeSpan> BreakStartTime { get; set; }
         public Nullable<System.TimeSpan> BreakEndTime { get; set; }
-        public int ResponsiblePersonID { get; set; }
+        public Nullable<int> ResponsiblePersonID { get; set; }
         public System.DateTime EffectiveDate { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
     

@@ -160,6 +160,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company users.
+        /// </summary>
+        public static string CompanyUsers {
+            get {
+                return ResourceManager.GetString("CompanyUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact information.
         /// </summary>
         public static string ContactInformation {
@@ -439,6 +448,42 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Request is already processed.
+        /// </summary>
+        public static string RequestAlreadyProcessed {
+            get {
+                return ResourceManager.GetString("RequestAlreadyProcessed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request is approved.
+        /// </summary>
+        public static string RequestApproved {
+            get {
+                return ResourceManager.GetString("RequestApproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request is not approved by quality manager.
+        /// </summary>
+        public static string RequestNotApprovedByQualityManager {
+            get {
+                return ResourceManager.GetString("RequestNotApprovedByQualityManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request is rejected.
+        /// </summary>
+        public static string RequestRejected {
+            get {
+                return ResourceManager.GetString("RequestRejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Required field.
         /// </summary>
         public static string Required {
@@ -534,6 +579,15 @@ namespace TestCard.Properties.Resources {
         public static string Users {
             get {
                 return ResourceManager.GetString("Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        public static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
             }
         }
         

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestCard.Domain.Helpers;
 using TestCard.Domain.Services;
 using TestCard.Web.Filters;
 
@@ -11,46 +12,65 @@ namespace TestCard.Web.Controllers
     [AuthorizationFilter]
     public class ListController : BaseController
     {
-        public PartialViewResult Person()
+        public PartialViewResult Person(int? companyID)
         {
-            var list = new List<Models.PersonListModel>();
-
             using (var service = new PersonService())
             {
-                service.GetAll()
-                    .ToList()
-                    .ForEach(x => list.Add(AutoMapper.Mapper.Map<Domain.Person, Models.PersonListModel>(x)));
-            }
+                string filterExpression = null;
 
-            return PartialView(list);
+                if(companyID.HasValue)
+                {
+                    filterExpression = string.Format("CompanyID == {0}", companyID);
+                }
+
+                var option = new DataFilterOption
+                {
+                    StartRowIndex = 0,
+                    MaximumRows = 100,
+                    SortByExpression = "LastName",
+                    FilterExpression = filterExpression
+                };
+
+                var list = AutoMapper.Mapper.Map<List<Models.PersonListModel>>(service.GetAll(option).ToList());
+
+                return PartialView(list);
+            }
         }
 
         public PartialViewResult Company()
         {
-            var list = new List<Models.CompanyListModel>();
-
             using (var service = new CompanyService())
             {
-                service.GetAll()
-                    .ToList()
-                    .ForEach(x => list.Add(AutoMapper.Mapper.Map<TestCard.Domain.Company, Models.CompanyListModel>(x)));
-            }
+                var option = new DataFilterOption
+                {
+                    StartRowIndex = 0,
+                    MaximumRows = 100,
+                    SortByExpression = "CompanyName",
+                    //FilterExpression = string.Format("CompanyID == {0}", companyID)
+                };
 
-            return PartialView(list);
+                var list = AutoMapper.Mapper.Map<List<Models.CompanyListModel>>(service.GetAll(option).ToList());
+
+                return PartialView(list);
+            }
         }
 
         public PartialViewResult PersonChangeRequest()
         {
-            var list = new List<Models.PersonListModel>();
-
             using (var service = new PersonChangeRequestService())
             {
-                service.GetAll()
-                    .ToList()
-                    .ForEach(x => list.Add(AutoMapper.Mapper.Map<Domain.PersonChangeRequest, Models.PersonListModel>(x)));
-            }
+                var filter = new DataFilterOption
+                {
+                    StartRowIndex = 0,
+                    MaximumRows = 100,
+                    SortByExpression = "CreateDate DESC",
+                    //FilterExpression = string.Format("CompanyID == {0}", companyID)
+                };
 
-            return PartialView(list);
+                var list = AutoMapper.Mapper.Map<List<Models.PersonListModel>>(service.GetList(CurrentUser.CompanyID.Value, (Domain.AccountTypes)CurrentUser.AccountTypeID, filter));
+
+                return PartialView(list);
+            }
         }
     }
 }

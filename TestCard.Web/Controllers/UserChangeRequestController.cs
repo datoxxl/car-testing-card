@@ -13,6 +13,8 @@ namespace TestCard.Web.Controllers
     [AuthorizationFilter]
     public class UserChangeRequestController : BaseController
     {
+        public static object lockObject = new object();
+
         public ActionResult List()
         {
             return View();
@@ -45,6 +47,59 @@ namespace TestCard.Web.Controllers
                 }
             }
             catch
+            {
+                SetErrorMessage();
+            }
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public ActionResult ProcessRequest(int id, Domain.ConfirmStatuses status)
+        {
+            try
+            {
+                lock (lockObject)
+                {
+                    using (var service = new PersonChangeRequestService())
+                    {
+                        bool? alreadyProcessed = null;
+                        bool? notApprovedByQualityManager = null;
+
+                        var saved = service.ChangeRequestStatus(id,
+                            status,
+                            (Domain.AccountTypes)CurrentUser.AccountTypeID,
+                            CurrentUser.PersonID,
+                            ref alreadyProcessed,
+                            ref notApprovedByQualityManager);
+
+                        if (saved)
+                        {
+                            if (status == Domain.ConfirmStatuses.Approved)
+                            {
+                                SetSuccessMessage(GeneralResource.RequestApproved);
+                            }
+                            else
+                            {
+                                SetSuccessMessage(GeneralResource.RequestRejected);
+                            }
+                        }
+                        else
+                        {
+                            if (alreadyProcessed == true)
+                            {
+                                SetErrorMessage(GeneralResource.RequestAlreadyProcessed);
+                            }
+
+                            if (notApprovedByQualityManager == true)
+                            {
+                                SetErrorMessage(GeneralResource.RequestNotApprovedByQualityManager);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
             {
                 SetErrorMessage();
             }

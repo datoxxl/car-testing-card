@@ -285,4 +285,22 @@
   <data name="Reject" xml:space="preserve">
     <value>Reject</value>
   </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="RequestAlreadyProcessed" xml:space="preserve">
+    <value>Request is already processed</value>
+  </data>
+  <data name="RequestApproved" xml:space="preserve">
+    <value>Request is approved</value>
+  </data>
+  <data name="RequestNotApprovedByQualityManager" xml:space="preserve">
+    <value>Request is not approved by quality manager</value>
+  </data>
+  <data name="RequestRejected" xml:space="preserve">
+    <value>Request is rejected</value>
+  </data>
+  <data name="CompanyUsers" xml:space="preserve">
+    <value>Company users</value>
+  </data>
 </root>

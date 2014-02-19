@@ -20,6 +20,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -29,10 +30,10 @@
                 @Html.DisplayFor(modelItem => item.IDNo)
             </td>
             <td>
-                @Html.ActionLink(item.FullName, "Edit", "User", new { @id = item.PersonID }, null)
+                @Html.ActionLink(item.FullName, "View", "User", new { @id = item.PersonID }, null)
             </td>
             <td>
-                @Html.ActionLink(item.CompanyName, "Edit", "Company", new { @id = item.CompanyID }, null)
+                @Html.ActionLink(item.CompanyName, "View", "Company", new { @id = item.CompanyID }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AccountTypeName)
@@ -42,6 +43,8 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>@Html.ActionLink(GeneralResource.Edit, "Edit", "User", new { @id = item.PersonID }, null)
             </td>
         </tr>
     }

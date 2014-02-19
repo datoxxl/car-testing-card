@@ -5,6 +5,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestCard.Domain.Helpers;
 
 namespace TestCard.Domain.Services
 {
@@ -32,6 +33,11 @@ namespace TestCard.Domain.Services
         public virtual IQueryable<T> GetAll()
         {
             return _DbContext.Set<T>();
+        }
+
+        public virtual IQueryable<T> GetAll(DataFilterOption option)
+        {
+            return _DbContext.Set<T>().SortAndFilter<T>(option);
         }
 
         public virtual T Get(dynamic id)

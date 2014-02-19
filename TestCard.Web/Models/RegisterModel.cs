@@ -84,6 +84,7 @@ namespace TestCard.Web.Models
             ErrorMessageResourceType = typeof(GeneralResource))]
         public string RepeatPassword { get; set; }
 
-        public SelectList AccountTypes { get; set; }
+        public SelectList AccountTypeSelectList { get; set; }
+        public SelectList CompanySelectList { get; set; }
     }
 }

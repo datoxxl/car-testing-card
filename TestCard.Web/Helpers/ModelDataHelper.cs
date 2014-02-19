@@ -91,7 +91,12 @@ namespace TestCard.Web.Helpers
         {
             using (var service = new AccountTypeService())
             {
-                model.AccountTypes = new SelectList(service.GetAll().ToList(), "AccountTypeID", "AccountTypeName");
+                model.AccountTypeSelectList = new SelectList(service.GetAll().ToList(), "AccountTypeID", "AccountTypeName");
+            }
+
+            using (var service = new CompanyService())
+            {
+                model.CompanySelectList = new SelectList(service.GetAll().ToList(), "CompanyID", "CompanyName");
             }
         }
     }

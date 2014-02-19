@@ -24,7 +24,7 @@
                     </li>
                     <li>
                         @Html.LabelFor(x => x.AccountTypeID)
-                        @Html.DropDownListFor(x => x.AccountTypeID, Model.AccountTypes, string.Empty)
+                        @Html.DropDownListFor(x => x.AccountTypeID, Model.AccountTypeSelectList, string.Empty)
                         @Html.ValidationMessageFor(x => x.AccountTypeID)
                     </li>
                     <li>
@@ -56,7 +56,7 @@
                     </li>
                     <li>
                         @Html.LabelFor(x => x.CompanyID)
-                        @Html.TextBoxFor(x => x.CompanyID)
+                        @Html.DropDownListFor(x => x.CompanyID, Model.CompanySelectList, string.Empty)
                         @Html.ValidationMessageFor(x => x.CompanyID)
                     </li>
                 </ol>

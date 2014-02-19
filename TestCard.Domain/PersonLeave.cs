@@ -20,7 +20,7 @@ namespace TestCard.Domain
         public int ResponsiblePersonID { get; set; }
         public System.DateTime EffectiveDate { get; set; }
     
-        public virtual Person Person { get; set; }
         public virtual Person Person1 { get; set; }
+        public virtual Person Person { get; set; }
     }
 }

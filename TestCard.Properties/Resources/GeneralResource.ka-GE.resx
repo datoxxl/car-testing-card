@@ -285,4 +285,22 @@
   <data name="Reject" xml:space="preserve">
     <value>უარყოფა</value>
   </data>
+  <data name="View" xml:space="preserve">
+    <value>ნახვა</value>
+  </data>
+  <data name="RequestAlreadyProcessed" xml:space="preserve">
+    <value>მოთხოვნა უკვე დაპროცესებულია</value>
+  </data>
+  <data name="RequestApproved" xml:space="preserve">
+    <value>მოთხოვნა დადასტურებულია</value>
+  </data>
+  <data name="RequestNotApprovedByQualityManager" xml:space="preserve">
+    <value>მოთხოვნა არ დაუდასტურებია ხარისხის მენეჯერს</value>
+  </data>
+  <data name="RequestRejected" xml:space="preserve">
+    <value>მოთხოვნა უარყოფილია</value>
+  </data>
+  <data name="CompanyUsers" xml:space="preserve">
+    <value>კომპანიის მომხმარებლები</value>
+  </data>
 </root>

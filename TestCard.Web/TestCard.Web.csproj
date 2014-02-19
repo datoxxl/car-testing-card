@@ -166,8 +166,6 @@
     <Content Include="Content\images\body.gif" />
     <Content Include="Content\images\card.png" />
     <Content Include="Content\images\card-edit.png" />
-    <Content Include="Content\images\close.png" />
-    <Content Include="Content\images\close-hover.png" />
     <Content Include="Content\images\company.png" />
     <Content Include="Content\images\company16.png" />
     <Content Include="Content\images\error32.png" />
@@ -302,6 +300,9 @@
     <Content Include="Views\UserChangeRequest\View.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\RegisterModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PersonScheduleModel.cshtml" />
+    <Content Include="Views\User\View.cshtml" />
+    <Content Include="Views\Company\DisplayTemplates\CompanyModel.cshtml" />
+    <Content Include="Views\Company\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
