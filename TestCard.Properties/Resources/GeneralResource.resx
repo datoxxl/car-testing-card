@@ -303,4 +303,43 @@
   <data name="CompanyUsers" xml:space="preserve">
     <value>Company users</value>
   </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Card Number</value>
+  </data>
+  <data name="CarModel" xml:space="preserve">
+    <value>Car Model</value>
+  </data>
+  <data name="CarNumber" xml:space="preserve">
+    <value>Car Number</value>
+  </data>
+  <data name="CarSerialNo" xml:space="preserve">
+    <value>Car Serial No</value>
+  </data>
+  <data name="EffectiveDate" xml:space="preserve">
+    <value>Effective Date</value>
+  </data>
+  <data name="OwnerName" xml:space="preserve">
+    <value>Owner Name</value>
+  </data>
+  <data name="RespFullName" xml:space="preserve">
+    <value>Resp. Full Name</value>
+  </data>
+  <data name="Valid" xml:space="preserve">
+    <value>Valid</value>
+  </data>
+  <data name="VINCode" xml:space="preserve">
+    <value>VIN Code</value>
+  </data>
+  <data name="NotValid" xml:space="preserve">
+    <value>Not Valid</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Odometer" xml:space="preserve">
+    <value>Odometer</value>
+  </data>
+  <data name="OwnerIDNo" xml:space="preserve">
+    <value>Owner IDNo</value>
+  </data>
 </root>

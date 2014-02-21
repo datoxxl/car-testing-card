@@ -303,4 +303,43 @@
   <data name="CompanyUsers" xml:space="preserve">
     <value>კომპანიის მომხმარებლები</value>
   </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>ბარათის №</value>
+  </data>
+  <data name="CarModel" xml:space="preserve">
+    <value>ასს-ის მარკა მოდელი, ტიპი</value>
+  </data>
+  <data name="CarNumber" xml:space="preserve">
+    <value>ასს-ის სახელმწიფო ნომერი</value>
+  </data>
+  <data name="CarSerialNo" xml:space="preserve">
+    <value>ასს-ის სარეგისტრაციო მოწმობის სერია, №</value>
+  </data>
+  <data name="EffectiveDate" xml:space="preserve">
+    <value>გაცემის თარიღი</value>
+  </data>
+  <data name="OwnerName" xml:space="preserve">
+    <value>ასს-ის მფლობელი</value>
+  </data>
+  <data name="RespFullName" xml:space="preserve">
+    <value>გამცემი</value>
+  </data>
+  <data name="Valid" xml:space="preserve">
+    <value>ვარგისია</value>
+  </data>
+  <data name="VINCode" xml:space="preserve">
+    <value>VIN კოდი</value>
+  </data>
+  <data name="NotValid" xml:space="preserve">
+    <value>უვარგისი</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>კომენტარი</value>
+  </data>
+  <data name="Odometer" xml:space="preserve">
+    <value>ოდომეტრი</value>
+  </data>
+  <data name="OwnerIDNo" xml:space="preserve">
+    <value>მფლობელის პ/ნ</value>
+  </data>
 </root>

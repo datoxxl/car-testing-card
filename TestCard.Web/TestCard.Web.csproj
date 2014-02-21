@@ -143,6 +143,7 @@
     <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\PersonChangeRequestController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\TestingCardController.cs" />
     <Compile Include="Filters\AuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,6 +157,7 @@
     <Compile Include="Models\PersonScheduleChangeRequestListModel.cs" />
     <Compile Include="Models\PersonScheduleModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\TestingCardModel.cs" />
     <Compile Include="Models\ToolbarButton.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\UserOptions.cs" />
@@ -166,6 +168,7 @@
       <Link>AutoMapper.Net4.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\images\blue_check.png" />
     <Content Include="Content\images\body.gif" />
     <Content Include="Content\images\card.png" />
     <Content Include="Content\images\card-edit.png" />
@@ -311,6 +314,13 @@
     <Content Include="Views\PersonScheduleChangeRequest\List.cshtml" />
     <Content Include="Views\List\PersonScheduleChangeRequest.cshtml" />
     <Content Include="Views\PersonScheduleChangeRequest\View.cshtml" />
+    <Content Include="Views\TestingCard\List.cshtml" />
+    <Content Include="Views\List\TestingCard.cshtml" />
+    <Content Include="Views\TestingCard\DisplayTemplates\TestingCardModel.cshtml" />
+    <Content Include="Views\TestingCard\EditorTemplates\TestingCardModel.cshtml" />
+    <Content Include="Views\TestingCard\Add.cshtml" />
+    <Content Include="Views\TestingCard\Edit.cshtml" />
+    <Content Include="Views\TestingCard\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

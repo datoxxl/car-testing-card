@@ -63,6 +63,11 @@ namespace TestCard.Web
             Mapper.CreateMap<Domain.Company, Models.CompanyListModel>();
             Mapper.CreateMap<Domain.Company, Models.CompanyModel>()
                 .ForMember(dest => dest.FileName, src => src.MapFrom(x => x.File.FileName));
+
+            Mapper.CreateMap<Domain.TestingCard, Models.TestingCardModel>()
+               .ForMember(dest => dest.CompanyName, src => src.MapFrom(x => x.Person.Company.CompanyName))
+               .ForMember(dest => dest.CompanyID, src => src.MapFrom(x => x.Person.CompanyID))
+               .ForMember(dest => dest.RespPersonFullName, src => src.MapFrom(x => x.Person.FirstName + " " + x.Person.LastName));
         }
     }
 }
