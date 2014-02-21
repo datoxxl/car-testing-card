@@ -7,6 +7,14 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/globalize")
+    @Scripts.Render("~/bundles/site")
+    <!--[if (gte IE 6)&(lte IE 8)]>
+      @Scripts.Render("~/bundles/selectivizr")
+    <![endif]-->
 </head>
 <body>
     @{ Html.RenderPartial("_Header"); }
@@ -15,13 +23,8 @@
         @RenderBody()
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/globalize")
-    @Scripts.Render("~/bundles/site")
-    @RenderSection("scripts", required: false)
-
     @{ Html.RenderPartial("_MessageHandling"); }
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>

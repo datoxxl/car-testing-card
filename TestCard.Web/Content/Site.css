@@ -489,7 +489,7 @@ ul.x-toolbar
 
             .x-toolbar-button .btn-wrapper > .text.multiline
             {
-                line-height: initial;
+                line-height: inherit;
             }
 
         .x-toolbar-button .btn-wrapper > .icon
