@@ -372,4 +372,13 @@
   <data name="InvalidDate" xml:space="preserve">
     <value>თარიღი არასწორია</value>
   </data>
+  <data name="ResponsiblePerson" xml:space="preserve">
+    <value>პასუხისმგებელი პირი</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>ნომერი</value>
+  </data>
+  <data name="TestingCardChangeRequest" xml:space="preserve">
+    <value>ტესტირების ბარათის ცვლილების მოთხოვნა</value>
+  </data>
 </root>

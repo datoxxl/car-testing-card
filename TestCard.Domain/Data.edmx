@@ -397,10 +397,6 @@
             <End Role="Person" EntitySet="Person" />
             <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequest" />
           </AssociationSet>
-          <AssociationSet Name="FK_TestingCardChangeRequest_Person2" Association="CarTestingCardModel.Store.FK_TestingCardChangeRequest_Person2">
-            <End Role="Person" EntitySet="Person" />
-            <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequest" />
-          </AssociationSet>
           <AssociationSet Name="FK_TestingCardChangeRequest_Person3" Association="CarTestingCardModel.Store.FK_TestingCardChangeRequest_Person3">
             <End Role="Person" EntitySet="Person" />
             <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequest" />
@@ -755,7 +751,7 @@
             <PropertyRef Name="TestingCardChangeRequestID" />
           </Key>
           <Property Name="TestingCardChangeRequestID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="TestingCardID" Type="int" Nullable="false" />
+          <Property Name="TestingCardID" Type="int" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
           <Property Name="TestingCardChangeRequestNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="VIN" Type="nvarchar" MaxLength="50" />
@@ -794,7 +790,7 @@
             <PropertyRef Name="TestingSubStepID" />
           </Key>
           <Property Name="TestingCardChangeRequestID" Type="int" Nullable="false" />
-          <Property Name="TestingCardID" Type="int" Nullable="false" />
+          <Property Name="TestingCardID" Type="int" />
           <Property Name="TestingSubStepID" Type="int" Nullable="false" />
           <Property Name="IsValid" Type="bit" Nullable="false" />
         </EntityType>
@@ -1757,18 +1753,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TestingCardChangeRequest_Person2">
-          <End Role="Person" Type="CarTestingCardModel.Store.Person" Multiplicity="0..1" />
-          <End Role="TestingCardChangeRequest" Type="CarTestingCardModel.Store.TestingCardChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="TestingCardChangeRequest">
-              <PropertyRef Name="QualityManagerPersonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TestingCardChangeRequest_Person3">
           <End Role="Person" Type="CarTestingCardModel.Store.Person" Multiplicity="0..1" />
           <End Role="TestingCardChangeRequest" Type="CarTestingCardModel.Store.TestingCardChangeRequest" Multiplicity="*" />
@@ -1782,7 +1766,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TestingCardChangeRequest_TestingCard">
-          <End Role="TestingCard" Type="CarTestingCardModel.Store.TestingCard" Multiplicity="1" />
+          <End Role="TestingCard" Type="CarTestingCardModel.Store.TestingCard" Multiplicity="0..1" />
           <End Role="TestingCardChangeRequest" Type="CarTestingCardModel.Store.TestingCardChangeRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TestingCard">
@@ -1818,7 +1802,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TestingCardDetailChangeRequest_TestingCard">
-          <End Role="TestingCard" Type="CarTestingCardModel.Store.TestingCard" Multiplicity="1" />
+          <End Role="TestingCard" Type="CarTestingCardModel.Store.TestingCard" Multiplicity="0..1" />
           <End Role="TestingCardDetailChangeRequest" Type="CarTestingCardModel.Store.TestingCardDetailChangeRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TestingCard">
@@ -2046,17 +2030,9 @@
             <End Role="ConfirmStatus" EntitySet="ConfirmStatus1" />
             <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequests" />
           </AssociationSet>
-          <AssociationSet Name="FK_TestingCardChangeRequest_TestingCard" Association="TestCardModel.FK_TestingCardChangeRequest_TestingCard">
-            <End Role="TestingCard" EntitySet="TestingCards" />
-            <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequests" />
-          </AssociationSet>
           <AssociationSet Name="FK_TestingCardDetail_TestingCard" Association="TestCardModel.FK_TestingCardDetail_TestingCard">
             <End Role="TestingCard" EntitySet="TestingCards" />
             <End Role="TestingCardDetail" EntitySet="TestingCardDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TestingCardDetailChangeRequest_TestingCard" Association="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCard">
-            <End Role="TestingCard" EntitySet="TestingCards" />
-            <End Role="TestingCardDetailChangeRequest" EntitySet="TestingCardDetailChangeRequests" />
           </AssociationSet>
           <AssociationSet Name="FK_TestingCardDetailHistory_TestingCard" Association="TestCardModel.FK_TestingCardDetailHistory_TestingCard">
             <End Role="TestingCard" EntitySet="TestingCards" />
@@ -2228,10 +2204,6 @@
             <End Role="Person" EntitySet="People" />
             <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequests" />
           </AssociationSet>
-          <AssociationSet Name="FK_TestingCardChangeRequest_Person2" Association="TestCardModel.FK_TestingCardChangeRequest_Person2">
-            <End Role="Person" EntitySet="People" />
-            <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequests" />
-          </AssociationSet>
           <AssociationSet Name="FK_TestingCardChangeRequest_Person3" Association="TestCardModel.FK_TestingCardChangeRequest_Person3">
             <End Role="Person" EntitySet="People" />
             <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequests" />
@@ -2322,6 +2294,14 @@
           <AssociationSet Name="FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest" Association="TestCardModel.FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest">
             <End Role="PersonScheduleChangeRequest" EntitySet="PersonScheduleChangeRequests" />
             <End Role="PersonScheduleChangeRequestDetail" EntitySet="PersonScheduleChangeRequestDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestingCardChangeRequest_TestingCard" Association="TestCardModel.FK_TestingCardChangeRequest_TestingCard">
+            <End Role="TestingCard" EntitySet="TestingCards" />
+            <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestingCardDetailChangeRequest_TestingCard" Association="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCard">
+            <End Role="TestingCard" EntitySet="TestingCards" />
+            <End Role="TestingCardDetailChangeRequest" EntitySet="TestingCardDetailChangeRequests" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountType">
@@ -2578,21 +2558,21 @@
           <Property Name="Comment" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
           <Property Name="ResponsiblePersonID" Type="Int32" />
           <Property Name="EffectiveDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TestingCardChangeRequests" Relationship="TestCardModel.FK_TestingCardChangeRequest_TestingCard" FromRole="TestingCard" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="TestingCardDetails" Relationship="TestCardModel.FK_TestingCardDetail_TestingCard" FromRole="TestingCard" ToRole="TestingCardDetail" />
-          <NavigationProperty Name="TestingCardDetailChangeRequests" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCard" FromRole="TestingCard" ToRole="TestingCardDetailChangeRequest" />
           <NavigationProperty Name="TestingCardDetailHistories" Relationship="TestCardModel.FK_TestingCardDetailHistory_TestingCard" FromRole="TestingCard" ToRole="TestingCardDetailHistory" />
           <NavigationProperty Name="TestingCardFileChangeRequests" Relationship="TestCardModel.FK_TestingCardFileChangeRequest_TestingCard" FromRole="TestingCard" ToRole="TestingCardFileChangeRequest" />
           <NavigationProperty Name="TestingCardHistories" Relationship="TestCardModel.FK_TestingCardHistory_TestingCard" FromRole="TestingCard" ToRole="TestingCardHistory" />
           <NavigationProperty Name="Files" Relationship="TestCardModel.TestingCardFile" FromRole="TestingCard" ToRole="File" />
           <NavigationProperty Name="Person" Relationship="TestCardModel.FK_TestingCard_Person" FromRole="TestingCard" ToRole="Person" />
+          <NavigationProperty Name="TestingCardChangeRequests" Relationship="TestCardModel.FK_TestingCardChangeRequest_TestingCard" FromRole="TestingCard" ToRole="TestingCardChangeRequest" />
+          <NavigationProperty Name="TestingCardDetailChangeRequests" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCard" FromRole="TestingCard" ToRole="TestingCardDetailChangeRequest" />
         </EntityType>
         <EntityType Name="TestingCardChangeRequest">
           <Key>
             <PropertyRef Name="TestingCardChangeRequestID" />
           </Key>
           <Property Name="TestingCardChangeRequestID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="TestingCardID" Type="Int32" Nullable="false" />
+          <Property Name="TestingCardID" Type="Int32" />
           <Property Name="Number" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="TestingCardChangeRequestNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="VIN" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
@@ -2615,15 +2595,14 @@
           <Property Name="AdministratorConfirmStatusID" Type="Int32" />
           <Property Name="AdministratorConfirmDate" Type="DateTime" Precision="3" />
           <Property Name="AdministratorPersonID" Type="Int32" />
-          <NavigationProperty Name="ConfirmStatu" Relationship="TestCardModel.FK_TestingCardChangeRequest_ConfirmStatus" FromRole="TestingCardChangeRequest" ToRole="ConfirmStatus" />
-          <NavigationProperty Name="ConfirmStatu1" Relationship="TestCardModel.FK_TestingCardChangeRequest_ConfirmStatus1" FromRole="TestingCardChangeRequest" ToRole="ConfirmStatus" />
-          <NavigationProperty Name="TestingCard" Relationship="TestCardModel.FK_TestingCardChangeRequest_TestingCard" FromRole="TestingCardChangeRequest" ToRole="TestingCard" />
+          <NavigationProperty Name="QualityManagerConfirmStatus" Relationship="TestCardModel.FK_TestingCardChangeRequest_ConfirmStatus" FromRole="TestingCardChangeRequest" ToRole="ConfirmStatus" />
+          <NavigationProperty Name="AdminConfirmStatus" Relationship="TestCardModel.FK_TestingCardChangeRequest_ConfirmStatus1" FromRole="TestingCardChangeRequest" ToRole="ConfirmStatus" />
           <NavigationProperty Name="TestingCardDetailChangeRequests" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCardChangeRequest" FromRole="TestingCardChangeRequest" ToRole="TestingCardDetailChangeRequest" />
           <NavigationProperty Name="TestingCardFileChangeRequests" Relationship="TestCardModel.FK_TestingCardFileChangeRequest_TestingCardChangeRequest" FromRole="TestingCardChangeRequest" ToRole="TestingCardFileChangeRequest" />
-          <NavigationProperty Name="Person" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person" FromRole="TestingCardChangeRequest" ToRole="Person" />
-          <NavigationProperty Name="Person1" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person1" FromRole="TestingCardChangeRequest" ToRole="Person" />
-          <NavigationProperty Name="Person2" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person2" FromRole="TestingCardChangeRequest" ToRole="Person" />
-          <NavigationProperty Name="Person3" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person3" FromRole="TestingCardChangeRequest" ToRole="Person" />
+          <NavigationProperty Name="QualityManagerPerson" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person" FromRole="TestingCardChangeRequest" ToRole="Person" />
+          <NavigationProperty Name="ResponsiblePerson" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person1" FromRole="TestingCardChangeRequest" ToRole="Person" />
+          <NavigationProperty Name="AdminPerson" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person3" FromRole="TestingCardChangeRequest" ToRole="Person" />
+          <NavigationProperty Name="TestingCard" Relationship="TestCardModel.FK_TestingCardChangeRequest_TestingCard" FromRole="TestingCardChangeRequest" ToRole="TestingCard" />
         </EntityType>
         <EntityType Name="TestingCardDetail">
           <Key>
@@ -2642,12 +2621,12 @@
             <PropertyRef Name="TestingSubStepID" />
           </Key>
           <Property Name="TestingCardChangeRequestID" Type="Int32" Nullable="false" />
-          <Property Name="TestingCardID" Type="Int32" Nullable="false" />
+          <Property Name="TestingCardID" Type="Int32" />
           <Property Name="TestingSubStepID" Type="Int32" Nullable="false" />
           <Property Name="IsValid" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TestingCard" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCard" FromRole="TestingCardDetailChangeRequest" ToRole="TestingCard" />
           <NavigationProperty Name="TestingCardChangeRequest" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCardChangeRequest" FromRole="TestingCardDetailChangeRequest" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="TestingSubStep" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingSubStep" FromRole="TestingCardDetailChangeRequest" ToRole="TestingSubStep" />
+          <NavigationProperty Name="TestingCard" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCard" FromRole="TestingCardDetailChangeRequest" ToRole="TestingCard" />
         </EntityType>
         <EntityType Name="TestingCardDetailHistory">
           <Key>
@@ -2982,18 +2961,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TestingCardChangeRequest_TestingCard">
-          <End Role="TestingCard" Type="TestCardModel.TestingCard" Multiplicity="1" />
-          <End Role="TestingCardChangeRequest" Type="TestCardModel.TestingCardChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TestingCard">
-              <PropertyRef Name="TestingCardID" />
-            </Principal>
-            <Dependent Role="TestingCardChangeRequest">
-              <PropertyRef Name="TestingCardID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TestingCardDetail_TestingCard">
           <End Role="TestingCard" Type="TestCardModel.TestingCard" Multiplicity="1" />
           <End Role="TestingCardDetail" Type="TestCardModel.TestingCardDetail" Multiplicity="*" />
@@ -3002,18 +2969,6 @@
               <PropertyRef Name="TestingCardID" />
             </Principal>
             <Dependent Role="TestingCardDetail">
-              <PropertyRef Name="TestingCardID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TestingCardDetailChangeRequest_TestingCard">
-          <End Role="TestingCard" Type="TestCardModel.TestingCard" Multiplicity="1" />
-          <End Role="TestingCardDetailChangeRequest" Type="TestCardModel.TestingCardDetailChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TestingCard">
-              <PropertyRef Name="TestingCardID" />
-            </Principal>
-            <Dependent Role="TestingCardDetailChangeRequest">
               <PropertyRef Name="TestingCardID" />
             </Dependent>
           </ReferentialConstraint>
@@ -3227,7 +3182,6 @@
           <NavigationProperty Name="PersonScheduleHistories" Relationship="TestCardModel.FK_PersonScheduleHistory_Person" FromRole="Person" ToRole="PersonScheduleHistory" />
           <NavigationProperty Name="TestingCardChangeRequests" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person" FromRole="Person" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="TestingCardChangeRequests1" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person1" FromRole="Person" ToRole="TestingCardChangeRequest" />
-          <NavigationProperty Name="TestingCardChangeRequests2" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person2" FromRole="Person" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="TestingCardChangeRequests3" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person3" FromRole="Person" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="TestingCardHistories" Relationship="TestCardModel.FK_TestingCardHistory_Person" FromRole="Person" ToRole="TestingCardHistory" />
           <NavigationProperty Name="AdminPersonChangeRequests" Relationship="TestCardModel.FK_PersonChangeRequest_AdminPerson" FromRole="Person" ToRole="PersonChangeRequest" />
@@ -3591,18 +3545,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TestingCardChangeRequest_Person2">
-          <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
-          <End Type="TestCardModel.TestingCardChangeRequest" Role="TestingCardChangeRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person">
-              <PropertyRef Name="PersonID" />
-            </Principal>
-            <Dependent Role="TestingCardChangeRequest">
-              <PropertyRef Name="QualityManagerPersonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TestingCardChangeRequest_Person3">
           <End Type="TestCardModel.Person" Role="Person" Multiplicity="0..1" />
           <End Type="TestCardModel.TestingCardChangeRequest" Role="TestingCardChangeRequest" Multiplicity="*" />
@@ -3934,6 +3876,30 @@
             </Principal>
             <Dependent Role="PersonScheduleChangeRequestDetail">
               <PropertyRef Name="PersonScheduleChangeRequestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestingCardChangeRequest_TestingCard">
+          <End Type="TestCardModel.TestingCard" Role="TestingCard" Multiplicity="0..1" />
+          <End Type="TestCardModel.TestingCardChangeRequest" Role="TestingCardChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestingCard">
+              <PropertyRef Name="TestingCardID" />
+            </Principal>
+            <Dependent Role="TestingCardChangeRequest">
+              <PropertyRef Name="TestingCardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestingCardDetailChangeRequest_TestingCard">
+          <End Type="TestCardModel.TestingCard" Role="TestingCard" Multiplicity="0..1" />
+          <End Type="TestCardModel.TestingCardDetailChangeRequest" Role="TestingCardDetailChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestingCard">
+              <PropertyRef Name="TestingCardID" />
+            </Principal>
+            <Dependent Role="TestingCardDetailChangeRequest">
+              <PropertyRef Name="TestingCardID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

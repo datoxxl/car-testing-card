@@ -3,4 +3,12 @@
 @{
     ViewBag.Title = "View";
 }
-@Html.DisplayForModel()
+<div class="x-form-container">
+    <span class="header">@GeneralResource.TestCard</span>
+    <div class="top-actions">
+        @Html.ActionLink(GeneralResource.Back, "List")
+    </div>
+    <div class="form-inner">
+        @Html.DisplayForModel()
+    </div>
+</div>

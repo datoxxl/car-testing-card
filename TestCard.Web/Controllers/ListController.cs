@@ -93,16 +93,38 @@ namespace TestCard.Web.Controllers
 
         public PartialViewResult TestingCard()
         {
-            var list = new List<Models.TestingCardModel>();
-
             using (var service = new TestingCardService())
             {
-                service.GetAll()
-                    .ToList()
-                    .ForEach(x => list.Add(AutoMapper.Mapper.Map<Domain.TestingCard, Models.TestingCardModel>(x)));
-            }
+                var filter = new DataFilterOption
+                {
+                    StartRowIndex = 0,
+                    MaximumRows = 100,
+                    SortByExpression = "EffectiveDate DESC",
+                    //FilterExpression = string.Format("CompanyID == {0}", companyID)
+                };
 
-            return PartialView(list);
+                var list = AutoMapper.Mapper.Map<List<Models.TestingCardListModel>>(service.GetList(CurrentUser, filter));
+
+                return PartialView(list);
+            }
+        }
+
+        public PartialViewResult TestingCardChangeRequest()
+        {
+            using (var service = new TestingCardChangeRequestService())
+            {
+                var filter = new DataFilterOption
+                {
+                    StartRowIndex = 0,
+                    MaximumRows = 100,
+                    SortByExpression = "CreateDate DESC",
+                    //FilterExpression = string.Format("CompanyID == {0}", companyID)
+                };
+
+                var list = AutoMapper.Mapper.Map<List<Models.TestingCardChangeRequestListModel>>(service.GetList(CurrentUser, filter));
+
+                return PartialView(list);
+            }
         }
     }
 }

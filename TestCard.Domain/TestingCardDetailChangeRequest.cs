@@ -15,12 +15,12 @@ namespace TestCard.Domain
     public partial class TestingCardDetailChangeRequest
     {
         public int TestingCardChangeRequestID { get; set; }
-        public int TestingCardID { get; set; }
+        public Nullable<int> TestingCardID { get; set; }
         public int TestingSubStepID { get; set; }
         public bool IsValid { get; set; }
     
-        public virtual TestingCard TestingCard { get; set; }
         public virtual TestingCardChangeRequest TestingCardChangeRequest { get; set; }
         public virtual TestingSubStep TestingSubStep { get; set; }
+        public virtual TestingCard TestingCard { get; set; }
     }
 }

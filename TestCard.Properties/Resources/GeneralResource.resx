@@ -341,7 +341,7 @@
   </data>
   <data name="OwnerIDNo" xml:space="preserve">
     <value>Owner IDNo</value>
-   </data>
+  </data>
   <data name="AdministratorConfirm" xml:space="preserve">
     <value>Admin. confirm</value>
   </data>
@@ -371,5 +371,14 @@
   </data>
   <data name="InvalidDate" xml:space="preserve">
     <value>Invalid date</value>
+  </data>
+  <data name="ResponsiblePerson" xml:space="preserve">
+    <value>Responsible person</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="TestingCardChangeRequest" xml:space="preserve">
+    <value>Testing card change request</value>
   </data>
 </root>

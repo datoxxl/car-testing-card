@@ -1,0 +1,102 @@
+﻿@model TestCard.Web.Models.TestingCardModel
+
+@Html.HiddenFor(x => x.TestingCardID)
+<table class="x-form">
+    <tr>
+        <td>
+            <fieldset>
+                <legend></legend>
+                <table class="x-details-table">
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(x => x.TestingCardNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => x.TestingCardNumber)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(x => x.OwnerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => x.OwnerName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(x => x.OwnerIDNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => x.OwnerIDNo)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(x => x.CarModel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => x.CarModel)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(x => x.CarNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => x.CarNumber)
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </td>
+        <td>
+            <fieldset>
+                <legend></legend>
+                <table class="x-details-table">
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(x => x.CarSerialNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => x.CarSerialNo)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(x => x.Odometer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => x.Odometer)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(x => x.Comment)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => x.Comment)
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </td>
+    </tr>
+</table>
+<table class="x-card-steps">
+    @for (var i = 0; i < Model.TestingSteps.Count; i++)
+    { 
+        <tr>
+            <td>
+                @Html.DisplayFor(x => x.TestingSteps[i].TestingStepName)
+            </td>
+            @for (var j = 0; j < Model.TestingSteps[i].TestingSubSteps.Count; j++)
+            {
+                <td@(Model.TestingSteps[i].TestingSubSteps.Count == 2 && Model.TestingSteps[i].TestingSubSteps.Count == (j + 1) ? " colspan=3" : string.Empty)>
+                    @Html.CheckBoxFor(x => x.TestingSteps[i].TestingSubSteps[j].IsValid, new { disabled = "disabled" })
+                    @Html.LabelFor(x => x.TestingSteps[i].TestingSubSteps[j].IsValid, Model.TestingSteps[i].TestingSubSteps[j].TestingSubStepName)
+                </td>
+            }
+        </tr>
+    }
+</table>

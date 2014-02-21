@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TestCard.Web.Models.TestingCardModel>
+﻿@model IEnumerable<TestCard.Web.Models.TestingCardListModel>
 
 <table class="x-table">
     <tr>
@@ -68,9 +68,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Valid)
             </td>
-            <td>
-                @Html.ActionLink(GeneralResource.Edit, "Edit", "TestingCard", new { @id = item.TestingCardID }, null)
-            </td>
+            @{ Html.RenderPartial("_ActionCell", new List<ActionButton> {
+                new ActionButton
+                {
+                    Controller = "TestingCard",
+                    ObjectID = item.TestingCardID,
+                    Type = ActionButton.ActionType.Edit
+                }}); }
+
         </tr>
     }
 

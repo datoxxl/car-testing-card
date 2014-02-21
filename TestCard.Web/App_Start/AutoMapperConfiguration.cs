@@ -28,6 +28,13 @@ namespace TestCard.Web
             Mapper.CreateMap<Models.PersonModel, Domain.PersonChangeRequest>();
             Mapper.CreateMap<Models.PersonModel, Domain.Person>();
 
+            Mapper.CreateMap<Models.TestingCardModel, Domain.TestingCardChangeRequest>()
+                .ForMember(dest => dest.TestingCardChangeRequestNumber, src => src.MapFrom(x => x.TestingCardNumber));
+
+            Mapper.CreateMap<Models.TestingCardModel.TestingSubStep, Domain.TestingCardDetailChangeRequest>();
+
+            //--
+
             Mapper.CreateMap<Domain.Person, Models.RegisterModel>()
                 .ForMember(dest => dest.CompanyName, src => src.MapFrom(x => x.Company.CompanyName))
                 .ForMember(dest => dest.AccountTypeName, src => src.MapFrom(x => x.AccountType.AccountTypeName));
@@ -67,16 +74,34 @@ namespace TestCard.Web
                 .ForMember(dest => dest.QualityManagerConfirmStatusName, src => src.MapFrom(x => x.QualityManagerConfirmStatus.ConfirmStatusName))
                 .ForMember(dest => dest.AdministratorConfirmStatusName, src => src.MapFrom(x => x.AdminConfirmStatus.ConfirmStatusName));
 
+            Mapper.CreateMap<Domain.TestingCardChangeRequest, Models.TestingCardChangeRequestListModel>()
+                .ForMember(dest => dest.ResponsiblePersonFirstName, src => src.MapFrom(x => x.ResponsiblePerson.FirstName))
+                .ForMember(dest => dest.ResponsiblePersonLastName, src => src.MapFrom(x => x.ResponsiblePerson.LastName))
+                .ForMember(dest => dest.QualityManagerConfirmStatusName, src => src.MapFrom(x => x.QualityManagerConfirmStatus.ConfirmStatusName))
+                .ForMember(dest => dest.AdministratorConfirmStatusName, src => src.MapFrom(x => x.AdminConfirmStatus.ConfirmStatusName));
+
             Mapper.CreateMap<Domain.PersonScheduleChangeRequest, Models.PersonScheduleModel>();
 
             Mapper.CreateMap<Domain.Company, Models.CompanyListModel>();
             Mapper.CreateMap<Domain.Company, Models.CompanyModel>()
                 .ForMember(dest => dest.FileName, src => src.MapFrom(x => x.File.FileName));
 
-            Mapper.CreateMap<Domain.TestingCard, Models.TestingCardModel>()
+            Mapper.CreateMap<Domain.TestingCard, Models.TestingCardListModel>()
                .ForMember(dest => dest.CompanyName, src => src.MapFrom(x => x.Person.Company.CompanyName))
                .ForMember(dest => dest.CompanyID, src => src.MapFrom(x => x.Person.CompanyID))
                .ForMember(dest => dest.RespPersonFullName, src => src.MapFrom(x => x.Person.FirstName + " " + x.Person.LastName));
+            Mapper.CreateMap<Domain.TestingCard, Models.TestingCardModel>();
+
+            Mapper.CreateMap<Domain.TestingCardDetail, Models.TestingCardModel.TestingSubStep>();
+
+            Mapper.CreateMap<Domain.TestingStep, Models.TestingCardModel.TestingStep>();
+
+            Mapper.CreateMap<Domain.TestingSubStep, Models.TestingCardModel.TestingSubStep>();
+
+            Mapper.CreateMap<Domain.TestingCardChangeRequest, Models.TestingCardModel>()
+                .ForMember(dest => dest.TestingCardNumber, src => src.MapFrom(x => x.TestingCardChangeRequestNumber));
+
+            Mapper.CreateMap<Domain.TestingCardDetailChangeRequest, Models.TestingCardModel.TestingSubStep>();
         }
     }
 }

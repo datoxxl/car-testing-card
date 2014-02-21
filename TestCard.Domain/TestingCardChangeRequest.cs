@@ -21,7 +21,7 @@ namespace TestCard.Domain
         }
     
         public int TestingCardChangeRequestID { get; set; }
-        public int TestingCardID { get; set; }
+        public Nullable<int> TestingCardID { get; set; }
         public string Number { get; set; }
         public string TestingCardChangeRequestNumber { get; set; }
         public string VIN { get; set; }
@@ -45,14 +45,13 @@ namespace TestCard.Domain
         public Nullable<System.DateTime> AdministratorConfirmDate { get; set; }
         public Nullable<int> AdministratorPersonID { get; set; }
     
-        public virtual ConfirmStatus ConfirmStatu { get; set; }
-        public virtual ConfirmStatus ConfirmStatu1 { get; set; }
-        public virtual TestingCard TestingCard { get; set; }
+        public virtual ConfirmStatus QualityManagerConfirmStatus { get; set; }
+        public virtual ConfirmStatus AdminConfirmStatus { get; set; }
         public virtual ICollection<TestingCardDetailChangeRequest> TestingCardDetailChangeRequests { get; set; }
         public virtual ICollection<TestingCardFileChangeRequest> TestingCardFileChangeRequests { get; set; }
-        public virtual Person Person { get; set; }
-        public virtual Person Person1 { get; set; }
-        public virtual Person Person2 { get; set; }
-        public virtual Person Person3 { get; set; }
+        public virtual Person QualityManagerPerson { get; set; }
+        public virtual Person ResponsiblePerson { get; set; }
+        public virtual Person AdminPerson { get; set; }
+        public virtual TestingCard TestingCard { get; set; }
     }
 }

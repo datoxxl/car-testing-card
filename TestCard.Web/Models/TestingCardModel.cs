@@ -10,6 +10,7 @@ namespace TestCard.Web.Models
     public class TestingCardModel
     {
         public int TestingCardID { get; set; }
+        public int TestingCardChangeRequestID { get; set; }
 
         public string Number { get; set; }
 
@@ -70,7 +71,20 @@ namespace TestCard.Web.Models
             set { }
         }
 
-        public List<TestingStep> TestingStepList { get; set; }
-        public List<TestingSubStep> TestingSubStepList { get; set; }
+        public List<TestingStep> TestingSteps { get; set; }
+
+        public class TestingStep
+        {
+            public int TestingStepID { get; set; }
+            public string TestingStepName { get; set; }
+            public List<TestingSubStep> TestingSubSteps { get; set; }
+        }
+
+        public class TestingSubStep
+        {
+            public int TestingSubStepID { get; set; }
+            public string TestingSubStepName { get; set; }
+            public bool IsValid { get; set; }
+        }
     }
 }

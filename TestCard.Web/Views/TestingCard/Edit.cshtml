@@ -3,4 +3,19 @@
 @{
     ViewBag.Title = "Edit";
 }
-@Html.EditorForModel()
+<div class="x-form-container">
+    <span class="header">@GeneralResource.TestCard</span>
+    <div class="top-actions">
+        @Html.ActionLink(GeneralResource.Back, "List")
+    </div>
+    <div class="form-inner">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.EditorForModel()
+            <div class="x-actions">
+                <input type="submit" value="@GeneralResource.Save" />
+                @Html.ActionLink(GeneralResource.Cancel, "List")
+            </div>
+        }
+    </div>
+</div>

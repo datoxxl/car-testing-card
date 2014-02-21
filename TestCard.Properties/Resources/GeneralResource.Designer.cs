@@ -457,6 +457,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number.
+        /// </summary>
+        public static string Number {
+            get {
+                return ResourceManager.GetString("Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Odometer.
         /// </summary>
         public static string Odometer {
@@ -655,6 +664,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Responsible person.
+        /// </summary>
+        public static string ResponsiblePerson {
+            get {
+                return ResourceManager.GetString("ResponsiblePerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
@@ -696,6 +714,15 @@ namespace TestCard.Properties.Resources {
         public static string TestCard {
             get {
                 return ResourceManager.GetString("TestCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Testing card change request.
+        /// </summary>
+        public static string TestingCardChangeRequest {
+            get {
+                return ResourceManager.GetString("TestingCardChangeRequest", resourceCulture);
             }
         }
         

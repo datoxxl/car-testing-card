@@ -118,12 +118,7 @@ namespace TestCard.Web.Helpers
         {
             using (var service = new TestingStepService())
             {
-                model.TestingStepList = service.GetAll().ToList();
-            }
-
-            using (var service = new TestingSubStepService())
-            {
-                model.TestingSubStepList = service.GetAll().ToList();
+                model.TestingSteps = AutoMapper.Mapper.Map<List<Models.TestingCardModel.TestingStep>>(service.GetAll().ToList());
             }
         }
     }

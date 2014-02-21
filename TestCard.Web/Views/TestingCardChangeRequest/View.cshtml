@@ -1,0 +1,14 @@
+﻿@model TestCard.Web.Models.TestingCardModel
+
+@{
+    ViewBag.Title = "View";
+}
+<div class="x-form-container">
+    <span class="header">@GeneralResource.TestingCardChangeRequest</span>
+    <div class="top-actions">
+        @Html.ActionLink(GeneralResource.Back, "List")
+    </div>
+    <div class="form-inner">
+        @Html.DisplayForModel()
+    </div>
+</div>
