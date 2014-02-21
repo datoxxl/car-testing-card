@@ -38,14 +38,12 @@
             <td>
                 @item.CreateDate.Value.ToString(TestCard.Properties.Config.DateFormat)
             </td>
-            <td class="action-col">
-                @{ Html.RenderPartial("_RequestActionsList", new TestCard.Web.Models.RequestActionsModel
-                   {
-                       Action = "ProcessRequest",
-                       Controller = "PersonScheduleChangeRequest",
-                       RequestID = item.PersonScheduleChangeRequestID
-                   }); }
-            </td>
+            @{ Html.RenderPartial("_RequestActionCell", new TestCard.Web.Models.RequestActionsModel
+                {
+                    Action = "ProcessRequest",
+                    Controller = "PersonScheduleChangeRequest",
+                    RequestID = item.PersonScheduleChangeRequestID
+                }); }
         </tr>
     }
 

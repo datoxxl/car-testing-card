@@ -37,15 +37,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AccreditationExpireDate)
             </td>
-            <td class="action-col">
-                @{ Html.RenderPartial("_ActionsList", new List<ActionButton> {
-                    new ActionButton
-                    {
-                        Controller = "Company",
-                        ObjectID = item.CompanyID,
-                        Type = ActionButton.ActionType.Edit
-                    }}); }
-            </td>
+            @{ Html.RenderPartial("_ActionCell", new List<ActionButton> {
+                new ActionButton
+                {
+                    Controller = "Company",
+                    ObjectID = item.CompanyID,
+                    Type = ActionButton.ActionType.Edit
+                }}); }
         </tr>
     }
 </table>

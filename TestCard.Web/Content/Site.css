@@ -672,11 +672,22 @@ table.x-table
         border: 1px solid silver;
     }
 
+        table.x-table > tbody > tr > th:empty
+        {
+            width: 1px;
+            padding: 0;
+        }
+
     table.x-table > tbody > tr > td
     {
         border: 1px solid #ededed;
         padding: 5px 10px 4px 10px;
     }
+
+        table.x-table > tbody > tr > td:empty
+        {
+            padding: 0;
+        }
 
     table.x-table > tbody > tr:hover > td
     {
@@ -693,10 +704,11 @@ table.x-table
         background-color: #c1ddf1;
     }
 
-    table.x-table .action-col
-    {
-        width: 1px;
-    }
+        table.x-table > tbody > tr.active > td.action-col
+        {
+            width: 1px;
+            white-space: nowrap;
+        }
 
 table.x-schedule
 {
