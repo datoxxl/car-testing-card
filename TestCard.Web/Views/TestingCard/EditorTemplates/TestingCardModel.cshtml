@@ -1,0 +1,106 @@
+﻿@model TestCard.Web.Models.TestingCardModel
+
+<style type="text/css">
+    #step-table {
+        border: 1px solid;
+    }
+
+        #step-table > tbody > tr > td {
+            border: 1px solid;
+        }
+
+        #step-table input {
+            width: 20px;
+            height: 20px;
+        }
+</style>
+<div class="x-form-container">
+    <span class="header">@GeneralResource.TestCard</span>
+    <div class="top-actions">
+        @Html.ActionLink(GeneralResource.Back, "List")
+    </div>
+    <div class="form-inner">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(x => x.TestingCardID)
+            <table class="x-form">
+                <tr>
+                    <td>
+                        <fieldset>
+                            <legend></legend>
+                            <ol>
+                                <li>
+                                    @Html.LabelFor(x => x.TestingCardNumber)
+                                    @Html.TextBoxFor(x => x.TestingCardNumber)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(x => x.OwnerName)
+                                    @Html.TextBoxFor(x => x.OwnerName)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(x => x.OwnerIDNo)
+                                    @Html.TextBoxFor(x => x.OwnerIDNo)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(x => x.CarModel)
+                                    @Html.TextBoxFor(x => x.CarModel)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(x => x.CarNumber)
+                                    @Html.TextBoxFor(x => x.CarNumber)
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </td>
+                    <td>
+                        <fieldset>
+                            <legend></legend>
+                            <ol>
+                                <li>
+                                    @Html.LabelFor(x => x.CarSerialNo)
+                                    @Html.TextBoxFor(x => x.CarSerialNo)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(x => x.Odometer)
+                                    @Html.TextBoxFor(x => x.Odometer)
+                                </li>
+                                <li>
+                                    @Html.LabelFor(x => x.Comment)
+                                    @Html.TextAreaFor(x => x.Comment)
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </td>
+                    <tr>
+                        <td colspan="2">
+                            <fieldset>
+                                <legend></legend>
+                                <table class="x-details-table" id="step-table">
+                                    @foreach (var item in Model.TestingStepList)
+                                    { 
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TestingStepName)
+                                            </td>
+                                            @foreach (var subItem in Model.TestingSubStepList.Where(x => x.TestingStepID == item.TestingStepID))
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => subItem.TestingSubStepName)
+                                                    @Html.CheckBox(subItem.TestingSubStepID.ToString())
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </table>
+                            </fieldset>
+                        </td>
+                    </tr>
+                </tr>
+            </table>
+            <div class="x-actions">
+                <input type="submit" value="@GeneralResource.Save" />
+                @Html.ActionLink(GeneralResource.Cancel, "List")
+            </div>
+        }
+    </div>
+</div>

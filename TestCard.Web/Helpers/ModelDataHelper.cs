@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestCard.Domain;
 using TestCard.Domain.Services;
 
 namespace TestCard.Web.Helpers
@@ -110,6 +111,19 @@ namespace TestCard.Web.Helpers
             using (var service = new CompanyService())
             {
                 model.CompanySelectList = new SelectList(service.GetAll().ToList(), "CompanyID", "CompanyName");
+            }
+        }
+
+        public static void Populate(Models.TestingCardModel model)
+        {
+            using (var service = new TestingStepService())
+            {
+                model.TestingStepList = service.GetAll().ToList();
+            }
+
+            using (var service = new TestingSubStepService())
+            {
+                model.TestingSubStepList = service.GetAll().ToList();
             }
         }
     }

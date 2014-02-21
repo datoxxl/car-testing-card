@@ -1,0 +1,77 @@
+﻿@model IEnumerable<TestCard.Web.Models.TestingCardModel>
+
+<table class="x-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TestingCardNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EffectiveDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RespPersonFullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarSerialNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VIN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valid)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.TestingCardNumber, "View", "TestingCard", new { @id = item.TestingCardID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EffectiveDate)
+            </td>
+            <td>
+                @Html.ActionLink(item.CompanyName, "View", "Company", new { @id = item.CompanyID }, null)
+            </td>
+            <td>
+                @Html.ActionLink(item.RespPersonFullName, "View", "Person", new { @id = item.ResponsiblePersonID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarSerialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VIN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valid)
+            </td>
+            <td>
+                @Html.ActionLink(GeneralResource.Edit, "Edit", "TestingCard", new { @id = item.TestingCardID }, null)
+            </td>
+        </tr>
+    }
+
+</table>
