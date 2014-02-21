@@ -316,11 +316,11 @@
     <Content Include="Views\PersonScheduleChangeRequest\List.cshtml" />
     <Content Include="Views\List\PersonScheduleChangeRequest.cshtml" />
     <Content Include="Views\PersonScheduleChangeRequest\View.cshtml" />
-    <Content Include="Views\Shared\_RequestActionsList.cshtml" />
+    <Content Include="Views\Shared\_RequestActionCell.cshtml" />
     <Content Include="Views\Person\Add.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RegisterModel.cshtml" />
     <Content Include="Views\Shared\_RequestActions.cshtml" />
-    <Content Include="Views\Shared\_ActionsList.cshtml" />
+    <Content Include="Views\Shared\_ActionCell.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
