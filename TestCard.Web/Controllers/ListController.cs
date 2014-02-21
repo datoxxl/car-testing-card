@@ -67,7 +67,7 @@ namespace TestCard.Web.Controllers
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.PersonListModel>>(service.GetList(CurrentUser, filter));
+                var list = AutoMapper.Mapper.Map<List<Models.PersonChangeRequestListModel>>(service.GetList(CurrentUser, filter));
 
                 return PartialView(list);
             }

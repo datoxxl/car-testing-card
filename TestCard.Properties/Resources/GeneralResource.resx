@@ -303,4 +303,31 @@
   <data name="CompanyUsers" xml:space="preserve">
     <value>Company users</value>
   </data>
+  <data name="AdministratorConfirm" xml:space="preserve">
+    <value>Admin. confirm</value>
+  </data>
+  <data name="CreateDate" xml:space="preserve">
+    <value>Create date</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="QualityManagerConfirm" xml:space="preserve">
+    <value>Qualirt man. confirm</value>
+  </data>
+  <data name="RequestDate" xml:space="preserve">
+    <value>Request date</value>
+  </data>
+  <data name="RequestUser" xml:space="preserve">
+    <value>Request user</value>
+  </data>
+  <data name="UserChangeRequests" xml:space="preserve">
+    <value>User change requests</value>
+  </data>
+  <data name="UserHasUnconfirmedRequest" xml:space="preserve">
+    <value>Can not save, user has unconfirmed request</value>
+  </data>
+  <data name="WorkScheduleChangeRequests" xml:space="preserve">
+    <value>Work schedule change requests</value>
+  </data>
 </root>

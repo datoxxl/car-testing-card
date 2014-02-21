@@ -18,6 +18,22 @@ namespace TestCard.Properties
             }
         }
 
+        public static string DateFormat
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DateFormat"];
+            }
+        }
+
+        public static string DateTimeFormat
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DateTimeFormat"];
+            }
+        }
+
         public static string FilePath
         {
             get

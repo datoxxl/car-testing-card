@@ -151,11 +151,13 @@
     <Compile Include="Models\ActionButton.cs" />
     <Compile Include="Models\CompanyListModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
+    <Compile Include="Models\PersonChangeRequestListModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PersonListModel.cs" />
     <Compile Include="Models\PersonScheduleChangeRequestListModel.cs" />
     <Compile Include="Models\PersonScheduleModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\RequestActionsModel.cs" />
     <Compile Include="Models\ToolbarButton.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\UserOptions.cs" />
@@ -166,15 +168,19 @@
       <Link>AutoMapper.Net4.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\images\approve24.png" />
     <Content Include="Content\images\body.gif" />
     <Content Include="Content\images\card.png" />
     <Content Include="Content\images\card-edit.png" />
     <Content Include="Content\images\company.png" />
     <Content Include="Content\images\company16.png" />
+    <Content Include="Content\images\delete24.png" />
+    <Content Include="Content\images\edit24.png" />
     <Content Include="Content\images\error32.png" />
     <Content Include="Content\images\filter.gif" />
     <Content Include="Content\images\filter.png" />
     <Content Include="Content\images\filter-delete.gif" />
+    <Content Include="Content\images\info24.png" />
     <Content Include="Content\images\info32.png" />
     <Content Include="Content\images\load.gif" />
     <Content Include="Content\images\logIn16.png" />
@@ -293,7 +299,6 @@
     <Content Include="Views\Company\Edit.cshtml" />
     <Content Include="Views\Person\List.cshtml" />
     <Content Include="Views\Person\Edit.cshtml" />
-    <Content Include="Views\Authorization\EditorTemplates\RegisterModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PersonModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PersonScheduleModel.cshtml" />
     <Content Include="Views\List\Person.cshtml" />
@@ -311,6 +316,11 @@
     <Content Include="Views\PersonScheduleChangeRequest\List.cshtml" />
     <Content Include="Views\List\PersonScheduleChangeRequest.cshtml" />
     <Content Include="Views\PersonScheduleChangeRequest\View.cshtml" />
+    <Content Include="Views\Shared\_RequestActionsList.cshtml" />
+    <Content Include="Views\Person\Add.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RegisterModel.cshtml" />
+    <Content Include="Views\Shared\_RequestActions.cshtml" />
+    <Content Include="Views\Shared\_ActionsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

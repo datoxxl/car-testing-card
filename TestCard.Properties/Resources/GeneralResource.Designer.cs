@@ -97,6 +97,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Admin. confirm.
+        /// </summary>
+        public static string AdministratorConfirm {
+            get {
+                return ResourceManager.GetString("AdministratorConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Approve.
         /// </summary>
         public static string Approve {
@@ -178,6 +187,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create date.
+        /// </summary>
+        public static string CreateDate {
+            get {
+                return ResourceManager.GetString("CreateDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data saved.
         /// </summary>
         public static string DataSaved {
@@ -192,6 +210,15 @@ namespace TestCard.Properties.Resources {
         public static string Day {
             get {
                 return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string Details {
+            get {
+                return ResourceManager.GetString("Details", resourceCulture);
             }
         }
         
@@ -385,6 +412,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Qualirt man. confirm.
+        /// </summary>
+        public static string QualityManagerConfirm {
+            get {
+                return ResourceManager.GetString("QualityManagerConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Record doesn&apos;t exist.
         /// </summary>
         public static string RecordNotExists {
@@ -466,6 +502,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Request date.
+        /// </summary>
+        public static string RequestDate {
+            get {
+                return ResourceManager.GetString("RequestDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Request is not approved by quality manager.
         /// </summary>
         public static string RequestNotApprovedByQualityManager {
@@ -480,6 +525,15 @@ namespace TestCard.Properties.Resources {
         public static string RequestRejected {
             get {
                 return ResourceManager.GetString("RequestRejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request user.
+        /// </summary>
+        public static string RequestUser {
+            get {
+                return ResourceManager.GetString("RequestUser", resourceCulture);
             }
         }
         
@@ -574,6 +628,24 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User change requests.
+        /// </summary>
+        public static string UserChangeRequests {
+            get {
+                return ResourceManager.GetString("UserChangeRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not save, user has unconfirmed request.
+        /// </summary>
+        public static string UserHasUnconfirmedRequest {
+            get {
+                return ResourceManager.GetString("UserHasUnconfirmedRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Users.
         /// </summary>
         public static string Users {
@@ -606,6 +678,15 @@ namespace TestCard.Properties.Resources {
         public static string WorkSchedule {
             get {
                 return ResourceManager.GetString("WorkSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work schedule change requests.
+        /// </summary>
+        public static string WorkScheduleChangeRequests {
+            get {
+                return ResourceManager.GetString("WorkScheduleChangeRequests", resourceCulture);
             }
         }
         

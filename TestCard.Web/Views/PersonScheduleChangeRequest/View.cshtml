@@ -3,4 +3,19 @@
 @{
     ViewBag.Title = "View";
 }
-@Html.DisplayForModel()
+<div class="x-form-container">
+    <span class="header">@GeneralResource.WorkSchedule</span>
+    <div class="top-actions">
+        @Html.ActionLink(GeneralResource.Back, "List", "PersonChangeRequest")
+    </div>
+    <div class="form-inner">
+        @Html.DisplayForModel()
+
+        @{ Html.RenderPartial("_RequestActions", new TestCard.Web.Models.RequestActionsModel
+            {
+                Action = "ProcessRequest",
+                Controller = "PersonScheduleChangeRequest",
+                RequestID = Model.PersonScheduleChangeRequestID.Value
+            }); }
+    </div>
+</div>

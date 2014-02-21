@@ -36,18 +36,15 @@
                 @Html.ActionLink(item.PersonFullName, "View", "Person", new { @id = item.PersonID }, null)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
+                @item.CreateDate.Value.ToString(TestCard.Properties.Config.DateFormat)
             </td>
-            <td style="width: 1px;">
-                @Html.ActionLink(GeneralResource.View, "View", "PersonScheduleChangeRequest", new { @id = item.PersonScheduleChangeRequestID }, new { @class = "x-button" })
-                @using (Html.BeginForm("ProcessRequest", "PersonScheduleChangeRequest", new { @id = item.PersonScheduleChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Approved }, FormMethod.Post))
-                {
-                    <input type="submit" value="@GeneralResource.Approve" />
-                }
-                @using (Html.BeginForm("ProcessRequest", "PersonScheduleChangeRequest", new { @id = item.PersonScheduleChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Rejected }, FormMethod.Post))
-                {
-                    <input type="submit" value="@GeneralResource.Reject" />
-                }
+            <td class="action-col">
+                @{ Html.RenderPartial("_RequestActionsList", new TestCard.Web.Models.RequestActionsModel
+                   {
+                       Action = "ProcessRequest",
+                       Controller = "PersonScheduleChangeRequest",
+                       RequestID = item.PersonScheduleChangeRequestID
+                   }); }
             </td>
         </tr>
     }

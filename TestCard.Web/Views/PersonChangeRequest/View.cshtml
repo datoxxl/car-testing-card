@@ -7,16 +7,12 @@
     </div>
     <div class="form-inner">
         @Html.DisplayForModel()
-        <div class="x-actions">
-            @using (Html.BeginForm("ProcessRequest", "UserChangeRequest", new { @id = Model.PersonChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Approved }, FormMethod.Post))
+
+        @{ Html.RenderPartial("_RequestActions", new TestCard.Web.Models.RequestActionsModel
             {
-                <input type="submit" value="@GeneralResource.Approve" />
-            }
-            @using (Html.BeginForm("ProcessRequest", "UserChangeRequest", new { @id = Model.PersonChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Rejected }, FormMethod.Post))
-            {
-                <input type="submit" value="@GeneralResource.Reject" />
-            }
-            @Html.ActionLink(GeneralResource.Cancel, "List")
-        </div>
+                Action = "ProcessRequest",
+                Controller = "PersonChangeRequest",
+                RequestID = Model.PersonChangeRequestID.Value
+            }); }
     </div>
 </div>

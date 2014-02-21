@@ -51,14 +51,23 @@ namespace TestCard.Web
             Mapper.CreateMap<Domain.PersonScheduleChangeRequestDetail, Models.PersonScheduleModel.Day>();
             Mapper.CreateMap<Domain.PersonSchedule, Models.PersonScheduleModel.Day>();
 
+            Mapper.CreateMap<Domain.PersonChangeRequest, Models.PersonChangeRequestListModel>()
+                .ForMember(dest => dest.PersonFirstName, src => src.MapFrom(x => x.Person.FirstName))
+                .ForMember(dest => dest.PersonLastName, src => src.MapFrom(x => x.Person.LastName))
+                .ForMember(dest => dest.ResponsiblePersonFirstName, src => src.MapFrom(x => x.ResponsiblePerson.FirstName))
+                .ForMember(dest => dest.ResponsiblePersonLastName, src => src.MapFrom(x => x.ResponsiblePerson.LastName))
+                .ForMember(dest => dest.QualityManagerConfirmStatusName, src => src.MapFrom(x => x.QualityManagerConfirmStatus.ConfirmStatusName))
+                .ForMember(dest => dest.AdministratorConfirmStatusName, src => src.MapFrom(x => x.AdminConfirmStatus.ConfirmStatusName));
+
             Mapper.CreateMap<Domain.PersonScheduleChangeRequest, Models.PersonScheduleChangeRequestListModel>()
                 .ForMember(dest => dest.PersonFirstName, src => src.MapFrom(x => x.Person.FirstName))
                 .ForMember(dest => dest.PersonLastName, src => src.MapFrom(x => x.Person.LastName))
                 .ForMember(dest => dest.ResponsiblePersonFirstName, src => src.MapFrom(x => x.ResponsiblePerson.FirstName))
                 .ForMember(dest => dest.ResponsiblePersonLastName, src => src.MapFrom(x => x.ResponsiblePerson.LastName))
                 .ForMember(dest => dest.QualityManagerConfirmStatusName, src => src.MapFrom(x => x.QualityManagerConfirmStatus.ConfirmStatusName))
-                .ForMember(dest => dest.AdministratorConfirmStatusName, src => src.MapFrom(x => x.AdminConfirmStatus.ConfirmStatusName))
-                ;
+                .ForMember(dest => dest.AdministratorConfirmStatusName, src => src.MapFrom(x => x.AdminConfirmStatus.ConfirmStatusName));
+
+            Mapper.CreateMap<Domain.PersonScheduleChangeRequest, Models.PersonScheduleModel>();
 
             Mapper.CreateMap<Domain.Company, Models.CompanyListModel>();
             Mapper.CreateMap<Domain.Company, Models.CompanyModel>()

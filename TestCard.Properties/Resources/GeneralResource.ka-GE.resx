@@ -303,4 +303,31 @@
   <data name="CompanyUsers" xml:space="preserve">
     <value>კომპანიის მომხმარებლები</value>
   </data>
+  <data name="AdministratorConfirm" xml:space="preserve">
+    <value>ადმინ.-ის დასტური</value>
+  </data>
+  <data name="CreateDate" xml:space="preserve">
+    <value>შექმნის თარიღი</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>დეტალები</value>
+  </data>
+  <data name="QualityManagerConfirm" xml:space="preserve">
+    <value>ხარისხის მენეჯ.-ის დასტური</value>
+  </data>
+  <data name="RequestDate" xml:space="preserve">
+    <value>მოთხოვნის თარიღი</value>
+  </data>
+  <data name="RequestUser" xml:space="preserve">
+    <value>მომთხოვნი პირი</value>
+  </data>
+  <data name="UserChangeRequests" xml:space="preserve">
+    <value>მომხმარებლის ცვლილების მოთხოვნები</value>
+  </data>
+  <data name="UserHasUnconfirmedRequest" xml:space="preserve">
+    <value>შენახვა ვერ მოხერხდა, მომხმარებელს გააჩნია დაუდასტურებელი ჩანაწერი</value>
+  </data>
+  <data name="WorkScheduleChangeRequests" xml:space="preserve">
+    <value>სამუშაო გრაფიკის ცვლილების მოთხოვნები</value>
+  </data>
 </root>

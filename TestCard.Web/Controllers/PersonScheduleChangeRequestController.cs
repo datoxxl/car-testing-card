@@ -31,6 +31,7 @@ namespace TestCard.Web.Controllers
                     if (source != null)
                     {
                         var model = new Models.PersonScheduleModel();
+                        model = AutoMapper.Mapper.Map(source, model);
                         model.Days = AutoMapper.Mapper.Map(source.PersonScheduleChangeRequestDetails, model.Days);
                         //model.Schedule = new Models.PersonScheduleModel();
                         //model.Schedule.Days = AutoMapper.Mapper.Map<List<Models.PersonScheduleModel.Day>>(source.PersonScheduleChangeRequests.ToList());

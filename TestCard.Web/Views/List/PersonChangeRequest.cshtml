@@ -1,24 +1,21 @@
-﻿@model IEnumerable<TestCard.Web.Models.PersonListModel>
+﻿@model IEnumerable<TestCard.Web.Models.PersonChangeRequestListModel>
 
 <table class="x-table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.IDNo)
+            @Html.DisplayNameFor(model => model.AdministratorConfirmStatusName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FullName)
+            @Html.DisplayNameFor(model => model.QualityManagerConfirmStatusName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
+            @Html.DisplayNameFor(model => model.ResponsiblePersonFullName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccountTypeName)
+            @Html.DisplayNameFor(model => model.PersonFullName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Mobile)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.CreateDate)
         </th>
         <th></th>
     </tr>
@@ -27,33 +24,27 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IDNo)
+                @Html.DisplayFor(modelItem => item.AdministratorConfirmStatusName)
             </td>
             <td>
-                @Html.ActionLink(item.FullName, "View", "Person", new { @id = item.PersonID }, null)
+                @Html.DisplayFor(modelItem => item.QualityManagerConfirmStatusName)
             </td>
             <td>
-                @Html.ActionLink(item.CompanyName, "Edit", "Company", new { @id = item.CompanyID }, null)
+                @Html.ActionLink(item.ResponsiblePersonFullName, "View", "Person", new { @id = item.ResponsiblePersonID }, null)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AccountTypeName)
+                @Html.ActionLink(item.PersonFullName, "View", "Person", new { @id = item.PersonID }, null)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Mobile)
+                @item.CreateDate.Value.ToString(TestCard.Properties.Config.DateFormat)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td style="width: 1px;">
-                @Html.ActionLink(GeneralResource.View, "View", "PersonChangeRequest", new { @id = item.PersonChangeRequestID }, new { @class = "x-button" })
-                @using (Html.BeginForm("ProcessRequest", "PersonChangeRequest", new { @id = item.PersonChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Approved }, FormMethod.Post))
-                {
-                    <input type="submit" value="@GeneralResource.Approve" />
-                }
-                @using (Html.BeginForm("ProcessRequest", "PersonChangeRequest", new { @id = item.PersonChangeRequestID, status = (int)TestCard.Domain.ConfirmStatuses.Rejected }, FormMethod.Post))
-                {
-                    <input type="submit" value="@GeneralResource.Reject" />
-                }
+            <td class="action-col">
+                @{ Html.RenderPartial("_RequestActionsList", new TestCard.Web.Models.RequestActionsModel
+                   {
+                       Action = "ProcessRequest",
+                       Controller = "PersonChangeRequest",
+                       RequestID = item.PersonChangeRequestID
+                   }); }
             </td>
         </tr>
     }

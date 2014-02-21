@@ -1,0 +1,11 @@
+﻿@model TestCard.Web.Models.RequestActionsModel
+<div class="x-actions">
+    @using (Html.BeginForm(Model.Action, Model.Controller, new { @id = Model.RequestID, status = (int)TestCard.Domain.ConfirmStatuses.Approved }, FormMethod.Post))
+    {
+        <input type="submit" value="@GeneralResource.Approve" class="btn approve" title="@GeneralResource.Approve" />
+    }
+    @using (Html.BeginForm(Model.Action, Model.Controller, new { @id = Model.RequestID, status = (int)TestCard.Domain.ConfirmStatuses.Rejected }, FormMethod.Post))
+    {
+        <input type="submit" value="@GeneralResource.Reject" class="btn reject" title="@GeneralResource.Reject" />
+    }
+</div>
