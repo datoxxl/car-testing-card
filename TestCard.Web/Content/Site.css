@@ -22,11 +22,6 @@ a
     cursor: pointer;
 }
 
-.x-table a
-{
-    color: #4183c4;
-}
-
 /* forms */
 fieldset
 {
@@ -241,6 +236,19 @@ input[type="checkbox"].input-validation-error
 .validation-summary-valid
 {
     display: none;
+}
+
+input[data-val-date]
+{
+}
+
+.ui-datepicker-trigger
+{
+    margin-left: -25px;
+    margin-right: 5px;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
 }
 
 div.watermark
@@ -481,7 +489,7 @@ ul.x-toolbar
 
             .x-toolbar-button .btn-wrapper > .text.multiline
             {
-                line-height: initial;
+                line-height: inherit;
             }
 
         .x-toolbar-button .btn-wrapper > .icon
@@ -584,7 +592,28 @@ table.x-form
 {
     text-align: right;
     padding: 10px 0;
+    white-space: nowrap;
 }
+
+    .x-actions form
+    {
+        display: inline;
+    }
+
+    .x-actions .btn
+    {
+    }
+
+        .x-actions .btn.approve
+        {
+            background-color: #60a917;
+        }
+
+        .x-actions .btn.reject
+        {
+            background-color: #e51400;
+        }
+
 
 .x-toolbar-sep-hor
 {
@@ -651,11 +680,22 @@ table.x-table
         border: 1px solid silver;
     }
 
+        table.x-table > tbody > tr > th:empty
+        {
+            width: 1px;
+            padding: 0;
+        }
+
     table.x-table > tbody > tr > td
     {
         border: 1px solid #ededed;
         padding: 5px 10px 4px 10px;
     }
+
+        table.x-table > tbody > tr > td:empty
+        {
+            padding: 0;
+        }
 
     table.x-table > tbody > tr:hover > td
     {
@@ -670,6 +710,17 @@ table.x-table
     table.x-table > tbody > tr.active > td
     {
         background-color: #c1ddf1;
+    }
+
+        table.x-table > tbody > tr.active > td.action-col
+        {
+            width: 1px;
+            white-space: nowrap;
+        }
+
+    table.x-table a
+    {
+        color: #4183c4;
     }
 
 table.x-schedule
@@ -740,6 +791,7 @@ ul.x-action-bar
     margin: 30px;
 }
 
+    .x-header,
     .x-form-container .header
     {
         background-color: #157fcc;
@@ -781,3 +833,44 @@ ul.x-action-bar
     border: 1px solid #555;
     margin-top: 10px;
 }
+
+.x-list-actions
+{
+    white-space: nowrap;
+}
+
+    .x-list-actions form
+    {
+        display: inline;
+    }
+
+    .x-list-actions .btn
+    {
+        height: 24px;
+        width: 24px;
+        background-repeat: no-repeat;
+        display: inline-block;
+        background-color: transparent;
+        border: 0;
+        vertical-align: middle;
+    }
+
+        .x-list-actions .btn.details
+        {
+            background-image: url('images/info24.png');
+        }
+
+        .x-list-actions .btn.approve
+        {
+            background-image: url('images/approve24.png');
+        }
+
+        .x-list-actions .btn.reject
+        {
+            background-image: url('images/delete24.png');
+        }
+
+        .x-list-actions .btn.edit
+        {
+            background-image: url('images/edit24.png');
+        }

@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "List";
 }
-
+<span class="x-header">@GeneralResource.UserChangeRequests</span>
 @{ Html.RenderAction("PersonChangeRequest", "List"); }
+<span class="x-header">@GeneralResource.WorkScheduleChangeRequests</span>
 @{ Html.RenderAction("PersonScheduleChangeRequest", "List"); }

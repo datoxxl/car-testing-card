@@ -44,8 +44,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>@Html.ActionLink(GeneralResource.Edit, "Edit", "Person", new { @id = item.PersonID }, null)
-            </td>
+            @{ Html.RenderPartial("_ActionCell", new List<ActionButton> {
+                new ActionButton
+                {
+                    Controller = "Person",
+                    ObjectID = item.PersonID,
+                    Type = ActionButton.ActionType.Edit
+                }}); }
         </tr>
     }
 

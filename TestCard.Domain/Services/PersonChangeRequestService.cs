@@ -9,19 +9,68 @@ namespace TestCard.Domain.Services
 {
     public class PersonChangeRequestService : DomainServiceBase<PersonChangeRequest>
     {
-        public bool SaveChangeRequest(PersonChangeRequest personRequest, int? responsiblePerson)
+        public bool SaveChangeRequest(PersonChangeRequest request, v_person currentPerson, ref bool? hasUnconfirmedRequest)
         {
             var now = DateTime.Now;
+            int? personID = null;
 
-            personRequest.EffectiveDate = now;
-            personRequest.CreateDate = now;
-            personRequest.ResponsiblePersonID = responsiblePerson;
+            if (currentPerson != null)
+            {
+                personID = currentPerson.PersonID;
+            }
 
-            Add(personRequest);
+            request.EffectiveDate = now;
+            request.CreateDate = now;
+            request.ResponsiblePersonID = personID;
+
+            if (personID.HasValue)
+            {
+                var accountType = (AccountTypes)currentPerson.AccountTypeID;
+                var rejectStatusID = (int)ConfirmStatuses.Rejected;
+                hasUnconfirmedRequest = GetAll().Any(x => x.PersonID == request.PersonID
+                    && !x.AdministratorConfirmStatusID.HasValue
+                    && x.QualityManagerConfirmStatusID != rejectStatusID);
+
+                switch (accountType)
+                {
+                    case AccountTypes.Administrator:
+                        request.AdministratorConfirmDate = now;
+                        request.AdministratorPersonID = personID;
+                        request.AdministratorConfirmStatusID = (int)ConfirmStatuses.Approved;
+
+                        request.QualityManagerConfirmDate = now;
+                        request.QualityManagerPersonID = personID;
+                        request.QualityManagerConfirmStatusID = (int)ConfirmStatuses.Approved;
+
+                        new PersonService(_DbContext).SavePerson(request);
+                        break;
+                    case AccountTypes.QualityManager:
+
+                        if (hasUnconfirmedRequest == true)
+                        {
+                            return false;
+                        }
+
+                        request.QualityManagerConfirmDate = now;
+                        request.QualityManagerPersonID = personID;
+                        request.QualityManagerConfirmStatusID = (int)ConfirmStatuses.Approved;
+                        break;
+                    case AccountTypes.Operator:
+                        if (hasUnconfirmedRequest == true)
+                        {
+                            return false;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            Add(request);
 
             SaveChanges();
 
-            return personRequest.PersonChangeRequestID > 0;
+            return request.PersonChangeRequestID > 0;
         }
 
         public bool ChangeRequestStatus(int id, ConfirmStatuses status, AccountTypes type, int personID, ref bool? alreadyProcessed, ref bool? notApprovedByQualityManager)

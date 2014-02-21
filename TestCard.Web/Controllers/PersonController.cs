@@ -23,6 +23,50 @@ namespace TestCard.Web.Controllers
             return GetModel(id);
         }
 
+        public ActionResult Add()
+        {
+            var model = new TestCard.Web.Models.RegisterModel();
+            ModelDataHelper.Populate(model);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Add(TestCard.Web.Models.RegisterModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    using (var service = new PersonChangeRequestService())
+                    {
+                        var per = AutoMapper.Mapper.Map<Models.RegisterModel, TestCard.Domain.PersonChangeRequest>(model);
+
+                        bool? hasUnconfirmedRequest = null;
+                        var saved = service.SaveChangeRequest(per, CurrentUser, ref hasUnconfirmedRequest);
+
+                        if (saved)
+                        {
+                            SetSuccessMessage();
+                            return RedirectToAction("List");
+                        }
+                        else if (hasUnconfirmedRequest == true)
+                        {
+                            SetErrorMessage(GeneralResource.UserHasUnconfirmedRequest);
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                SetErrorMessage();
+            }
+
+            ModelDataHelper.Populate(model);
+
+            return View(model);
+        }
+
         public ActionResult Edit(int id)
         {
             return GetModel(id);
@@ -39,13 +83,19 @@ namespace TestCard.Web.Controllers
                     {
                         var per = AutoMapper.Mapper.Map<Domain.PersonChangeRequest>(model);
 
-                        List<Domain.PersonScheduleChangeRequest> scheduleList = new List<Domain.PersonScheduleChangeRequest>();
+                        bool? hasUnconfirmedRequest = null;
+                        var saved = service.SaveChangeRequest(per, CurrentUser, ref hasUnconfirmedRequest);
 
-                        service.SaveChangeRequest(per, CurrentUser.PersonID);
+                        if (saved)
+                        {
+                            SetSuccessMessage();
+                            return RedirectToAction("Edit", RouteData.Values);
+                        }
+                        else if (hasUnconfirmedRequest == true)
+                        {
+                            SetErrorMessage(GeneralResource.UserHasUnconfirmedRequest);
+                        }
                     }
-
-                    SetSuccessMessage();
-                    return RedirectToAction("Edit", RouteData.Values);
                 }
             }
             catch

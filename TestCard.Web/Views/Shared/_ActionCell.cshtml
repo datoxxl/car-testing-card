@@ -1,0 +1,17 @@
+﻿@model IEnumerable<TestCard.Web.Models.ActionButton>
+<td class="action-cell">
+    <div class="x-list-actions">
+        @foreach (var item in Model)
+        {
+            @Html.ActionLink(" ",
+            item.Action ?? item.Type.ToString(),
+            item.Controller,
+            new { @id = item.ObjectID },
+            new
+            {
+                @class = "btn " + item.Type.ToString().ToLower(),
+                title = item.Text ?? TestCard.Domain.Helpers.EnumHelper.GetDescription(item.Type)
+            })
+        }
+    </div>
+</td>

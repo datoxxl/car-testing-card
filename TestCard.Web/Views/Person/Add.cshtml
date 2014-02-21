@@ -1,0 +1,20 @@
+﻿@model TestCard.Web.Models.RegisterModel
+@{
+    ViewBag.Title = "Add";
+}
+<div class="x-form-container">
+    <span class="header">@GeneralResource.User</span>
+    <div class="top-actions">
+        @Html.ActionLink(GeneralResource.Back, "List")
+    </div>
+    <div class="form-inner">
+        @using (Html.BeginForm())
+        {
+            @Html.EditorForModel()
+            <div class="x-actions">
+                <input type="submit" value="@GeneralResource.Save" />
+                @Html.ActionLink(GeneralResource.Cancel, "List")
+            </div>
+        }
+    </div>
+</div>

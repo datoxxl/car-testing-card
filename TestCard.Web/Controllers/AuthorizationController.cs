@@ -64,7 +64,9 @@ namespace TestCard.Web.Controllers
                     using (var service = new PersonChangeRequestService())
                     {
                         var per = AutoMapper.Mapper.Map<Models.RegisterModel, TestCard.Domain.PersonChangeRequest>(model);
-                        service.SaveChangeRequest(per, null);
+
+                        bool? hasUnconfirmedRequest = null;
+                        service.SaveChangeRequest(per, null, ref hasUnconfirmedRequest);
                     }
 
                    SetSuccessMessage(GeneralResource.RegistrationComplete);

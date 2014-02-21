@@ -37,13 +37,22 @@ namespace TestCard.Web.Controllers
                 {
                     using (var service = new PersonScheduleChangeRequestService())
                     {
-                        var list = AutoMapper.Mapper.Map<List<Domain.PersonScheduleChangeRequestDetail>>(model.Days);
-                
-                        service.SaveChangeRequest(id, list, CurrentUser.PersonID);
-                    }
+                        var request = new Domain.PersonScheduleChangeRequest { PersonID = id };
+                        var details = AutoMapper.Mapper.Map<List<Domain.PersonScheduleChangeRequestDetail>>(model.Days);
 
-                    SetSuccessMessage();
-                    return RedirectToAction("Edit", RouteData.Values);
+                        bool? hasUnconfirmedRequest = null;
+                        var saved = service.SaveChangeRequest(request, details, CurrentUser, ref hasUnconfirmedRequest);
+
+                        if (saved)
+                        {
+                            SetSuccessMessage();
+                            return RedirectToAction("Edit", RouteData.Values);
+                        }
+                        else if (hasUnconfirmedRequest == true)
+                        {
+                            SetErrorMessage(GeneralResource.UserHasUnconfirmedRequest);
+                        }
+                    }
                 }
             }
             catch
