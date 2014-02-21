@@ -40,7 +40,8 @@ namespace TestCard.Web.Models
            ErrorMessageResourceName = "FillRequiredField",
            ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "AccreditationDate", ResourceType = typeof(GeneralResource))]
-        public Nullable<System.DateTime> AccreditationExpireDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? AccreditationExpireDate { get; set; }
 
         [Required(ErrorMessage = "",
            ErrorMessageResourceName = "FillRequiredField",

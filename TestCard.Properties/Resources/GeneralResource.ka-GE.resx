@@ -330,4 +330,7 @@
   <data name="WorkScheduleChangeRequests" xml:space="preserve">
     <value>სამუშაო გრაფიკის ცვლილების მოთხოვნები</value>
   </data>
+  <data name="InvalidDate" xml:space="preserve">
+    <value>თარიღი არასწორია</value>
+  </data>
 </root>

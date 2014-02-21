@@ -1,0 +1,14 @@
+﻿@model DateTime?
+@{
+    object txtVal = "";
+    if (Model.HasValue)
+    {
+        txtVal = Model.Value;
+    };
+}
+
+@Html.TextBoxFor(x => x, new
+{
+    @data_val_date = GeneralResource.InvalidDate,
+    Value = string.Format(ViewData.ModelMetadata.EditFormatString, txtVal)
+})

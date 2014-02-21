@@ -330,4 +330,7 @@
   <data name="WorkScheduleChangeRequests" xml:space="preserve">
     <value>Work schedule change requests</value>
   </data>
+  <data name="InvalidDate" xml:space="preserve">
+    <value>Invalid date</value>
+  </data>
 </root>

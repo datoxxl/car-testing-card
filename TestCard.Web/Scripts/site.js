@@ -1,6 +1,7 @@
 /// <reference path="jquery.js" />
 
 $(function () {
+    initDatePickers();
     initDropDown();
     initValidation();
 
@@ -826,6 +827,15 @@ function SetupScroll() {
 }
 
 function initValidation() {
+
+    $.validator.methods.date = function (value, element) {
+        Globalize.culture("ka-GE");
+        // you can alternatively pass the culture to parseDate instead of
+        // setting the culture above, like so:
+        // parseDate(value, null, "en-AU")
+        return this.optional(element) || Globalize.parseDate(value) !== null;
+    }
+
     $('.field-validation-error').each(function (index, elem) {
         var $t = $(this);
 
@@ -841,18 +851,6 @@ function initValidation() {
     });
 }
 
-//$.fn.has_scrollbar = function () {
-//    var divnode = this.get(0);   
-//    if (divnode.scrollHeight > divnode.clientHeight) {        
-//        return true;
-//    }
-//}
-//$.fn.has_H_scrollbar = function () {    
-//    var divnode = this.get(0);    
-//    if (divnode.scrollWidth > divnode.clientWidth)
-//        return true;
-//}
-
 function initDataTable() {
     $('.x-table').each(function (index, elem) {
         var $table = $(elem);
@@ -864,5 +862,16 @@ function initDataTable() {
             $t.siblings().removeClass('selected');
             $t.addClass('selected');
         });
+    });
+}
+
+function initDatePickers() {
+    $.datepicker.setDefaults($.datepicker.regional["fr"]);
+
+    $('input[data-val-date]').datepicker({
+        showOn: "both",
+        buttonImage: "/content/images/calendar16.png",
+        buttonImageOnly: true,
+        dateFormat: 'dd.mm.yy'
     });
 }

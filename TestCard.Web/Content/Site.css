@@ -22,11 +22,6 @@ a
     cursor: pointer;
 }
 
-.x-table a
-{
-    color: #4183c4;
-}
-
 /* forms */
 fieldset
 {
@@ -241,6 +236,19 @@ input[type="checkbox"].input-validation-error
 .validation-summary-valid
 {
     display: none;
+}
+
+input[data-val-date]
+{
+}
+
+.ui-datepicker-trigger
+{
+    margin-left: -25px;
+    margin-right: 5px;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
 }
 
 div.watermark
@@ -709,6 +717,11 @@ table.x-table
             width: 1px;
             white-space: nowrap;
         }
+
+    table.x-table a
+    {
+        color: #4183c4;
+    }
 
 table.x-schedule
 {
