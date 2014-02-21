@@ -232,6 +232,7 @@
     <Content Include="Photo.ashx" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.ka-GE.js" />
     <Content Include="Scripts\globalize\globalize.js" />
+    <None Include="Properties\PublishProfiles\TestCard.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
