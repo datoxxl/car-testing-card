@@ -123,11 +123,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountTypeService.cs" />
     <Compile Include="Services\CompanyService.cs" />
+    <Compile Include="Services\TestingSubStepService.cs" />
+    <Compile Include="Services\TestingStepService.cs" />
     <Compile Include="Services\DomainServiceBase.cs" />
     <Compile Include="Services\PersonChangeRequestService.cs" />
     <Compile Include="Services\PersonScheduleChangeRequestService.cs" />
     <Compile Include="Services\PersonScheduleService.cs" />
     <Compile Include="Services\PersonService.cs" />
+    <Compile Include="Services\TestingCardService.cs" />
     <Compile Include="TestingCard.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>

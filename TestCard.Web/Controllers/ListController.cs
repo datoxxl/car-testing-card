@@ -90,5 +90,19 @@ namespace TestCard.Web.Controllers
                 return PartialView(list);
             }
         }
+
+        public PartialViewResult TestingCard()
+        {
+            var list = new List<Models.TestingCardModel>();
+
+            using (var service = new TestingCardService())
+            {
+                service.GetAll()
+                    .ToList()
+                    .ForEach(x => list.Add(AutoMapper.Mapper.Map<Domain.TestingCard, Models.TestingCardModel>(x)));
+            }
+
+            return PartialView(list);
+        }
     }
 }
