@@ -6,7 +6,7 @@
 <div class="x-form-container">
     <span class="header">@GeneralResource.WorkSchedule</span>
     <div class="top-actions">
-        <a href="@Request.UrlReferrer.OriginalString">@GeneralResource.Back</a>
+        @Html.ActionLink(GeneralResource.Back, "Edit", "Person", new { id = Model.PersonID }, null)
     </div>
     <div class="form-inner">
         @using (Html.BeginForm())

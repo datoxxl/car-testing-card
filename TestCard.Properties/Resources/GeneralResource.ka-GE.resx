@@ -381,4 +381,10 @@
   <data name="TestingCardChangeRequest" xml:space="preserve">
     <value>ტესტირების ბარათის ცვლილების მოთხოვნა</value>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>მისამართი</value>
+  </data>
+  <data name="InvalidNumber" xml:space="preserve">
+    <value>რიცხვი არასწორია</value>
+  </data>
 </root>

@@ -59,7 +59,14 @@ namespace TestCard.Web.Controllers
 
                         SetSuccessMessage();
 
-                        return RedirectToAction("Edit", new { @id = testingCard.TestingCardID });
+                        if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
+                        {
+                            return RedirectToAction("Edit", new { @id = testingCard.TestingCardID });
+                        }
+                        else
+                        {
+                            return RedirectToAction("List", "TestingCardChangeRequest");
+                        }
                     }
                 }
             }
@@ -97,7 +104,15 @@ namespace TestCard.Web.Controllers
                         if (saved)
                         {
                             SetSuccessMessage();
-                            return RedirectToAction("Edit", RouteData.Values);
+
+                            if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
+                            {
+                                return RedirectToAction("Edit", RouteData.Values);
+                            }
+                            else
+                            {
+                                return RedirectToAction("List", "TestingCardChangeRequest");
+                            }
                         }
                         else if (hasUnconfirmedRequest == true)
                         {
@@ -123,33 +138,7 @@ namespace TestCard.Web.Controllers
         {
             try
             {
-                using (var service = new TestingCardService())
-                {
-                    var source = service.Get(id);
-
-                    if (source != null)
-                    {
-                        var model = new Models.TestingCardModel();
-                        model = AutoMapper.Mapper.Map(source, model);
-                        var subSteps = AutoMapper.Mapper.Map<List<Models.TestingCardModel.TestingSubStep>>(source.TestingCardDetails);
-
-                        ModelDataHelper.Populate(model);
-
-                        model.TestingSteps.SelectMany(x => x.TestingSubSteps).ToList().ForEach(
-                            x =>
-                            {
-                                var item = subSteps.FirstOrDefault(y => y.TestingSubStepID == x.TestingSubStepID);
-                                x.IsValid = item.IsValid;
-                            }
-                        );
-
-                        return View(model);
-                    }
-                    else
-                    {
-                        SetErrorMessage(GeneralResource.RecordNotExists);
-                    }
-                }
+                return View(GetTestingCardModel(id));
             }
             catch
             {

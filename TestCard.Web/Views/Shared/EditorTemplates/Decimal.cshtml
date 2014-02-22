@@ -1,0 +1,14 @@
+﻿@model Decimal?
+@{
+    object txtVal = "";
+    if (Model.HasValue)
+    {
+        txtVal = Model.Value;
+    };
+}
+
+@Html.TextBoxFor(x => x, new
+{
+    @data_val_number = GeneralResource.InvalidNumber,
+    Value = string.Format(ViewData.ModelMetadata.EditFormatString, txtVal)
+})

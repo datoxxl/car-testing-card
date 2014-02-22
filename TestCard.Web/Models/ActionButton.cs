@@ -14,6 +14,6 @@ namespace TestCard.Web.Models
         public ActionType Type { get; set; }
         public object ObjectID { get; set; }
 
-        public enum ActionType { Add, Edit, Delete }
+        public enum ActionType { Add, Edit, Delete, Print }
     }
 }

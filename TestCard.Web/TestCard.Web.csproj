@@ -137,12 +137,14 @@
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\PdfViewController.cs" />
     <Compile Include="Controllers\PersonScheduleChangeRequestController.cs" />
     <Compile Include="Controllers\PersonScheduleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\PersonChangeRequestController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="Controllers\TestingCardChangeRequestController.cs" />
     <Compile Include="Controllers\TestingCardController.cs" />
     <Compile Include="Filters\AuthorizationFilter.cs" />
@@ -150,6 +152,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ModelDataHelper.cs" />
+    <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Models\ActionButton.cs" />
     <Compile Include="Models\CompanyListModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
@@ -179,6 +182,7 @@
     <Content Include="Content\images\calendar16.png" />
     <Content Include="Content\images\card.png" />
     <Content Include="Content\images\card-edit.png" />
+    <Content Include="Content\images\check-black.png" />
     <Content Include="Content\images\company.png" />
     <Content Include="Content\images\company16.png" />
     <Content Include="Content\images\delete24.png" />
@@ -195,6 +199,7 @@
     <Content Include="Content\images\note-delete16.png" />
     <Content Include="Content\images\note-edit16.png" />
     <Content Include="Content\images\print.gif" />
+    <Content Include="Content\images\print24.png" />
     <Content Include="Content\images\s.gif" />
     <Content Include="Content\images\sad.png" />
     <Content Include="Content\images\tool-sprites.png" />
@@ -320,6 +325,8 @@
     <Content Include="Views\List\TestingCardChangeRequest.cshtml" />
     <Content Include="Views\TestingCardChangeRequest\List.cshtml" />
     <Content Include="Views\TestingCardChangeRequest\View.cshtml" />
+    <Content Include="Views\Print\TestingCard.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -333,6 +340,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PdfReportGenerator\PdfReportGenerator.csproj">
+      <Project>{df00196a-3b96-4bcd-8c4e-879db8edfe95}</Project>
+      <Name>PdfReportGenerator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestCard.Domain\TestCard.Domain.csproj">
       <Project>{487ad6c8-76e7-45ef-8ca4-6749be3ff250}</Project>
       <Name>TestCard.Domain</Name>

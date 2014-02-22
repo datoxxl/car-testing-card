@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using TestCard.Domain;
 using TestCard.Domain.Services;
+using TestCard.Web.Helpers;
 
 namespace TestCard.Web.Controllers
 {
@@ -30,6 +31,18 @@ namespace TestCard.Web.Controllers
             {
                 Session["CurrentUser"] = value;
             }
+        }
+
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            var culture = new CultureInfo(Config.DefaultCulture);
+
+            culture.NumberFormat.NumberDecimalSeparator = ".";
+
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+
+            base.Initialize(requestContext);
         }
 
         public class ImageResult : ActionResult
@@ -281,5 +294,42 @@ namespace TestCard.Web.Controllers
 
             return arr;
         }
+
+        #region Model sources
+
+        protected Models.TestingCardModel GetTestingCardModel(int id)
+        {
+            using (var service = new TestingCardService())
+            {
+                var source = service.Get(id);
+
+                if (source != null)
+                {
+                    var model = new Models.TestingCardModel();
+                    model = AutoMapper.Mapper.Map(source, model);
+                    var subSteps = AutoMapper.Mapper.Map<List<Models.TestingCardModel.TestingSubStep>>(source.TestingCardDetails);
+
+                    ModelDataHelper.Populate(model);
+
+                    model.TestingSteps.SelectMany(x => x.TestingSubSteps).ToList().ForEach(
+                        x =>
+                        {
+                            var item = subSteps.FirstOrDefault(y => y.TestingSubStepID == x.TestingSubStepID);
+                            x.IsValid = item.IsValid;
+                        }
+                    );
+
+                    return model;
+                }
+                else
+                {
+                    SetErrorMessage(GeneralResource.RecordNotExists);
+                }
+            }
+
+            return null;
+        }
+
+        #endregion
     }
 }

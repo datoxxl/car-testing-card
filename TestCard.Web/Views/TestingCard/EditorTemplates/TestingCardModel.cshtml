@@ -40,6 +40,11 @@
                 <legend></legend>
                 <ol>
                     <li>
+                        @Html.LabelFor(x => x.VIN)
+                        @Html.TextBoxFor(x => x.VIN)
+                        @Html.ValidationMessageFor(x => x.VIN)
+                    </li>
+                    <li>
                         @Html.LabelFor(x => x.CarSerialNo)
                         @Html.TextBoxFor(x => x.CarSerialNo)
                         @Html.ValidationMessageFor(x => x.CarSerialNo)

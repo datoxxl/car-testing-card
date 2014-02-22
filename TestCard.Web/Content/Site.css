@@ -849,7 +849,13 @@ ul.x-action-bar
         background-color: transparent;
         border: 0;
         vertical-align: middle;
+        margin-right: 5px;
     }
+
+        .x-list-actions .btn:last-child
+        {
+            margin: 0;
+        }
 
         .x-list-actions .btn.details
         {
@@ -869,6 +875,11 @@ ul.x-action-bar
         .x-list-actions .btn.edit
         {
             background-image: url('images/edit24.png');
+        }
+
+        .x-list-actions .btn.print
+        {
+            background-image: url('images/print24.png');
         }
 
 .x-card-steps

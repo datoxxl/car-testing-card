@@ -26,12 +26,8 @@ namespace TestCard.Web.Models
         [Display(Name = "Comment", ResourceType = typeof(GeneralResource))]
         public string Comment { get; set; }
 
-        public int? ResponsiblePersonID { get; set; }
-
         [Display(Name = "Odometer", ResourceType = typeof(GeneralResource))]
         public decimal? Odometer { get; set; }
-
-        public int? CompanyID { get; set; }
 
         [Display(Name = "CardNumber", ResourceType = typeof(GeneralResource))]
         public string TestingCardNumber { get; set; }
@@ -55,8 +51,7 @@ namespace TestCard.Web.Models
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime? EffectiveDate { get; set; }
 
-        [Display(Name = "Company", ResourceType = typeof(GeneralResource))]
-        public string CompanyName { get; set; }
+        public int? ResponsiblePersonID { get; set; }
 
         [Display(Name = "RespFullName", ResourceType = typeof(GeneralResource))]
         public string RespPersonFullName { get; set; }
@@ -71,7 +66,30 @@ namespace TestCard.Web.Models
             set { }
         }
 
+        public bool IsFirstTesting
+        {
+            get;
+            set;
+        }
+
         public List<TestingStep> TestingSteps { get; set; }
+
+        //From company
+        public int? CompanyID { get; set; }
+
+        public string CompanyFileName { get; set; }
+
+        [Display(Name = "Company", ResourceType = typeof(GeneralResource))]
+        public string CompanyName { get; set; }
+
+        [Display(Name = "AccreditationNumber", ResourceType = typeof(GeneralResource))]
+        public string CompanyAccreditationNumber { get; set; }
+
+        [Display(Name = "AccreditationScope", ResourceType = typeof(GeneralResource))]
+        public string CompanyAccreditationScope { get; set; }
+
+        [Display(Name = "Address", ResourceType = typeof(GeneralResource))]
+        public string CompanyAddress { get; set; }
 
         public class TestingStep
         {

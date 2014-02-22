@@ -1,0 +1,415 @@
+﻿@model TestCard.Web.Models.TestingCardModel
+@{
+    Layout = null;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+    <title></title>
+    <style>
+        body, td
+        {
+            font-size: 12px;
+            font-family: Sylfaen;
+            background: #fff;
+        }
+
+        #print-form
+        {
+            width: 255mm;
+            height: 297mm;
+            /*width: auto;*/
+            padding: 0;
+            border: 0;
+            float: none !important;
+            color: black;
+            background: transparent;
+        }
+
+        #company-logo
+        {
+            text-align: center;
+        }
+
+            #company-logo img
+            {
+                width: 150px;
+                height: 200px;
+                border: 1px solid #000;
+            }
+
+        .content
+        {
+            border: 1px solid #000;
+            padding: 10px;
+            height: 35px;
+            text-align: center;
+        }
+
+        .title
+        {
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+
+        label
+        {
+            margin-right: 5px;
+        }
+
+        span.checkbox
+        {
+            padding: 3px 4px 3px 2px;
+            width: 17px;
+            height: 17px;
+            border: 1px solid #000;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+            span.checkbox.checked
+            {
+                background: url("/content/images/check-black.png") no-repeat center;
+            }
+
+        #accred-scope .title
+        {
+            font-weight: bold;
+        }
+
+        #com-address
+        {
+            margin: 5px 100px;
+        }
+
+            #com-address .title
+            {
+                font-size: 11px;
+            }
+
+            #com-address .content
+            {
+                padding: 5px;
+                height: 25px;
+            }
+
+        #car-details
+        {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #000;
+        }
+
+            #car-details td
+            {
+                border: 1px solid #000;
+                padding: 5px;
+            }
+
+                #car-details td.name
+                {
+                    width: 300px;
+                    border-right: none;
+                }
+
+                #car-details td.value
+                {
+                    border-left: none;
+                }
+
+            #car-details .legal-text
+            {
+                font-size: 11px;
+                padding: 1px;
+            }
+
+        #testing
+        {
+            margin-bottom: 2px;
+            padding: 0 40px;
+        }
+
+            #testing .first
+            {
+                float: left;
+            }
+
+            #testing .second
+            {
+                float: right;
+            }
+
+        #card-steps
+        {
+            margin-top: 15px;
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #000;
+        }
+
+            #card-steps td
+            {
+                width: 20%;
+                border: 1px solid #000;
+                padding: 5px;
+            }
+
+            #card-steps label > .checkbox
+            {
+            }
+
+        .clear
+        {
+            clear: both;
+        }
+
+
+        #footer
+        {
+            margin-top: 10px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #footer .summary
+            {
+                font-weight: bold;
+            }
+
+            #footer .dashed-line
+            {
+                margin: 5px 0;
+            }
+
+            #footer .responsible .first
+            {
+                padding-left: 20px;
+            }
+
+            #footer .date
+            {
+            }
+
+                #footer .date .ba
+                {
+                    float: right;
+                    font-weight: bold;
+                }
+
+                #footer .date td
+                {
+                    padding-top: 10px;
+                    border-bottom: 1px solid #000;
+                }
+
+            #footer .legend td
+            {
+                padding-top: 5px;
+                font-size: 11px;
+            }
+
+        .signature
+        {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+            .signature .line
+            {
+                display: inline-block;
+                border-bottom: 1px solid #000;
+                min-width: 100px;
+                padding: 1px 5px;
+                text-align: center;
+            }
+
+            .signature .text
+            {
+                text-align: center;
+                display: block;
+            }
+
+        .dashed-line
+        {
+            border-bottom: 1px dashed #000;
+            height: 0;
+        }
+
+        div.table
+        {
+            display: table;
+            vertical-align: middle;
+        }
+
+            div.table > div
+            {
+                display: table-cell;
+                vertical-align: middle;
+            }
+    </style>
+</head>
+<body>
+    <div id="print-form">
+        <div id="company-logo">
+            <img src="/Home/GetImage/?id=@Model.CompanyFileName" />
+        </div>
+        <div id="accred-scope">
+            <span class="title">ავტოსატრანსპორტო საშუალების გზისთვი ვარგისობაზე ტესტირების ბარათი
+                N @Model.TestingCardNumber</span>
+            <div class="content">
+                @Model.CompanyAccreditationScope
+            </div>
+        </div>
+        <div id="com-address">
+            <span class="title">ავტოსატრანსპორტი საშუალების (ასს-ს) ტესტირების ცენტრის დასახელება,
+                მისამართი:</span>
+            <div class="content">
+                @(Model.CompanyName + ", " + Model.CompanyAddress)
+            </div>
+            <span class="title">ასს-ს ტესტირების ცენტრის აკრედიტაციის ნომერი: @Model.CompanyAccreditationNumber</span>
+        </div>
+        <div id="testing">
+            <div class="first">
+                <label for="">პირველადი ტესტირება</label><span class="checkbox">@(Model.IsFirstTesting ? Html.Raw(@"<img src=""/content/images/check-black.png"" />") : null)</span>
+            </div>
+            <div class="second">
+                <label for="">მეორადი ტესტირება</label><span class="checkbox">@(!Model.IsFirstTesting ? Html.Raw(@"<img src=""/content/images/check-black.png"" />") : null)</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <table id="car-details">
+            <tr>
+                <td colspan="2" class="legal-text">გაფორმებულია აკრედიტაციის ცენტრის ავტოსატრანსპორტო
+                    საშუალებათა გზისთვის
+                    ვარგისობაზე ტესტირების ცენტრების ტექნიკურ მრჩეველთა კომიტეტის დადგენილების შესაბამისად
+                    და ავტოსატრანსპორტო საშუალებათა მიმართ წაყენებული ტექნიკური მოთხოვნებისა და ტესტირების
+                    მეთოდების შესახებ. ტექნიკური რეგლამენტის შესრულების მიზნით
+                </td>
+            </tr>
+            <tr>
+                <td class="name">ასს-ის მარკა, მოდელი, ტიპი:
+                </td>
+                <td class="value">
+                    @Html.DisplayFor(x => x.CarModel)
+                </td>
+            </tr>
+            <tr>
+                <td class="name">ასს-ის სახელმწიფო ნომერი:
+                </td>
+                <td class="value">
+                    @Html.DisplayFor(x => x.CarNumber)
+                </td>
+            </tr>
+            <tr>
+                <td class="name">ასს-ის სარეგისტრაციო მოწმობის სერია, ნომერი:
+                </td>
+                <td class="value">
+                    @Html.DisplayFor(x => x.CarSerialNo)
+                </td>
+            </tr>
+            <tr>
+                <td class="name">ასს-ის მფლობელი, (სახელი გვარი):</td>
+                <td class="value">
+                    @Html.DisplayFor(x => x.OwnerName)
+                </td>
+            </tr>
+            <tr>
+                <td class="name">VIN კოდი:
+                </td>
+                <td class="value">
+                    @Html.DisplayFor(x => x.VIN)
+                </td>
+            </tr>
+            <tr>
+                <td class="name">ოდომეტრის ჩვენება:
+                </td>
+                <td class="value">
+                    @Html.DisplayFor(x => x.Odometer)
+                </td>
+            </tr>
+        </table>
+        <table id="card-steps">
+            @for (var i = 0; i < Model.TestingSteps.Count; i++)
+            { 
+                <tr>
+                    <td>
+                        @Html.DisplayFor(x => x.TestingSteps[i].TestingStepName)
+                    </td>
+                    @for (var j = 0; j < Model.TestingSteps[i].TestingSubSteps.Count; j++)
+                    {
+                        <td@(Model.TestingSteps[i].TestingSubSteps.Count == 2 && Model.TestingSteps[i].TestingSubSteps.Count == (j + 1) ? " colspan=3" : string.Empty)>
+                            <div class="table">
+                                <div>
+                                    @Html.LabelFor(x => x.TestingSteps[i].TestingSubSteps[j].IsValid, Model.TestingSteps[i].TestingSubSteps[j].TestingSubStepName)
+                                </div>
+                                <div>
+                                    <span class="checkbox">
+                                        @(Model.TestingSteps[i].TestingSubSteps[j].IsValid == true ? Html.Raw(@"<img src=""/content/images/check-black.png"" />") : null)
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+            <tr>
+                <td colspan="5">შენიშვნა: @Model.Comment
+                </td>
+            </tr>
+        </table>
+        <table id="footer">
+            <tr class="summary">
+                <td>დასკვნა ასს-ის გზისთვის ვარგისობის შესახებ:
+                </td>
+                <td>
+                    <label for="">გზისთვის ვარგისია</label><span class="checkbox">@(Model.IsValid == true ? Html.Raw(@"<img src=""/content/images/check-black.png"" />") : null)</span>
+                </td>
+                <td>
+                    <label for="">გზისთვის უვარგისია4</label><span class="checkbox">@(Model.IsValid != true ? Html.Raw(@"<img src=""/content/images/check-black.png"" />") : null)</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="dashed-line"></div>
+                </td>
+            </tr>
+            <tr class="responsible">
+                <td colspan="2" class="first">ტესტირების ჩამტარებელი პასუხისმგებელი პირი:  <span
+                    class="signature">
+                    <span class="line">@Model.RespPersonFullName</span>
+                    <span class="text">სახელი გვარი</span>
+                </span>
+                </td>
+                <td>
+                    <span class="signature">
+                        <span class="line">&nbsp;</span>
+                        <span class="text">ხელმოწერა</span>
+                    </span>
+                </td>
+            </tr>
+            <tr class="date">
+                <td colspan="2">ასს-ის ტესტირების თარიღი: <span class="signature">
+                    <span class="line">@Model.EffectiveDate.Value.ToString("dd/MM/yyyy HH:mm")</span>
+                    <span class="text">&nbsp;</span>
+                </span>
+                    <span class="ba">ბ.ა.</span>
+                </td>
+                <td></td>
+            </tr>
+            <tr class="legend">
+                <td colspan="3">შენიშვნა:
+                    <br />
+                    1,2,3 - თუ გათვალისწინებულია კონსტრუქციით
+                    <br />
+                    4 - გზისთვის უვარგისი ასს-ის განმეორებითი ტესტირება მხოლოდ გაუმართავ ელემენტებზე
+                    შესაძლებელია ერთი კალენდარული კვირის განმავლობაში.
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        window.print();
+    </script>
+</body>
+</html>

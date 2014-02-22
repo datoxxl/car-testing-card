@@ -74,7 +74,15 @@
                     Controller = "TestingCard",
                     ObjectID = item.TestingCardID,
                     Type = ActionButton.ActionType.Edit
-                }}); }
+                },
+                new ActionButton
+                {
+                    Controller = "Print",
+                    Action = "TestingCard",
+                    ObjectID = item.TestingCardID,
+                    Type = ActionButton.ActionType.Print
+                }
+               }); }
 
         </tr>
     }

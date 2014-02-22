@@ -97,6 +97,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Admin. confirm.
         /// </summary>
         public static string AdministratorConfirm {
@@ -408,6 +417,15 @@ namespace TestCard.Properties.Resources {
         public static string InvalidDate {
             get {
                 return ResourceManager.GetString("InvalidDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid number.
+        /// </summary>
+        public static string InvalidNumber {
+            get {
+                return ResourceManager.GetString("InvalidNumber", resourceCulture);
             }
         }
         

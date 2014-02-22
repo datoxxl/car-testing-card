@@ -46,7 +46,14 @@ namespace TestCard.Web.Controllers
                         if (saved)
                         {
                             SetSuccessMessage();
-                            return RedirectToAction("Edit", RouteData.Values);
+                            if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
+                            {
+                                return RedirectToAction("Edit", RouteData.Values);
+                            }
+                            else
+                            {
+                                return RedirectToAction("List", "PersonChangeChangeRequest");
+                            }
                         }
                         else if (hasUnconfirmedRequest == true)
                         {
@@ -76,6 +83,7 @@ namespace TestCard.Web.Controllers
                     if (source != null)
                     {
                         var model = new Models.PersonScheduleModel();
+                        model.PersonID = id;
                         model.Days = AutoMapper.Mapper.Map<List<Models.PersonScheduleModel.Day>>(source.PersonSchedules.ToList());
 
                         ModelDataHelper.Populate(model);
