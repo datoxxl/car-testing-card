@@ -2,6 +2,6 @@
     ViewBag.Title = "List";
 }
 <span class="x-header">@GeneralResource.UserChangeRequests</span>
-@{ Html.RenderAction("PersonChangeRequest", "List"); }
+@{ Html.RenderPartial("_AjaxList", new AjaxListModel { ActionName = "PersonChangeRequest" }); }
 <span class="x-header">@GeneralResource.WorkScheduleChangeRequests</span>
-@{ Html.RenderAction("PersonScheduleChangeRequest", "List"); }
+@{ Html.RenderPartial("_AjaxList", new AjaxListModel { ActionName = "PersonScheduleChangeRequest" }); }

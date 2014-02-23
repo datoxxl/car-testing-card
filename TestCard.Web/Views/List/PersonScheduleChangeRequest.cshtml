@@ -1,52 +1,50 @@
 ﻿@model IEnumerable<TestCard.Web.Models.PersonScheduleChangeRequestListModel>
-<div id="per-sch-change-req-list">
-    <table class="x-table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AdministratorConfirmStatusName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QualityManagerConfirmStatusName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ResponsiblePersonFullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonFullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
-            </th>
-            <th></th>
-        </tr>
+<table class="x-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AdministratorConfirmStatusName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QualityManagerConfirmStatusName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResponsiblePersonFullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonFullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th></th>
+    </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AdministratorConfirmStatusName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QualityManagerConfirmStatusName)
-                </td>
-                <td>
-                    @Html.ActionLink(item.ResponsiblePersonFullName, "View", "Person", new { @id = item.ResponsiblePersonID }, null)
-                </td>
-                <td>
-                    @Html.ActionLink(item.PersonFullName, "View", "Person", new { @id = item.PersonID }, null)
-                </td>
-                <td>
-                    @item.CreateDate.Value.ToString(TestCard.Properties.Config.DateFormat)
-                </td>
-                @{ Html.RenderPartial("_RequestActionCell", new TestCard.Web.Models.RequestActionsModel
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdministratorConfirmStatusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QualityManagerConfirmStatusName)
+            </td>
+            <td>
+                @Html.ActionLink(item.ResponsiblePersonFullName, "View", "Person", new { @id = item.ResponsiblePersonID }, null)
+            </td>
+            <td>
+                @Html.ActionLink(item.PersonFullName, "View", "Person", new { @id = item.PersonID }, null)
+            </td>
+            <td>
+                @item.CreateDate.Value.ToString(TestCard.Properties.Config.DateFormat)
+            </td>
+            @{ Html.RenderPartial("_RequestActionCell", new TestCard.Web.Models.RequestActionsModel
                 {
                     Action = "ProcessRequest",
                     Controller = "PersonScheduleChangeRequest",
                     RequestID = item.PersonScheduleChangeRequestID
                 }); }
-            </tr>
-        }
+        </tr>
+    }
 
-    </table>
-    @Html.Pager((IPagedList)Model, "per-sch-change-req-list", "PersonScheduleChangeRequest")
-</div>
+</table>
+@Html.Pager((IPagedList)Model, "PersonScheduleChangeRequest", "PersonScheduleChangeRequest")

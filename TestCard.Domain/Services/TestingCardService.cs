@@ -97,6 +97,11 @@ namespace TestCard.Domain.Services
                 });
             }
 
+            if (request.TestingCard == null)
+            {
+                request.TestingCard = card;
+            }
+
             //TO DO: Testing card detail history
             //foreach (var item in card.TestingCardDetails)
             //{

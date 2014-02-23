@@ -50,22 +50,19 @@ namespace TestCard.Web.Controllers
                         if (saved)
                         {
                             SetSuccessMessage();
-                            return RedirectToAction("List");
+
+                            if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
+                            {
+                                return RedirectToAction("Edit", new { @id = testingCard.TestingCardID });
+                            }
+                            else
+                            {
+                                return RedirectToAction("List", "TestingCardChangeRequest");
+                            }
                         }
                         else if (hasUnconfirmedRequest == true)
                         {
                             SetErrorMessage(GeneralResource.UserHasUnconfirmedRequest);
-                        }
-
-                        SetSuccessMessage();
-
-                        if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
-                        {
-                            return RedirectToAction("Edit", new { @id = testingCard.TestingCardID });
-                        }
-                        else
-                        {
-                            return RedirectToAction("List", "TestingCardChangeRequest");
                         }
                     }
                 }

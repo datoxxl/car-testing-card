@@ -154,7 +154,9 @@
     <Compile Include="Helpers\Html\Pager.cs" />
     <Compile Include="Helpers\ModelDataHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
+    <Compile Include="Helpers\ViewContextHelper.cs" />
     <Compile Include="Models\ActionButton.cs" />
+    <Compile Include="Models\AjaxListModel.cs" />
     <Compile Include="Models\CompanyListModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\PagedList.cs" />
@@ -339,6 +341,7 @@
     <Content Include="Views\TestingCardChangeRequest\View.cshtml" />
     <Content Include="Views\Print\TestingCard.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
+    <Content Include="Views\Shared\_AjaxList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

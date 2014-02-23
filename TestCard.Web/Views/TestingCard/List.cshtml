@@ -11,4 +11,4 @@
            }
        }); }
 </p>
-@{ Html.RenderAction("TestingCard", "List"); }
+@{ Html.RenderPartial("_AjaxList", new AjaxListModel { ActionName = "TestingCard" }); }

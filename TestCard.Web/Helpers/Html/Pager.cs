@@ -36,11 +36,11 @@ namespace TestCard.Web.Helpers.Html
             var firstPageIndex = pageIndex > 1 ? 1 : -1;
             var lastPageIndex = pageIndex < totalPageCount ? totalPageCount : -1;
 
-            new AjaxHelper(helper.ViewContext, helper.ViewDataContainer).BeginForm(actionName, controllerName, new AjaxOptions
+            new AjaxHelper(helper.ViewContext, helper.ViewDataContainer).BeginForm(actionName, controllerName, helper.ViewContext.GetCombinedRouteValues(null), new AjaxOptions
             {
                 UpdateTargetId = targetID,
                 InsertionMode = InsertionMode.Replace,
-                HttpMethod = "GET"
+                HttpMethod = "POST",
             });
 
             var container = new TagBuilder("div");

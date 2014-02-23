@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<TestCard.Web.Models.TestingCardChangeRequestListModel>
-<div id="testing-card-change-req-list">
 <table class="x-table">
     <tr>
         <th>
@@ -48,5 +47,4 @@
     }
 
 </table>
-    @Html.Pager((IPagedList)Model, "testing-card-change-req-list", "TestingCardChangeRequest")
-</div>
+@Html.Pager((IPagedList)Model, "TestingCardChangeRequest", "TestingCardChangeRequest")

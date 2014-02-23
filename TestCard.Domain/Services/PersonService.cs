@@ -97,6 +97,11 @@ namespace TestCard.Domain.Services
             person.ResponsiblePersonID = request.ResponsiblePersonID;
             person.SystemIDNo = request.SystemIDNo;
 
+            if(request.Person == null)
+            {
+                request.Person = person;
+            }
+
             return true;
         }
     }

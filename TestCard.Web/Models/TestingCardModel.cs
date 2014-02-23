@@ -9,8 +9,8 @@ namespace TestCard.Web.Models
 {
     public class TestingCardModel
     {
-        public int TestingCardID { get; set; }
-        public int TestingCardChangeRequestID { get; set; }
+        public int? TestingCardID { get; set; }
+        public int? TestingCardChangeRequestID { get; set; }
 
         public string Number { get; set; }
 

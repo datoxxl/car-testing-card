@@ -1,0 +1,5 @@
+﻿@model AjaxListModel
+
+<div id="@Model.ActionName">
+    @{ Html.RenderAction(Model.ActionName, Model.ControllerName ?? "List", Model.RouteValues); }
+</div>

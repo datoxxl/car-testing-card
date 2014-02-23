@@ -53,6 +53,10 @@
             </tr>
         </table>
         <span class="header">@GeneralResource.CompanyUsers</span>
-        @{ Html.RenderAction("Person", "List", new { companyID = Model.CompanyID }); }
+        @{ Html.RenderPartial("_AjaxList", new AjaxListModel
+           {
+               ActionName = "Person",
+               RouteValues = new { companyID = Model.CompanyID }
+           }); }
     </div>
 </div>
