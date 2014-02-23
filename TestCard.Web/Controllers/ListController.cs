@@ -12,118 +12,118 @@ namespace TestCard.Web.Controllers
     [AuthorizationFilter]
     public class ListController : BaseController
     {
-        public PartialViewResult Person(int? companyID)
+        public PartialViewResult Person(int? companyID, int pageIndex = 1)
         {
             using (var service = new PersonService())
             {
                 string filterExpression = null;
 
-                if(companyID.HasValue)
+                if (companyID.HasValue)
                 {
                     filterExpression = string.Format("CompanyID == {0}", companyID);
                 }
 
-                var option = new DataFilterOption
+                var filter = new DataFilterOption
                 {
-                    StartRowIndex = 0,
-                    MaximumRows = 100,
+                    PageIndex = pageIndex,
+                    MaximumRows = 3,
                     SortByExpression = "LastName",
                     FilterExpression = filterExpression
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.PersonListModel>>(service.GetAll(option).ToList());
+                var list = AutoMapper.Mapper.Map<List<Models.PersonListModel>>(service.GetAll(filter).ToList());
 
-                return PartialView(list);
+                return PartialView(new Models.PagedList<Models.PersonListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
         }
 
-        public PartialViewResult Company()
+        public PartialViewResult Company(int pageIndex = 1)
         {
             using (var service = new CompanyService())
             {
-                var option = new DataFilterOption
+                var filter = new DataFilterOption
                 {
-                    StartRowIndex = 0,
-                    MaximumRows = 100,
+                    PageIndex = pageIndex,
+                    MaximumRows = 3,
                     SortByExpression = "CompanyName",
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.CompanyListModel>>(service.GetAll(option).ToList());
+                var list = AutoMapper.Mapper.Map<List<Models.CompanyListModel>>(service.GetAll(filter).ToList());
 
-                return PartialView(list);
+                return PartialView(new Models.PagedList<Models.CompanyListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
         }
 
-        public PartialViewResult PersonChangeRequest()
+        public PartialViewResult PersonChangeRequest(int pageIndex = 1)
         {
             using (var service = new PersonChangeRequestService())
             {
                 var filter = new DataFilterOption
                 {
-                    StartRowIndex = 0,
-                    MaximumRows = 100,
+                    PageIndex = pageIndex,
+                    MaximumRows = 3,
                     SortByExpression = "CreateDate DESC",
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
 
                 var list = AutoMapper.Mapper.Map<List<Models.PersonChangeRequestListModel>>(service.GetList(CurrentUser, filter));
 
-                return PartialView(list);
+                return PartialView(new Models.PagedList<Models.PersonChangeRequestListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
         }
 
-        public PartialViewResult PersonScheduleChangeRequest()
+        public PartialViewResult PersonScheduleChangeRequest(int pageIndex = 1)
         {
             using (var service = new PersonScheduleChangeRequestService())
             {
                 var filter = new DataFilterOption
                 {
-                    StartRowIndex = 0,
-                    MaximumRows = 100,
+                    PageIndex = pageIndex,
+                    MaximumRows = 3,
                     SortByExpression = "CreateDate DESC",
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
 
                 var list = AutoMapper.Mapper.Map<List<Models.PersonScheduleChangeRequestListModel>>(service.GetList(CurrentUser, filter));
 
-                return PartialView(list);
+                return PartialView(new Models.PagedList<Models.PersonScheduleChangeRequestListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
         }
 
-        public PartialViewResult TestingCard()
+        public PartialViewResult TestingCard(int pageIndex = 1)
         {
             using (var service = new TestingCardService())
             {
                 var filter = new DataFilterOption
                 {
-                    StartRowIndex = 0,
-                    MaximumRows = 100,
+                    PageIndex = pageIndex,
+                    MaximumRows = 3,
                     SortByExpression = "EffectiveDate DESC",
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
 
                 var list = AutoMapper.Mapper.Map<List<Models.TestingCardListModel>>(service.GetList(CurrentUser, filter));
 
-                return PartialView(list);
+                return PartialView(new Models.PagedList<Models.TestingCardListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
         }
 
-        public PartialViewResult TestingCardChangeRequest()
+        public PartialViewResult TestingCardChangeRequest(int pageIndex = 1)
         {
             using (var service = new TestingCardChangeRequestService())
             {
                 var filter = new DataFilterOption
                 {
-                    StartRowIndex = 0,
-                    MaximumRows = 100,
+                    PageIndex = pageIndex,
+                    MaximumRows = 3,
                     SortByExpression = "CreateDate DESC",
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
 
                 var list = AutoMapper.Mapper.Map<List<Models.TestingCardChangeRequestListModel>>(service.GetList(CurrentUser, filter));
 
-                return PartialView(list);
+                return PartialView(new Models.PagedList<Models.TestingCardChangeRequestListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
         }
     }

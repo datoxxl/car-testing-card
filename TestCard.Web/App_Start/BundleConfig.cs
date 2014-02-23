@@ -34,7 +34,9 @@ namespace TestCard.Web
                         "~/Scripts/selectivizr.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
-                        "~/Scripts/site.js"));
+                        "~/Scripts/site.js",
+                        "~/Scripts/pager.js"
+                        ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 

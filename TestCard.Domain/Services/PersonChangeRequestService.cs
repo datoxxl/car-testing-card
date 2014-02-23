@@ -143,7 +143,7 @@ namespace TestCard.Domain.Services
         public List<PersonChangeRequest> GetList(v_person person, DataFilterOption filter)
         {
             var type = (AccountTypes)person.AccountTypeID;
-            var result = GetAll().Where(x => x.Person.CompanyID == person.CompanyID);
+            var result = GetAll().Where(x => x.CompanyID == person.CompanyID);
             var personID = person.PersonID;
 
             switch (type)

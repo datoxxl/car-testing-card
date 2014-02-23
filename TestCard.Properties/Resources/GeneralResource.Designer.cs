@@ -763,6 +763,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total records.
+        /// </summary>
+        public static string TotalRecords {
+            get {
+                return ResourceManager.GetString("TotalRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         public static string Type {

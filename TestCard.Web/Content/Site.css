@@ -907,3 +907,116 @@ ul.x-action-bar
     {
         vertical-align: middle;
     }
+
+.x-pager
+{
+    padding: 5px 0;
+    background-color: #f5f5f5;
+    border: 1px solid silver;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    .x-pager *
+    {
+        vertical-align: middle;
+    }
+
+    .x-pager .page-num
+    {
+        width: 50px;
+        height: 20px;
+        margin-left: 5px;
+    }
+
+    .x-pager .page-text
+    {
+        margin-right: 5px;
+    }
+
+    .x-pager .record-text
+    {
+        float: right;
+        margin-right: 15px;
+    }
+
+    .x-pager .prev,
+    .x-pager .next,
+    .x-pager .first,
+    .x-pager .last,
+    .x-pager .refresh
+    {
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        vertical-align: middle;
+    }
+
+    .x-pager .dis
+    {
+        cursor: default;
+    }
+
+    .x-pager .prev
+    {
+        background-image: url(images/pager/prev.gif);
+    }
+
+        .x-pager .prev.dis
+        {
+            background-image: url(images/pager/prev-disabled.gif);
+        }
+
+    .x-pager .next
+    {
+        background-image: url(images/pager/next.gif);
+    }
+
+        .x-pager .next.dis
+        {
+            background-image: url(images/pager/next-disabled.gif);
+        }
+
+    .x-pager .first
+    {
+        background-image: url(images/pager/first.gif);
+    }
+
+        .x-pager .first.dis
+        {
+            background-image: url(images/pager/first-disabled.gif);
+        }
+
+    .x-pager .last
+    {
+        background-image: url(images/pager/last.gif);
+    }
+
+        .x-pager .last.dis
+        {
+            background-image: url(images/pager/last-disabled.gif);
+        }
+
+    .x-pager .refresh
+    {
+        margin-left: 5px;
+        background-image: url(images/pager/refresh.gif);
+    }
+
+    .x-pager .sep
+    {
+        /*margin: 0 5px;*/
+        height: 14px;
+        border-style: solid;
+        border-width: 0 1px;
+        border-left-color: #aca899;
+        border-right-color: white;
+        vertical-align: middle;
+    }

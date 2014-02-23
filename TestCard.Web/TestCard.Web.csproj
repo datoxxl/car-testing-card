@@ -151,11 +151,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Html\Pager.cs" />
     <Compile Include="Helpers\ModelDataHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Models\ActionButton.cs" />
     <Compile Include="Models\CompanyListModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
+    <Compile Include="Models\PagedList.cs" />
     <Compile Include="Models\TestingCardChangeRequestListModel.cs" />
     <Compile Include="Models\PersonChangeRequestListModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -198,6 +200,15 @@
     <Content Include="Content\images\note-add16.png" />
     <Content Include="Content\images\note-delete16.png" />
     <Content Include="Content\images\note-edit16.png" />
+    <Content Include="Content\images\pager\first-disabled.gif" />
+    <Content Include="Content\images\pager\first.gif" />
+    <Content Include="Content\images\pager\last-disabled.gif" />
+    <Content Include="Content\images\pager\last.gif" />
+    <Content Include="Content\images\pager\next-disabled.gif" />
+    <Content Include="Content\images\pager\next.gif" />
+    <Content Include="Content\images\pager\prev-disabled.gif" />
+    <Content Include="Content\images\pager\prev.gif" />
+    <Content Include="Content\images\pager\refresh.gif" />
     <Content Include="Content\images\print.gif" />
     <Content Include="Content\images\print24.png" />
     <Content Include="Content\images\s.gif" />
@@ -256,6 +267,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\pager.js" />
     <Content Include="Scripts\selectivizr.min.js" />
     <Content Include="Scripts\selectivizr.js" />
     <Content Include="Scripts\site.js" />

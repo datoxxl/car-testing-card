@@ -387,4 +387,7 @@
   <data name="InvalidNumber" xml:space="preserve">
     <value>Invalid number</value>
   </data>
+  <data name="TotalRecords" xml:space="preserve">
+    <value>Total records</value>
+  </data>
 </root>

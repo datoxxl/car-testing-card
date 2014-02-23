@@ -59,8 +59,8 @@ namespace TestCard.Web
             Mapper.CreateMap<Domain.PersonSchedule, Models.PersonScheduleModel.Day>();
 
             Mapper.CreateMap<Domain.PersonChangeRequest, Models.PersonChangeRequestListModel>()
-                .ForMember(dest => dest.PersonFirstName, src => src.MapFrom(x => x.Person.FirstName))
-                .ForMember(dest => dest.PersonLastName, src => src.MapFrom(x => x.Person.LastName))
+                .ForMember(dest => dest.PersonFirstName, src => src.MapFrom(x => x.FirstName))
+                .ForMember(dest => dest.PersonLastName, src => src.MapFrom(x => x.LastName))
                 .ForMember(dest => dest.ResponsiblePersonFirstName, src => src.MapFrom(x => x.ResponsiblePerson.FirstName))
                 .ForMember(dest => dest.ResponsiblePersonLastName, src => src.MapFrom(x => x.ResponsiblePerson.LastName))
                 .ForMember(dest => dest.QualityManagerConfirmStatusName, src => src.MapFrom(x => x.QualityManagerConfirmStatus.ConfirmStatusName))

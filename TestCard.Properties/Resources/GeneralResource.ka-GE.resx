@@ -387,4 +387,7 @@
   <data name="InvalidNumber" xml:space="preserve">
     <value>რიცხვი არასწორია</value>
   </data>
+  <data name="TotalRecords" xml:space="preserve">
+    <value>სულ ჩანაწერი</value>
+  </data>
 </root>
