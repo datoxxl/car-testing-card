@@ -26,7 +26,7 @@ namespace TestCard.Web.Controllers
                 var filter = new DataFilterOption
                 {
                     PageIndex = pageIndex,
-                    MaximumRows = 3,
+                    MaximumRows = 10,
                     SortByExpression = "LastName",
                     FilterExpression = filterExpression
                 };
@@ -44,7 +44,7 @@ namespace TestCard.Web.Controllers
                 var filter = new DataFilterOption
                 {
                     PageIndex = pageIndex,
-                    MaximumRows = 3,
+                    MaximumRows = 10,
                     SortByExpression = "CompanyName",
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
@@ -62,7 +62,7 @@ namespace TestCard.Web.Controllers
                 var filter = new DataFilterOption
                 {
                     PageIndex = pageIndex,
-                    MaximumRows = 3,
+                    MaximumRows = 10,
                     SortByExpression = "CreateDate DESC",
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
@@ -80,7 +80,7 @@ namespace TestCard.Web.Controllers
                 var filter = new DataFilterOption
                 {
                     PageIndex = pageIndex,
-                    MaximumRows = 3,
+                    MaximumRows = 10,
                     SortByExpression = "CreateDate DESC",
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
@@ -98,7 +98,7 @@ namespace TestCard.Web.Controllers
                 var filter = new DataFilterOption
                 {
                     PageIndex = pageIndex,
-                    MaximumRows = 3,
+                    MaximumRows = 10,
                     SortByExpression = "EffectiveDate DESC",
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
@@ -116,7 +116,7 @@ namespace TestCard.Web.Controllers
                 var filter = new DataFilterOption
                 {
                     PageIndex = pageIndex,
-                    MaximumRows = 3,
+                    MaximumRows = 10,
                     SortByExpression = "CreateDate DESC",
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
