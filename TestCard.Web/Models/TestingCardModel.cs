@@ -19,8 +19,11 @@ namespace TestCard.Web.Models
 
         public bool? IsValid { get; set; }
 
+        [Display(Name = "FirnishNumber", ResourceType = typeof(GeneralResource))]
         public string FirnishNumber { get; set; }
 
+        [Display(Name = "FirnishDate", ResourceType = typeof(GeneralResource))]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FirnishDate { get; set; }
 
         [Display(Name = "Comment", ResourceType = typeof(GeneralResource))]

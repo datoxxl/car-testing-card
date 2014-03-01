@@ -20,13 +20,13 @@ namespace TestCard.Web.Controllers
             return View();
         }
 
-        public ActionResult View(int id)
+        public ActionResult View(int? id)
         {
             try
             {
                 using (var service = new PersonChangeRequestService())
                 {
-                    var source = service.Get(id);
+                    var source = service.Get(id ?? -1);
 
                     if (source != null)
                     {

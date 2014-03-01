@@ -99,7 +99,7 @@ select
 textarea
 {
     vertical-align: top;
-    height: 150px;
+    height: 70px;
 }
 
     input:focus, textarea:focus
@@ -212,6 +212,7 @@ td a.x-button
     display: inline-block;
 }
 
+.input-validation-error,
 input.input-validation-error
 {
     border: 1px solid #e80c4d;

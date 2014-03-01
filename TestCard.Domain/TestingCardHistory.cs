@@ -17,7 +17,6 @@ namespace TestCard.Domain
         public int TestingCardHistoryID { get; set; }
         public int TestingCardID { get; set; }
         public string Number { get; set; }
-        public string TestingCardHistoryNumber { get; set; }
         public string VIN { get; set; }
         public string CarModel { get; set; }
         public string CarNumber { get; set; }
@@ -32,6 +31,7 @@ namespace TestCard.Domain
         public Nullable<int> ResponsiblePersonID { get; set; }
         public Nullable<System.DateTime> EffectiveDate { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
+        public string TestingCardNumber { get; set; }
     
         public virtual TestingCard TestingCard { get; set; }
         public virtual Person Person { get; set; }

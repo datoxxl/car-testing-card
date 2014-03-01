@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7c1f67fd2bfa4a42a8678f56c29b767e" Name="Diagram1" ZoomLevel="99">
+      <Diagram DiagramId="7c1f67fd2bfa4a42a8678f56c29b767e" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="TestCardModel.AccountType" Width="1.5" PointX="9" PointY="34.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.Company" Width="1.5" PointX="3" PointY="38.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.CompanyChangeRequest" Width="1.875" PointX="8.25" PointY="37.75" IsExpanded="true" />
@@ -115,6 +115,8 @@
         <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_TestingCard" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCard" />
+        <EntityTypeShape EntityType="TestCardModel.Code" Width="1.5" PointX="0.059727139798797263" PointY="3.779946761103322" />
+        <EntityTypeShape EntityType="TestCardModel.CodeType" Width="1.5" PointX="3.6677875126096362" PointY="14.041455409508876" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

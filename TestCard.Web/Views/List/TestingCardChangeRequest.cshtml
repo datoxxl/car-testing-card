@@ -11,7 +11,7 @@
             @Html.DisplayNameFor(model => model.ResponsiblePersonFullName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TestingCardChangeRequestNumber)
+            @Html.DisplayNameFor(model => model.TestingCardNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
@@ -32,7 +32,7 @@
                 @Html.ActionLink(item.ResponsiblePersonFullName, "View", "Person", new { @id = item.ResponsiblePersonID }, null)
             </td>
             <td>
-                @Html.ActionLink(item.TestingCardChangeRequestNumber, "View", "TestingCard", new { @id = item.TestingCardID }, null)
+                @Html.ActionLink(item.TestingCardNumber, "View", "TestingCard", new { @id = item.TestingCardID }, null)
             </td>
             <td>
                 @item.CreateDate.Value.ToString(TestCard.Properties.Config.DateFormat)

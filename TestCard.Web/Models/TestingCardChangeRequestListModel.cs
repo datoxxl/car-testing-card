@@ -18,7 +18,7 @@ namespace TestCard.Web.Models
         public string ResponsiblePersonLastName { get; set; }
 
         [Display(Name = "Number", ResourceType = typeof(GeneralResource))]
-        public string TestingCardChangeRequestNumber { get; set; }
+        public string TestingCardNumber { get; set; }
 
         [Display(Name = "ResponsiblePerson", ResourceType = typeof(GeneralResource))]
         public string ResponsiblePersonFullName

@@ -20,7 +20,7 @@ namespace TestCard.Web.Controllers
             return View();
         }
 
-        public ActionResult View(int id)
+        public ActionResult View(int? id)
         {
             try
             {

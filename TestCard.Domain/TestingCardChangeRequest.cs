@@ -23,7 +23,6 @@ namespace TestCard.Domain
         public int TestingCardChangeRequestID { get; set; }
         public Nullable<int> TestingCardID { get; set; }
         public string Number { get; set; }
-        public string TestingCardChangeRequestNumber { get; set; }
         public string VIN { get; set; }
         public string CarModel { get; set; }
         public string CarNumber { get; set; }
@@ -44,6 +43,7 @@ namespace TestCard.Domain
         public Nullable<int> AdministratorConfirmStatusID { get; set; }
         public Nullable<System.DateTime> AdministratorConfirmDate { get; set; }
         public Nullable<int> AdministratorPersonID { get; set; }
+        public string TestingCardNumber { get; set; }
     
         public virtual ConfirmStatus QualityManagerConfirmStatus { get; set; }
         public virtual ConfirmStatus AdminConfirmStatus { get; set; }

@@ -321,10 +321,6 @@ namespace TestCard.Web.Controllers
 
                     return model;
                 }
-                else
-                {
-                    SetErrorMessage(GeneralResource.RecordNotExists);
-                }
             }
 
             return null;

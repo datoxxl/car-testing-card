@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestCard.Properties.Resources;
 using TestCard.Web.Filters;
 
 namespace TestCard.Web.Controllers
@@ -13,7 +14,24 @@ namespace TestCard.Web.Controllers
     {
         public ActionResult TestingCard(int id)
         {
-            return View(GetTestingCardModel(id));
+            try
+            {
+                var model = GetTestingCardModel(id);
+                if (model != null)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    SetErrorMessage(GeneralResource.RecordNotExists);
+                }
+            }
+            catch
+            {
+                SetErrorMessage();
+            }
+
+            return RedirectTo(Request.UrlReferrer.AbsoluteUri);
         }
     }
 }

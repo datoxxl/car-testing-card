@@ -58,5 +58,7 @@ namespace TestCard.Domain
         public DbSet<PersonChangeRequest> PersonChangeRequests { get; set; }
         public DbSet<PersonScheduleChangeRequest> PersonScheduleChangeRequests { get; set; }
         public DbSet<PersonScheduleChangeRequestDetail> PersonScheduleChangeRequestDetails { get; set; }
+        public DbSet<Code> Codes { get; set; }
+        public DbSet<CodeType> CodeTypes { get; set; }
     }
 }

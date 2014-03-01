@@ -28,10 +28,11 @@ namespace TestCard.Web
             Mapper.CreateMap<Models.PersonModel, Domain.PersonChangeRequest>();
             Mapper.CreateMap<Models.PersonModel, Domain.Person>();
 
-            Mapper.CreateMap<Models.TestingCardModel, Domain.TestingCardChangeRequest>()
-                .ForMember(dest => dest.TestingCardChangeRequestNumber, src => src.MapFrom(x => x.TestingCardNumber));
+            Mapper.CreateMap<Models.TestingCardModel, Domain.TestingCardChangeRequest>();
+            Mapper.CreateMap<Models.TestingCardModel, Domain.TestingCard>();
 
             Mapper.CreateMap<Models.TestingCardModel.TestingSubStep, Domain.TestingCardDetailChangeRequest>();
+            Mapper.CreateMap<Models.TestingCardModel.TestingSubStep, Domain.TestingCardDetail>();
 
             //--
 
@@ -106,8 +107,7 @@ namespace TestCard.Web
 
             Mapper.CreateMap<Domain.TestingSubStep, Models.TestingCardModel.TestingSubStep>();
 
-            Mapper.CreateMap<Domain.TestingCardChangeRequest, Models.TestingCardModel>()
-                .ForMember(dest => dest.TestingCardNumber, src => src.MapFrom(x => x.TestingCardChangeRequestNumber));
+            Mapper.CreateMap<Domain.TestingCardChangeRequest, Models.TestingCardModel>();
 
             Mapper.CreateMap<Domain.TestingCardDetailChangeRequest, Models.TestingCardModel.TestingSubStep>();
         }

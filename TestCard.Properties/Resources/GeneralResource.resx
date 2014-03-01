@@ -390,4 +390,10 @@
   <data name="TotalRecords" xml:space="preserve">
     <value>Total records</value>
   </data>
+  <data name="FirnishDate" xml:space="preserve">
+    <value>Firnish date</value>
+  </data>
+  <data name="FirnishNumber" xml:space="preserve">
+    <value>Firnish number</value>
+  </data>
 </root>

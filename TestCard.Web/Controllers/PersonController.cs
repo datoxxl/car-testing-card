@@ -18,9 +18,9 @@ namespace TestCard.Web.Controllers
             return View();
         }
 
-        public ActionResult View(int id)
+        public ActionResult View(int? id)
         {
-            return GetModel(id);
+            return GetModel(id ?? -1);
         }
 
         public ActionResult Add()
@@ -50,7 +50,8 @@ namespace TestCard.Web.Controllers
                             SetSuccessMessage();
                             if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
                             {
-                                return RedirectToAction("Edit", new { @id = per.PersonID });
+                                //return RedirectToAction("Edit", new { @id = per.PersonID });
+                                return RedirectToAction("List");
                             }
                             else
                             {
@@ -74,9 +75,9 @@ namespace TestCard.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return GetModel(id);
+            return GetModel(id ?? -1);
         }
 
         [HttpPost]
@@ -99,11 +100,12 @@ namespace TestCard.Web.Controllers
 
                             if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
                             {
-                                return RedirectToAction("Edit", RouteData.Values);
+                                //return RedirectToAction("Edit", RouteData.Values);
+                                return RedirectToAction("List");
                             }
                             else
                             {
-                                return RedirectToAction("List", "PersonChangeChangeRequest");
+                                return RedirectToAction("List", "PersonChangeRequest");
                             }
                         }
                         else if (hasUnconfirmedRequest == true)

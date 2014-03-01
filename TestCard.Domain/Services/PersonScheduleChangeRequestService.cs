@@ -102,7 +102,10 @@ namespace TestCard.Domain.Services
 
                             Update(request);
 
-                            new PersonScheduleService(_DbContext).SavePersonSchedule(request.PersonID.Value, request.ResponsiblePersonID, request.PersonScheduleChangeRequestDetails.ToList());
+                            if (status == ConfirmStatuses.Approved)
+                            {
+                                new PersonScheduleService(_DbContext).SavePersonSchedule(request.PersonID.Value, request.ResponsiblePersonID, request.PersonScheduleChangeRequestDetails.ToList());
+                            }
 
                             SaveChanges();
 

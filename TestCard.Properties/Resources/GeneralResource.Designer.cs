@@ -349,6 +349,24 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Firnish date.
+        /// </summary>
+        public static string FirnishDate {
+            get {
+                return ResourceManager.GetString("FirnishDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Firnish number.
+        /// </summary>
+        public static string FirnishNumber {
+            get {
+                return ResourceManager.GetString("FirnishNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
         public static string From {

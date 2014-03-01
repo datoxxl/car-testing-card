@@ -14,9 +14,9 @@ namespace TestCard.Web.Controllers
     [AuthorizationFilter]
     public class CompanyController : BaseController
     {
-        public ActionResult View(int id)
+        public ActionResult View(int? id)
         {
-            return GetModel(id);
+            return GetModel(id ?? -1);
         }
 
         public ActionResult List()
@@ -52,7 +52,8 @@ namespace TestCard.Web.Controllers
 
                             SetSuccessMessage();
 
-                            return RedirectToAction("Edit", new { @id = company.CompanyID });
+                            //return RedirectToAction("Edit", new { @id = company.CompanyID });
+                            return RedirectToAction("List");
                         }
                     }
                 }
@@ -65,9 +66,9 @@ namespace TestCard.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return GetModel(id);
+            return GetModel(id ?? -1);
         }
 
         [HttpPost]
@@ -93,7 +94,8 @@ namespace TestCard.Web.Controllers
                         }
 
                         SetSuccessMessage();
-                        return RedirectToAction("Edit", RouteData.Values);
+                        //return RedirectToAction("Edit", RouteData.Values);
+                        return RedirectToAction("List");
                     }
                 }
             }

@@ -7,6 +7,8 @@
     <Schema Namespace="CarTestingCardModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CarTestingCardModelStoreContainer">
           <EntitySet Name="AccountType" EntityType="CarTestingCardModel.Store.AccountType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Code" EntityType="CarTestingCardModel.Store.Code" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CodeType" EntityType="CarTestingCardModel.Store.CodeType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Company" EntityType="CarTestingCardModel.Store.Company" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CompanyChangeRequest" EntityType="CarTestingCardModel.Store.CompanyChangeRequest" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CompanyHistory" EntityType="CarTestingCardModel.Store.CompanyHistory" store:Type="Tables" Schema="dbo" />
@@ -473,6 +475,26 @@
           <Property Name="AccountTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="AccountTypeName" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Code">
+          <Key>
+            <PropertyRef Name="CodeID" />
+          </Key>
+          <Property Name="CodeID" Type="int" Nullable="false" />
+          <Property Name="CodeTypeID" Type="int" Nullable="false" />
+          <Property Name="Prefix" Type="nvarchar" MaxLength="50" />
+          <Property Name="Suffix" Type="nvarchar" MaxLength="50" />
+          <Property Name="Seed" Type="int" Nullable="false" />
+          <Property Name="Length" Type="int" Nullable="false" />
+          <Property Name="IncrementStep" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CodeType">
+          <Key>
+            <PropertyRef Name="CodeTypeID" />
+          </Key>
+          <Property Name="CodeTypeID" Type="int" Nullable="false" />
+          <Property Name="TItle" Type="nvarchar" Nullable="false" MaxLength="250" />
+        </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="CompanyID" />
@@ -753,7 +775,7 @@
           <Property Name="TestingCardChangeRequestID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="TestingCardID" Type="int" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="TestingCardChangeRequestNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="TestingCardNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="VIN" Type="nvarchar" MaxLength="50" />
           <Property Name="CarModel" Type="nvarchar" MaxLength="200" />
           <Property Name="CarNumber" Type="nvarchar" MaxLength="50" />
@@ -828,7 +850,7 @@
           <Property Name="TestingCardHistoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="TestingCardID" Type="int" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="TestingCardHistoryNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="TestingCardNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="VIN" Type="nvarchar" MaxLength="50" />
           <Property Name="CarModel" Type="nvarchar" MaxLength="200" />
           <Property Name="CarNumber" Type="nvarchar" MaxLength="50" />
@@ -2303,6 +2325,8 @@
             <End Role="TestingCard" EntitySet="TestingCards" />
             <End Role="TestingCardDetailChangeRequest" EntitySet="TestingCardDetailChangeRequests" />
           </AssociationSet>
+          <EntitySet Name="Codes" EntityType="TestCardModel.Code" />
+          <EntitySet Name="CodeTypes" EntityType="TestCardModel.CodeType" />
           </EntityContainer>
         <EntityType Name="AccountType">
           <Key>
@@ -2574,7 +2598,6 @@
           <Property Name="TestingCardChangeRequestID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="TestingCardID" Type="Int32" />
           <Property Name="Number" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="TestingCardChangeRequestNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="VIN" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="CarModel" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
           <Property Name="CarNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
@@ -2603,6 +2626,7 @@
           <NavigationProperty Name="ResponsiblePerson" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person1" FromRole="TestingCardChangeRequest" ToRole="Person" />
           <NavigationProperty Name="AdminPerson" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person3" FromRole="TestingCardChangeRequest" ToRole="Person" />
           <NavigationProperty Name="TestingCard" Relationship="TestCardModel.FK_TestingCardChangeRequest_TestingCard" FromRole="TestingCardChangeRequest" ToRole="TestingCard" />
+          <Property Type="String" Name="TestingCardNumber" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TestingCardDetail">
           <Key>
@@ -2659,7 +2683,6 @@
           <Property Name="TestingCardHistoryID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="TestingCardID" Type="Int32" Nullable="false" />
           <Property Name="Number" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="TestingCardHistoryNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="VIN" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="CarModel" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
           <Property Name="CarNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
@@ -2676,6 +2699,7 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TestingCard" Relationship="TestCardModel.FK_TestingCardHistory_TestingCard" FromRole="TestingCardHistory" ToRole="TestingCard" />
           <NavigationProperty Name="Person" Relationship="TestCardModel.FK_TestingCardHistory_Person" FromRole="TestingCardHistory" ToRole="Person" />
+          <Property Type="String" Name="TestingCardNumber" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TestingStep">
           <Key>
@@ -3903,6 +3927,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Code">
+          <Key>
+            <PropertyRef Name="CodeID" />
+          </Key>
+          <Property Type="Int32" Name="CodeID" Nullable="false" />
+          <Property Type="Int32" Name="CodeTypeID" Nullable="false" />
+          <Property Type="String" Name="Prefix" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Suffix" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Seed" Nullable="false" />
+          <Property Type="Int32" Name="Length" Nullable="false" />
+          <Property Type="Int32" Name="IncrementStep" Nullable="false" />
+          <Property Type="Int32" Name="Count" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CodeType">
+          <Key>
+            <PropertyRef Name="CodeTypeID" />
+          </Key>
+          <Property Type="Int32" Name="CodeTypeID" Nullable="false" />
+          <Property Type="String" Name="TItle" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4124,10 +4168,10 @@
           <EntitySetMapping Name="TestingCardChangeRequests">
             <EntityTypeMapping TypeName="TestCardModel.TestingCardChangeRequest">
               <MappingFragment StoreEntitySet="TestingCardChangeRequest">
+                <ScalarProperty Name="TestingCardNumber" ColumnName="TestingCardNumber" />
                 <ScalarProperty Name="TestingCardChangeRequestID" ColumnName="TestingCardChangeRequestID" />
                 <ScalarProperty Name="TestingCardID" ColumnName="TestingCardID" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="TestingCardChangeRequestNumber" ColumnName="TestingCardChangeRequestNumber" />
                 <ScalarProperty Name="VIN" ColumnName="VIN" />
                 <ScalarProperty Name="CarModel" ColumnName="CarModel" />
                 <ScalarProperty Name="CarNumber" ColumnName="CarNumber" />
@@ -4192,10 +4236,10 @@
           <EntitySetMapping Name="TestingCardHistories">
             <EntityTypeMapping TypeName="TestCardModel.TestingCardHistory">
               <MappingFragment StoreEntitySet="TestingCardHistory">
+                <ScalarProperty Name="TestingCardNumber" ColumnName="TestingCardNumber" />
                 <ScalarProperty Name="TestingCardHistoryID" ColumnName="TestingCardHistoryID" />
                 <ScalarProperty Name="TestingCardID" ColumnName="TestingCardID" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="TestingCardHistoryNumber" ColumnName="TestingCardHistoryNumber" />
                 <ScalarProperty Name="VIN" ColumnName="VIN" />
                 <ScalarProperty Name="CarModel" ColumnName="CarModel" />
                 <ScalarProperty Name="CarNumber" ColumnName="CarNumber" />
@@ -4451,6 +4495,28 @@
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="WeekDayNumber" ColumnName="WeekDayNumber" />
                 <ScalarProperty Name="PersonScheduleChangeRequestID" ColumnName="PersonScheduleChangeRequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Codes">
+            <EntityTypeMapping TypeName="TestCardModel.Code">
+              <MappingFragment StoreEntitySet="Code">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="IncrementStep" ColumnName="IncrementStep" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Seed" ColumnName="Seed" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="Prefix" ColumnName="Prefix" />
+                <ScalarProperty Name="CodeTypeID" ColumnName="CodeTypeID" />
+                <ScalarProperty Name="CodeID" ColumnName="CodeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CodeTypes">
+            <EntityTypeMapping TypeName="TestCardModel.CodeType">
+              <MappingFragment StoreEntitySet="CodeType">
+                <ScalarProperty Name="TItle" ColumnName="TItle" />
+                <ScalarProperty Name="CodeTypeID" ColumnName="CodeTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -26,6 +26,11 @@
                                     @Html.ValidationMessageFor(x => x.CompanyName)
                                 </li>
                                 <li>
+                                    @Html.LabelFor(x => x.Address)
+                                    @Html.TextAreaFor(x => x.Address)
+                                    @Html.ValidationMessageFor(x => x.Address)
+                                </li>
+                                <li>
                                     @Html.LabelFor(x => x.Phone)
                                     @Html.TextBoxFor(x => x.Phone)
                                     @Html.ValidationMessageFor(x => x.Phone)

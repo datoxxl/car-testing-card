@@ -390,4 +390,10 @@
   <data name="TotalRecords" xml:space="preserve">
     <value>სულ ჩანაწერი</value>
   </data>
+  <data name="FirnishDate" xml:space="preserve">
+    <value>ფირნიშის თარიღი</value>
+  </data>
+  <data name="FirnishNumber" xml:space="preserve">
+    <value>ფირნიშის ნომერი</value>
+  </data>
 </root>

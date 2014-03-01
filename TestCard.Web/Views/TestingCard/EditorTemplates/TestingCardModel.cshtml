@@ -32,6 +32,11 @@
                         @Html.TextBoxFor(x => x.CarNumber)
                         @Html.ValidationMessageFor(x => x.CarNumber)
                     </li>
+                    <li>
+                        @Html.LabelFor(x => x.CarSerialNo)
+                        @Html.TextBoxFor(x => x.CarSerialNo)
+                        @Html.ValidationMessageFor(x => x.CarSerialNo)
+                    </li>
                 </ol>
             </fieldset>
         </td>
@@ -45,14 +50,19 @@
                         @Html.ValidationMessageFor(x => x.VIN)
                     </li>
                     <li>
-                        @Html.LabelFor(x => x.CarSerialNo)
-                        @Html.TextBoxFor(x => x.CarSerialNo)
-                        @Html.ValidationMessageFor(x => x.CarSerialNo)
-                    </li>
-                    <li>
                         @Html.LabelFor(x => x.Odometer)
                         @Html.TextBoxFor(x => x.Odometer)
                         @Html.ValidationMessageFor(x => x.Odometer)
+                    </li>
+                    <li>
+                        @Html.LabelFor(x => x.FirnishNumber)
+                        @Html.TextBoxFor(x => x.FirnishNumber)
+                        @Html.ValidationMessageFor(x => x.FirnishNumber)
+                    </li>
+                    <li>
+                        @Html.LabelFor(x => x.FirnishDate)
+                        @Html.EditorFor(x => x.FirnishDate)
+                        @Html.ValidationMessageFor(x => x.FirnishDate)
                     </li>
                     <li>
                         @Html.LabelFor(x => x.Comment)

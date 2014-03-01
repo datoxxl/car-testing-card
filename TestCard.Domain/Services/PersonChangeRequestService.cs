@@ -98,7 +98,10 @@ namespace TestCard.Domain.Services
 
                             Update(request);
 
-                            new PersonService(_DbContext).SavePerson(request);
+                            if (status == ConfirmStatuses.Approved)
+                            {
+                                new PersonService(_DbContext).SavePerson(request);
+                            }
 
                             SaveChanges();
 

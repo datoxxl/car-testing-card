@@ -40,7 +40,7 @@ namespace TestCard.Domain.Services
                 {
                     TestingCardID = card.TestingCardID,
                     Number = card.Number,
-                    TestingCardHistoryNumber = card.TestingCardNumber,
+                    TestingCardNumber = card.TestingCardNumber,
                     VIN = card.VIN,
                     CarModel = card.CarModel,
                     CarNumber = card.CarNumber,
@@ -59,16 +59,16 @@ namespace TestCard.Domain.Services
 
                 Update(card);
             }
-            else
-            {
-                card = new TestingCard();
-                card.EffectiveDate = now;
+            //else
+            //{
+            //    card = new TestingCard();
 
-                Add(card);
-            }
+            //    card.EffectiveDate = request.EffectiveDate;
 
-            card.Number = request.Number;
-            card.TestingCardNumber = request.TestingCardChangeRequestNumber;
+            //    Add(card);
+            //}
+
+            card.TestingCardNumber = request.TestingCardNumber;
             card.VIN = request.VIN;
             card.CarModel = request.CarModel;
             card.CarNumber = request.CarNumber;
@@ -81,7 +81,6 @@ namespace TestCard.Domain.Services
             card.FirnishDate = request.FirnishDate;
             card.Comment = request.Comment;
             card.ResponsiblePersonID = request.ResponsiblePersonID;
-            card.EffectiveDate = request.EffectiveDate;
 
             foreach (var item in card.TestingCardDetails.ToList())
             {
@@ -109,6 +108,27 @@ namespace TestCard.Domain.Services
 
             //    });
             //}
+
+            return true;
+        }
+
+        public bool SaveTestingCard(TestingCard testingCard, v_person currentPerson)
+        {
+            var now = DateTime.Now;
+
+            var codeService = new CodeService(_DbContext);
+
+            testingCard.Number = codeService.NextCode(CodeTypes.TestingCardOrderNumber);
+            if (testingCard.TestingCardNumber == null)
+            {
+                testingCard.TestingCardNumber = codeService.NextCode(CodeTypes.TestingCardNumber);
+            }
+            testingCard.EffectiveDate = now;
+            testingCard.ResponsiblePersonID = currentPerson.PersonID;
+
+            Add(testingCard);
+
+            SaveChanges();
 
             return true;
         }

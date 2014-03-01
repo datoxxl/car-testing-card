@@ -19,6 +19,13 @@ namespace TestCard.Domain.Services
                 personID = currentPerson.PersonID;
             }
 
+            var codeService = new CodeService(_DbContext);
+
+            //request.Number = codeService.NextCode(CodeTypes.TestingCardOrderNumber);
+            if (request.TestingCardNumber == null)
+            {
+                request.TestingCardNumber = codeService.NextCode(CodeTypes.TestingCardNumber);
+            }
             request.EffectiveDate = now;
             request.CreateDate = now;
             request.ResponsiblePersonID = personID;
@@ -98,7 +105,10 @@ namespace TestCard.Domain.Services
 
                             Update(request);
 
-                            new TestingCardService(_DbContext).SaveTestingCard(request);
+                            if (status == ConfirmStatuses.Approved)
+                            {
+                                new TestingCardService(_DbContext).SaveTestingCard(request);
+                            }
 
                             SaveChanges();
 

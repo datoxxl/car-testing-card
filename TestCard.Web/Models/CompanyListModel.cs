@@ -14,6 +14,8 @@ namespace TestCard.Web.Models
         public string CompanyName { get; set; }
         [Display(Name = "Telephone", ResourceType = typeof(GeneralResource))]
         public string Phone { get; set; }
+        [Display(Name = "Address", ResourceType = typeof(GeneralResource))]
+        public string Address { get; set; }
         [Display(Name = "AccreditationScope", ResourceType = typeof(GeneralResource))]
         public string AccreditationScope { get; set; }
         [Display(Name = "AccreditationNumber", ResourceType = typeof(GeneralResource))]

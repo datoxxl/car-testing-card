@@ -21,6 +21,12 @@ namespace TestCard.Web.Models
         [Required(ErrorMessage = "",
            ErrorMessageResourceName = "FillRequiredField",
            ErrorMessageResourceType = typeof(GeneralResource))]
+        [Display(Name = "Address", ResourceType = typeof(GeneralResource))]
+        public string Address { get; set; }
+
+        [Required(ErrorMessage = "",
+           ErrorMessageResourceName = "FillRequiredField",
+           ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "Telephone", ResourceType = typeof(GeneralResource))]
         public string Phone { get; set; }
 

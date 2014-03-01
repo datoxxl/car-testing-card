@@ -18,9 +18,9 @@ namespace TestCard.Web.Controllers
             return View();
         }
 
-        public ActionResult View(int id)
+        public ActionResult View(int? id)
         {
-            return GetModel(id);
+            return GetModel(id ?? -1);
         }
 
         public ActionResult Add()
@@ -38,32 +38,17 @@ namespace TestCard.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    using (var service = new TestingCardChangeRequestService())
+                    using (var service = new TestingCardService())
                     {
-                        var testingCard = AutoMapper.Mapper.Map<TestCard.Domain.TestingCardChangeRequest>(model);
+                        var testingCard = AutoMapper.Mapper.Map<TestCard.Domain.TestingCard>(model);
 
-                        testingCard.TestingCardDetailChangeRequests = AutoMapper.Mapper.Map<List<TestCard.Domain.TestingCardDetailChangeRequest>>(model.TestingSteps.SelectMany(x => x.TestingSubSteps));
+                        testingCard.TestingCardDetails = AutoMapper.Mapper.Map<List<TestCard.Domain.TestingCardDetail>>(model.TestingSteps.SelectMany(x => x.TestingSubSteps));
 
-                        bool? hasUnconfirmedRequest = null;
-                        var saved = service.SaveChangeRequest(testingCard, CurrentUser, ref hasUnconfirmedRequest);
+                        service.SaveTestingCard(testingCard, CurrentUser);
 
-                        if (saved)
-                        {
-                            SetSuccessMessage();
+                        SetSuccessMessage();
 
-                            if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
-                            {
-                                return RedirectToAction("Edit", new { @id = testingCard.TestingCardID });
-                            }
-                            else
-                            {
-                                return RedirectToAction("List", "TestingCardChangeRequest");
-                            }
-                        }
-                        else if (hasUnconfirmedRequest == true)
-                        {
-                            SetErrorMessage(GeneralResource.UserHasUnconfirmedRequest);
-                        }
+                        return RedirectToAction("List");
                     }
                 }
             }
@@ -77,9 +62,9 @@ namespace TestCard.Web.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return GetModel(id);
+            return GetModel(id ?? -1);
         }
 
         [HttpPost]
@@ -104,7 +89,8 @@ namespace TestCard.Web.Controllers
 
                             if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
                             {
-                                return RedirectToAction("Edit", RouteData.Values);
+                                //return RedirectToAction("Edit", RouteData.Values);
+                                return RedirectToAction("List");
                             }
                             else
                             {
@@ -116,9 +102,6 @@ namespace TestCard.Web.Controllers
                             SetErrorMessage(GeneralResource.UserHasUnconfirmedRequest);
                         }
                     }
-
-                    SetSuccessMessage();
-                    return RedirectToAction("Edit", RouteData.Values);
                 }
             }
             catch
@@ -135,14 +118,22 @@ namespace TestCard.Web.Controllers
         {
             try
             {
-                return View(GetTestingCardModel(id));
+                var model = GetTestingCardModel(id);
+                if (model != null)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    SetErrorMessage(GeneralResource.RecordNotExists);
+                }
             }
             catch
             {
                 SetErrorMessage();
             }
 
-            return RedirectToAction("List");
+            return RedirectTo(Request.UrlReferrer.AbsoluteUri);
         }
     }
 }
