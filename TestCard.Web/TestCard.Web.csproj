@@ -148,6 +148,7 @@
     <Compile Include="Controllers\TestingCardChangeRequestController.cs" />
     <Compile Include="Controllers\TestingCardController.cs" />
     <Compile Include="Filters\AuthorizationFilter.cs" />
+    <Compile Include="Filters\ListFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -215,6 +216,7 @@
     <Content Include="Content\images\print24.png" />
     <Content Include="Content\images\s.gif" />
     <Content Include="Content\images\sad.png" />
+    <Content Include="Content\images\stats.png" />
     <Content Include="Content\images\tool-sprites.png" />
     <Content Include="Content\images\users.png" />
     <Content Include="Content\images\user-edit.png" />
@@ -254,6 +256,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Photo.ashx" />
+    <Content Include="Scripts\change-request-filter.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.ka-GE.js" />
     <Content Include="Scripts\globalize\globalize.js" />
     <None Include="Properties\PublishProfiles\TestCard.pubxml" />
@@ -274,6 +277,7 @@
     <Content Include="Scripts\selectivizr.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\mult-upload.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -342,6 +346,10 @@
     <Content Include="Views\Print\TestingCard.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_AjaxList.cshtml" />
+    <Content Include="Views\TestingCard\AddImages.cshtml" />
+    <Content Include="Views\Shared\_MultUpload.cshtml" />
+    <Content Include="Views\Shared\_ChangeRequestFilter.cshtml" />
+    <Content Include="Views\TestingCard\Images.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

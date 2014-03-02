@@ -93,6 +93,7 @@
     <Compile Include="Helpers\DomainServiceHelper.cs" />
     <Compile Include="Helpers\DynamicLibrary.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Person.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>

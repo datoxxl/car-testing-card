@@ -5,6 +5,13 @@
     <ul class="x-toolbar">
         <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
                                        {
+                                           ButtonType = "stats",
+                                           Text = GeneralResource.Statistics,
+                                           Url = "/Statistics/Index"
+                                       })
+        </li>
+        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+                                       {
                                            ButtonType = "company",
                                            Text = GeneralResource.Company,
                                            Url = "/Company/List"

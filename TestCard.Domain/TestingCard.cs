@@ -17,12 +17,12 @@ namespace TestCard.Domain
         public TestingCard()
         {
             this.TestingCardDetails = new HashSet<TestingCardDetail>();
-            this.TestingCardDetailHistories = new HashSet<TestingCardDetailHistory>();
             this.TestingCardFileChangeRequests = new HashSet<TestingCardFileChangeRequest>();
             this.TestingCardHistories = new HashSet<TestingCardHistory>();
             this.Files = new HashSet<File>();
             this.TestingCardChangeRequests = new HashSet<TestingCardChangeRequest>();
             this.TestingCardDetailChangeRequests = new HashSet<TestingCardDetailChangeRequest>();
+            this.TestingCardDetailHistories = new HashSet<TestingCardDetailHistory>();
         }
     
         public int TestingCardID { get; set; }
@@ -43,12 +43,12 @@ namespace TestCard.Domain
         public Nullable<System.DateTime> EffectiveDate { get; set; }
     
         public virtual ICollection<TestingCardDetail> TestingCardDetails { get; set; }
-        public virtual ICollection<TestingCardDetailHistory> TestingCardDetailHistories { get; set; }
         public virtual ICollection<TestingCardFileChangeRequest> TestingCardFileChangeRequests { get; set; }
         public virtual ICollection<TestingCardHistory> TestingCardHistories { get; set; }
         public virtual ICollection<File> Files { get; set; }
         public virtual Person Person { get; set; }
         public virtual ICollection<TestingCardChangeRequest> TestingCardChangeRequests { get; set; }
         public virtual ICollection<TestingCardDetailChangeRequest> TestingCardDetailChangeRequests { get; set; }
+        public virtual ICollection<TestingCardDetailHistory> TestingCardDetailHistories { get; set; }
     }
 }

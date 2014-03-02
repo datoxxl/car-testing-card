@@ -1,0 +1,39 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "Images";
+}
+<div class="x-form-container">
+    <span class="x-header">@GeneralResource.CarImages</span>
+    <div class="top-actions">
+        @Html.ActionLink(GeneralResource.BackToList, "List")
+        @Html.ActionLink(GeneralResource.TestCard, "Edit", ViewContext.RouteData.Values)
+        @Html.ActionLink(GeneralResource.Images, "ImagesAdd", ViewContext.RouteData.Values, new { @class = "active" })
+    </div>
+    <div class="form-inner">
+        @using (Html.BeginForm("AddImages", "TestingCard",
+                new { id = ViewContext.RouteData.Values["id"] },
+                FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+        {
+            Html.RenderPartial("_MultUpload");
+            <div class="x-actions">
+                <input type="submit" value="@GeneralResource.Upload"/>
+            </div>
+        }
+        <div class="x-img-list">
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <img src="@Url.ImageUrl(item)" />
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/multupload")
+}

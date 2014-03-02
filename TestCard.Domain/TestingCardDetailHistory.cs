@@ -14,12 +14,13 @@ namespace TestCard.Domain
     
     public partial class TestingCardDetailHistory
     {
-        public int TestingCardDetailID { get; set; }
+        public int TestingCardHistoryID { get; set; }
         public int TestingCardID { get; set; }
         public int TestingSubStepID { get; set; }
         public bool IsValid { get; set; }
     
         public virtual TestingCard TestingCard { get; set; }
+        public virtual TestingCardHistory TestingCardHistory { get; set; }
         public virtual TestingSubStep TestingSubStep { get; set; }
     }
 }

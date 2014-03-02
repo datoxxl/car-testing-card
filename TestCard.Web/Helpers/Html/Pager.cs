@@ -12,7 +12,7 @@ namespace TestCard.Web.Helpers.Html
 {
     public static class PagerHelper
     {
-        public static MvcHtmlString Pager(this HtmlHelper helper, IPagedList list, string targetID, string actionName, string controllerName = null)
+        public static void Pager(this HtmlHelper helper, IPagedList list, string targetID, string actionName, string controllerName = null)
         {
             var html = string.Empty;
 
@@ -36,65 +36,66 @@ namespace TestCard.Web.Helpers.Html
             var firstPageIndex = pageIndex > 1 ? 1 : -1;
             var lastPageIndex = pageIndex < totalPageCount ? totalPageCount : -1;
 
-            new AjaxHelper(helper.ViewContext, helper.ViewDataContainer).BeginForm(actionName, controllerName, helper.ViewContext.GetCombinedRouteValues(null), new AjaxOptions
+            using (new AjaxHelper(helper.ViewContext, helper.ViewDataContainer).BeginForm(actionName, controllerName, helper.ViewContext.GetCombinedRouteValues(null), new AjaxOptions
             {
                 UpdateTargetId = targetID,
                 InsertionMode = InsertionMode.Replace,
                 HttpMethod = "POST",
-            });
+            }))
+            {
+                var container = new TagBuilder("div");
+                container.AddCssClass("x-pager");
 
-            var container = new TagBuilder("div");
-            container.AddCssClass("x-pager");
+                var firstLink = GetNavLink(firstPageIndex, "first");
+                var prevLink = GetNavLink(prevPageIndex, "prev");
+                var nextLink = GetNavLink(nextPageIndex, "next");
+                var lastLink = GetNavLink(lastPageIndex, "last");
+                var refreshLink = GetNavLink(pageIndex, "refresh");
 
-            var firstLink = GetNavLink(firstPageIndex, "first");
-            var prevLink = GetNavLink(prevPageIndex, "prev");
-            var nextLink = GetNavLink(nextPageIndex, "next");
-            var lastLink = GetNavLink(lastPageIndex, "last");
-            var refreshLink = GetNavLink(pageIndex, "refresh");
+                var pageInput = new TagBuilder("input");
+                pageInput.Attributes.Add("type", "text");
+                pageInput.AddCssClass("page-num");
+                pageInput.Attributes.Add("value", pageIndex.ToString());
 
-            var pageInput = new TagBuilder("input");
-            pageInput.Attributes.Add("type", "text");
-            pageInput.AddCssClass("page-num");
-            pageInput.Attributes.Add("value", pageIndex.ToString());
+                var pageHidden = new TagBuilder("input");
+                pageHidden.Attributes.Add("name", "pageIndex");
+                pageHidden.Attributes.Add("id", "pageIndex");
+                pageHidden.Attributes.Add("type", "hidden");
+                pageHidden.Attributes.Add("value", pageIndex.ToString());
 
-            var pageHidden = new TagBuilder("input");
-            pageHidden.Attributes.Add("name", "pageIndex");
-            pageHidden.Attributes.Add("id", "pageIndex");
-            pageHidden.Attributes.Add("type", "hidden");
-            pageHidden.Attributes.Add("value", pageIndex.ToString());
+                var pageTotalHidden = new TagBuilder("input");
+                pageTotalHidden.Attributes.Add("id", "pageTotal");
+                pageTotalHidden.Attributes.Add("type", "hidden");
+                pageTotalHidden.Attributes.Add("value", totalPageCount.ToString());
 
-            var pageTotalHidden = new TagBuilder("input");
-            pageTotalHidden.Attributes.Add("id", "pageTotal");
-            pageTotalHidden.Attributes.Add("type", "hidden");
-            pageTotalHidden.Attributes.Add("value", totalPageCount.ToString());
+                var pageText = new TagBuilder("span");
+                pageText.AddCssClass("page-text");
+                pageText.InnerHtml = string.Format(" of {0}", totalPageCount);
 
-            var pageText = new TagBuilder("span");
-            pageText.AddCssClass("page-text");
-            pageText.InnerHtml = string.Format(" of {0}", totalPageCount);
+                var recordText = new TagBuilder("span");
+                recordText.AddCssClass("record-text");
+                recordText.InnerHtml = string.Format("{0}: {1}", GeneralResource.TotalRecords, totalItemCount);
 
-            var recordText = new TagBuilder("span");
-            recordText.AddCssClass("record-text");
-            recordText.InnerHtml = string.Format("{0}: {1}", GeneralResource.TotalRecords, totalItemCount);
+                var separator = new TagBuilder("span");
+                separator.AddCssClass("sep");
 
-            var separator = new TagBuilder("span");
-            separator.AddCssClass("sep");
+                container.InnerHtml =
+                      firstLink
+                    + prevLink
+                    + separator.ToString(TagRenderMode.Normal)
+                    + pageInput.ToString(TagRenderMode.SelfClosing)
+                    + pageHidden.ToString(TagRenderMode.SelfClosing)
+                    + pageTotalHidden.ToString(TagRenderMode.SelfClosing)
+                    + pageText.ToString(TagRenderMode.Normal)
+                    + separator.ToString(TagRenderMode.Normal)
+                    + nextLink
+                    + lastLink
+                    + separator.ToString(TagRenderMode.Normal)
+                    + refreshLink
+                    + recordText.ToString(TagRenderMode.Normal);
 
-            container.InnerHtml =
-                  firstLink
-                + prevLink
-                + separator.ToString(TagRenderMode.Normal)
-                + pageInput.ToString(TagRenderMode.SelfClosing)
-                + pageHidden.ToString(TagRenderMode.SelfClosing)
-                + pageTotalHidden.ToString(TagRenderMode.SelfClosing)
-                + pageText.ToString(TagRenderMode.Normal)
-                + separator.ToString(TagRenderMode.Normal)
-                + nextLink
-                + lastLink
-                + separator.ToString(TagRenderMode.Normal)
-                + refreshLink
-                + recordText.ToString(TagRenderMode.Normal);
-
-            return new MvcHtmlString(container.ToString(TagRenderMode.Normal));
+                helper.ViewContext.Writer.Write(new MvcHtmlString(container.ToString(TagRenderMode.Normal)));
+            }
         }
 
         private static string GetNavLink(int pageIndex, string cssClass)

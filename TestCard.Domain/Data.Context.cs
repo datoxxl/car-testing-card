@@ -42,7 +42,6 @@ namespace TestCard.Domain
         public DbSet<TestingCardChangeRequest> TestingCardChangeRequests { get; set; }
         public DbSet<TestingCardDetail> TestingCardDetails { get; set; }
         public DbSet<TestingCardDetailChangeRequest> TestingCardDetailChangeRequests { get; set; }
-        public DbSet<TestingCardDetailHistory> TestingCardDetailHistories { get; set; }
         public DbSet<TestingCardFileChangeRequest> TestingCardFileChangeRequests { get; set; }
         public DbSet<TestingCardHistory> TestingCardHistories { get; set; }
         public DbSet<TestingStep> TestingSteps { get; set; }
@@ -60,5 +59,6 @@ namespace TestCard.Domain
         public DbSet<PersonScheduleChangeRequestDetail> PersonScheduleChangeRequestDetails { get; set; }
         public DbSet<Code> Codes { get; set; }
         public DbSet<CodeType> CodeTypes { get; set; }
+        public DbSet<TestingCardDetailHistory> TestingCardDetailHistories { get; set; }
     }
 }

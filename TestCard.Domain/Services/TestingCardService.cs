@@ -36,7 +36,7 @@ namespace TestCard.Domain.Services
             //Archive old person record
             if (card != null)
             {
-                _DbContext.TestingCardHistories.Add(new TestingCardHistory
+                var history = new TestingCardHistory
                 {
                     TestingCardID = card.TestingCardID,
                     Number = card.Number,
@@ -55,7 +55,19 @@ namespace TestCard.Domain.Services
                     ResponsiblePersonID = card.ResponsiblePersonID,
                     EffectiveDate = card.EffectiveDate,
                     CreateDate = now
-                });
+                };
+
+                _DbContext.TestingCardHistories.Add(history);
+
+                foreach (var item in card.TestingCardDetails)
+                {
+                    history.TestingCardDetailHistories.Add(new TestingCardDetailHistory
+                    {
+                        TestingCardID = item.TestingCardID,
+                        TestingSubStepID = item.TestingSubStepID,
+                        IsValid = item.IsValid
+                    });
+                }
 
                 Update(card);
             }
@@ -101,18 +113,10 @@ namespace TestCard.Domain.Services
                 request.TestingCard = card;
             }
 
-            //TO DO: Testing card detail history
-            //foreach (var item in card.TestingCardDetails)
-            //{
-            //    _DbContext.TestingCardDetailHistories.Add(new TestingCardDetailHistory { 
-
-            //    });
-            //}
-
             return true;
         }
 
-        public bool SaveTestingCard(TestingCard testingCard, v_person currentPerson)
+        public int SaveTestingCard(TestingCard testingCard, v_person currentPerson)
         {
             var now = DateTime.Now;
 
@@ -130,7 +134,42 @@ namespace TestCard.Domain.Services
 
             SaveChanges();
 
-            return true;
+            return testingCard.TestingCardID;
+        }
+
+        public void SaveTestingCardImages(int testingCardID, IEnumerable<byte[]> fileDatas)
+        {
+            var card = Get(testingCardID);
+
+            string fileName = null;
+            string filePath = null;
+
+            var files = new List<string>();
+
+            try
+            {
+                foreach (var item in fileDatas.Where(x => x != null))
+                {
+                    FileHelper.SaveImage(item, ref fileName, ref filePath);
+
+                    files.Add(filePath);
+
+                    card.Files.Add(new File
+                    {
+                        FileName = fileName,
+                        FilePath = filePath
+                    });
+                }
+            }
+            catch
+            {
+                foreach (var item in files)
+                {
+                    FileHelper.Delete(item);
+                }
+            }
+
+            SaveChanges();
         }
     }
 }

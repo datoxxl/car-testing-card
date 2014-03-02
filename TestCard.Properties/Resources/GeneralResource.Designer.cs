@@ -115,6 +115,24 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All records.
+        /// </summary>
+        public static string AllRecords {
+            get {
+                return ResourceManager.GetString("AllRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Approve.
         /// </summary>
         public static string Approve {
@@ -129,6 +147,15 @@ namespace TestCard.Properties.Resources {
         public static string Back {
             get {
                 return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to list.
+        /// </summary>
+        public static string BackToList {
+            get {
+                return ResourceManager.GetString("BackToList", resourceCulture);
             }
         }
         
@@ -156,6 +183,15 @@ namespace TestCard.Properties.Resources {
         public static string CardNumber {
             get {
                 return ResourceManager.GetString("CardNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Car images.
+        /// </summary>
+        public static string CarImages {
+            get {
+                return ResourceManager.GetString("CarImages", resourceCulture);
             }
         }
         
@@ -349,6 +385,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        public static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Firnish date.
         /// </summary>
         public static string FirnishDate {
@@ -421,6 +466,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Images.
+        /// </summary>
+        public static string Images {
+            get {
+                return ResourceManager.GetString("Images", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string Information {
@@ -480,6 +534,15 @@ namespace TestCard.Properties.Resources {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No images found.
+        /// </summary>
+        public static string NoImagesFound {
+            get {
+                return ResourceManager.GetString("NoImagesFound", resourceCulture);
             }
         }
         
@@ -552,6 +615,15 @@ namespace TestCard.Properties.Resources {
         public static string PasswordsMustMatch {
             get {
                 return ResourceManager.GetString("PasswordsMustMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to + More.
+        /// </summary>
+        public static string PlusMore {
+            get {
+                return ResourceManager.GetString("PlusMore", resourceCulture);
             }
         }
         
@@ -718,6 +790,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        public static string Statistics {
+            get {
+                return ResourceManager.GetString("Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allowe string length is {1}.
         /// </summary>
         public static string StringLengthErrorMessage {
@@ -795,6 +876,24 @@ namespace TestCard.Properties.Resources {
         public static string Type {
             get {
                 return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unconfirmed records.
+        /// </summary>
+        public static string UnconfirmedRecords {
+            get {
+                return ResourceManager.GetString("UnconfirmedRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload.
+        /// </summary>
+        public static string Upload {
+            get {
+                return ResourceManager.GetString("Upload", resourceCulture);
             }
         }
         

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<TestCard.Web.Models.TestingCardChangeRequestListModel>
+@{ Html.RenderPartial("_ChangeRequestFilter", new AjaxListModel { ActionName = "TestingCardChangeRequest" }); }
 <table class="x-table">
     <tr>
         <th>
@@ -47,4 +48,4 @@
     }
 
 </table>
-@Html.Pager((IPagedList)Model, "TestingCardChangeRequest", "TestingCardChangeRequest")
+@{Html.Pager((IPagedList)Model, "TestingCardChangeRequest", "TestingCardChangeRequest");}

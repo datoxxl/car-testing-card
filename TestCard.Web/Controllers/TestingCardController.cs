@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 using TestCard.Domain.Services;
@@ -44,11 +45,11 @@ namespace TestCard.Web.Controllers
 
                         testingCard.TestingCardDetails = AutoMapper.Mapper.Map<List<TestCard.Domain.TestingCardDetail>>(model.TestingSteps.SelectMany(x => x.TestingSubSteps));
 
-                        service.SaveTestingCard(testingCard, CurrentUser);
+                        var testingCardID = service.SaveTestingCard(testingCard, CurrentUser);
 
                         SetSuccessMessage();
 
-                        return RedirectToAction("List");
+                        return RedirectToAction("Edit", new { id = testingCardID });
                     }
                 }
             }
@@ -114,6 +115,61 @@ namespace TestCard.Web.Controllers
             return View(model);
         }
 
+        public ActionResult Images(int? id)
+        {
+            return GetTestingCardImages(id ?? -1);
+        }
+
+        public ActionResult AddImages(int? id)
+        {
+            return GetTestingCardImages(id ?? -1);
+        }
+
+        [HttpPost]
+        public ActionResult AddImages(int id, HttpPostedFileWrapper[] files)
+        {
+            try
+            {
+                var fileDatas = new List<byte[]>();
+
+                files = files.Where(x => x != null).ToArray();
+
+                if (files.Length == 0)
+                {
+                    SetErrorMessage(GeneralResource.NoImagesFound);
+
+                    return RedirectTo(Request.UrlReferrer.AbsoluteUri);
+                }
+
+                foreach (var file in files)
+                {
+                    if (file != null && file.ContentType != MediaTypeNames.Image.Jpeg)
+                    {
+                        SetErrorMessage(GeneralResource.ImageAllowedMessage);
+
+                        return RedirectTo(Request.UrlReferrer.AbsoluteUri);
+                    }
+                    else
+                    {
+                        fileDatas.Add(GetFileData(file));
+                    }
+                }
+
+                using (var service = new TestingCardService())
+                {
+                    service.SaveTestingCardImages(id, fileDatas);
+                }
+
+                SetSuccessMessage();
+            }
+            catch
+            {
+                SetErrorMessage();
+            }
+
+            return RedirectTo(Request.UrlReferrer.AbsoluteUri);
+        }
+
         private ActionResult GetModel(int id)
         {
             try
@@ -134,6 +190,23 @@ namespace TestCard.Web.Controllers
             }
 
             return RedirectTo(Request.UrlReferrer.AbsoluteUri);
+        }
+
+        private ActionResult GetTestingCardImages(int id)
+        {
+            using (var service = new TestingCardService())
+            {
+                var card = service.Get(id);
+
+                if (card == null)
+                {
+                    SetErrorMessage(GeneralResource.RecordNotExists);
+
+                    return RedirectTo(Request.UrlReferrer.AbsoluteUri);
+                }
+
+                return View(card.Files.Select(x => x.FileName));
+            }
         }
     }
 }

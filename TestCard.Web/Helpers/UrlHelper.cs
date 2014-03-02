@@ -17,5 +17,10 @@ namespace TestCard.Web.Helpers
 
             return resultUrl;
         }
+
+        public static string ImageUrl(this System.Web.Mvc.UrlHelper helper, string imageName)
+        {
+            return helper.Action("GetImage", "Home") + "?id=" + imageName;
+        }
     }
 }

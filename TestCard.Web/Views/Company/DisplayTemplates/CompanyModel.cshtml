@@ -3,7 +3,7 @@
 <div class="x-form-container">
     <span class="header">@GeneralResource.Company</span>
     <div class="top-actions">
-        @Html.ActionLink(GeneralResource.Back, "List")
+        @Html.ActionLink(GeneralResource.BackToList, "List")
     </div>
     <div class="form-inner">
         <table class="x-form">
@@ -49,7 +49,7 @@
                         <ol>
                             <li>
                                 <label for="file">@GeneralResource.CompanyLogo</label>
-                                <img class="x-picture-area" src="/Home/GetImage/?id=@Model.FileName" />
+                                <img class="x-picture-area" src="@Url.ImageUrl(Model.FileName)" />
                             </li>
                         </ol>
                     </fieldset>

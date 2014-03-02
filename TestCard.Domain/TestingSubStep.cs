@@ -28,7 +28,7 @@ namespace TestCard.Domain
     
         public virtual ICollection<TestingCardDetail> TestingCardDetails { get; set; }
         public virtual ICollection<TestingCardDetailChangeRequest> TestingCardDetailChangeRequests { get; set; }
-        public virtual ICollection<TestingCardDetailHistory> TestingCardDetailHistories { get; set; }
         public virtual TestingStep TestingStep { get; set; }
+        public virtual ICollection<TestingCardDetailHistory> TestingCardDetailHistories { get; set; }
     }
 }

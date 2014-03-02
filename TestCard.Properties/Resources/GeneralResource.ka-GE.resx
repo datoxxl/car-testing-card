@@ -396,4 +396,37 @@
   <data name="FirnishNumber" xml:space="preserve">
     <value>ფირნიშის ნომერი</value>
   </data>
+  <data name="CarImages" xml:space="preserve">
+    <value>ავტომობილის სურათები</value>
+  </data>
+  <data name="PlusMore" xml:space="preserve">
+    <value>+ მეტი</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>ატვირთვა</value>
+  </data>
+  <data name="NoImagesFound" xml:space="preserve">
+    <value>სურათები არ მოიძებნა</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>სიაში დაბრუნება</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>სურათები</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>ყველა</value>
+  </data>
+  <data name="AllRecords" xml:space="preserve">
+    <value>ყველა ჩანაწერი</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>გაფილტვრა</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>სტატისტიკა</value>
+  </data>
+  <data name="UnconfirmedRecords" xml:space="preserve">
+    <value>დაუსასტურებელი ჩანაწერები</value>
+  </data>
 </root>

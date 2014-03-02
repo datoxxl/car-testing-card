@@ -6,7 +6,9 @@
 <div class="x-form-container">
     <span class="header">@GeneralResource.TestCard</span>
     <div class="top-actions">
-        @Html.ActionLink(GeneralResource.Back, "List")
+        @Html.ActionLink(GeneralResource.BackToList, "List")
+        @Html.ActionLink(GeneralResource.TestCard, "Edit", ViewContext.RouteData.Values, new { @class = "active" })
+        @Html.ActionLink(GeneralResource.Images, "AddImages", ViewContext.RouteData.Values)
     </div>
     <div class="form-inner">
         @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))

@@ -150,16 +150,22 @@ namespace TestCard.Domain.Services
             return false;
         }
 
-        public List<TestingCardChangeRequest> GetList(v_person person, DataFilterOption filter)
+        public List<TestingCardChangeRequest> GetList(v_person person, DataFilterOption filter, bool showAll)
         {
             var type = (AccountTypes)person.AccountTypeID;
-            var result = GetAll().Where(x => x.ResponsiblePerson.Company.CompanyID == person.CompanyID);
+            var approvedStatus = (int)ConfirmStatuses.Approved;
+            var rejectedStatus = (int)ConfirmStatuses.Rejected;
             var personID = person.PersonID;
+            var result = GetAll().Where(x => x.ResponsiblePerson.Company.CompanyID == person.CompanyID);
+
+            if (!showAll)
+            {
+                result = result.Where(x => !x.AdministratorConfirmStatusID.HasValue && x.QualityManagerConfirmStatusID != rejectedStatus);
+            }
 
             switch (type)
             {
                 case AccountTypes.Administrator:
-                    var approvedStatus = (int)ConfirmStatuses.Approved;
                     result = result.Where(x => x.QualityManagerConfirmStatusID == approvedStatus);
                     break;
                 case AccountTypes.QualityManager:

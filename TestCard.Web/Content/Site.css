@@ -83,7 +83,8 @@ label
 input[type="text"],
 input[type="password"],
 textarea,
-select
+select,
+input[type="file"]
 {
     border-width: 1px;
     border-style: solid;
@@ -522,6 +523,11 @@ ul.x-toolbar
         background-image: url('images/card-edit.png');
     }
 
+    .x-toolbar-button.stats .btn-wrapper .icon
+    {
+        background-image: url('images/stats.png');
+    }
+
 #user-options
 {
 }
@@ -813,6 +819,11 @@ ul.x-action-bar
             display: inline-block;
         }
 
+            .x-form-container .top-actions a.active
+            {
+                background-color: #ccc;
+            }
+
     .x-form-container .form-inner
     {
         padding: 10px 20px;
@@ -1021,3 +1032,49 @@ ul.x-action-bar
         border-right-color: white;
         vertical-align: middle;
     }
+
+.x-img-list
+{
+}
+
+    .x-img-list ul
+    {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+        .x-img-list ul li
+        {
+            float: left;
+            padding: 10px;
+        }
+
+    .x-img-list img
+    {
+        width: 300px;
+    }
+
+.x-mult-upload
+{
+}
+
+    .x-mult-upload .actions .add-more
+    {
+    }
+
+    .x-mult-upload .files
+    {
+        font-size: 0;
+        /*text-align: center;*/
+    }
+
+    .x-mult-upload input[type="file"]
+    {
+        margin: 10px 10px 0 0;
+    }
+
+.x-list-filter
+{
+    text-align: right;
+}

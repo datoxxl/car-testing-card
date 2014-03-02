@@ -14,6 +14,11 @@ namespace TestCard.Domain
     
     public partial class TestingCardHistory
     {
+        public TestingCardHistory()
+        {
+            this.TestingCardDetailHistories = new HashSet<TestingCardDetailHistory>();
+        }
+    
         public int TestingCardHistoryID { get; set; }
         public int TestingCardID { get; set; }
         public string Number { get; set; }
@@ -35,5 +40,6 @@ namespace TestCard.Domain
     
         public virtual TestingCard TestingCard { get; set; }
         public virtual Person Person { get; set; }
+        public virtual ICollection<TestingCardDetailHistory> TestingCardDetailHistories { get; set; }
     }
 }

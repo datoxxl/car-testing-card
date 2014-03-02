@@ -1,0 +1,17 @@
+﻿@model AjaxListModel
+@using (Ajax.BeginForm(Model.ActionName, Model.ControllerName ?? "List", ViewContext.GetCombinedRouteValues(null), new AjaxOptions
+{
+    UpdateTargetId = Model.ActionName,
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST"
+}))
+{
+    <div class="x-list-filter change-request-filter">
+        <select name="showAll">
+            <option value="true" @((bool)ViewContext.RouteData.Values["showAll"] == true ? "selected=true" : string.Empty)>@GeneralResource.AllRecords
+            </option>
+            <option value="false" @((bool)ViewContext.RouteData.Values["showAll"] == false || !ViewContext.RouteData.Values.ContainsKey("showAll") ? "selected=true" : string.Empty)>@GeneralResource.UnconfirmedRecords
+            </option>
+        </select>
+    </div>
+}

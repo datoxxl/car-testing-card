@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestCard.Domain.Helpers;
 using TestCard.Properties;
 
 namespace TestCard.Domain.Services
@@ -19,16 +20,7 @@ namespace TestCard.Domain.Services
             {
                 if (companyLogo != null)
                 {
-                    do
-                    {
-                        fileName = Guid.NewGuid().ToString() + ".jpeg";
-                        filePath = System.IO.Path.GetFullPath(Config.FilePath + fileName);
-                    } while (System.IO.File.Exists(filePath));
-
-                    using (var file = System.IO.File.Open(filePath, System.IO.FileMode.OpenOrCreate))
-                    {
-                        file.Write(companyLogo, 0, companyLogo.Length);
-                    }
+                    FileHelper.SaveImage(companyLogo, ref fileName, ref filePath);
 
                     if (company.File != null)
                     {
@@ -56,14 +48,14 @@ namespace TestCard.Domain.Services
 
                 if (oldFilePath != null)
                 {
-                    System.IO.File.Delete(oldFilePath);
+                    FileHelper.Delete(oldFilePath);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (filePath != null)
                 {
-                    System.IO.File.Delete(filePath);
+                    FileHelper.Delete(oldFilePath);
                 }
 
                 throw ex;

@@ -6,7 +6,9 @@
 <div class="x-form-container">
     <span class="header">@GeneralResource.WorkSchedule</span>
     <div class="top-actions">
-        @Html.ActionLink(GeneralResource.Back, "Edit", "Person", new { id = Model.PersonID }, null)
+        @Html.ActionLink(GeneralResource.BackToList, "List", "Person")
+        @Html.ActionLink(GeneralResource.User, "Edit", "Person", ViewContext.RouteData.Values, null)
+        @Html.ActionLink(GeneralResource.WorkSchedule, "Edit", "PersonSchedule", ViewContext.RouteData.Values, new { @class = "active" })
     </div>
     <div class="form-inner">
         @using (Html.BeginForm())

@@ -396,4 +396,37 @@
   <data name="FirnishNumber" xml:space="preserve">
     <value>Firnish number</value>
   </data>
+  <data name="CarImages" xml:space="preserve">
+    <value>Car images</value>
+  </data>
+  <data name="PlusMore" xml:space="preserve">
+    <value>+ More</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="NoImagesFound" xml:space="preserve">
+    <value>No images found</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Back to list</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="AllRecords" xml:space="preserve">
+    <value>All records</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="UnconfirmedRecords" xml:space="preserve">
+    <value>Unconfirmed records</value>
+  </data>
 </root>

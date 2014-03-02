@@ -21,7 +21,7 @@ namespace TestCard.Web.Helpers
             RouteValueDictionary combinedRouteValues = new RouteValueDictionary(viewContext.RouteData.Values);
 
             NameValueCollection queryString = viewContext.RequestContext.HttpContext.Request.QueryString;
-            foreach (string key in queryString.AllKeys.Where(key => key != null))
+            foreach (string key in queryString.AllKeys.Where(key => key != null && !combinedRouteValues.Keys.Contains(key)))
                 combinedRouteValues[key] = queryString[key];
 
             if (newRouteValues != null)

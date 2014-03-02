@@ -1,0 +1,25 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "Images";
+}
+<div class="x-form-container">
+    <span class="x-header">@GeneralResource.CarImages</span>
+    <div class="top-actions">
+        @Html.ActionLink(GeneralResource.BackToList, "List")
+        @Html.ActionLink(GeneralResource.TestCard, "View", ViewContext.RouteData.Values)
+        @Html.ActionLink(GeneralResource.Images, "Images", ViewContext.RouteData.Values, new { @class = "active" })
+    </div>
+    <div class="form-inner">
+        <div class="x-img-list">
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <img src="@Url.ImageUrl(item)" />
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

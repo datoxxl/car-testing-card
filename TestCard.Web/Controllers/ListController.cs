@@ -9,7 +9,7 @@ using TestCard.Web.Filters;
 
 namespace TestCard.Web.Controllers
 {
-    [AuthorizationFilter]
+    [AuthorizationFilter, ListFilter]
     public class ListController : BaseController
     {
         public PartialViewResult Person(int? companyID, int pageIndex = 1)
@@ -55,7 +55,7 @@ namespace TestCard.Web.Controllers
             }
         }
 
-        public PartialViewResult PersonChangeRequest(int pageIndex = 1)
+        public PartialViewResult PersonChangeRequest(int pageIndex = 1, bool showAll = false)
         {
             using (var service = new PersonChangeRequestService())
             {
@@ -67,13 +67,13 @@ namespace TestCard.Web.Controllers
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.PersonChangeRequestListModel>>(service.GetList(CurrentUser, filter));
+                var list = AutoMapper.Mapper.Map<List<Models.PersonChangeRequestListModel>>(service.GetList(CurrentUser, filter, showAll));
 
                 return PartialView(new Models.PagedList<Models.PersonChangeRequestListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
         }
 
-        public PartialViewResult PersonScheduleChangeRequest(int pageIndex = 1)
+        public PartialViewResult PersonScheduleChangeRequest(int pageIndex = 1, bool showAll = false)
         {
             using (var service = new PersonScheduleChangeRequestService())
             {
@@ -85,7 +85,7 @@ namespace TestCard.Web.Controllers
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.PersonScheduleChangeRequestListModel>>(service.GetList(CurrentUser, filter));
+                var list = AutoMapper.Mapper.Map<List<Models.PersonScheduleChangeRequestListModel>>(service.GetList(CurrentUser, filter, showAll));
 
                 return PartialView(new Models.PagedList<Models.PersonScheduleChangeRequestListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
@@ -109,7 +109,7 @@ namespace TestCard.Web.Controllers
             }
         }
 
-        public PartialViewResult TestingCardChangeRequest(int pageIndex = 1)
+        public PartialViewResult TestingCardChangeRequest(int pageIndex = 1, bool showAll = false)
         {
             using (var service = new TestingCardChangeRequestService())
             {
@@ -121,7 +121,7 @@ namespace TestCard.Web.Controllers
                     //FilterExpression = string.Format("CompanyID == {0}", companyID)
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.TestingCardChangeRequestListModel>>(service.GetList(CurrentUser, filter));
+                var list = AutoMapper.Mapper.Map<List<Models.TestingCardChangeRequestListModel>>(service.GetList(CurrentUser, filter, showAll));
 
                 return PartialView(new Models.PagedList<Models.TestingCardChangeRequestListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
