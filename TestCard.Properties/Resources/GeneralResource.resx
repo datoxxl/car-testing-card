@@ -331,7 +331,7 @@
     <value>VIN Code</value>
   </data>
   <data name="NotValid" xml:space="preserve">
-    <value>Not Valid</value>
+    <value>Not valid</value>
   </data>
   <data name="Comment" xml:space="preserve">
     <value>Comment</value>

@@ -29,6 +29,7 @@ namespace TestCard.Domain.Services
             request.EffectiveDate = now;
             request.CreateDate = now;
             request.ResponsiblePersonID = personID;
+            request.IsValid = request.TestingCardDetailChangeRequests.All(x => x.IsValid);
 
             if (personID.HasValue)
             {

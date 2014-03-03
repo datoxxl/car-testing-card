@@ -44,6 +44,7 @@ namespace TestCard.Domain
         public Nullable<System.DateTime> AdministratorConfirmDate { get; set; }
         public Nullable<int> AdministratorPersonID { get; set; }
         public string TestingCardNumber { get; set; }
+        public Nullable<bool> IsFirstTesting { get; set; }
     
         public virtual ConfirmStatus QualityManagerConfirmStatus { get; set; }
         public virtual ConfirmStatus AdminConfirmStatus { get; set; }

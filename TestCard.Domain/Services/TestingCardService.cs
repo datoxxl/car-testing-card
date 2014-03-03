@@ -49,6 +49,7 @@ namespace TestCard.Domain.Services
                     OwnerName = card.OwnerName,
                     OwnerIDNo = card.OwnerIDNo,
                     IsValid = card.IsValid,
+                    IsFirstTesting = card.IsFirstTesting,
                     FirnishNumber = card.FirnishNumber,
                     FirnishDate = card.FirnishDate,
                     Comment = card.Comment,
@@ -129,6 +130,10 @@ namespace TestCard.Domain.Services
             }
             testingCard.EffectiveDate = now;
             testingCard.ResponsiblePersonID = currentPerson.PersonID;
+            testingCard.IsValid = testingCard.TestingCardDetails.All(x => x.IsValid);
+
+            var similiarCards = GetAll().Any(x => x.VIN == testingCard.VIN || x.CarSerialNo == testingCard.CarSerialNo);
+            testingCard.IsFirstTesting = !similiarCards;
 
             Add(testingCard);
 

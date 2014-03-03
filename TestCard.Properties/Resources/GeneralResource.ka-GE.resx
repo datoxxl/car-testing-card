@@ -331,7 +331,7 @@
     <value>VIN კოდი</value>
   </data>
   <data name="NotValid" xml:space="preserve">
-    <value>უვარგისი</value>
+    <value>უვარგისია</value>
   </data>
   <data name="Comment" xml:space="preserve">
     <value>კომენტარი</value>

@@ -145,6 +145,7 @@
     <Compile Include="Controllers\PersonChangeRequestController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\TestingCardChangeRequestController.cs" />
     <Compile Include="Controllers\TestingCardController.cs" />
     <Compile Include="Filters\AuthorizationFilter.cs" />
@@ -350,6 +351,7 @@
     <Content Include="Views\Shared\_MultUpload.cshtml" />
     <Content Include="Views\Shared\_ChangeRequestFilter.cshtml" />
     <Content Include="Views\TestingCard\Images.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

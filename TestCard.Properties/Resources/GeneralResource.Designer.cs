@@ -547,7 +547,7 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not Valid.
+        ///   Looks up a localized string similar to Not valid.
         /// </summary>
         public static string NotValid {
             get {

@@ -69,11 +69,7 @@ namespace TestCard.Web.Models
             set { }
         }
 
-        public bool IsFirstTesting
-        {
-            get;
-            set;
-        }
+        public bool IsFirstTesting { get; set; }
 
         public List<TestingStep> TestingSteps { get; set; }
 

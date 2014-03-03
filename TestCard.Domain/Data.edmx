@@ -766,6 +766,7 @@
           <Property Name="OwnerName" Type="nvarchar" MaxLength="200" />
           <Property Name="OwnerIDNo" Type="nvarchar" MaxLength="50" />
           <Property Name="IsValid" Type="bit" />
+          <Property Name="IsFirstTesting" Type="bit" />
           <Property Name="FirnishNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="FirnishDate" Type="date" />
           <Property Name="Comment" Type="nvarchar" MaxLength="2000" />
@@ -788,6 +789,7 @@
           <Property Name="OwnerName" Type="nvarchar" MaxLength="200" />
           <Property Name="OwnerIDNo" Type="nvarchar" MaxLength="50" />
           <Property Name="IsValid" Type="bit" />
+          <Property Name="IsFirstTesting" Type="bit" />
           <Property Name="FirnishNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="FirnishDate" Type="date" />
           <Property Name="Comment" Type="nvarchar" MaxLength="2000" />
@@ -863,6 +865,7 @@
           <Property Name="OwnerName" Type="nvarchar" MaxLength="200" />
           <Property Name="OwnerIDNo" Type="nvarchar" MaxLength="50" />
           <Property Name="IsValid" Type="bit" />
+          <Property Name="IsFirstTesting" Type="bit" />
           <Property Name="FirnishNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="FirnishDate" Type="date" />
           <Property Name="Comment" Type="nvarchar" MaxLength="2000" />
@@ -2610,6 +2613,7 @@
           <NavigationProperty Name="TestingCardChangeRequests" Relationship="TestCardModel.FK_TestingCardChangeRequest_TestingCard" FromRole="TestingCard" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="TestingCardDetailChangeRequests" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCard" FromRole="TestingCard" ToRole="TestingCardDetailChangeRequest" />
           <NavigationProperty Name="TestingCardDetailHistories" Relationship="TestCardModel.FK_TestingCardDetailHistory_TestingCard" FromRole="TestingCard" ToRole="TestingCardDetailHistory" />
+          <Property Type="Boolean" Name="IsFirstTesting" />
         </EntityType>
         <EntityType Name="TestingCardChangeRequest">
           <Key>
@@ -2647,6 +2651,7 @@
           <NavigationProperty Name="AdminPerson" Relationship="TestCardModel.FK_TestingCardChangeRequest_Person3" FromRole="TestingCardChangeRequest" ToRole="Person" />
           <NavigationProperty Name="TestingCard" Relationship="TestCardModel.FK_TestingCardChangeRequest_TestingCard" FromRole="TestingCardChangeRequest" ToRole="TestingCard" />
           <Property Type="String" Name="TestingCardNumber" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsFirstTesting" />
         </EntityType>
         <EntityType Name="TestingCardDetail">
           <Key>
@@ -2709,6 +2714,7 @@
           <NavigationProperty Name="Person" Relationship="TestCardModel.FK_TestingCardHistory_Person" FromRole="TestingCardHistory" ToRole="Person" />
           <Property Type="String" Name="TestingCardNumber" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TestingCardDetailHistories" Relationship="TestCardModel.FK_TestingCardDetailHistory_TestingCardHistory" FromRole="TestingCardHistory" ToRole="TestingCardDetailHistory" />
+          <Property Type="Boolean" Name="IsFirstTesting" />
         </EntityType>
         <EntityType Name="TestingStep">
           <Key>
@@ -4180,6 +4186,7 @@
           <EntitySetMapping Name="TestingCards">
             <EntityTypeMapping TypeName="TestCardModel.TestingCard">
               <MappingFragment StoreEntitySet="TestingCard">
+                <ScalarProperty Name="IsFirstTesting" ColumnName="IsFirstTesting" />
                 <ScalarProperty Name="TestingCardID" ColumnName="TestingCardID" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="TestingCardNumber" ColumnName="TestingCardNumber" />
@@ -4202,6 +4209,7 @@
           <EntitySetMapping Name="TestingCardChangeRequests">
             <EntityTypeMapping TypeName="TestCardModel.TestingCardChangeRequest">
               <MappingFragment StoreEntitySet="TestingCardChangeRequest">
+                <ScalarProperty Name="IsFirstTesting" ColumnName="IsFirstTesting" />
                 <ScalarProperty Name="TestingCardNumber" ColumnName="TestingCardNumber" />
                 <ScalarProperty Name="TestingCardChangeRequestID" ColumnName="TestingCardChangeRequestID" />
                 <ScalarProperty Name="TestingCardID" ColumnName="TestingCardID" />
@@ -4260,6 +4268,7 @@
           <EntitySetMapping Name="TestingCardHistories">
             <EntityTypeMapping TypeName="TestCardModel.TestingCardHistory">
               <MappingFragment StoreEntitySet="TestingCardHistory">
+                <ScalarProperty Name="IsFirstTesting" ColumnName="IsFirstTesting" />
                 <ScalarProperty Name="TestingCardNumber" ColumnName="TestingCardNumber" />
                 <ScalarProperty Name="TestingCardHistoryID" ColumnName="TestingCardHistoryID" />
                 <ScalarProperty Name="TestingCardID" ColumnName="TestingCardID" />
