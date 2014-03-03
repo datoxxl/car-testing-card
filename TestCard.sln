@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCard.Domain", "TestCard
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfReportGenerator", "PdfReportGenerator\PdfReportGenerator.csproj", "{DF00196A-3B96-4BCD-8C4E-879DB8EDFE95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{05208EF1-D6BA-4E25-9AF3-A788DA990E01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{DF00196A-3B96-4BCD-8C4E-879DB8EDFE95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF00196A-3B96-4BCD-8C4E-879DB8EDFE95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF00196A-3B96-4BCD-8C4E-879DB8EDFE95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05208EF1-D6BA-4E25-9AF3-A788DA990E01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05208EF1-D6BA-4E25-9AF3-A788DA990E01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05208EF1-D6BA-4E25-9AF3-A788DA990E01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05208EF1-D6BA-4E25-9AF3-A788DA990E01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,6 +19,7 @@ namespace TestCard.Domain.Helpers
 
             using (var file = System.IO.File.Open(filePath, System.IO.FileMode.OpenOrCreate))
             {
+                fileData = Tools.ImageTool.AutoOrientImageFile(fileData);
                 file.Write(fileData, 0, fileData.Length);
             }
         }

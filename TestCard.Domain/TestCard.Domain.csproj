@@ -214,6 +214,10 @@
       <Project>{1d363abf-ebc8-4d5b-abb9-a3a36380aa04}</Project>
       <Name>TestCard.Properties</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Tools\Tools.csproj">
+      <Project>{05208ef1-d6ba-4e25-9af3-a788da990e01}</Project>
+      <Name>Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
