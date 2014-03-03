@@ -7,17 +7,27 @@ using TestCard.Properties.Resources;
 
 namespace TestCard.Web.Models
 {
-    public class TestingCardModel
+    public class TestingCardChangeRequestModel
     {
         public int? TestingCardID { get; set; }
+        public int? TestingCardChangeRequestID { get; set; }
+
+        [Display(Name = "RequestReason", ResourceType = typeof(GeneralResource))]
+        public int? ReasonID { get; set; }
+
+        [Display(Name = "RequestReason", ResourceType = typeof(GeneralResource))]
+        public string ReasonName { get; set; }
+
+        [Display(Name = "RequestExplanation", ResourceType = typeof(GeneralResource))]
+        public string ReasonDescription { get; set; }
 
         public string Number { get; set; }
 
-        [StringLength(11,
-           MinimumLength = 11,
-           ErrorMessage = "",
-           ErrorMessageResourceName = "IdNumberMaxLengthError",
-           ErrorMessageResourceType = typeof(GeneralResource))]
+         [StringLength(11,
+            MinimumLength = 11,
+            ErrorMessage = "",
+            ErrorMessageResourceName = "IdNumberMaxLengthError",
+            ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "OwnerIDNo", ResourceType = typeof(GeneralResource))]
         public string OwnerIDNo { get; set; }
 
@@ -77,35 +87,6 @@ namespace TestCard.Web.Models
 
         public List<TestingStep> TestingSteps { get; set; }
 
-        //From company
-        public int? CompanyID { get; set; }
-
-        public string CompanyFileName { get; set; }
-
-        [Display(Name = "Company", ResourceType = typeof(GeneralResource))]
-        public string CompanyName { get; set; }
-
-        [Display(Name = "AccreditationNumber", ResourceType = typeof(GeneralResource))]
-        public string CompanyAccreditationNumber { get; set; }
-
-        [Display(Name = "AccreditationScope", ResourceType = typeof(GeneralResource))]
-        public string CompanyAccreditationScope { get; set; }
-
-        [Display(Name = "Address", ResourceType = typeof(GeneralResource))]
-        public string CompanyAddress { get; set; }
-    }
-
-    public class TestingStep
-    {
-        public int TestingStepID { get; set; }
-        public string TestingStepName { get; set; }
-        public List<TestingSubStep> TestingSubSteps { get; set; }
-    }
-
-    public class TestingSubStep
-    {
-        public int TestingSubStepID { get; set; }
-        public string TestingSubStepName { get; set; }
-        public bool IsValid { get; set; }
+        public SelectList Reasons { get; set; }
     }
 }

@@ -118,6 +118,8 @@
         <AssociationConnector Association="TestCardModel.FK_TestingCardDetailHistory_TestingCard" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardDetailHistory_TestingCardHistory" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardDetailHistory_TestingSubStep" />
+        <EntityTypeShape EntityType="TestCardModel.ChangeRequestReason" Width="1.5" PointX="5.0797771164587591" PointY="27.227142912907127" />
+        <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_ChangeRequestReason" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

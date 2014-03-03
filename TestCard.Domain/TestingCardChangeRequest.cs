@@ -45,6 +45,8 @@ namespace TestCard.Domain
         public Nullable<int> AdministratorPersonID { get; set; }
         public string TestingCardNumber { get; set; }
         public Nullable<bool> IsFirstTesting { get; set; }
+        public Nullable<int> ReasonID { get; set; }
+        public string ReasonDescription { get; set; }
     
         public virtual ConfirmStatus QualityManagerConfirmStatus { get; set; }
         public virtual ConfirmStatus AdminConfirmStatus { get; set; }
@@ -54,5 +56,6 @@ namespace TestCard.Domain
         public virtual Person ResponsiblePerson { get; set; }
         public virtual Person AdminPerson { get; set; }
         public virtual TestingCard TestingCard { get; set; }
+        public virtual ChangeRequestReason ChangeRequestReason { get; set; }
     }
 }

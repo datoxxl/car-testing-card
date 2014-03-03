@@ -1,0 +1,121 @@
+﻿@model TestCard.Web.Models.TestingCardChangeRequestModel
+
+@Html.HiddenFor(x => x.TestingCardID)
+<table class="x-form">
+    <tr>
+        <td>
+            <fieldset>
+                <legend></legend>
+                <ol>
+                    <li>
+                        @Html.LabelFor(x => x.ReasonID)
+                        @Html.DropDownListFor(x => x.ReasonID, Model.Reasons, string.Empty)
+                        @Html.ValidationMessageFor(x => x.ReasonID)
+                    </li>
+                </ol>
+            </fieldset>
+        </td>
+        <td>
+            <fieldset>
+                <legend></legend>
+                <ol>
+                    <li>
+                        @Html.LabelFor(x => x.ReasonDescription)
+                        @Html.TextAreaFor(x => x.ReasonDescription)
+                        @Html.ValidationMessageFor(x => x.ReasonDescription)
+                    </li>
+                </ol>
+            </fieldset>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <fieldset>
+                <legend></legend>
+                <ol>
+                    <li>
+                        @Html.LabelFor(x => x.TestingCardNumber)
+                        @Html.TextBoxFor(x => x.TestingCardNumber)
+                        @Html.ValidationMessageFor(x => x.TestingCardNumber)
+                    </li>
+                    <li>
+                        @Html.LabelFor(x => x.OwnerName)
+                        @Html.TextBoxFor(x => x.OwnerName)
+                        @Html.ValidationMessageFor(x => x.OwnerName)
+                    </li>
+                    <li>
+                        @Html.LabelFor(x => x.OwnerIDNo)
+                        @Html.TextBoxFor(x => x.OwnerIDNo)
+                        @Html.ValidationMessageFor(x => x.OwnerIDNo)
+                    </li>
+                    <li>
+                        @Html.LabelFor(x => x.CarModel)
+                        @Html.TextBoxFor(x => x.CarModel)
+                        @Html.ValidationMessageFor(x => x.CarModel)
+                    </li>
+                    <li>
+                        @Html.LabelFor(x => x.CarNumber)
+                        @Html.TextBoxFor(x => x.CarNumber)
+                        @Html.ValidationMessageFor(x => x.CarNumber)
+                    </li>
+                    <li>
+                        @Html.LabelFor(x => x.CarSerialNo)
+                        @Html.TextBoxFor(x => x.CarSerialNo)
+                        @Html.ValidationMessageFor(x => x.CarSerialNo)
+                    </li>
+                </ol>
+            </fieldset>
+        </td>
+        <td>
+            <fieldset>
+                <legend></legend>
+                <ol>
+                    <li>
+                        @Html.LabelFor(x => x.VIN)
+                        @Html.TextBoxFor(x => x.VIN)
+                        @Html.ValidationMessageFor(x => x.VIN)
+                    </li>
+                    <li>
+                        @Html.LabelFor(x => x.Odometer)
+                        @Html.TextBoxFor(x => x.Odometer)
+                        @Html.ValidationMessageFor(x => x.Odometer)
+                    </li>
+                    <li>
+                        @Html.LabelFor(x => x.FirnishNumber)
+                        @Html.TextBoxFor(x => x.FirnishNumber)
+                        @Html.ValidationMessageFor(x => x.FirnishNumber)
+                    </li>
+                    <li>
+                        @Html.LabelFor(x => x.FirnishDate)
+                        @Html.EditorFor(x => x.FirnishDate)
+                        @Html.ValidationMessageFor(x => x.FirnishDate)
+                    </li>
+                    <li>
+                        @Html.LabelFor(x => x.Comment)
+                        @Html.TextAreaFor(x => x.Comment)
+                        @Html.ValidationMessageFor(x => x.Comment)
+                    </li>
+                </ol>
+            </fieldset>
+        </td>
+    </tr>
+</table>
+<table class="x-card-steps">
+    @for (var i = 0; i < Model.TestingSteps.Count; i++)
+    { 
+        <tr>
+            <td>
+                @Html.HiddenFor(x => x.TestingSteps[i].TestingStepID)
+                @Html.DisplayFor(x => x.TestingSteps[i].TestingStepName)
+            </td>
+            @for (var j = 0; j < Model.TestingSteps[i].TestingSubSteps.Count; j++)
+            {
+                <td@(Model.TestingSteps[i].TestingSubSteps.Count == 2 && Model.TestingSteps[i].TestingSubSteps.Count == (j + 1) ? " colspan=3" : string.Empty)>
+                    @Html.HiddenFor(x => x.TestingSteps[i].TestingSubSteps[j].TestingSubStepID)
+                    @Html.CheckBoxFor(x => x.TestingSteps[i].TestingSubSteps[j].IsValid)
+                    @Html.LabelFor(x => x.TestingSteps[i].TestingSubSteps[j].IsValid, Model.TestingSteps[i].TestingSubSteps[j].TestingSubStepName)
+                </td>
+            }
+        </tr>
+    }
+</table>

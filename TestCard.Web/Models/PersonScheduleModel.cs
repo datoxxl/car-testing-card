@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,9 +17,13 @@ namespace TestCard.Web.Models
         {
             public int WeekDayNumber { get; set; }
             public string WeekDayName { get; set; }
+            [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
             public TimeSpan? StartTime { get; set; }
+            [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
             public TimeSpan? EndTime { get; set; }
+            [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
             public TimeSpan? BreakStartTime { get; set; }
+            [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
             public TimeSpan? BreakEndTime { get; set; }
         }
 

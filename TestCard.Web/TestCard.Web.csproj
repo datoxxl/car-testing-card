@@ -161,6 +161,7 @@
     <Compile Include="Models\AjaxListModel.cs" />
     <Compile Include="Models\CompanyListModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
+    <Compile Include="Models\TestingCardChangeRequestModel.cs" />
     <Compile Include="Models\PagedList.cs" />
     <Compile Include="Models\TestingCardChangeRequestListModel.cs" />
     <Compile Include="Models\PersonChangeRequestListModel.cs" />
@@ -170,8 +171,10 @@
     <Compile Include="Models\PersonScheduleModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\TestingCardListModel.cs" />
-    <Compile Include="Models\TestingCardModel.cs" />
     <Compile Include="Models\RequestActionsModel.cs" />
+    <Compile Include="Models\TestingCardModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\ToolbarButton.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\UserOptions.cs" />
@@ -330,7 +333,7 @@
     <Content Include="Views\PersonScheduleChangeRequest\View.cshtml" />
     <Content Include="Views\TestingCard\List.cshtml" />
     <Content Include="Views\List\TestingCard.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\TestingCardModel.cshtml" />
+    <Content Include="Views\TestingCard\DisplayTemplates\TestingCardModel.cshtml" />
     <Content Include="Views\TestingCard\EditorTemplates\TestingCardModel.cshtml" />
     <Content Include="Views\TestingCard\Add.cshtml" />
     <Content Include="Views\TestingCard\Edit.cshtml" />
@@ -352,6 +355,8 @@
     <Content Include="Views\Shared\_ChangeRequestFilter.cshtml" />
     <Content Include="Views\TestingCard\Images.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
+    <Content Include="Views\TestingCard\EditorTemplates\TestingCardChangeRequestModel.cshtml" />
+    <Content Include="Views\TestingCardChangeRequest\DisplayTemplates\TestingCardChangeRequestModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -359,7 +364,6 @@
     <Folder Include="ModelBinders\" />
     <Folder Include="Views\Person\DisplayTemplates\" />
     <Folder Include="Views\Person\EditorTemplates\" />
-    <Folder Include="Views\TestingCard\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -118,7 +118,23 @@ namespace TestCard.Web.Helpers
         {
             using (var service = new TestingStepService())
             {
-                model.TestingSteps = AutoMapper.Mapper.Map<List<Models.TestingCardModel.TestingStep>>(service.GetAll().ToList());
+                model.TestingSteps = AutoMapper.Mapper.Map<List<Models.TestingStep>>(service.GetAll().ToList());
+            }
+        }
+
+        public static void Populate(Models.TestingCardChangeRequestModel model)
+        {
+            if (model.TestingSteps == null)
+            {
+                using (var service = new TestingStepService())
+                {
+                    model.TestingSteps = AutoMapper.Mapper.Map<List<Models.TestingStep>>(service.GetAll().ToList());
+                }
+            }
+
+            using (var service = new ChangeRequestReasonService())
+            {
+                model.Reasons = new SelectList(service.GetAll().ToList(), "ChangeRequestReasonID", "Title");
             }
         }
     }

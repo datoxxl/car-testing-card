@@ -307,7 +307,7 @@ namespace TestCard.Web.Controllers
                 {
                     var model = new Models.TestingCardModel();
                     model = AutoMapper.Mapper.Map(source, model);
-                    var subSteps = AutoMapper.Mapper.Map<List<Models.TestingCardModel.TestingSubStep>>(source.TestingCardDetails);
+                    var subSteps = AutoMapper.Mapper.Map<List<Models.TestingSubStep>>(source.TestingCardDetails);
 
                     ModelDataHelper.Populate(model);
 

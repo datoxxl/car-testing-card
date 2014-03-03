@@ -429,4 +429,10 @@
   <data name="UnconfirmedRecords" xml:space="preserve">
     <value>დაუსასტურებელი ჩანაწერები</value>
   </data>
+  <data name="RequestExplanation" xml:space="preserve">
+    <value>მოთხოვნის განმარტება</value>
+  </data>
+  <data name="RequestReason" xml:space="preserve">
+    <value>მოთხოვნის მიზეზი</value>
+  </data>
 </root>

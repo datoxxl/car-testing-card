@@ -30,9 +30,9 @@ namespace TestCard.Web.Controllers
 
                     if (source != null)
                     {
-                        var model = new Models.TestingCardModel();
+                        var model = new Models.TestingCardChangeRequestModel();
                         model = AutoMapper.Mapper.Map(source, model);
-                        var subSteps = AutoMapper.Mapper.Map<List<Models.TestingCardModel.TestingSubStep>>(source.TestingCardDetailChangeRequests);
+                        var subSteps = AutoMapper.Mapper.Map<List<Models.TestingSubStep>>(source.TestingCardDetailChangeRequests);
 
                         ModelDataHelper.Populate(model);
 

@@ -7,6 +7,7 @@
     <Schema Namespace="CarTestingCardModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CarTestingCardModelStoreContainer">
           <EntitySet Name="AccountType" EntityType="CarTestingCardModel.Store.AccountType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ChangeRequestReason" EntityType="CarTestingCardModel.Store.ChangeRequestReason" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Code" EntityType="CarTestingCardModel.Store.Code" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CodeType" EntityType="CarTestingCardModel.Store.CodeType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Company" EntityType="CarTestingCardModel.Store.Company" store:Type="Tables" Schema="dbo" />
@@ -383,6 +384,10 @@
             <End Role="Person" EntitySet="Person" />
             <End Role="TestingCard" EntitySet="TestingCard" />
           </AssociationSet>
+          <AssociationSet Name="FK_TestingCardChangeRequest_ChangeRequestReason" Association="CarTestingCardModel.Store.FK_TestingCardChangeRequest_ChangeRequestReason">
+            <End Role="ChangeRequestReason" EntitySet="ChangeRequestReason" />
+            <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequest" />
+          </AssociationSet>
           <AssociationSet Name="FK_TestingCardChangeRequest_ConfirmStatus" Association="CarTestingCardModel.Store.FK_TestingCardChangeRequest_ConfirmStatus">
             <End Role="ConfirmStatus" EntitySet="ConfirmStatus" />
             <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequest" />
@@ -478,6 +483,13 @@
           </Key>
           <Property Name="AccountTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="AccountTypeName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ChangeRequestReason">
+          <Key>
+            <PropertyRef Name="ChangeRequestReasonID" />
+          </Key>
+          <Property Name="ChangeRequestReasonID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="250" />
         </EntityType>
         <EntityType Name="Code">
           <Key>
@@ -778,6 +790,8 @@
             <PropertyRef Name="TestingCardChangeRequestID" />
           </Key>
           <Property Name="TestingCardChangeRequestID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ReasonID" Type="int" />
+          <Property Name="ReasonDescription" Type="nvarchar" MaxLength="2000" />
           <Property Name="TestingCardID" Type="int" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
           <Property Name="TestingCardNumber" Type="nvarchar" MaxLength="50" />
@@ -1734,6 +1748,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TestingCardChangeRequest_ChangeRequestReason">
+          <End Role="ChangeRequestReason" Type="CarTestingCardModel.Store.ChangeRequestReason" Multiplicity="0..1" />
+          <End Role="TestingCardChangeRequest" Type="CarTestingCardModel.Store.TestingCardChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChangeRequestReason">
+              <PropertyRef Name="ChangeRequestReasonID" />
+            </Principal>
+            <Dependent Role="TestingCardChangeRequest">
+              <PropertyRef Name="ReasonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TestingCardChangeRequest_ConfirmStatus">
           <End Role="ConfirmStatus" Type="CarTestingCardModel.Store.ConfirmStatus" Multiplicity="0..1" />
           <End Role="TestingCardChangeRequest" Type="CarTestingCardModel.Store.TestingCardChangeRequest" Multiplicity="*" />
@@ -2350,6 +2376,11 @@
             <End Role="TestingSubStep" EntitySet="TestingSubSteps" />
             <End Role="TestingCardDetailHistory" EntitySet="TestingCardDetailHistories" />
           </AssociationSet>
+          <EntitySet Name="ChangeRequestReasons" EntityType="TestCardModel.ChangeRequestReason" />
+          <AssociationSet Name="FK_TestingCardChangeRequest_ChangeRequestReason" Association="TestCardModel.FK_TestingCardChangeRequest_ChangeRequestReason">
+            <End Role="ChangeRequestReason" EntitySet="ChangeRequestReasons" />
+            <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequests" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountType">
           <Key>
@@ -2652,6 +2683,9 @@
           <NavigationProperty Name="TestingCard" Relationship="TestCardModel.FK_TestingCardChangeRequest_TestingCard" FromRole="TestingCardChangeRequest" ToRole="TestingCard" />
           <Property Type="String" Name="TestingCardNumber" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="IsFirstTesting" />
+          <Property Type="Int32" Name="ReasonID" />
+          <Property Type="String" Name="ReasonDescription" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChangeRequestReason" Relationship="TestCardModel.FK_TestingCardChangeRequest_ChangeRequestReason" FromRole="TestingCardChangeRequest" ToRole="ChangeRequestReason" />
         </EntityType>
         <EntityType Name="TestingCardDetail">
           <Key>
@@ -3987,6 +4021,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ChangeRequestReason">
+          <Key>
+            <PropertyRef Name="ChangeRequestReasonID" />
+          </Key>
+          <Property Type="Int32" Name="ChangeRequestReasonID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TestingCardChangeRequests" Relationship="TestCardModel.FK_TestingCardChangeRequest_ChangeRequestReason" FromRole="ChangeRequestReason" ToRole="TestingCardChangeRequest" />
+        </EntityType>
+        <Association Name="FK_TestingCardChangeRequest_ChangeRequestReason">
+          <End Type="TestCardModel.ChangeRequestReason" Role="ChangeRequestReason" Multiplicity="0..1" />
+          <End Type="TestCardModel.TestingCardChangeRequest" Role="TestingCardChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChangeRequestReason">
+              <PropertyRef Name="ChangeRequestReasonID" />
+            </Principal>
+            <Dependent Role="TestingCardChangeRequest">
+              <PropertyRef Name="ReasonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4209,6 +4263,8 @@
           <EntitySetMapping Name="TestingCardChangeRequests">
             <EntityTypeMapping TypeName="TestCardModel.TestingCardChangeRequest">
               <MappingFragment StoreEntitySet="TestingCardChangeRequest">
+                <ScalarProperty Name="ReasonDescription" ColumnName="ReasonDescription" />
+                <ScalarProperty Name="ReasonID" ColumnName="ReasonID" />
                 <ScalarProperty Name="IsFirstTesting" ColumnName="IsFirstTesting" />
                 <ScalarProperty Name="TestingCardNumber" ColumnName="TestingCardNumber" />
                 <ScalarProperty Name="TestingCardChangeRequestID" ColumnName="TestingCardChangeRequestID" />
@@ -4560,6 +4616,14 @@
                 <ScalarProperty Name="TestingSubStepID" ColumnName="TestingSubStepID" />
                 <ScalarProperty Name="TestingCardID" ColumnName="TestingCardID" />
                 <ScalarProperty Name="TestingCardHistoryID" ColumnName="TestingCardHistoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChangeRequestReasons">
+            <EntityTypeMapping TypeName="TestCardModel.ChangeRequestReason">
+              <MappingFragment StoreEntitySet="ChangeRequestReason">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ChangeRequestReasonID" ColumnName="ChangeRequestReasonID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

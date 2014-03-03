@@ -21,7 +21,24 @@ namespace TestCard.Web.Controllers
 
         public ActionResult View(int? id)
         {
-            return GetModel(id ?? -1);
+            try
+            {
+                var model = GetTestingCardModel(id ?? -1);
+                if (model != null)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    SetErrorMessage(GeneralResource.RecordNotExists);
+                }
+            }
+            catch
+            {
+                SetErrorMessage();
+            }
+
+            return RedirectTo(Request.UrlReferrer.AbsoluteUri);
         }
 
         public ActionResult Add()
@@ -65,11 +82,34 @@ namespace TestCard.Web.Controllers
 
         public ActionResult Edit(int? id)
         {
-            return GetModel(id ?? -1);
+            try
+            {
+                var cardModel = GetTestingCardModel(id ?? -1);
+                var model = new Models.TestingCardChangeRequestModel();
+
+                AutoMapper.Mapper.Map(cardModel, model);
+
+                ModelDataHelper.Populate(model);
+
+                if (model != null)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    SetErrorMessage(GeneralResource.RecordNotExists);
+                }
+            }
+            catch
+            {
+                SetErrorMessage();
+            }
+
+            return RedirectTo(Request.UrlReferrer.AbsoluteUri);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, Models.TestingCardModel model)
+        public ActionResult Edit(int id, Models.TestingCardChangeRequestModel model)
         {
             try
             {
@@ -161,28 +201,6 @@ namespace TestCard.Web.Controllers
                 }
 
                 SetSuccessMessage();
-            }
-            catch
-            {
-                SetErrorMessage();
-            }
-
-            return RedirectTo(Request.UrlReferrer.AbsoluteUri);
-        }
-
-        private ActionResult GetModel(int id)
-        {
-            try
-            {
-                var model = GetTestingCardModel(id);
-                if (model != null)
-                {
-                    return View(model);
-                }
-                else
-                {
-                    SetErrorMessage(GeneralResource.RecordNotExists);
-                }
             }
             catch
             {

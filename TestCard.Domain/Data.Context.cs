@@ -60,5 +60,6 @@ namespace TestCard.Domain
         public DbSet<Code> Codes { get; set; }
         public DbSet<CodeType> CodeTypes { get; set; }
         public DbSet<TestingCardDetailHistory> TestingCardDetailHistories { get; set; }
+        public DbSet<ChangeRequestReason> ChangeRequestReasons { get; set; }
     }
 }

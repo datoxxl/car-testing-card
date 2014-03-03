@@ -1,4 +1,4 @@
-﻿@model TestCard.Web.Models.TestingCardModel
+﻿@model TestCard.Web.Models.TestingCardChangeRequestModel
 
 @{
     ViewBag.Title = "View";
@@ -10,5 +10,11 @@
     </div>
     <div class="form-inner">
         @Html.DisplayForModel()
+        @{ Html.RenderPartial("_RequestActions", new TestCard.Web.Models.RequestActionsModel
+            {
+                Action = "ProcessRequest",
+                Controller = "TestingCardChangeRequest",
+                RequestID = Model.TestingCardChangeRequestID.Value
+            }); }
     </div>
 </div>

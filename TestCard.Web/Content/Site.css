@@ -35,7 +35,7 @@ table.x-form fieldset legend
     padding-bottom: 5px;
     border-bottom: 1px solid #157fcc;
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
     table.x-form fieldset legend:empty
@@ -46,7 +46,7 @@ table.x-form fieldset legend
 .x-details-table
 {
     border-collapse: collapse;
-    margin: 10px;
+    width: 100%;
 }
 
     .x-details-table > tbody > tr > td
@@ -54,11 +54,12 @@ table.x-form fieldset legend
         padding: 5px;
     }
 
-        .x-details-table > tbody > tr > td:first-child
-        {
-            vertical-align: top;
-            width: 180px;
-        }
+    .x-details-table > tbody > tr > td
+    {
+        vertical-align: top;
+        width: 50%;
+        border: 1px solid #ccc;
+    }
 
 fieldset ol
 {
@@ -71,13 +72,14 @@ fieldset ol
         padding-bottom: 5px;
     }
 
-label
+.x-form label
 {
     display: inline-block;
     /*font-size: 1.2em;*/
     /*font-weight: 600;*/
-    width: 150px;
+    width: 165px;
     vertical-align: middle;
+    padding-right: 15px;
 }
 
 input[type="text"],
@@ -93,7 +95,7 @@ input[type="file"]
     color: #333;
     /*font-size: 1.2em;*/
     padding: 5px;
-    width: 250px;
+    width: 300px;
     vertical-align: middle;
 }
 
@@ -581,13 +583,12 @@ table.x-form
 {
     width: 100%;
     border-collapse: collapse;
-    margin: 0 auto;
 }
 
     table.x-form > tbody > tr > td
     {
         vertical-align: top;
-        padding-right: 2em;
+        padding: 0 15px 15px 0;
         width: 50%;
     }
 
@@ -667,6 +668,12 @@ table.x-form
     #login input[type="password"]
     {
         width: 240px;
+    }
+
+    #login label
+    {
+        display: inline-block;
+        width: 150px;
     }
 
 table.x-table
@@ -831,7 +838,6 @@ ul.x-action-bar
 
     .x-form-container .x-form
     {
-        width: auto;
     }
 
 .x-picture-area

@@ -429,4 +429,10 @@
   <data name="UnconfirmedRecords" xml:space="preserve">
     <value>Unconfirmed records</value>
   </data>
+  <data name="RequestExplanation" xml:space="preserve">
+    <value>Request explanation</value>
+  </data>
+  <data name="RequestReason" xml:space="preserve">
+    <value>Request reason</value>
+  </data>
 </root>

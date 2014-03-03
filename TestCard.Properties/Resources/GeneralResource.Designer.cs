@@ -727,11 +727,29 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Request explanation.
+        /// </summary>
+        public static string RequestExplanation {
+            get {
+                return ResourceManager.GetString("RequestExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Request is not approved by quality manager.
         /// </summary>
         public static string RequestNotApprovedByQualityManager {
             get {
                 return ResourceManager.GetString("RequestNotApprovedByQualityManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request reason.
+        /// </summary>
+        public static string RequestReason {
+            get {
+                return ResourceManager.GetString("RequestReason", resourceCulture);
             }
         }
         

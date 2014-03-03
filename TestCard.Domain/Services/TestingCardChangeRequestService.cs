@@ -155,13 +155,13 @@ namespace TestCard.Domain.Services
         {
             var type = (AccountTypes)person.AccountTypeID;
             var approvedStatus = (int)ConfirmStatuses.Approved;
-            var rejectedStatus = (int)ConfirmStatuses.Rejected;
             var personID = person.PersonID;
             var result = GetAll().Where(x => x.ResponsiblePerson.Company.CompanyID == person.CompanyID);
 
             if (!showAll)
             {
-                result = result.Where(x => !x.AdministratorConfirmStatusID.HasValue && x.QualityManagerConfirmStatusID != rejectedStatus);
+                result = result.Where(x => !x.AdministratorConfirmStatusID.HasValue 
+                    && (!x.QualityManagerConfirmStatusID.HasValue || x.QualityManagerConfirmStatusID == approvedStatus));
             }
 
             switch (type)
