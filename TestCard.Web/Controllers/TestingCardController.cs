@@ -50,7 +50,7 @@ namespace TestCard.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Models.TestingCardModel model)
+        public ActionResult Add(Models.TestingCardModel model, HttpPostedFileWrapper[] files)
         {
             try
             {
@@ -62,11 +62,22 @@ namespace TestCard.Web.Controllers
 
                         testingCard.TestingCardDetails = AutoMapper.Mapper.Map<List<TestCard.Domain.TestingCardDetail>>(model.TestingSteps.SelectMany(x => x.TestingSubSteps));
 
-                        var testingCardID = service.SaveTestingCard(testingCard, CurrentUser);
+                        bool incorrectFormat = false;
 
-                        SetSuccessMessage();
+                        var images = GetImages(files, ref incorrectFormat);
 
-                        return RedirectToAction("Edit", new { id = testingCardID });
+                        if (incorrectFormat)
+                        {
+                            SetErrorMessage(GeneralResource.ImageAllowedMessage);
+                        }
+                        else
+                        {
+                            var testingCardID = service.SaveTestingCard(testingCard, images, CurrentUser);
+
+                            SetSuccessMessage();
+
+                            return RedirectToAction("Edit", new { id = testingCardID });
+                        }
                     }
                 }
             }
@@ -170,10 +181,6 @@ namespace TestCard.Web.Controllers
         {
             try
             {
-                var fileDatas = new List<byte[]>();
-
-                files = files.Where(x => x != null).ToArray();
-
                 if (files.Length == 0)
                 {
                     SetErrorMessage(GeneralResource.NoImagesFound);
@@ -181,26 +188,23 @@ namespace TestCard.Web.Controllers
                     return RedirectTo(Request.UrlReferrer.AbsoluteUri);
                 }
 
-                foreach (var file in files)
+                bool incorrectFormat = false;
+
+                var images = GetImages(files, ref incorrectFormat);
+
+                if (incorrectFormat)
                 {
-                    if (file != null && file.ContentType != MediaTypeNames.Image.Jpeg)
-                    {
-                        SetErrorMessage(GeneralResource.ImageAllowedMessage);
-
-                        return RedirectTo(Request.UrlReferrer.AbsoluteUri);
-                    }
-                    else
-                    {
-                        fileDatas.Add(GetFileData(file));
-                    }
+                    SetErrorMessage(GeneralResource.ImageAllowedMessage);
                 }
-
-                using (var service = new TestingCardService())
+                else
                 {
-                    service.SaveTestingCardImages(id, fileDatas);
-                }
+                    using (var service = new TestingCardService())
+                    {
+                        service.SaveTestingCardImages(id, images);
+                    }
 
-                SetSuccessMessage();
+                    SetSuccessMessage();
+                }
             }
             catch
             {
@@ -225,6 +229,27 @@ namespace TestCard.Web.Controllers
 
                 return View(card.Files.Select(x => x.FileName));
             }
+        }
+
+        public List<byte[]> GetImages(HttpPostedFileWrapper[] files, ref bool incorrectFormat)
+        {
+            var fileDatas = new List<byte[]>();
+
+            files = files.Where(x => x != null).ToArray();
+
+            foreach (var file in files)
+            {
+                if (FileHelper.IsNullOrOfType(file, FileHelper.FileType.WebImage))
+                {
+                    fileDatas.Add(FileHelper.GetFileData(file));
+                }
+                else
+                {
+                    incorrectFormat = true;
+                }
+            }
+
+            return fileDatas;
         }
     }
 }

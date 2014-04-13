@@ -358,6 +358,9 @@
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\TestingCard\EditorTemplates\TestingCardChangeRequestModel.cshtml" />
     <Content Include="Views\TestingCardChangeRequest\DisplayTemplates\TestingCardChangeRequestModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TestingStep.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TestingStep.cshtml" />
+    <Content Include="Views\Shared\_FormActions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

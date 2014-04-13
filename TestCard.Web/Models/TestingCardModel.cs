@@ -39,18 +39,30 @@ namespace TestCard.Web.Models
         [Display(Name = "CardNumber", ResourceType = typeof(GeneralResource))]
         public string TestingCardNumber { get; set; }
 
+        [Required(ErrorMessage = "",
+           ErrorMessageResourceName = "FillRequiredField",
+           ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "VINCode", ResourceType = typeof(GeneralResource))]
         public string VIN { get; set; }
 
         [Display(Name = "CarModel", ResourceType = typeof(GeneralResource))]
         public string CarModel { get; set; }
 
+        [Required(ErrorMessage = "",
+           ErrorMessageResourceName = "FillRequiredField",
+           ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "CarNumber", ResourceType = typeof(GeneralResource))]
         public string CarNumber { get; set; }
 
+        [Required(ErrorMessage = "",
+           ErrorMessageResourceName = "FillRequiredField",
+           ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "CarSerialNo", ResourceType = typeof(GeneralResource))]
         public string CarSerialNo { get; set; }
 
+        [Required(ErrorMessage = "",
+           ErrorMessageResourceName = "FillRequiredField",
+           ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "OwnerName", ResourceType = typeof(GeneralResource))]
         public string OwnerName { get; set; }
 
@@ -76,6 +88,8 @@ namespace TestCard.Web.Models
         public bool IsFirstTesting { get; set; }
 
         public List<TestingStep> TestingSteps { get; set; }
+
+        public IEnumerable<string> Images { get; set; }
 
         //From company
         public int? CompanyID { get; set; }
@@ -108,6 +122,7 @@ namespace TestCard.Web.Models
     {
         public int TestingSubStepID { get; set; }
         public string TestingSubStepName { get; set; }
-        public bool IsValid { get; set; }
+        public bool IsInvalid { get; set; }
+        public bool IsChecked { get; set; }
     }
 }

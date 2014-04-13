@@ -829,7 +829,8 @@
           </Key>
           <Property Name="TestingCardID" Type="int" Nullable="false" />
           <Property Name="TestingSubStepID" Type="int" Nullable="false" />
-          <Property Name="IsValid" Type="bit" Nullable="false" />
+          <Property Name="IsInvalid" Type="bit" Nullable="false" />
+          <Property Name="IsChecked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TestingCardDetailChangeRequest">
           <Key>
@@ -839,7 +840,8 @@
           <Property Name="TestingCardChangeRequestID" Type="int" Nullable="false" />
           <Property Name="TestingCardID" Type="int" />
           <Property Name="TestingSubStepID" Type="int" Nullable="false" />
-          <Property Name="IsValid" Type="bit" Nullable="false" />
+          <Property Name="IsInvalid" Type="bit" Nullable="false" />
+          <Property Name="IsChecked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TestingCardDetailHistory">
           <Key>
@@ -849,7 +851,8 @@
           <Property Name="TestingCardHistoryID" Type="int" Nullable="false" />
           <Property Name="TestingCardID" Type="int" Nullable="false" />
           <Property Name="TestingSubStepID" Type="int" Nullable="false" />
-          <Property Name="IsValid" Type="bit" Nullable="false" />
+          <Property Name="IsInvalid" Type="bit" Nullable="false" />
+          <Property Name="IsChecked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TestingCardFile">
           <Key>
@@ -2717,9 +2720,10 @@
           </Key>
           <Property Name="TestingCardID" Type="Int32" Nullable="false" />
           <Property Name="TestingSubStepID" Type="Int32" Nullable="false" />
-          <Property Name="IsValid" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TestingCard" Relationship="TestCardModel.FK_TestingCardDetail_TestingCard" FromRole="TestingCardDetail" ToRole="TestingCard" />
           <NavigationProperty Name="TestingSubStep" Relationship="TestCardModel.FK_TestingCardDetail_TestingSubStep" FromRole="TestingCardDetail" ToRole="TestingSubStep" />
+          <Property Type="Boolean" Name="IsInvalid" Nullable="false" />
+          <Property Type="Boolean" Name="IsChecked" Nullable="false" />
         </EntityType>
         <EntityType Name="TestingCardDetailChangeRequest">
           <Key>
@@ -2729,10 +2733,11 @@
           <Property Name="TestingCardChangeRequestID" Type="Int32" Nullable="false" />
           <Property Name="TestingCardID" Type="Int32" />
           <Property Name="TestingSubStepID" Type="Int32" Nullable="false" />
-          <Property Name="IsValid" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TestingCardChangeRequest" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCardChangeRequest" FromRole="TestingCardDetailChangeRequest" ToRole="TestingCardChangeRequest" />
           <NavigationProperty Name="TestingSubStep" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingSubStep" FromRole="TestingCardDetailChangeRequest" ToRole="TestingSubStep" />
           <NavigationProperty Name="TestingCard" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCard" FromRole="TestingCardDetailChangeRequest" ToRole="TestingCard" />
+          <Property Type="Boolean" Name="IsInvalid" Nullable="false" />
+          <Property Type="Boolean" Name="IsChecked" Nullable="false" />
         </EntityType>
         <EntityType Name="TestingCardFileChangeRequest">
           <Key>
@@ -3992,10 +3997,11 @@
           <Property Type="Int32" Name="TestingCardHistoryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="TestingCardID" Nullable="false" />
           <Property Type="Int32" Name="TestingSubStepID" Nullable="false" />
-          <Property Type="Boolean" Name="IsValid" Nullable="false" />
           <NavigationProperty Name="TestingCard" Relationship="TestCardModel.FK_TestingCardDetailHistory_TestingCard" FromRole="TestingCardDetailHistory" ToRole="TestingCard" />
           <NavigationProperty Name="TestingCardHistory" Relationship="TestCardModel.FK_TestingCardDetailHistory_TestingCardHistory" FromRole="TestingCardDetailHistory" ToRole="TestingCardHistory" />
           <NavigationProperty Name="TestingSubStep" Relationship="TestCardModel.FK_TestingCardDetailHistory_TestingSubStep" FromRole="TestingCardDetailHistory" ToRole="TestingSubStep" />
+          <Property Type="Boolean" Name="IsInvalid" Nullable="false" />
+          <Property Type="Boolean" Name="IsChecked" Nullable="false" />
         </EntityType>
         <Association Name="FK_TestingCardDetailHistory_TestingCard">
           <End Type="TestCardModel.TestingCard" Role="TestingCard" Multiplicity="1" />
@@ -4333,19 +4339,21 @@
           <EntitySetMapping Name="TestingCardDetails">
             <EntityTypeMapping TypeName="TestCardModel.TestingCardDetail">
               <MappingFragment StoreEntitySet="TestingCardDetail">
+                <ScalarProperty Name="IsChecked" ColumnName="IsChecked" />
+                <ScalarProperty Name="IsInvalid" ColumnName="IsInvalid" />
                 <ScalarProperty Name="TestingCardID" ColumnName="TestingCardID" />
                 <ScalarProperty Name="TestingSubStepID" ColumnName="TestingSubStepID" />
-                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TestingCardDetailChangeRequests">
             <EntityTypeMapping TypeName="TestCardModel.TestingCardDetailChangeRequest">
               <MappingFragment StoreEntitySet="TestingCardDetailChangeRequest">
+                <ScalarProperty Name="IsChecked" ColumnName="IsChecked" />
+                <ScalarProperty Name="IsInvalid" ColumnName="IsInvalid" />
                 <ScalarProperty Name="TestingCardChangeRequestID" ColumnName="TestingCardChangeRequestID" />
                 <ScalarProperty Name="TestingCardID" ColumnName="TestingCardID" />
                 <ScalarProperty Name="TestingSubStepID" ColumnName="TestingSubStepID" />
-                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4649,7 +4657,8 @@
           <EntitySetMapping Name="TestingCardDetailHistories">
             <EntityTypeMapping TypeName="TestCardModel.TestingCardDetailHistory">
               <MappingFragment StoreEntitySet="TestingCardDetailHistory">
-                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="IsChecked" ColumnName="IsChecked" />
+                <ScalarProperty Name="IsInvalid" ColumnName="IsInvalid" />
                 <ScalarProperty Name="TestingSubStepID" ColumnName="TestingSubStepID" />
                 <ScalarProperty Name="TestingCardID" ColumnName="TestingCardID" />
                 <ScalarProperty Name="TestingCardHistoryID" ColumnName="TestingCardHistoryID" />

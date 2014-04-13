@@ -46,7 +46,7 @@ namespace TestCard.Web.Controllers
                         {
                             var company = AutoMapper.Mapper.Map<Models.CompanyModel, TestCard.Domain.Company>(model);
 
-                            service.SaveCompany(company, CurrentUser.PersonID, GetFileData(logo), GetFileData(accrLogo));
+                            service.SaveCompany(company, CurrentUser.PersonID, FileHelper.GetFileData(logo), FileHelper.GetFileData(accrLogo));
 
                             SetSuccessMessage();
 
@@ -89,7 +89,7 @@ namespace TestCard.Web.Controllers
 
                             company = AutoMapper.Mapper.Map(model, company);
 
-                            service.SaveCompany(company, CurrentUser.PersonID, GetFileData(logo), GetFileData(accrLogo));
+                            service.SaveCompany(company, CurrentUser.PersonID, FileHelper.GetFileData(logo), FileHelper.GetFileData(accrLogo));
                         }
 
                         SetSuccessMessage();

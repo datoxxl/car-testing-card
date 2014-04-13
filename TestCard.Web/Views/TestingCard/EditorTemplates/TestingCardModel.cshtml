@@ -17,7 +17,7 @@
                         @Html.TextBoxFor(x => x.OwnerName)
                         @Html.ValidationMessageFor(x => x.OwnerName)
                     </li>
-                @*    <li>
+                    @*    <li>
                         @Html.LabelFor(x => x.OwnerIDNo)
                         @Html.TextBoxFor(x => x.OwnerIDNo)
                         @Html.ValidationMessageFor(x => x.OwnerIDNo)
@@ -77,19 +77,6 @@
 <table class="x-card-steps">
     @for (var i = 0; i < Model.TestingSteps.Count; i++)
     { 
-        <tr>
-            <td>
-                @Html.HiddenFor(x => x.TestingSteps[i].TestingStepID)
-                @Html.DisplayFor(x => x.TestingSteps[i].TestingStepName)
-            </td>
-            @for (var j = 0; j < Model.TestingSteps[i].TestingSubSteps.Count; j++)
-            {
-                <td@(Model.TestingSteps[i].TestingSubSteps.Count == 2 && Model.TestingSteps[i].TestingSubSteps.Count == (j + 1) ? " colspan=3" : string.Empty)>
-                    @Html.HiddenFor(x => x.TestingSteps[i].TestingSubSteps[j].TestingSubStepID)
-                    @Html.CheckBoxFor(x => x.TestingSteps[i].TestingSubSteps[j].IsValid)
-                    @Html.LabelFor(x => x.TestingSteps[i].TestingSubSteps[j].IsValid, Model.TestingSteps[i].TestingSubSteps[j].TestingSubStepName)
-                </td>
-            }
-        </tr>
+        @Html.EditorFor(x => x.TestingSteps[i])
     }
 </table>

@@ -1,0 +1,25 @@
+﻿@model TestingStep
+
+<tr>
+    <td>
+        @Html.HiddenFor(x => Model.TestingStepID)
+        @Html.DisplayFor(x => Model.TestingStepName)
+    </td>
+    @for (var j = 0; j < Model.TestingSubSteps.Count; j++)
+    {
+        <td@(Model.TestingSubSteps.Count == 2 && Model.TestingSubSteps.Count == (j + 1) ? " colspan=3" : string.Empty)>
+            @Html.HiddenFor(x => Model.TestingSubSteps[j].TestingSubStepID)
+            <div class="step">
+                <div>
+                    @Html.CheckBoxFor(x => Model.TestingSubSteps[j].IsChecked)
+                </div>
+                <div>
+                    @Html.LabelFor(x => Model.TestingSubSteps[j].IsInvalid, Model.TestingSubSteps[j].TestingSubStepName)
+                </div>
+                <div>
+                    @Html.CheckBoxFor(x => Model.TestingSubSteps[j].IsInvalid)
+                </div>
+            </div>
+        </td>
+    }
+</tr>

@@ -118,7 +118,12 @@ namespace TestCard.Web.Helpers
         {
             using (var service = new TestingStepService())
             {
-                model.TestingSteps = AutoMapper.Mapper.Map<List<Models.TestingStep>>(service.GetAll().ToList());
+                model.TestingSteps = AutoMapper.Mapper.Map<List<Models.TestingStep>>(service.GetAll(true));
+            }
+
+            if(model.Images == null)
+            {
+                model.Images = new List<string>();
             }
         }
 
@@ -128,7 +133,7 @@ namespace TestCard.Web.Helpers
             {
                 using (var service = new TestingStepService())
                 {
-                    model.TestingSteps = AutoMapper.Mapper.Map<List<Models.TestingStep>>(service.GetAll().ToList());
+                    model.TestingSteps = AutoMapper.Mapper.Map<List<Models.TestingStep>>(service.GetAll(true));
                 }
             }
 

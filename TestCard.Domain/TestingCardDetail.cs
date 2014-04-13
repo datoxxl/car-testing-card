@@ -16,7 +16,8 @@ namespace TestCard.Domain
     {
         public int TestingCardID { get; set; }
         public int TestingSubStepID { get; set; }
-        public bool IsValid { get; set; }
+        public bool IsInvalid { get; set; }
+        public bool IsChecked { get; set; }
     
         public virtual TestingCard TestingCard { get; set; }
         public virtual TestingSubStep TestingSubStep { get; set; }

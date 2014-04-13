@@ -17,7 +17,8 @@ namespace TestCard.Domain
         public int TestingCardChangeRequestID { get; set; }
         public Nullable<int> TestingCardID { get; set; }
         public int TestingSubStepID { get; set; }
-        public bool IsValid { get; set; }
+        public bool IsInvalid { get; set; }
+        public bool IsChecked { get; set; }
     
         public virtual TestingCardChangeRequest TestingCardChangeRequest { get; set; }
         public virtual TestingSubStep TestingSubStep { get; set; }

@@ -16,7 +16,7 @@
 
         #print-form
         {
-            width: 1025px;
+            width: 1040px;
             /*height: 297mm;*/
             /*width: auto;*/
             padding: 0;
@@ -55,7 +55,8 @@
 
         label
         {
-            margin-right: 5px;
+            margin: 0 5px;
+            display: inline-block;
         }
 
         span.checkbox
@@ -349,11 +350,16 @@
                         <td@(Model.TestingSteps[i].TestingSubSteps.Count == 2 && Model.TestingSteps[i].TestingSubSteps.Count == (j + 1) ? " colspan=3" : string.Empty)>
                             <div class="table">
                                 <div>
-                                    @Html.LabelFor(x => x.TestingSteps[i].TestingSubSteps[j].IsValid, Model.TestingSteps[i].TestingSubSteps[j].TestingSubStepName)
+                                    <span class="checkbox">
+                                        @(Model.TestingSteps[i].TestingSubSteps[j].IsChecked == true ? Html.Raw(@"<img src=""/content/images/check-black.png"" />") : null)
+                                    </span>
+                                </div>
+                                <div>
+                                    @Html.LabelFor(x => x.TestingSteps[i].TestingSubSteps[j].IsInvalid, Model.TestingSteps[i].TestingSubSteps[j].TestingSubStepName)
                                 </div>
                                 <div>
                                     <span class="checkbox">
-                                        @(Model.TestingSteps[i].TestingSubSteps[j].IsValid == true ? Html.Raw(@"<img src=""/content/images/check-black.png"" />") : null)
+                                        @(Model.TestingSteps[i].TestingSubSteps[j].IsInvalid == true ? Html.Raw(@"<img src=""/content/images/check-black.png"" />") : null)
                                     </span>
                                 </div>
                             </div>

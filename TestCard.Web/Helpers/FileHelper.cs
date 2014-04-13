@@ -193,6 +193,20 @@ namespace TestCard.Web.Helpers
             }
         }
 
+        public static byte[] GetFileData(HttpPostedFileWrapper file)
+        {
+            if (file == null)
+            {
+                return null;
+            }
+
+            var arr = new byte[file.ContentLength];
+
+            file.InputStream.Read(arr, 0, file.ContentLength);
+
+            return arr;
+        }
+
         public enum FileType { None, WebImage }
     }
 }

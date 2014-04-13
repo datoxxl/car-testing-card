@@ -441,4 +441,7 @@
   <data name="Note" xml:space="preserve">
     <value>შენიშვნა</value>
   </data>
+  <data name="Print" xml:space="preserve">
+    <value>ბეჭდვა</value>
+  </data>
 </root>

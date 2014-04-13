@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestCard.Domain.Helpers;
 using TestCard.Properties;
+using System.Data.Entity;
 
 namespace TestCard.Domain.Services
 {
@@ -14,6 +15,15 @@ namespace TestCard.Domain.Services
 
         public TestingCardService(TestCardContext context)
             : base(context) { }
+
+        public TestingCard Get(int id, bool includeDetails)
+        {
+             return _DbContext
+                    .TestingCards
+                    .Include(x => x.TestingCardDetails)
+                    .Where(x => x.TestingCardID == id)
+                    .FirstOrDefault();
+        }
 
         public List<TestingCard> GetList(v_person person, DataFilterOption filter)
         {
@@ -66,7 +76,8 @@ namespace TestCard.Domain.Services
                     {
                         TestingCardID = item.TestingCardID,
                         TestingSubStepID = item.TestingSubStepID,
-                        IsValid = item.IsValid
+                        IsInvalid = item.IsInvalid,
+                        IsChecked = item.IsChecked
                     });
                 }
 
@@ -104,7 +115,8 @@ namespace TestCard.Domain.Services
             {
                 card.TestingCardDetails.Add(new TestingCardDetail
                 {
-                    IsValid = item.IsValid,
+                    IsChecked = item.IsChecked,
+                    IsInvalid = item.IsInvalid,
                     TestingSubStepID = item.TestingSubStepID
                 });
             }
@@ -117,64 +129,92 @@ namespace TestCard.Domain.Services
             return true;
         }
 
-        public int SaveTestingCard(TestingCard testingCard, v_person currentPerson)
+        public int SaveTestingCard(TestingCard testingCard, List<byte[]> images, v_person currentPerson)
         {
-            var now = DateTime.Now;
+            List<string> savedFiles = new List<string>();
 
-            var codeService = new CodeService(_DbContext);
-
-            testingCard.Number = codeService.NextCode(CodeTypes.TestingCardOrderNumber);
-            if (testingCard.TestingCardNumber == null)
+            try
             {
-                testingCard.TestingCardNumber = codeService.NextCode(CodeTypes.TestingCardNumber);
+                var now = DateTime.Now;
+
+                var codeService = new CodeService(_DbContext);
+
+                testingCard.Number = codeService.NextCode(CodeTypes.TestingCardOrderNumber);
+                if (testingCard.TestingCardNumber == null)
+                {
+                    testingCard.TestingCardNumber = codeService.NextCode(CodeTypes.TestingCardNumber);
+                }
+                testingCard.EffectiveDate = now;
+                testingCard.ResponsiblePersonID = currentPerson.PersonID;
+                testingCard.IsValid = !testingCard.TestingCardDetails.Any(x => x.IsInvalid);
+
+                var similiarCards = GetAll().Any(x => x.VIN == testingCard.VIN || x.CarSerialNo == testingCard.CarSerialNo);
+                testingCard.IsFirstTesting = !similiarCards;
+
+                Add(testingCard);
+
+                if (images.Count > 0)
+                {
+                    SaveTestingCardImages(testingCard, images, savedFiles);
+                }
+
+                SaveChanges();
             }
-            testingCard.EffectiveDate = now;
-            testingCard.ResponsiblePersonID = currentPerson.PersonID;
-            testingCard.IsValid = testingCard.TestingCardDetails.All(x => x.IsValid);
+            catch (Exception e)
+            {
+                DeleteTestingCardImages(savedFiles);
 
-            var similiarCards = GetAll().Any(x => x.VIN == testingCard.VIN || x.CarSerialNo == testingCard.CarSerialNo);
-            testingCard.IsFirstTesting = !similiarCards;
-
-            Add(testingCard);
-
-            SaveChanges();
+                throw e;
+            }
 
             return testingCard.TestingCardID;
         }
 
-        public void SaveTestingCardImages(int testingCardID, IEnumerable<byte[]> fileDatas)
+        public void SaveTestingCardImages(int testingCardID, List<byte[]> images)
         {
-            var card = Get(testingCardID);
-
-            string fileName = null;
-            string filePath = null;
-
-            var files = new List<string>();
+            List<string> savedFiles = new List<string>();
 
             try
             {
-                foreach (var item in fileDatas.Where(x => x != null))
-                {
-                    FileHelper.SaveImage(item, ref fileName, ref filePath);
+                var testingCard = Get(testingCardID);
 
-                    files.Add(filePath);
+                SaveTestingCardImages(testingCard, images, savedFiles);
 
-                    card.Files.Add(new File
-                    {
-                        FileName = fileName,
-                        FilePath = filePath
-                    });
-                }
+                SaveChanges();
             }
-            catch
+            catch (Exception e)
             {
-                foreach (var item in files)
-                {
-                    FileHelper.Delete(item);
-                }
-            }
+                DeleteTestingCardImages(savedFiles);
 
-            SaveChanges();
+                throw e;
+            }
+        }
+
+        protected void SaveTestingCardImages(TestingCard testingCard, List<byte[]> images, List<string> savedFiles)
+        {
+            string fileName = null;
+            string filePath = null;
+
+            foreach (var item in images.Where(x => x != null))
+            {
+                FileHelper.SaveImage(item, ref fileName, ref filePath);
+
+                savedFiles.Add(filePath);
+
+                testingCard.Files.Add(new File
+                {
+                    FileName = fileName,
+                    FilePath = filePath
+                });
+            }
+        }
+
+        protected void DeleteTestingCardImages(List<string> images)
+        {
+            foreach (var item in images)
+            {
+                FileHelper.Delete(item);
+            }
         }
     }
 }

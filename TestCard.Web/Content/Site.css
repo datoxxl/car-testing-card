@@ -831,6 +831,17 @@ ul.x-action-bar
                 background-color: #ccc;
             }
 
+        .x-form-actions
+        {
+            float: right;
+        }
+
+            .x-form-actions a.btn
+            {
+                background-color: transparent;
+                border: 0;
+            }
+
     .x-form-container .form-inner
     {
         padding: 10px 20px;
@@ -858,47 +869,47 @@ ul.x-action-bar
         display: inline;
     }
 
-    .x-list-actions .btn
+.btn
+{
+    height: 24px;
+    width: 24px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-color: transparent;
+    border: 0;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+    .btn:last-child
     {
-        height: 24px;
-        width: 24px;
-        background-repeat: no-repeat;
-        display: inline-block;
-        background-color: transparent;
-        border: 0;
-        vertical-align: middle;
-        margin-right: 5px;
+        margin: 0;
     }
 
-        .x-list-actions .btn:last-child
-        {
-            margin: 0;
-        }
+    .btn.details
+    {
+        background-image: url('images/info24.png');
+    }
 
-        .x-list-actions .btn.details
-        {
-            background-image: url('images/info24.png');
-        }
+    .btn.approve
+    {
+        background-image: url('images/approve24.png');
+    }
 
-        .x-list-actions .btn.approve
-        {
-            background-image: url('images/approve24.png');
-        }
+    .btn.reject
+    {
+        background-image: url('images/delete24.png');
+    }
 
-        .x-list-actions .btn.reject
-        {
-            background-image: url('images/delete24.png');
-        }
+    .btn.edit
+    {
+        background-image: url('images/edit24.png');
+    }
 
-        .x-list-actions .btn.edit
-        {
-            background-image: url('images/edit24.png');
-        }
-
-        .x-list-actions .btn.print
-        {
-            background-image: url('images/print24.png');
-        }
+    .btn.print
+    {
+        background-image: url('images/print24.png');
+    }
 
 .x-card-steps
 {
@@ -916,15 +927,28 @@ ul.x-action-bar
 
     .x-card-steps label
     {
-        display: inline;
+        display: inline-block;
         width: auto;
         vertical-align: middle;
+        padding: 0 5px;
     }
 
     .x-card-steps input
     {
         vertical-align: middle;
+        width: 18px;
+        height: 18px;
     }
+
+    .x-card-steps .step
+    {
+        display: table;
+    }
+
+        .x-card-steps .step > div
+        {
+            display: table-cell;
+        }
 
 .x-pager
 {
@@ -1094,4 +1118,19 @@ ol.logo-images
     {
         display: table-cell;
         padding-right: 15px;
+    }
+
+.f-tabs .f-tab-content
+{
+    display: none;
+}
+
+div.table
+{
+    display: table;
+}
+
+    div.table > div
+    {
+        display: table-cell;
     }

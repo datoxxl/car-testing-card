@@ -103,7 +103,7 @@ namespace TestCard.Web
                .ForMember(dest => dest.CompanyAddress, src => src.MapFrom(x => x.Person.Company.Address))
                .ForMember(dest => dest.CompanyLogoFileName, src => src.MapFrom(x => x.Person.Company.CompanyLogoFile.FileName))
                .ForMember(dest => dest.AccreditationLogoFileName, src => src.MapFrom(x => x.Person.Company.AccreditationLogoFile.FileName))
-               .ForMember(dest => dest.RespPersonFullName, src => src.MapFrom(x => x.Person.FirstName + " " + x.Person.LastName)); ;
+               .ForMember(dest => dest.RespPersonFullName, src => src.MapFrom(x => x.Person.FirstName + " " + x.Person.LastName));
 
             Mapper.CreateMap<Domain.TestingCardDetail, Models.TestingSubStep>();
 

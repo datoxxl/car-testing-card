@@ -110,17 +110,6 @@
 <table class="x-card-steps">
     @for (var i = 0; i < Model.TestingSteps.Count; i++)
     { 
-        <tr>
-            <td>
-                @Html.DisplayFor(x => x.TestingSteps[i].TestingStepName)
-            </td>
-            @for (var j = 0; j < Model.TestingSteps[i].TestingSubSteps.Count; j++)
-            {
-                <td@(Model.TestingSteps[i].TestingSubSteps.Count == 2 && Model.TestingSteps[i].TestingSubSteps.Count == (j + 1) ? " colspan=3" : string.Empty)>
-                    @Html.CheckBoxFor(x => x.TestingSteps[i].TestingSubSteps[j].IsValid, new { disabled = "disabled" })
-                    @Html.LabelFor(x => x.TestingSteps[i].TestingSubSteps[j].IsValid, Model.TestingSteps[i].TestingSubSteps[j].TestingSubStepName)
-                </td>
-            }
-        </tr>
+        @Html.DisplayFor(x => x.TestingSteps[i])
     }
 </table>

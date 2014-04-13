@@ -40,7 +40,7 @@ namespace TestCard.Web.Controllers
                             x =>
                             {
                                 var item = subSteps.FirstOrDefault(y => y.TestingSubStepID == x.TestingSubStepID);
-                                x.IsValid = item.IsValid;
+                                x.IsInvalid = item.IsInvalid;
                             }
                         );
 

@@ -111,27 +111,13 @@ namespace TestCard.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        protected byte[] GetFileData(HttpPostedFileWrapper file)
-        {
-            if (file == null)
-            {
-                return null;
-            }
-
-            var arr = new byte[file.ContentLength];
-
-            file.InputStream.Read(arr, 0, file.ContentLength);
-
-            return arr;
-        }
-
         #region Model sources
 
         protected Models.TestingCardModel GetTestingCardModel(int id)
         {
             using (var service = new TestingCardService())
             {
-                var source = service.Get(id);
+                var source = service.Get(id, true);
 
                 if (source != null)
                 {
@@ -145,7 +131,8 @@ namespace TestCard.Web.Controllers
                         x =>
                         {
                             var item = subSteps.FirstOrDefault(y => y.TestingSubStepID == x.TestingSubStepID);
-                            x.IsValid = item.IsValid;
+                            x.IsInvalid = item.IsInvalid;
+                            x.IsChecked = item.IsChecked;
                         }
                     );
 

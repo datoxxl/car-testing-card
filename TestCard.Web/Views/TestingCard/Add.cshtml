@@ -3,15 +3,34 @@
 @{
     ViewBag.Title = "Add";
 }
-<div class="x-form-container">
+<div class="x-form-container f-tabs">
     <span class="header">@GeneralResource.TestCard</span>
     <div class="top-actions">
         @Html.ActionLink(GeneralResource.BackToList, "List")
+        <a href="#card" class="f-tab active">@GeneralResource.TestCard</a>
+        <a href="#images" class="f-tab">@GeneralResource.Images</a>
     </div>
     <div class="form-inner">
         @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            @Html.EditorForModel()
+            <div class="f-tab-content">
+                <div id="card">
+                    @Html.EditorForModel()
+                </div>
+                <div id="images">
+                    @{ Html.RenderPartial("_MultUpload"); }
+                    <div class="x-img-list">
+                        <ul>
+                            @foreach (var item in Model.Images)
+                            {
+                                <li>
+                                    <img src="@Url.ImageUrl(item)" />
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="x-actions">
                 <input type="submit" value="@GeneralResource.Save" />
                 @Html.ActionLink(GeneralResource.Cancel, "List")
@@ -19,3 +38,7 @@
         }
     </div>
 </div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/multupload")
+}

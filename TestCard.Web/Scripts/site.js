@@ -4,6 +4,7 @@ $(function () {
     initDatePickers();
     initDropDown();
     initValidation();
+    initSimpleTabs();
 
     return;
 
@@ -873,5 +874,48 @@ function initDatePickers() {
         buttonImage: "/content/images/calendar16.png",
         buttonImageOnly: true,
         dateFormat: 'dd.mm.yy'
+    });
+}
+
+function initSimpleTabs() {
+
+    var str = {
+        tabs: '.f-tabs',
+        tab: '.f-tab',
+        activeTab: '.f-tab.active',
+        content: '.f-tab-content',
+        contentElements: '.f-tab-content > div',
+        activeClass: 'active',
+        hrefAttr: 'href'
+    };
+
+    $(str.tabs).each(function (index, elem) {
+        var $tabs = $(elem);
+
+        $tabs.find(str.contentElements).hide();
+
+        $tabs.find(str.tab).click(function (e) {
+            e.preventDefault();
+
+            var $t = $(this);
+
+            $t.siblings(str.tab).removeClass(str.activeClass);
+            $t.addClass(str.activeClass);
+
+            var objID = $t.attr(str.hrefAttr);
+
+            var $contentElem = $tabs.find(objID);
+
+            $contentElem.siblings().hide();
+
+            $contentElem.show();
+        });
+
+        var objID = $tabs.find(str.activeTab).attr(str.hrefAttr)
+            || $tabs.find(str.tab).first().attr(str.hrefAttr);
+
+        $tabs.find(objID).show();
+
+        $tabs.find(str.content).show();
     });
 }
