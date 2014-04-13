@@ -190,7 +190,7 @@
     <value>პირადი ნომერი უნდა შეიცავდეს 11 სიმბოლოს</value>
   </data>
   <data name="ImageAllowedMessage" xml:space="preserve">
-    <value>დაშვებულია მხოლოდ .jpeg სურათები</value>
+    <value>დაშვებულია მხოლოდ .jpeg და .png ფორმატის სურათები</value>
   </data>
   <data name="Information" xml:space="preserve">
     <value>ინფორმაცია</value>
@@ -434,5 +434,11 @@
   </data>
   <data name="RequestReason" xml:space="preserve">
     <value>მოთხოვნის მიზეზი</value>
+  </data>
+  <data name="AccreditationLogo" xml:space="preserve">
+    <value>აკრედიტაციის ლოგო</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>შენიშვნა</value>
   </data>
 </root>

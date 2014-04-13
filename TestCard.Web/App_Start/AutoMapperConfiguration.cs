@@ -87,7 +87,8 @@ namespace TestCard.Web
 
             Mapper.CreateMap<Domain.Company, Models.CompanyListModel>();
             Mapper.CreateMap<Domain.Company, Models.CompanyModel>()
-                .ForMember(dest => dest.FileName, src => src.MapFrom(x => x.File.FileName));
+                .ForMember(dest => dest.LogoFileName, src => src.MapFrom(x => x.CompanyLogoFile.FileName))
+                .ForMember(dest => dest.AccreditationLogoFileName, src => src.MapFrom(x => x.AccreditationLogoFile.FileName));
 
             Mapper.CreateMap<Domain.TestingCard, Models.TestingCardListModel>()
                .ForMember(dest => dest.CompanyName, src => src.MapFrom(x => x.Person.Company.CompanyName))
@@ -100,7 +101,8 @@ namespace TestCard.Web
                .ForMember(dest => dest.CompanyAccreditationNumber, src => src.MapFrom(x => x.Person.Company.AccreditationNumber))
                .ForMember(dest => dest.CompanyAccreditationScope, src => src.MapFrom(x => x.Person.Company.AccreditationScope))
                .ForMember(dest => dest.CompanyAddress, src => src.MapFrom(x => x.Person.Company.Address))
-               .ForMember(dest => dest.CompanyFileName, src => src.MapFrom(x => x.Person.Company.File.FileName))
+               .ForMember(dest => dest.CompanyLogoFileName, src => src.MapFrom(x => x.Person.Company.CompanyLogoFile.FileName))
+               .ForMember(dest => dest.AccreditationLogoFileName, src => src.MapFrom(x => x.Person.Company.AccreditationLogoFile.FileName))
                .ForMember(dest => dest.RespPersonFullName, src => src.MapFrom(x => x.Person.FirstName + " " + x.Person.LastName)); ;
 
             Mapper.CreateMap<Domain.TestingCardDetail, Models.TestingSubStep>();

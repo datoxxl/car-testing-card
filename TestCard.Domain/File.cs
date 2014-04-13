@@ -16,23 +16,25 @@ namespace TestCard.Domain
     {
         public File()
         {
-            this.Companies = new HashSet<Company>();
             this.PersonHistories = new HashSet<PersonHistory>();
             this.TestingCardFileChangeRequests = new HashSet<TestingCardFileChangeRequest>();
             this.TestingCards = new HashSet<TestingCard>();
             this.People = new HashSet<Person>();
             this.PersonChangeRequests = new HashSet<PersonChangeRequest>();
+            this.CompaniesAccreditation = new HashSet<Company>();
+            this.CompaniesLogo = new HashSet<Company>();
         }
     
         public int FileID { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
     
-        public virtual ICollection<Company> Companies { get; set; }
         public virtual ICollection<PersonHistory> PersonHistories { get; set; }
         public virtual ICollection<TestingCardFileChangeRequest> TestingCardFileChangeRequests { get; set; }
         public virtual ICollection<TestingCard> TestingCards { get; set; }
         public virtual ICollection<Person> People { get; set; }
         public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
+        public virtual ICollection<Company> CompaniesAccreditation { get; set; }
+        public virtual ICollection<Company> CompaniesLogo { get; set; }
     }
 }

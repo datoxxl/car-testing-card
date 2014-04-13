@@ -156,7 +156,11 @@
       [v_TestingCardDetailChangeRequest].[TestingCardChangeRequestID] AS [TestingCardChangeRequestID]
       FROM [dbo].[v_TestingCardDetailChangeRequest] AS [v_TestingCardDetailChangeRequest]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_Company_File" Association="CarTestingCardModel.Store.FK_Company_File">
+          <AssociationSet Name="FK_Company_File_AccreditationLogo" Association="CarTestingCardModel.Store.FK_Company_File_AccreditationLogo">
+            <End Role="File" EntitySet="File" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_File_CompanyLogo" Association="CarTestingCardModel.Store.FK_Company_File_CompanyLogo">
             <End Role="File" EntitySet="File" />
             <End Role="Company" EntitySet="Company" />
           </AssociationSet>
@@ -525,7 +529,8 @@
           <Property Name="ResponsiblePersonID" Type="int" />
           <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
           <Property Name="IDNo" Type="char" MaxLength="9" />
-          <Property Name="FileID" Type="int" />
+          <Property Name="CompanyLogoFileID" Type="int" />
+          <Property Name="AccreditationLogoFileID" Type="int" />
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="CompanyChangeRequest">
@@ -1064,7 +1069,7 @@
           <Property Name="stepName" Type="varchar" MaxLength="34" />
           <Property Name="TestingCardChangeRequestID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Company_File">
+        <Association Name="FK_Company_File_AccreditationLogo">
           <End Role="File" Type="CarTestingCardModel.Store.File" Multiplicity="0..1" />
           <End Role="Company" Type="CarTestingCardModel.Store.Company" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1072,7 +1077,19 @@
               <PropertyRef Name="FileID" />
             </Principal>
             <Dependent Role="Company">
+              <PropertyRef Name="AccreditationLogoFileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_File_CompanyLogo">
+          <End Role="File" Type="CarTestingCardModel.Store.File" Multiplicity="0..1" />
+          <End Role="Company" Type="CarTestingCardModel.Store.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
               <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CompanyLogoFileID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2129,10 +2146,6 @@
             <End Role="TestingSubStep" EntitySet="TestingSubSteps" />
           </AssociationSet>
           <EntitySet Name="Files" EntityType="TestCardModel.File" />
-          <AssociationSet Name="FK_Company_File" Association="TestCardModel.FK_Company_File">
-            <End Role="File" EntitySet="Files" />
-            <End Role="Company" EntitySet="Companies" />
-          </AssociationSet>
           <AssociationSet Name="FK_PersonHistory_File" Association="TestCardModel.FK_PersonHistory_File">
             <End Role="File" EntitySet="Files" />
             <End Role="PersonHistory" EntitySet="PersonHistories" />
@@ -2381,6 +2394,14 @@
             <End Role="ChangeRequestReason" EntitySet="ChangeRequestReasons" />
             <End Role="TestingCardChangeRequest" EntitySet="TestingCardChangeRequests" />
           </AssociationSet>
+          <AssociationSet Name="FK_Company_File_AccreditationLogo" Association="TestCardModel.FK_Company_File_AccreditationLogo">
+            <End Role="File" EntitySet="Files" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_File_CompanyLogo" Association="TestCardModel.FK_Company_File_CompanyLogo">
+            <End Role="File" EntitySet="Files" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountType">
           <Key>
@@ -2406,16 +2427,18 @@
           <Property Name="ResponsiblePersonID" Type="Int32" />
           <Property Name="EffectiveDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IDNo" Type="String" MaxLength="9" Unicode="false" FixedLength="true" />
-          <Property Name="FileID" Type="Int32" />
           <Property Name="Address" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="CompanyChangeRequests" Relationship="TestCardModel.FK_CompanyChangeRequest_Company" FromRole="Company" ToRole="CompanyChangeRequest" />
           <NavigationProperty Name="CompanyHistories" Relationship="TestCardModel.FK_CompanyHistory_Company" FromRole="Company" ToRole="CompanyHistory" />
           <NavigationProperty Name="PersonHistories" Relationship="TestCardModel.FK_PersonHistory_Company" FromRole="Company" ToRole="PersonHistory" />
-          <NavigationProperty Name="File" Relationship="TestCardModel.FK_Company_File" FromRole="Company" ToRole="File" />
-          <NavigationProperty Name="Person" Relationship="TestCardModel.FK_Company_Person" FromRole="Company" ToRole="Person" />
-          <NavigationProperty Name="Person1" Relationship="TestCardModel.FK_Company_Person1" FromRole="Company" ToRole="Person" />
+          <NavigationProperty Name="ContactPerson" Relationship="TestCardModel.FK_Company_Person" FromRole="Company" ToRole="Person" />
+          <NavigationProperty Name="ResponsiblePerson" Relationship="TestCardModel.FK_Company_Person1" FromRole="Company" ToRole="Person" />
           <NavigationProperty Name="People" Relationship="TestCardModel.FK_Person_Company" FromRole="Company" ToRole="Person" />
           <NavigationProperty Name="PersonChangeRequests" Relationship="TestCardModel.FK_PersonChangeRequest_Company" FromRole="Company" ToRole="PersonChangeRequest" />
+          <Property Type="Int32" Name="CompanyLogoFileID" />
+          <Property Type="Int32" Name="AccreditationLogoFileID" />
+          <NavigationProperty Name="AccreditationLogoFile" Relationship="TestCardModel.FK_Company_File_AccreditationLogo" FromRole="Company" ToRole="File" />
+          <NavigationProperty Name="CompanyLogoFile" Relationship="TestCardModel.FK_Company_File_CompanyLogo" FromRole="Company" ToRole="File" />
         </EntityType>
         <EntityType Name="CompanyChangeRequest">
           <Key>
@@ -3137,25 +3160,14 @@
           <Property Type="Int32" Name="FileID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="FileName" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="FilePath" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Companies" Relationship="TestCardModel.FK_Company_File" FromRole="File" ToRole="Company" />
           <NavigationProperty Name="PersonHistories" Relationship="TestCardModel.FK_PersonHistory_File" FromRole="File" ToRole="PersonHistory" />
           <NavigationProperty Name="TestingCardFileChangeRequests" Relationship="TestCardModel.FK_TestingCardFileChangeRequest_File" FromRole="File" ToRole="TestingCardFileChangeRequest" />
           <NavigationProperty Name="TestingCards" Relationship="TestCardModel.TestingCardFile" FromRole="File" ToRole="TestingCard" />
           <NavigationProperty Name="People" Relationship="TestCardModel.FK_Person_File" FromRole="File" ToRole="Person" />
           <NavigationProperty Name="PersonChangeRequests" Relationship="TestCardModel.FK_PersonChangeRequest_File" FromRole="File" ToRole="PersonChangeRequest" />
+          <NavigationProperty Name="CompaniesAccreditation" Relationship="TestCardModel.FK_Company_File_AccreditationLogo" FromRole="File" ToRole="Company" />
+          <NavigationProperty Name="CompaniesLogo" Relationship="TestCardModel.FK_Company_File_CompanyLogo" FromRole="File" ToRole="Company" />
         </EntityType>
-        <Association Name="FK_Company_File">
-          <End Type="TestCardModel.File" Role="File" Multiplicity="0..1" />
-          <End Type="TestCardModel.Company" Role="Company" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="File">
-              <PropertyRef Name="FileID" />
-            </Principal>
-            <Dependent Role="Company">
-              <PropertyRef Name="FileID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PersonHistory_File">
           <End Type="TestCardModel.File" Role="File" Multiplicity="0..1" />
           <End Type="TestCardModel.PersonHistory" Role="PersonHistory" Multiplicity="*" />
@@ -4041,6 +4053,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Company_File_AccreditationLogo">
+          <End Type="TestCardModel.File" Role="File" Multiplicity="0..1" />
+          <End Type="TestCardModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="AccreditationLogoFileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_File_CompanyLogo">
+          <End Type="TestCardModel.File" Role="File" Multiplicity="0..1" />
+          <End Type="TestCardModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CompanyLogoFileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4058,6 +4094,8 @@
           <EntitySetMapping Name="Companies">
             <EntityTypeMapping TypeName="TestCardModel.Company">
               <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="AccreditationLogoFileID" ColumnName="AccreditationLogoFileID" />
+                <ScalarProperty Name="CompanyLogoFileID" ColumnName="CompanyLogoFileID" />
                 <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="ContactPersonID" ColumnName="ContactPersonID" />
@@ -4068,7 +4106,6 @@
                 <ScalarProperty Name="ResponsiblePersonID" ColumnName="ResponsiblePersonID" />
                 <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
                 <ScalarProperty Name="IDNo" ColumnName="IDNo" />
-                <ScalarProperty Name="FileID" ColumnName="FileID" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
               </MappingFragment>
             </EntityTypeMapping>

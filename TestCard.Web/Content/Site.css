@@ -1084,3 +1084,14 @@ ul.x-action-bar
 {
     text-align: right;
 }
+
+ol.logo-images
+{
+    display: table;
+}
+
+    ol.logo-images > li
+    {
+        display: table-cell;
+        padding-right: 15px;
+    }

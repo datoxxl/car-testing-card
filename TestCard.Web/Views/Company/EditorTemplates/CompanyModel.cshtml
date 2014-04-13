@@ -56,11 +56,16 @@
                     <td>
                         <fieldset>
                             <legend></legend>
-                            <ol>
+                            <ol class="logo-images">
                                 <li>
                                     <label for="file">@GeneralResource.CompanyLogo</label>
-                                    <input type="file" name="file" id="file" />
-                                    <img class="x-picture-area" src="@Url.ImageUrl(Model.FileName)" />
+                                    <input type="file" name="logo" id="logo" />
+                                    <img class="x-picture-area" src="@Url.ImageUrl(Model.LogoFileName)" />
+                                </li>
+                                <li>
+                                    <label for="file">@GeneralResource.AccreditationLogo</label>
+                                    <input type="file" name="accrLogo" id="accrLogo" />
+                                    <img class="x-picture-area" src="@Url.ImageUrl(Model.AccreditationLogoFileName)" />
                                 </li>
                             </ol>
                         </fieldset>

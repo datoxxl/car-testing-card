@@ -22,7 +22,7 @@ namespace TestCard.Web.Models
 
         public DateTime? FirnishDate { get; set; }
 
-        [Display(Name = "Comment", ResourceType = typeof(GeneralResource))]
+        [Display(Name = "Note", ResourceType = typeof(GeneralResource))]
         public string Comment { get; set; }
 
         public int? ResponsiblePersonID { get; set; }

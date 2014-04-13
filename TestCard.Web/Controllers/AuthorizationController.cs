@@ -29,6 +29,7 @@ namespace TestCard.Web.Controllers
                     if (per != null)
                     {
                         CurrentUser = per;
+                        //TO DO: Authentication cookie Request.Cookies.Add(new HttpCookie("auth", per.PersonID));
 
                         return RedirectTo(returnUrl);
                     }

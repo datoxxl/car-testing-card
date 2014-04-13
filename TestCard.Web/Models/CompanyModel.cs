@@ -60,6 +60,7 @@ namespace TestCard.Web.Models
         [Display(Name = "IdentificationNumber", ResourceType = typeof(GeneralResource))]
         public string IDNo { get; set; }
 
-        public string FileName { get; set; }
+        public string LogoFileName { get; set; }
+        public string AccreditationLogoFileName { get; set; }
     }
 }

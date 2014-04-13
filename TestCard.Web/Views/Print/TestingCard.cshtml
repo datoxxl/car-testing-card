@@ -26,16 +26,16 @@
             background: transparent;
         }
 
-        #company-logo
+        #logo
         {
             text-align: center;
+            line-height: 0;
+            padding-bottom: 5px;
         }
 
-            #company-logo img
+            #logo img
             {
-                width: 150px;
-                height: 200px;
-                border: 1px solid #000;
+                height: 65px;
             }
 
         .content
@@ -251,8 +251,16 @@
 </head>
 <body>
     <div id="print-form">
-        <div id="company-logo">
-            <img src="/Home/GetImage/?id=@Model.CompanyFileName" />
+        <div id="logo">
+            <div>
+                <img src="/Content/images/logo.jpg" />
+            </div>
+            <div>
+                <img src="/Home/GetImage/?id=@Model.CompanyLogoFileName" />
+            </div>
+            <div>
+                <img src="/Home/GetImage/?id=@Model.AccreditationLogoFileName" />
+            </div>
         </div>
         <div id="accred-scope">
             <span class="title">ავტოსატრანსპორტო საშუალების გზისთვი ვარგისობაზე ტესტირების ბარათი

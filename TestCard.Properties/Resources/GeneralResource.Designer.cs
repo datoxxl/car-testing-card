@@ -70,6 +70,15 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accreditation logo.
+        /// </summary>
+        public static string AccreditationLogo {
+            get {
+                return ResourceManager.GetString("AccreditationLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accreditation number.
         /// </summary>
         public static string AccreditationNumber {
@@ -457,7 +466,7 @@ namespace TestCard.Properties.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only .jpeg images are allowed.
+        ///   Looks up a localized string similar to Only images with format .jpeg &amp; .png are allowed.
         /// </summary>
         public static string ImageAllowedMessage {
             get {
@@ -543,6 +552,15 @@ namespace TestCard.Properties.Resources {
         public static string NoImagesFound {
             get {
                 return ResourceManager.GetString("NoImagesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note.
+        /// </summary>
+        public static string Note {
+            get {
+                return ResourceManager.GetString("Note", resourceCulture);
             }
         }
         

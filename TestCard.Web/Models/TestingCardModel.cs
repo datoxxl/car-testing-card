@@ -30,7 +30,7 @@ namespace TestCard.Web.Models
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FirnishDate { get; set; }
 
-        [Display(Name = "Comment", ResourceType = typeof(GeneralResource))]
+        [Display(Name = "Note", ResourceType = typeof(GeneralResource))]
         public string Comment { get; set; }
 
         [Display(Name = "Odometer", ResourceType = typeof(GeneralResource))]
@@ -80,7 +80,9 @@ namespace TestCard.Web.Models
         //From company
         public int? CompanyID { get; set; }
 
-        public string CompanyFileName { get; set; }
+        public string CompanyLogoFileName { get; set; }
+
+        public string AccreditationLogoFileName { get; set; }
 
         [Display(Name = "Company", ResourceType = typeof(GeneralResource))]
         public string CompanyName { get; set; }

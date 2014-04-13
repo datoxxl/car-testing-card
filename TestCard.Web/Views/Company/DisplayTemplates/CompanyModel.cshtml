@@ -46,10 +46,14 @@
                 <td>
                     <fieldset>
                         <legend></legend>
-                        <ol>
+                        <ol class="logo-images">
                             <li>
                                 <label for="file">@GeneralResource.CompanyLogo</label>
-                                <img class="x-picture-area" src="@Url.ImageUrl(Model.FileName)" />
+                                <img class="x-picture-area" src="@Url.ImageUrl(Model.LogoFileName)" />
+                            </li>
+                            <li>
+                                <label for="file">@GeneralResource.AccreditationLogo</label>
+                                <img class="x-picture-area" src="@Url.ImageUrl(Model.AccreditationLogoFileName)" />
                             </li>
                         </ol>
                     </fieldset>

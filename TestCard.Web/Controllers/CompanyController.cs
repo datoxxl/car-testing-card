@@ -8,6 +8,7 @@ using TestCard.Web;
 using TestCard.Properties.Resources;
 using TestCard.Domain.Services;
 using System.Net.Mime;
+using TestCard.Web.Helpers;
 
 namespace TestCard.Web.Controllers
 {
@@ -32,29 +33,30 @@ namespace TestCard.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Models.CompanyModel model, HttpPostedFileWrapper file)
+        public ActionResult Add(Models.CompanyModel model, HttpPostedFileWrapper logo, HttpPostedFileWrapper accrLogo)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (file != null && file.ContentType != MediaTypeNames.Image.Jpeg)
-                    {
-                        SetErrorMessage(GeneralResource.ImageAllowedMessage);
-                    }
-                    else
+                    if (FileHelper.IsNullOrOfType(logo, FileHelper.FileType.WebImage)
+                        && FileHelper.IsNullOrOfType(accrLogo, FileHelper.FileType.WebImage))
                     {
                         using (var service = new CompanyService())
                         {
                             var company = AutoMapper.Mapper.Map<Models.CompanyModel, TestCard.Domain.Company>(model);
 
-                            service.SaveCompany(company, CurrentUser.PersonID, GetFileData(file));
+                            service.SaveCompany(company, CurrentUser.PersonID, GetFileData(logo), GetFileData(accrLogo));
 
                             SetSuccessMessage();
 
                             //return RedirectToAction("Edit", new { @id = company.CompanyID });
                             return RedirectToAction("List");
                         }
+                    }
+                    else
+                    {
+                        SetErrorMessage(GeneralResource.ImageAllowedMessage);
                     }
                 }
             }
@@ -72,17 +74,14 @@ namespace TestCard.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, Models.CompanyModel model, HttpPostedFileWrapper file)
+        public ActionResult Edit(int id, Models.CompanyModel model, HttpPostedFileWrapper logo, HttpPostedFileWrapper accrLogo)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (file != null && file.ContentType != MediaTypeNames.Image.Jpeg)
-                    {
-                        SetErrorMessage(GeneralResource.ImageAllowedMessage);
-                    }
-                    else
+                    if (FileHelper.IsNullOrOfType(logo, FileHelper.FileType.WebImage)
+                        && FileHelper.IsNullOrOfType(accrLogo, FileHelper.FileType.WebImage))
                     {
                         using (var service = new CompanyService())
                         {
@@ -90,13 +89,18 @@ namespace TestCard.Web.Controllers
 
                             company = AutoMapper.Mapper.Map(model, company);
 
-                            service.SaveCompany(company, CurrentUser.PersonID, GetFileData(file));
+                            service.SaveCompany(company, CurrentUser.PersonID, GetFileData(logo), GetFileData(accrLogo));
                         }
 
                         SetSuccessMessage();
                         //return RedirectToAction("Edit", RouteData.Values);
                         return RedirectToAction("List");
                     }
+                    else
+                    {
+                        SetErrorMessage(GeneralResource.ImageAllowedMessage);
+                    }
+
                 }
             }
             catch

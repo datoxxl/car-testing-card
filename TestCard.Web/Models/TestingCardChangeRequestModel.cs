@@ -40,7 +40,7 @@ namespace TestCard.Web.Models
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FirnishDate { get; set; }
 
-        [Display(Name = "Comment", ResourceType = typeof(GeneralResource))]
+        [Display(Name = "Note", ResourceType = typeof(GeneralResource))]
         public string Comment { get; set; }
 
         [Display(Name = "Odometer", ResourceType = typeof(GeneralResource))]

@@ -51,7 +51,6 @@
         <AssociationConnector Association="TestCardModel.FK_TestingCardDetailChangeRequest_TestingSubStep" ManuallyRouted="false" />
         <AssociationConnector Association="TestCardModel.FK_TestingSubStep_TestingStep" ManuallyRouted="false" />
         <EntityTypeShape EntityType="TestCardModel.File" Width="1.5" PointX="0.75" PointY="39.25" />
-        <AssociationConnector Association="TestCardModel.FK_Company_File" />
         <AssociationConnector Association="TestCardModel.FK_PersonHistory_File" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardFileChangeRequest_File" />
         <AssociationConnector Association="TestCardModel.TestingCardFile" />
@@ -120,6 +119,8 @@
         <AssociationConnector Association="TestCardModel.FK_TestingCardDetailHistory_TestingSubStep" />
         <EntityTypeShape EntityType="TestCardModel.ChangeRequestReason" Width="1.5" PointX="5.0797771164587591" PointY="27.227142912907127" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_ChangeRequestReason" />
+        <AssociationConnector Association="TestCardModel.FK_Company_File_AccreditationLogo" />
+        <AssociationConnector Association="TestCardModel.FK_Company_File_CompanyLogo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

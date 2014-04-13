@@ -190,7 +190,7 @@
     <value>IdNumberMaxLengthError</value>
   </data>
   <data name="ImageAllowedMessage" xml:space="preserve">
-    <value>Only .jpeg images are allowed</value>
+    <value>Only images with format .jpeg &amp; .png are allowed</value>
   </data>
   <data name="Information" xml:space="preserve">
     <value>Information</value>
@@ -434,5 +434,11 @@
   </data>
   <data name="RequestReason" xml:space="preserve">
     <value>Request reason</value>
+  </data>
+  <data name="AccreditationLogo" xml:space="preserve">
+    <value>Accreditation logo</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
   </data>
 </root>

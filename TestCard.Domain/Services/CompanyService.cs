@@ -10,24 +10,23 @@ namespace TestCard.Domain.Services
 {
     public class CompanyService : DomainServiceBase<Company>
     {
-        public bool SaveCompany(Company company, int responsiblePersonID, byte[] companyLogo)
+        public bool SaveCompany(Company company, int responsiblePersonID, byte[] companyLogo, byte[] accreditationLogo)
         {
-            string fileName = null;
-            string filePath = null;
-            string oldFilePath = null;
+            string[] filePath = new string[2];
+            string[] oldFilePath = new string[2];
 
             try
             {
                 if (companyLogo != null)
                 {
-                    FileHelper.SaveImage(companyLogo, ref fileName, ref filePath);
+                    company.CompanyLogoFile =
+                        CreateImageFile(company.CompanyLogoFile, companyLogo, ref filePath[0], ref oldFilePath[0]);
+                }
 
-                    if (company.File != null)
-                    {
-                        oldFilePath = company.File.FilePath;
-                    }
-
-                    company.File = new File { FileName = fileName, FilePath = filePath };
+                if (accreditationLogo != null)
+                {
+                    company.AccreditationLogoFile =
+                        CreateImageFile(company.AccreditationLogoFile, accreditationLogo, ref filePath[1], ref oldFilePath[1]);
                 }
 
                 var today = DateTime.Now;
@@ -46,22 +45,42 @@ namespace TestCard.Domain.Services
 
                 SaveChanges();
 
-                if (oldFilePath != null)
+                foreach (var item in oldFilePath)
                 {
-                    FileHelper.Delete(oldFilePath);
+                    if (item != null)
+                    {
+                        FileHelper.Delete(item);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                if (filePath != null)
+                foreach (var item in filePath)
                 {
-                    FileHelper.Delete(oldFilePath);
+                    if (item != null)
+                    {
+                        FileHelper.Delete(item);
+                    }
                 }
 
                 throw ex;
             }
 
             return company.CompanyID > 0;
+        }
+
+        private File CreateImageFile(File oldFile, byte[] data, ref string filePath, ref string oldFilePath)
+        {
+            string fileName = null;
+
+            FileHelper.SaveImage(data, ref fileName, ref filePath);
+
+            if (oldFile != null)
+            {
+                oldFilePath = oldFile.FilePath;
+            }
+
+            return new File { FileName = fileName, FilePath = filePath };
         }
     }
 }

@@ -33,16 +33,18 @@ namespace TestCard.Domain
         public Nullable<int> ResponsiblePersonID { get; set; }
         public System.DateTime EffectiveDate { get; set; }
         public string IDNo { get; set; }
-        public Nullable<int> FileID { get; set; }
         public string Address { get; set; }
+        public Nullable<int> CompanyLogoFileID { get; set; }
+        public Nullable<int> AccreditationLogoFileID { get; set; }
     
         public virtual ICollection<CompanyChangeRequest> CompanyChangeRequests { get; set; }
         public virtual ICollection<CompanyHistory> CompanyHistories { get; set; }
         public virtual ICollection<PersonHistory> PersonHistories { get; set; }
-        public virtual File File { get; set; }
-        public virtual Person Person { get; set; }
-        public virtual Person Person1 { get; set; }
+        public virtual Person ContactPerson { get; set; }
+        public virtual Person ResponsiblePerson { get; set; }
         public virtual ICollection<Person> People { get; set; }
         public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
+        public virtual File AccreditationLogoFile { get; set; }
+        public virtual File CompanyLogoFile { get; set; }
     }
 }
