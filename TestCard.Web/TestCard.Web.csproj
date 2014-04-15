@@ -198,6 +198,7 @@
     <Content Include="Content\images\delete24.png" />
     <Content Include="Content\images\edit24.png" />
     <Content Include="Content\images\error32.png" />
+    <Content Include="Content\images\exclamation.png" />
     <Content Include="Content\images\filter.gif" />
     <Content Include="Content\images\filter.png" />
     <Content Include="Content\images\filter-delete.gif" />
