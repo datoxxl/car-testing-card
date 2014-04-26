@@ -8,7 +8,7 @@ using TestCard.Properties.Resources;
 
 namespace TestCard.Web.Models
 {
-    public class PersonModel
+    public class PersonModel : ChangeRequestBase
     {
         public int? PersonID { get; set; }
         public int? PersonChangeRequestID { get; set; }

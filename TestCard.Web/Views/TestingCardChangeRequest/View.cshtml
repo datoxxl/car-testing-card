@@ -14,7 +14,9 @@
             {
                 Action = "ProcessRequest",
                 Controller = "TestingCardChangeRequest",
-                RequestID = Model.TestingCardChangeRequestID.Value
+                RequestID = Model.TestingCardChangeRequestID.Value,
+                ProcessedByQualityManager = Model.ProcessedByQualityManager,
+                ProcessedByAdministrator = Model.ProcessedByAdministrator
             }); }
     </div>
 </div>

@@ -42,7 +42,9 @@
                 {
                     Action = "ProcessRequest",
                     Controller = "PersonChangeRequest",
-                    RequestID = item.PersonChangeRequestID
+                    RequestID = item.PersonChangeRequestID,
+                    ProcessedByQualityManager = item.ProcessedByQualityManager,
+                    ProcessedByAdministrator = item.ProcessedByAdministrator
                 }); }
         </tr>
     }

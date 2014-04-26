@@ -2,9 +2,9 @@
 <td class="action-cell">
     <div class="x-list-actions">
         @Html.ActionLink(" ", "View", Model.Controller, new { @id = Model.RequestID }, new { @class = "btn details", title = GeneralResource.Details })
-        @if (ViewBag.AccountType != TestCard.Domain.AccountTypes.Operator)
+        @if (!Model.ProcessedByQualityManager && ViewBag.AccountType == TestCard.Domain.AccountTypes.QualityManager
+                || Model.ProcessedByQualityManager && !Model.ProcessedByAdministrator && ViewBag.AccountType == TestCard.Domain.AccountTypes.Administrator)
         {
-
             using (Html.BeginForm(Model.Action, Model.Controller, new { @id = Model.RequestID, status = (int)TestCard.Domain.ConfirmStatuses.Approved }, FormMethod.Post))
             {
             <input type="submit" value="" class="btn approve" title="@GeneralResource.Approve" />

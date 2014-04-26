@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace TestCard.Web.Models
 {
-    public class PersonScheduleModel
+    public class PersonScheduleModel : ChangeRequestBase
     {
         public int PersonID { get; set; }
         public int? PersonScheduleChangeRequestID { get; set; }

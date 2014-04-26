@@ -162,6 +162,7 @@
     <Compile Include="Models\ActionBar.cs" />
     <Compile Include="Models\ActionButton.cs" />
     <Compile Include="Models\AjaxListModel.cs" />
+    <Compile Include="Models\ChangeRequestBase.cs" />
     <Compile Include="Models\CompanyListModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\ActionCell.cs" />

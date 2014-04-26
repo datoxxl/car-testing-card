@@ -42,7 +42,9 @@
                 {
                     Action = "ProcessRequest",
                     Controller = "TestingCardChangeRequest",
-                    RequestID = item.TestingCardChangeRequestID
+                    RequestID = item.TestingCardChangeRequestID,
+                    ProcessedByQualityManager = item.ProcessedByQualityManager,
+                    ProcessedByAdministrator = item.ProcessedByAdministrator
                 }); }
         </tr>
     }

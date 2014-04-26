@@ -7,7 +7,7 @@ using TestCard.Properties.Resources;
 
 namespace TestCard.Web.Models
 {
-    public class TestingCardChangeRequestModel
+    public class TestingCardChangeRequestModel : ChangeRequestBase
     {
         public int? TestingCardID { get; set; }
         public int? TestingCardChangeRequestID { get; set; }

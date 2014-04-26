@@ -15,7 +15,9 @@
             {
                 Action = "ProcessRequest",
                 Controller = "PersonScheduleChangeRequest",
-                RequestID = Model.PersonScheduleChangeRequestID.Value
+                RequestID = Model.PersonScheduleChangeRequestID.Value,
+                ProcessedByQualityManager = Model.ProcessedByQualityManager,
+                ProcessedByAdministrator = Model.ProcessedByAdministrator
             }); }
     </div>
 </div>

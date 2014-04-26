@@ -12,7 +12,9 @@
             {
                 Action = "ProcessRequest",
                 Controller = "PersonChangeRequest",
-                RequestID = Model.PersonChangeRequestID.Value
+                RequestID = Model.PersonChangeRequestID.Value,
+                ProcessedByQualityManager = Model.ProcessedByQualityManager,
+                ProcessedByAdministrator = Model.ProcessedByAdministrator
             }); }
     </div>
 </div>

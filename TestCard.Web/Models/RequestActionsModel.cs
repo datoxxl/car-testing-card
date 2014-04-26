@@ -12,5 +12,9 @@ namespace TestCard.Web.Models
         public string Action { get; set; }
 
         public string Controller { get; set; }
+
+        public bool ProcessedByQualityManager { get; set; }
+
+        public bool ProcessedByAdministrator { get; set; }
     }
 }
