@@ -42,13 +42,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AccreditationExpireDate)
             </td>
-            @{ Html.RenderPartial("_ActionCell", new List<ActionButton> {
-                new ActionButton
-                {
-                    Controller = "Company",
-                    ObjectID = item.CompanyID,
-                    Type = ActionButton.ActionType.Edit
-                }}); }
+            @{ Html.RenderPartial("_ActionCell", new ActionCell
+               {
+                   EntityObject = TestCard.Domain.Objects.Company,
+                   Items = new List<ActionButton> {
+                        new ActionButton
+                        {
+                            Controller = "Company",
+                            ObjectID = item.CompanyID,
+                            Type = ActionButton.ActionTypes.Edit
+                        }
+                    }
+               }); }
         </tr>
     }
 </table>

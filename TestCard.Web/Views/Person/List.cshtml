@@ -2,13 +2,17 @@
     ViewBag.Title = "List";
 }
 <p>
-    @{ Html.RenderPartial("_ActionBar", new List<TestCard.Web.Models.ActionButton>
+    @{ Html.RenderPartial("_ActionBar", new ActionBar
        {
-           new TestCard.Web.Models.ActionButton { 
-               Type = ActionButton.ActionType.Add, 
-               Text = GeneralResource.Add,
-               Url = "/Person/Add"
-           }
+           EntityObject = TestCard.Domain.Objects.Person,
+           Items = new List<ActionButton>
+           {
+               new ActionButton { 
+                   Type = ActionButton.ActionTypes.Add, 
+                   Text = GeneralResource.Add,
+                   Url = Url.Action("Add", "Person")
+               }
+            }
        }); }
 </p>
 @{ Html.RenderPartial("_AjaxList", new AjaxListModel { ActionName = "Person" }); }

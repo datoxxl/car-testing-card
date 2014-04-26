@@ -8,10 +8,11 @@ namespace TestCard.Domain.Services
 {
     public class PersonScheduleService : DomainServiceBase<PersonSchedule>
     {
-        public PersonScheduleService() { }
+        public PersonScheduleService(User currentUser)
+            : base(currentUser) { }
 
-        public PersonScheduleService(TestCardContext context)
-            : base(context) { }
+        public PersonScheduleService(DomainServiceBase service)
+            : base(service) { }
 
         public bool SavePersonSchedule(int personID, int? responsiblePersonID, List<PersonScheduleChangeRequestDetail> request)
         {
@@ -57,6 +58,25 @@ namespace TestCard.Domain.Services
             }
 
             return true;
+        }
+
+        public override IQueryable<PersonSchedule> SecurityFilter(IQueryable<PersonSchedule> query)
+        {
+            switch (_CurrentUser.AccountType)
+            {
+                case AccountTypes.Administrator:
+                    break;
+                case AccountTypes.QualityManager:
+                    query = query.Where(x => x.Person.CompanyID == _CurrentUser.CompanyID);
+                    break;
+                case AccountTypes.Operator:
+                    query = query.Where(x => x.PersonID == _CurrentUser.PersonID);
+                    break;
+                default:
+                    break;
+            }
+
+            return base.SecurityFilter(query);
         }
     }
 }

@@ -12,13 +12,9 @@ namespace TestCard.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class v_TestingCardDetail
+    public partial class Permission
     {
-        public string TestingStepName { get; set; }
-        public string TestingSubStepName { get; set; }
-        public int TestingCardID { get; set; }
-        public int TestingSubStepID { get; set; }
-        public bool IsValid { get; set; }
-        public string stepName { get; set; }
+        public int PermissionID { get; set; }
+        public string Name { get; set; }
     }
 }

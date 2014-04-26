@@ -9,7 +9,12 @@ namespace TestCard.Domain.Services
 {
     public class TestingCardChangeRequestService : DomainServiceBase<TestingCardChangeRequest>
     {
-        public bool SaveChangeRequest(TestingCardChangeRequest request, v_person currentPerson, ref bool? hasUnconfirmedRequest)
+        public TestingCardChangeRequestService() { }
+
+        public TestingCardChangeRequestService(User currentUser)
+            : base(currentUser) { }
+
+        public bool SaveChangeRequest(TestingCardChangeRequest request, User currentPerson, ref bool? hasUnconfirmedRequest)
         {
             var now = DateTime.Now;
             int? personID = null;
@@ -19,7 +24,7 @@ namespace TestCard.Domain.Services
                 personID = currentPerson.PersonID;
             }
 
-            var codeService = new CodeService(_DbContext);
+            var codeService = new CodeService(this);
 
             //request.Number = codeService.NextCode(CodeTypes.TestingCardOrderNumber);
             if (request.TestingCardNumber == null)
@@ -33,7 +38,7 @@ namespace TestCard.Domain.Services
 
             if (personID.HasValue)
             {
-                var accountType = (AccountTypes)currentPerson.AccountTypeID;
+                var accountType = currentPerson.AccountType;
                 var rejectStatusID = (int)ConfirmStatuses.Rejected;
                 hasUnconfirmedRequest = GetAll().Any(x => x.ResponsiblePersonID == request.ResponsiblePersonID
                     && !x.AdministratorConfirmStatusID.HasValue
@@ -50,7 +55,7 @@ namespace TestCard.Domain.Services
                         request.QualityManagerPersonID = personID;
                         request.QualityManagerConfirmStatusID = (int)ConfirmStatuses.Approved;
 
-                        new TestingCardService(_DbContext).SaveTestingCard(request);
+                        new TestingCardService(this).SaveTestingCard(request);
                         break;
                     case AccountTypes.QualityManager:
 
@@ -108,7 +113,7 @@ namespace TestCard.Domain.Services
 
                             if (status == ConfirmStatuses.Approved)
                             {
-                                new TestingCardService(_DbContext).SaveTestingCard(request);
+                                new TestingCardService(this).SaveTestingCard(request);
                             }
 
                             SaveChanges();
@@ -151,34 +156,25 @@ namespace TestCard.Domain.Services
             return false;
         }
 
-        public List<TestingCardChangeRequest> GetList(v_person person, DataFilterOption filter, bool showAll)
+        public override IQueryable<TestingCardChangeRequest> SecurityFilter(IQueryable<TestingCardChangeRequest> query)
         {
-            var type = (AccountTypes)person.AccountTypeID;
             var approvedStatus = (int)ConfirmStatuses.Approved;
-            var personID = person.PersonID;
-            var result = GetAll().Where(x => x.ResponsiblePerson.Company.CompanyID == person.CompanyID);
 
-            if (!showAll)
-            {
-                result = result.Where(x => !x.AdministratorConfirmStatusID.HasValue 
-                    && (!x.QualityManagerConfirmStatusID.HasValue || x.QualityManagerConfirmStatusID == approvedStatus));
-            }
-
-            switch (type)
+            switch (_CurrentUser.AccountType)
             {
                 case AccountTypes.Administrator:
-                    result = result.Where(x => x.QualityManagerConfirmStatusID == approvedStatus);
+                    query = query.Where(x => x.QualityManagerConfirmStatusID == approvedStatus);
                     break;
                 case AccountTypes.QualityManager:
                     break;
                 case AccountTypes.Operator:
-                    result = result.Where(x => x.ResponsiblePersonID == personID);
+                    query = query.Where(x => x.ResponsiblePersonID == _CurrentUser.PersonID);
                     break;
                 default:
                     break;
             }
 
-            return result.SortAndFilter(filter).ToList();
+            return base.SecurityFilter(query);
         }
     }
 }

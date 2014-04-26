@@ -22,7 +22,7 @@ namespace TestCard.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var service = new PersonService())
+                using (var service = new PersonService(CurrentUser))
                 {
                     var per = service.Login(model.IdNumber, model.Password);
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TestCard.Domain;
 
 namespace TestCard.Web.Models
 {
@@ -11,9 +12,9 @@ namespace TestCard.Web.Models
         public string Url { get; set; }
         public string Action { get; set; }
         public string Controller { get; set; }
-        public ActionType Type { get; set; }
+        public ActionTypes Type { get; set; }
         public object ObjectID { get; set; }
 
-        public enum ActionType { Add, Edit, Delete, Print }
+        public enum ActionTypes { Add, Edit, Delete, Print }
     }
 }

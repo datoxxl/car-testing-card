@@ -17,13 +17,13 @@ namespace TestCard.Web.Controllers
 {
     public class BaseController : Controller
     {
-        public v_person CurrentUser
+        public User CurrentUser
         {
             get
             {
                 try
                 {
-                    return Session["CurrentUser"] as v_person;
+                    return Session["CurrentUser"] as User;
                 }
                 catch { return null; }
             }
@@ -43,6 +43,19 @@ namespace TestCard.Web.Controllers
             Thread.CurrentThread.CurrentUICulture = culture;
 
             base.Initialize(requestContext);
+        }
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            var controller = filterContext.Controller as BaseController;
+
+            if (controller.CurrentUser != null)
+            {
+                controller.ViewBag.AccountType = controller.CurrentUser.AccountType;
+                controller.ViewBag.Permissions = controller.CurrentUser.Permissions;
+            }
+
+            base.OnActionExecuting(filterContext);
         }
 
         public class ImageResult : ActionResult
@@ -115,7 +128,7 @@ namespace TestCard.Web.Controllers
 
         protected Models.TestingCardModel GetTestingCardModel(int id)
         {
-            using (var service = new TestingCardService())
+            using (var service = new TestingCardService(CurrentUser))
             {
                 var source = service.Get(id, true);
 

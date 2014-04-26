@@ -30,7 +30,6 @@ namespace TestCard.Domain
         public DbSet<CompanyChangeRequest> CompanyChangeRequests { get; set; }
         public DbSet<CompanyHistory> CompanyHistories { get; set; }
         public DbSet<ConfirmStatus> ConfirmStatus1 { get; set; }
-        public DbSet<ErrorCode> ErrorCodes { get; set; }
         public DbSet<PersonDay> PersonDays { get; set; }
         public DbSet<PersonHistory> PersonHistories { get; set; }
         public DbSet<PersonLeave> PersonLeaves { get; set; }
@@ -46,12 +45,6 @@ namespace TestCard.Domain
         public DbSet<TestingCardHistory> TestingCardHistories { get; set; }
         public DbSet<TestingStep> TestingSteps { get; set; }
         public DbSet<TestingSubStep> TestingSubSteps { get; set; }
-        public DbSet<v_person> v_person { get; set; }
-        public DbSet<v_PersonChangeRequest> v_PersonChangeRequest { get; set; }
-        public DbSet<v_testing_cards> v_testing_cards { get; set; }
-        public DbSet<v_TestingCard4Print> v_TestingCard4Print { get; set; }
-        public DbSet<v_TestingCardDetail> v_TestingCardDetail { get; set; }
-        public DbSet<v_TestingCardDetailChangeRequest> v_TestingCardDetailChangeRequest { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<PersonChangeRequest> PersonChangeRequests { get; set; }
@@ -61,5 +54,8 @@ namespace TestCard.Domain
         public DbSet<CodeType> CodeTypes { get; set; }
         public DbSet<TestingCardDetailHistory> TestingCardDetailHistories { get; set; }
         public DbSet<ChangeRequestReason> ChangeRequestReasons { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Object> Objects { get; set; }
+        public DbSet<ObjectPermission> ObjectPermissions { get; set; }
     }
 }

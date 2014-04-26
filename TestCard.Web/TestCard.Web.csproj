@@ -150,6 +150,7 @@
     <Compile Include="Controllers\TestingCardController.cs" />
     <Compile Include="Filters\AuthorizationFilter.cs" />
     <Compile Include="Filters\ListFilter.cs" />
+    <Compile Include="Filters\PermissionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,10 +159,12 @@
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
     <Compile Include="Helpers\ViewContextHelper.cs" />
+    <Compile Include="Models\ActionBar.cs" />
     <Compile Include="Models\ActionButton.cs" />
     <Compile Include="Models\AjaxListModel.cs" />
     <Compile Include="Models\CompanyListModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
+    <Compile Include="Models\ActionCell.cs" />
     <Compile Include="Models\TestingCardChangeRequestModel.cs" />
     <Compile Include="Models\PagedList.cs" />
     <Compile Include="Models\TestingCardChangeRequestListModel.cs" />

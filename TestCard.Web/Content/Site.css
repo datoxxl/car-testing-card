@@ -604,16 +604,17 @@ table.x-form
         display: inline;
     }
 
-    .x-actions .btn
+    .x-actions
     {
+        
     }
 
-        .x-actions .btn.approve
+        .x-actions .approve
         {
             background-color: #60a917;
         }
 
-        .x-actions .btn.reject
+        .x-actions .reject
         {
             background-color: #e51400;
         }
@@ -722,10 +723,20 @@ table.x-table
         background-color: #c1ddf1;
     }
 
-        table.x-table > tbody > tr.active > td.action-col
+    table.x-table > tbody > tr > td.action-cell
+    {
+        width: 1px;
+        white-space: nowrap;
+    }
+
+    table.x-table > tbody > tr > td.action-cell
+    {
+        white-space: nowrap;
+    }
+
+        table.x-table > tbody > tr > td.action-cell form
         {
-            width: 1px;
-            white-space: nowrap;
+            display: inline;
         }
 
     table.x-table a
@@ -831,25 +842,25 @@ ul.x-action-bar
                 background-color: #ccc;
             }
 
-        .x-form-actions
-        {
-            float: right;
-        }
+.x-form-actions
+{
+    float: right;
+}
 
-            .x-form-actions a.btn
-            {
-                background-color: transparent;
-                border: 0;
-            }
-
-    .x-form-container .form-inner
+    .x-form-actions a.btn
     {
-        padding: 10px 20px;
+        background-color: transparent;
+        border: 0;
     }
 
-    .x-form-container .x-form
-    {
-    }
+.x-form-container .form-inner
+{
+    padding: 10px 20px;
+}
+
+.x-form-container .x-form
+{
+}
 
 .x-picture-area
 {
@@ -859,17 +870,8 @@ ul.x-action-bar
     margin-top: 10px;
 }
 
-.x-list-actions
-{
-    white-space: nowrap;
-}
-
-    .x-list-actions form
-    {
-        display: inline;
-    }
-
-.btn
+.btn,
+input.btn
 {
     height: 24px;
     width: 24px;

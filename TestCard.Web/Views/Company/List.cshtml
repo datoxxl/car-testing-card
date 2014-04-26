@@ -2,12 +2,16 @@
     ViewBag.Title = "List";
 }
 <p>
-    @{ Html.RenderPartial("_ActionBar", new List<TestCard.Web.Models.ActionButton>
+    @{ Html.RenderPartial("_ActionBar", new ActionBar
        {
-           new TestCard.Web.Models.ActionButton { 
-               Type = ActionButton.ActionType.Add, 
-               Text = GeneralResource.Add,
-               Url = "/Company/Add"
+           EntityObject = TestCard.Domain.Objects.Company,
+           Items = new List<ActionButton>
+           {
+               new ActionButton { 
+                   Type = ActionButton.ActionTypes.Add, 
+                   Text = GeneralResource.Add,
+                   Url = Url.Action("Add", "Company")
+               }
            }
        }); }
 </p>

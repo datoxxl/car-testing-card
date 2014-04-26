@@ -67,20 +67,24 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Valid)
             </td>
-            @{ Html.RenderPartial("_ActionCell", new List<ActionButton> {
-                new ActionButton
-                {
-                    Controller = "TestingCard",
-                    ObjectID = item.TestingCardID,
-                    Type = ActionButton.ActionType.Edit
-                },
-                new ActionButton
-                {
-                    Controller = "Print",
-                    Action = "TestingCard",
-                    ObjectID = item.TestingCardID,
-                    Type = ActionButton.ActionType.Print
-                }
+            @{ Html.RenderPartial("_ActionCell", new ActionCell
+               {
+                   EntityObject = TestCard.Domain.Objects.TestingCard,
+                   Items = new List<ActionButton> {
+                        new ActionButton
+                        {
+                            Controller = "TestingCard",
+                            ObjectID = item.TestingCardID,
+                            Type = ActionButton.ActionTypes.Edit
+                        },
+                        new ActionButton
+                        {
+                            Controller = "Print",
+                            Action = "TestingCard",
+                            ObjectID = item.TestingCardID,
+                            Type = ActionButton.ActionTypes.Print
+                        }
+                    }
                }); }
 
         </tr>

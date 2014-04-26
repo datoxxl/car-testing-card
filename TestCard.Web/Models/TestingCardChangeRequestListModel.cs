@@ -35,12 +35,12 @@ namespace TestCard.Web.Models
 
         public int? QualityManagerConfirmStatusID { get; set; }
 
-        [Display(Name = "AdministratorConfirm", ResourceType = typeof(GeneralResource))]
+        [Display(Name = "QualityManagerConfirm", ResourceType = typeof(GeneralResource))]
         public string QualityManagerConfirmStatusName { get; set; }
 
         public int? AdministatorConfirmStatusID { get; set; }
 
-        [Display(Name = "QualityManagerConfirm", ResourceType = typeof(GeneralResource))]
+        [Display(Name = "AdministratorConfirm", ResourceType = typeof(GeneralResource))]
         public string AdministratorConfirmStatusName { get; set; }
     }
 }

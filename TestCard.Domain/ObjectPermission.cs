@@ -12,12 +12,13 @@ namespace TestCard.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class v_TestingCardDetailChangeRequest
+    public partial class ObjectPermission
     {
-        public int TestingCardID { get; set; }
-        public int TestingSubStepID { get; set; }
-        public bool IsValid { get; set; }
-        public string stepName { get; set; }
-        public int TestingCardChangeRequestID { get; set; }
+        public int AccountTypeID { get; set; }
+        public int ObjectID { get; set; }
+        public int Permission { get; set; }
+    
+        public virtual AccountType AccountType { get; set; }
+        public virtual Object Object { get; set; }
     }
 }

@@ -13,22 +13,26 @@ namespace TestCard.Web.Controllers
     [AuthorizationFilter]
     public class PersonScheduleController : BaseController
     {
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         public ActionResult List()
         {
             return View();
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         public ActionResult View(int? id)
         {
             return GetModel(id ?? -1);
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.Edit)]
         public ActionResult Edit(int? id)
         {
             return GetModel(id ?? -1);
         }
 
         [HttpPost]
+        [PermissionFilter(TestCard.Domain.Permissions.Edit)]
         public ActionResult Edit(int id, Models.PersonScheduleModel model)
         {
             try
@@ -46,7 +50,7 @@ namespace TestCard.Web.Controllers
                         if (saved)
                         {
                             SetSuccessMessage();
-                            if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
+                            if (CurrentUser.AccountType == Domain.AccountTypes.Administrator)
                             {
                                 //return RedirectToAction("Edit", RouteData.Values);
                                 return RedirectToAction("List", "Person");
@@ -77,9 +81,9 @@ namespace TestCard.Web.Controllers
         {
             try
             {
-                using (var service = new PersonService())
+                using (var service = new PersonService(CurrentUser))
                 {
-                    var source = service.Get(id);
+                    var source = service.Get(id, true);
 
                     if (source != null)
                     {
@@ -102,7 +106,7 @@ namespace TestCard.Web.Controllers
                 SetErrorMessage();
             }
 
-            return RedirectToAction("List");
+            return RedirectToAction("List", "Person");
         }
     }
 }

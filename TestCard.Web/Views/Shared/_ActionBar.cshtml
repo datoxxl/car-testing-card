@@ -1,8 +1,36 @@
-﻿@model List<ActionButton>
+﻿@model ActionBar
 
 <ul class="x-action-bar">
-    @foreach (var item in Model)
+    @{
+        var perm = ViewBag.Permissions[Model.EntityObject];
+    }
+    @foreach (var item in Model.Items)
     {
+        switch (item.Type)
+        {
+            case ActionButton.ActionTypes.Add:
+                if (!perm.HasFlag(TestCard.Domain.Permissions.Add))
+                {
+                    continue;
+                }
+                break;
+            case ActionButton.ActionTypes.Edit:
+                if (!perm.HasFlag(TestCard.Domain.Permissions.Edit))
+                {
+                    continue;
+                }
+                break;
+            case ActionButton.ActionTypes.Delete:
+                if (!perm.HasFlag(TestCard.Domain.Permissions.Delete))
+                {
+                    continue;
+                }
+                break;
+            case ActionButton.ActionTypes.Print:
+                break;
+            default:
+                break;
+        }
         <li>
             <a href="@item.Url" class="item @item.Type.ToString().ToLower()">@item.Text</a>
         </li>   

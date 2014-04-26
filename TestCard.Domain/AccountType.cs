@@ -19,6 +19,7 @@ namespace TestCard.Domain
             this.PersonHistories = new HashSet<PersonHistory>();
             this.People = new HashSet<Person>();
             this.PersonChangeRequests = new HashSet<PersonChangeRequest>();
+            this.ObjectPermissions = new HashSet<ObjectPermission>();
         }
     
         public int AccountTypeID { get; set; }
@@ -27,5 +28,6 @@ namespace TestCard.Domain
         public virtual ICollection<PersonHistory> PersonHistories { get; set; }
         public virtual ICollection<Person> People { get; set; }
         public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
+        public virtual ICollection<ObjectPermission> ObjectPermissions { get; set; }
     }
 }

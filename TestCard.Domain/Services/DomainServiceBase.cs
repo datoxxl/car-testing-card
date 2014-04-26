@@ -9,7 +9,7 @@ using TestCard.Domain.Helpers;
 
 namespace TestCard.Domain.Services
 {
-    public abstract class DomainServiceBase<T> : IDisposable where T : class /*T=Model*/
+    public abstract class DomainServiceBase
     {
         public DbContextConfiguration Configuration
         {
@@ -20,29 +20,66 @@ namespace TestCard.Domain.Services
         }
 
         protected readonly TestCardContext _DbContext;
+        protected readonly User _CurrentUser;
 
         public DomainServiceBase()
-            : this(new TestCardContext())
-        { }
+            : this(new TestCardContext(), null) { }
 
-        public DomainServiceBase(TestCardContext context)
+        public DomainServiceBase(User currentUser)
+            : this(new TestCardContext(), currentUser) { }
+
+        public DomainServiceBase(DomainServiceBase service)
+            : this(service._DbContext, service._CurrentUser) { }
+
+        public DomainServiceBase(TestCardContext context, User currentUser)
         {
             _DbContext = context;
+            _CurrentUser = currentUser;
         }
+    }
+
+    public abstract class DomainServiceBase<T> : DomainServiceBase, IDisposable
+        where T : class /*T=Model*/
+    {
+        public DomainServiceBase()
+            : base()
+        { }
+
+        public DomainServiceBase(User currentUser)
+            : base(currentUser)
+        { }
+
+        public DomainServiceBase(DomainServiceBase service)
+            : base(service)
+        { }
 
         public virtual IQueryable<T> GetAll()
         {
             return _DbContext.Set<T>();
         }
 
-        public virtual IQueryable<T> GetAll(DataFilterOption option)
+        public virtual IQueryable<T> GetAll(DataFilterOption option, bool secureObject = false)
         {
-            return _DbContext.Set<T>().SortAndFilter<T>(option);
+            var query = _DbContext.Set<T>().AsQueryable();
+
+            if (secureObject)
+            {
+                query = SecurityFilter(query);
+            }
+
+            return query.SortAndFilter<T>(option);
         }
 
-        public virtual T Get(dynamic id)
+        public virtual T Get(dynamic id, bool secureObject = false)
         {
-            return _DbContext.Set<T>().Find(id);
+            var obj = _DbContext.Set<T>().Find(id);
+
+            if(secureObject)
+            {
+                obj = SecurityFilter(obj);
+            }
+
+            return obj;
         }
 
         public virtual void Add(T entity)
@@ -93,6 +130,18 @@ namespace TestCard.Domain.Services
         public void Dispose()
         {
             _DbContext.Dispose();
+        }
+
+        protected T SecurityFilter(T entity)
+        {
+            return SecurityFilter(new List<T>() { entity }
+                .AsQueryable())
+                .FirstOrDefault();
+        }
+
+        public virtual IQueryable<T> SecurityFilter(IQueryable<T> query)
+        {
+            return query;
         }
     }
 }

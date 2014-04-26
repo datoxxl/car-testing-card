@@ -15,16 +15,19 @@ namespace TestCard.Web.Controllers
     [AuthorizationFilter]
     public class CompanyController : BaseController
     {
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         public ActionResult View(int? id)
         {
             return GetModel(id ?? -1);
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         public ActionResult List()
         {
             return View();
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.Add)]
         public ActionResult Add()
         {
             var model = new Models.CompanyModel();
@@ -33,6 +36,7 @@ namespace TestCard.Web.Controllers
         }
 
         [HttpPost]
+        [PermissionFilter(TestCard.Domain.Permissions.Add)]
         public ActionResult Add(Models.CompanyModel model, HttpPostedFileWrapper logo, HttpPostedFileWrapper accrLogo)
         {
             try
@@ -42,7 +46,7 @@ namespace TestCard.Web.Controllers
                     if (FileHelper.IsNullOrOfType(logo, FileHelper.FileType.WebImage)
                         && FileHelper.IsNullOrOfType(accrLogo, FileHelper.FileType.WebImage))
                     {
-                        using (var service = new CompanyService())
+                        using (var service = new CompanyService(CurrentUser))
                         {
                             var company = AutoMapper.Mapper.Map<Models.CompanyModel, TestCard.Domain.Company>(model);
 
@@ -68,12 +72,14 @@ namespace TestCard.Web.Controllers
             return View(model);
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.Edit)]
         public ActionResult Edit(int? id)
         {
             return GetModel(id ?? -1);
         }
 
         [HttpPost]
+        [PermissionFilter(TestCard.Domain.Permissions.Edit)]
         public ActionResult Edit(int id, Models.CompanyModel model, HttpPostedFileWrapper logo, HttpPostedFileWrapper accrLogo)
         {
             try
@@ -83,7 +89,7 @@ namespace TestCard.Web.Controllers
                     if (FileHelper.IsNullOrOfType(logo, FileHelper.FileType.WebImage)
                         && FileHelper.IsNullOrOfType(accrLogo, FileHelper.FileType.WebImage))
                     {
-                        using (var service = new CompanyService())
+                        using (var service = new CompanyService(CurrentUser))
                         {
                             var company = service.Get(id);
 
@@ -116,9 +122,9 @@ namespace TestCard.Web.Controllers
         {
             try
             {
-                using (var service = new CompanyService())
+                using (var service = new CompanyService(CurrentUser))
                 {
-                    var source = service.Get(id);
+                    var source = service.Get(id, true);
 
                     if (source != null)
                     {

@@ -16,7 +16,6 @@ namespace TestCard.Web.Filters
 
             if (controller.CurrentUser != null)
             {
-                controller.ViewBag.AccountType = (TestCard.Domain.AccountTypes)controller.CurrentUser.AccountTypeID;
                 base.OnActionExecuting(filterContext);
                 return;
             }

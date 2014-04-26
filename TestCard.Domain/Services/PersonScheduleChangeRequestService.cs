@@ -9,7 +9,12 @@ namespace TestCard.Domain.Services
 {
     public class PersonScheduleChangeRequestService : DomainServiceBase<PersonScheduleChangeRequest>
     {
-        public bool SaveChangeRequest(PersonScheduleChangeRequest request, List<PersonScheduleChangeRequestDetail> scheduleRequestDetails, v_person currentPerson, ref bool? hasUnconfirmedRequest)
+        public PersonScheduleChangeRequestService() { }
+
+        public PersonScheduleChangeRequestService(User currentUser)
+            : base(currentUser) { }
+
+        public bool SaveChangeRequest(PersonScheduleChangeRequest request, List<PersonScheduleChangeRequestDetail> scheduleRequestDetails, User currentPerson, ref bool? hasUnconfirmedRequest)
         {
             var now = DateTime.Now;
             int? personID = null;
@@ -24,10 +29,10 @@ namespace TestCard.Domain.Services
 
             if (personID.HasValue)
             {
-                var accountType = (AccountTypes)currentPerson.AccountTypeID;
+                var accountType = currentPerson.AccountType;
                 var rejectStatusID = (int)ConfirmStatuses.Rejected;
-                hasUnconfirmedRequest = GetAll().Any(x => x.PersonID == request.PersonID 
-                    && !x.AdministratorConfirmStatusID.HasValue 
+                hasUnconfirmedRequest = GetAll().Any(x => x.PersonID == request.PersonID
+                    && !x.AdministratorConfirmStatusID.HasValue
                     && x.QualityManagerConfirmStatusID != rejectStatusID);
 
                 switch (accountType)
@@ -41,7 +46,7 @@ namespace TestCard.Domain.Services
                         request.QualityManagerPersonID = personID;
                         request.QualityManagerConfirmStatusID = (int)ConfirmStatuses.Approved;
 
-                        new PersonScheduleService(_DbContext).SavePersonSchedule(request.PersonID.Value, request.ResponsiblePersonID, scheduleRequestDetails.ToList());
+                        new PersonScheduleService(this).SavePersonSchedule(request.PersonID.Value, request.ResponsiblePersonID, scheduleRequestDetails.ToList());
                         break;
                     case AccountTypes.QualityManager:
 
@@ -104,7 +109,7 @@ namespace TestCard.Domain.Services
 
                             if (status == ConfirmStatuses.Approved)
                             {
-                                new PersonScheduleService(_DbContext).SavePersonSchedule(request.PersonID.Value, request.ResponsiblePersonID, request.PersonScheduleChangeRequestDetails.ToList());
+                                new PersonScheduleService(this).SavePersonSchedule(request.PersonID.Value, request.ResponsiblePersonID, request.PersonScheduleChangeRequestDetails.ToList());
                             }
 
                             SaveChanges();
@@ -147,34 +152,26 @@ namespace TestCard.Domain.Services
             return false;
         }
 
-        public List<PersonScheduleChangeRequest> GetList(v_person person, DataFilterOption filter, bool showAll)
+        public override IQueryable<PersonScheduleChangeRequest> SecurityFilter(IQueryable<PersonScheduleChangeRequest> query)
         {
-            var type = (AccountTypes)person.AccountTypeID;
             var approvedStatus = (int)ConfirmStatuses.Approved;
-            var personID = person.PersonID;
-            var result = GetAll().Where(x => x.Person.CompanyID == person.CompanyID);
 
-            if (!showAll)
-            {
-                result = result.Where(x => !x.AdministratorConfirmStatusID.HasValue
-                    && (!x.QualityManagerConfirmStatusID.HasValue || x.QualityManagerConfirmStatusID == approvedStatus));
-            }
-
-            switch (type)
+            switch (_CurrentUser.AccountType)
             {
                 case AccountTypes.Administrator:
-                    result = result.Where(x => x.QualityManagerConfirmStatusID == approvedStatus);
+                    query = query.Where(x => x.QualityManagerConfirmStatusID == approvedStatus);
                     break;
                 case AccountTypes.QualityManager:
+                    query = query.Where(x => x.Person.CompanyID == _CurrentUser.CompanyID);
                     break;
                 case AccountTypes.Operator:
-                    result = result.Where(x => x.PersonID == personID);
+                    query = query.Where(x => x.PersonID == _CurrentUser.PersonID);
                     break;
                 default:
                     break;
             }
 
-            return result.SortAndFilter(filter).ToList();
+            return base.SecurityFilter(query);
         }
     }
 }

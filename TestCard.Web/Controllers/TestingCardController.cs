@@ -14,11 +14,13 @@ namespace TestCard.Web.Controllers
     [AuthorizationFilter]
     public class TestingCardController : BaseController
     {
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         public ActionResult List()
         {
             return View();
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         public ActionResult View(int? id)
         {
             try
@@ -41,6 +43,7 @@ namespace TestCard.Web.Controllers
             return RedirectTo(Request.UrlReferrer.AbsoluteUri);
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.Add)]
         public ActionResult Add()
         {
             var model = new Models.TestingCardModel();
@@ -50,13 +53,14 @@ namespace TestCard.Web.Controllers
         }
 
         [HttpPost]
+        [PermissionFilter(TestCard.Domain.Permissions.Add)]
         public ActionResult Add(Models.TestingCardModel model, HttpPostedFileWrapper[] files)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    using (var service = new TestingCardService())
+                    using (var service = new TestingCardService(CurrentUser))
                     {
                         var testingCard = AutoMapper.Mapper.Map<TestCard.Domain.TestingCard>(model);
 
@@ -91,6 +95,7 @@ namespace TestCard.Web.Controllers
             return View(model);
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.Edit)]
         public ActionResult Edit(int? id)
         {
             try
@@ -120,6 +125,7 @@ namespace TestCard.Web.Controllers
         }
 
         [HttpPost]
+        [PermissionFilter(TestCard.Domain.Permissions.Edit)]
         public ActionResult Edit(int id, Models.TestingCardChangeRequestModel model)
         {
             try
@@ -139,7 +145,7 @@ namespace TestCard.Web.Controllers
                         {
                             SetSuccessMessage();
 
-                            if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
+                            if (CurrentUser.AccountType == Domain.AccountTypes.Administrator)
                             {
                                 //return RedirectToAction("Edit", RouteData.Values);
                                 return RedirectToAction("List");
@@ -166,17 +172,20 @@ namespace TestCard.Web.Controllers
             return View(model);
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         public ActionResult Images(int? id)
         {
             return GetTestingCardImages(id ?? -1);
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.Add)]
         public ActionResult AddImages(int? id)
         {
             return GetTestingCardImages(id ?? -1);
         }
 
         [HttpPost]
+        [PermissionFilter(TestCard.Domain.Permissions.Add)]
         public ActionResult AddImages(int id, HttpPostedFileWrapper[] files)
         {
             try
@@ -198,7 +207,7 @@ namespace TestCard.Web.Controllers
                 }
                 else
                 {
-                    using (var service = new TestingCardService())
+                    using (var service = new TestingCardService(CurrentUser))
                     {
                         service.SaveTestingCardImages(id, images);
                     }
@@ -214,9 +223,10 @@ namespace TestCard.Web.Controllers
             return RedirectTo(Request.UrlReferrer.AbsoluteUri);
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         private ActionResult GetTestingCardImages(int id)
         {
-            using (var service = new TestingCardService())
+            using (var service = new TestingCardService(CurrentUser))
             {
                 var card = service.Get(id);
 

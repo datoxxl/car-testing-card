@@ -10,21 +10,22 @@ namespace TestCard.Domain.Services
 {
     public class PersonService : DomainServiceBase<Person>
     {
-        public PersonService() { }
+        public PersonService(User currentUser)
+            : base(currentUser) { }
 
-        public PersonService(TestCardContext context)
-            : base(context) { }
+        public PersonService(DomainServiceBase service)
+            : base(service) { }
 
-        public v_person Login(string idNumber, string password)
+        public User Login(string idNumber, string password)
         {
             var per = _DbContext.People
                 .FirstOrDefault(x => x.IDNo == idNumber && x.Password == password);
 
             if (per != null)
             {
-                return new v_person
+                return new User
                     {
-                        AccountTypeID = per.AccountTypeID,
+                        AccountType = (AccountTypes)per.AccountTypeID,
                         AccountTypeName = per.AccountType.AccountTypeName,
                         CompanyID = per.CompanyID,
                         CompanyName = per.Company.CompanyName,
@@ -38,7 +39,9 @@ namespace TestCard.Domain.Services
                         Password = per.Password,
                         PersonID = per.PersonID,
                         ResponsiblePersonID = per.ResponsiblePersonID,
-                        SystemIDNo = per.SystemIDNo
+                        SystemIDNo = per.SystemIDNo,
+                        Permissions = per.AccountType.ObjectPermissions
+                            .ToDictionary(x => (Objects)x.ObjectID, x => (Permissions)x.Permission)
                     };
             }
 
@@ -97,12 +100,31 @@ namespace TestCard.Domain.Services
             person.ResponsiblePersonID = request.ResponsiblePersonID;
             person.SystemIDNo = request.SystemIDNo;
 
-            if(request.Person == null)
+            if (request.Person == null)
             {
                 request.Person = person;
             }
 
             return true;
+        }
+
+        public override IQueryable<Person> SecurityFilter(IQueryable<Person> query)
+        {
+            switch (_CurrentUser.AccountType)
+            {
+                case AccountTypes.Administrator:
+                    break;
+                case AccountTypes.QualityManager:
+                    query = query.Where(x => x.CompanyID == _CurrentUser.CompanyID);
+                    break;
+                case AccountTypes.Operator:
+                    query = query.Where(x => x.PersonID == _CurrentUser.PersonID);
+                    break;
+                default:
+                    break;
+            }
+
+            return base.SecurityFilter(query);
         }
     }
 }

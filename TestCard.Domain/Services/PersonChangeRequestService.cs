@@ -9,7 +9,12 @@ namespace TestCard.Domain.Services
 {
     public class PersonChangeRequestService : DomainServiceBase<PersonChangeRequest>
     {
-        public bool SaveChangeRequest(PersonChangeRequest request, v_person currentPerson, ref bool? hasUnconfirmedRequest)
+        public PersonChangeRequestService() { }
+
+        public PersonChangeRequestService(User currentUser)
+            : base(currentUser) { }
+
+        public bool SaveChangeRequest(PersonChangeRequest request, User currentPerson, ref bool? hasUnconfirmedRequest)
         {
             var now = DateTime.Now;
             int? personID = null;
@@ -25,7 +30,7 @@ namespace TestCard.Domain.Services
 
             if (personID.HasValue)
             {
-                var accountType = (AccountTypes)currentPerson.AccountTypeID;
+                var accountType = currentPerson.AccountType;
                 var rejectStatusID = (int)ConfirmStatuses.Rejected;
                 hasUnconfirmedRequest = GetAll().Any(x => x.PersonID == request.PersonID
                     && !x.AdministratorConfirmStatusID.HasValue
@@ -42,7 +47,7 @@ namespace TestCard.Domain.Services
                         request.QualityManagerPersonID = personID;
                         request.QualityManagerConfirmStatusID = (int)ConfirmStatuses.Approved;
 
-                        new PersonService(_DbContext).SavePerson(request);
+                        new PersonService(this).SavePerson(request);
                         break;
                     case AccountTypes.QualityManager:
 
@@ -100,7 +105,7 @@ namespace TestCard.Domain.Services
 
                             if (status == ConfirmStatuses.Approved)
                             {
-                                new PersonService(_DbContext).SavePerson(request);
+                                new PersonService(this).SavePerson(request);
                             }
 
                             SaveChanges();
@@ -143,34 +148,26 @@ namespace TestCard.Domain.Services
             return false;
         }
 
-        public List<PersonChangeRequest> GetList(v_person person, DataFilterOption filter, bool showAll)
+        public override IQueryable<PersonChangeRequest> SecurityFilter(IQueryable<PersonChangeRequest> query)
         {
-            var type = (AccountTypes)person.AccountTypeID;
             var approvedStatus = (int)ConfirmStatuses.Approved;
-            var personID = person.PersonID;
-            var result = GetAll().Where(x => x.CompanyID == person.CompanyID);
 
-            if (!showAll)
-            {
-                result = result.Where(x => !x.AdministratorConfirmStatusID.HasValue
-                    && (!x.QualityManagerConfirmStatusID.HasValue || x.QualityManagerConfirmStatusID == approvedStatus));
-            }
-
-            switch (type)
+            switch (_CurrentUser.AccountType)
             {
                 case AccountTypes.Administrator:
-                    result = result.Where(x => x.QualityManagerConfirmStatusID == approvedStatus);
+                    query = query.Where(x => x.QualityManagerConfirmStatusID == approvedStatus);
                     break;
                 case AccountTypes.QualityManager:
+                    query = query.Where(x => x.Person.CompanyID == _CurrentUser.CompanyID);
                     break;
                 case AccountTypes.Operator:
-                    result = result.Where(x => x.PersonID == personID);
+                    query = query.Where(x => x.PersonID == _CurrentUser.PersonID);
                     break;
                 default:
                     break;
             }
 
-            return result.SortAndFilter(filter).ToList();
+            return base.SecurityFilter(query);
         }
     }
 }

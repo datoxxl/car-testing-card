@@ -1,5 +1,5 @@
 ﻿@model TestCard.Web.Models.RequestActionsModel
-<td class="action-col">
+<td class="action-cell">
     <div class="x-list-actions">
         @Html.ActionLink(" ", "View", Model.Controller, new { @id = Model.RequestID }, new { @class = "btn details", title = GeneralResource.Details })
         @if (ViewBag.AccountType != TestCard.Domain.AccountTypes.Operator)

@@ -10,6 +10,13 @@ namespace TestCard.Domain.Services
 {
     public class CompanyService : DomainServiceBase<Company>
     {
+        public CompanyService()
+        { }
+
+        public CompanyService(User currentUser)
+            : base(currentUser)
+        { }
+
         public bool SaveCompany(Company company, int responsiblePersonID, byte[] companyLogo, byte[] accreditationLogo)
         {
             string[] filePath = new string[2];
@@ -81,6 +88,23 @@ namespace TestCard.Domain.Services
             }
 
             return new File { FileName = fileName, FilePath = filePath };
+        }
+
+        public override IQueryable<Company> SecurityFilter(IQueryable<Company> query)
+        {
+            switch (_CurrentUser.AccountType)
+            {
+                case AccountTypes.Administrator:
+                    break;
+                case AccountTypes.QualityManager:
+                case AccountTypes.Operator:
+                    query = query.Where(x => x.CompanyID == _CurrentUser.CompanyID);
+                    break;
+                default:
+                    break;
+            }
+
+            return query;
         }
     }
 }

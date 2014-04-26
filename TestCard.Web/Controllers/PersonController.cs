@@ -13,16 +13,19 @@ namespace TestCard.Web.Controllers
     [AuthorizationFilter]
     public class PersonController : BaseController
     {
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         public ActionResult List()
         {
             return View();
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         public ActionResult View(int? id)
         {
             return GetModel(id ?? -1);
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.Add)]
         public ActionResult Add()
         {
             var model = new TestCard.Web.Models.RegisterModel();
@@ -32,6 +35,7 @@ namespace TestCard.Web.Controllers
         }
 
         [HttpPost]
+        [PermissionFilter(TestCard.Domain.Permissions.Add)]
         public ActionResult Add(TestCard.Web.Models.RegisterModel model)
         {
             try
@@ -48,7 +52,7 @@ namespace TestCard.Web.Controllers
                         if (saved)
                         {
                             SetSuccessMessage();
-                            if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
+                            if (CurrentUser.AccountType == Domain.AccountTypes.Administrator)
                             {
                                 //return RedirectToAction("Edit", new { @id = per.PersonID });
                                 return RedirectToAction("List");
@@ -75,12 +79,14 @@ namespace TestCard.Web.Controllers
             return View(model);
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.Edit)]
         public ActionResult Edit(int? id)
         {
             return GetModel(id ?? -1);
         }
 
         [HttpPost]
+        [PermissionFilter(TestCard.Domain.Permissions.Edit)]
         public ActionResult Edit(int id, Models.PersonModel model)
         {
             try
@@ -98,7 +104,7 @@ namespace TestCard.Web.Controllers
                         {
                             SetSuccessMessage();
 
-                            if ((Domain.AccountTypes)CurrentUser.AccountTypeID == Domain.AccountTypes.Administrator)
+                            if (CurrentUser.AccountType == Domain.AccountTypes.Administrator)
                             {
                                 //return RedirectToAction("Edit", RouteData.Values);
                                 return RedirectToAction("List");
@@ -129,9 +135,9 @@ namespace TestCard.Web.Controllers
         {
             try
             {
-                using (var service = new PersonService())
+                using (var service = new PersonService(CurrentUser))
                 {
-                    var source = service.Get(id);
+                    var source = service.Get(id, true);
 
                     if (source != null)
                     {

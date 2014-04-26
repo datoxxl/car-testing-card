@@ -12,9 +12,16 @@ namespace TestCard.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class ErrorCode
+    public partial class Object
     {
-        public int error_id { get; set; }
-        public string description { get; set; }
+        public Object()
+        {
+            this.ObjectPermissions = new HashSet<ObjectPermission>();
+        }
+    
+        public int ObjectID { get; set; }
+        public string Name { get; set; }
+    
+        public virtual ICollection<ObjectPermission> ObjectPermissions { get; set; }
     }
 }

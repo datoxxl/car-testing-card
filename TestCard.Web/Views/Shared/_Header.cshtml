@@ -3,46 +3,64 @@
         @{ Html.RenderAction("UserOptions", "Home"); }
     </div>
     <ul class="x-toolbar">
-        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+        @if (ViewBag.Permissions[TestCard.Domain.Objects.Statistics].HasFlag(TestCard.Domain.Permissions.View))
+        {
+            <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
                                        {
                                            ButtonType = "stats",
                                            Text = GeneralResource.Statistics,
-                                           Url = "/Statistics/Index"
+                                           Url = Url.Action("Index", "Statistics")
                                        })
-        </li>
-        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+            </li>
+        }
+        @if (ViewBag.Permissions[TestCard.Domain.Objects.Company].HasFlag(TestCard.Domain.Permissions.View))
+        {
+            <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
                                        {
                                            ButtonType = "company",
                                            Text = GeneralResource.Company,
-                                           Url = "/Company/List"
+                                           Url = Url.Action("List", "Company")
                                        })
-        </li>
-        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+            </li>
+        }
+        @if (ViewBag.Permissions[TestCard.Domain.Objects.Person].HasFlag(TestCard.Domain.Permissions.View))
+        {
+            <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
                                        {
                                            ButtonType = "users",
                                            Text = GeneralResource.Users,
-                                           Url = "/Person/List"
+                                           Url = Url.Action("List", "Person")
                                        })</li>
-        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+        }
+        @if (ViewBag.Permissions[TestCard.Domain.Objects.PersonChangeRequest].HasFlag(TestCard.Domain.Permissions.View))
+        {
+            <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
                                        {
                                            ButtonType = "user-edit",
                                            Text = GeneralResource.EditRequest,
                                            Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline,
-                                           Url = "/PersonChangeRequest/List"
+                                           Url = Url.Action("List", "PersonChangeRequest")
                                        })</li>
-        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+        }
+        @if (ViewBag.Permissions[TestCard.Domain.Objects.TestingCard].HasFlag(TestCard.Domain.Permissions.View))
+        {
+            <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
                                        {
                                            ButtonType = "card",
                                            Text = GeneralResource.TestCard,
                                            Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline,
-                                           Url = "/TestingCard/List"
+                                           Url = Url.Action("List", "TestingCard")
                                        })</li>
-        <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
+        }
+        @if (ViewBag.Permissions[TestCard.Domain.Objects.TestingCardChangeRequest].HasFlag(TestCard.Domain.Permissions.View))
+        {
+            <li>@Html.Partial("_ToolbarButton", new TestCard.Web.Models.ToolbarButton
                                        {
                                            ButtonType = "card-edit",
                                            Text = GeneralResource.EditRequest,
                                            Type = TestCard.Web.Models.ToolbarButton.TextType.Multiline,
-                                           Url = "/TestingCardChangeRequest/List"
+                                           Url = Url.Action("List", "TestingCardChangeRequest")
                                        })</li>
+        }
     </ul>
 </div>

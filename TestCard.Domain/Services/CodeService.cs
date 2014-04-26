@@ -10,8 +10,8 @@ namespace TestCard.Domain.Services
     {
         public CodeService() { }
 
-        public CodeService(TestCardContext context)
-            : base(context) { }
+        public CodeService(DomainServiceBase service)
+            : base(service) { }
 
         public string NextCode(CodeTypes type)
         {

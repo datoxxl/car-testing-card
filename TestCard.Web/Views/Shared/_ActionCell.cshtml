@@ -1,17 +1,39 @@
-﻿@model IEnumerable<TestCard.Web.Models.ActionButton>
+﻿@model ActionCell
 <td class="action-cell">
     <div class="x-list-actions">
-        @foreach (var item in Model)
+        @{
+            var perm = ViewBag.Permissions[Model.EntityObject];
+        }
+        @foreach (var item in Model.Items)
         {
-            @Html.ActionLink(" ",
-            item.Action ?? item.Type.ToString(),
-            item.Controller,
-            new { @id = item.ObjectID },
-            new
+            switch (item.Type)
             {
-                @class = "btn " + item.Type.ToString().ToLower(),
-                title = item.Text ?? TestCard.Domain.Helpers.EnumHelper.GetDescription(item.Type)
-            })
+                case ActionButton.ActionTypes.Edit:
+                    if (!perm.HasFlag(TestCard.Domain.Permissions.Edit))
+                    {
+                        continue;
+                    }
+                    break;
+                case ActionButton.ActionTypes.Delete:
+                    if (!perm.HasFlag(TestCard.Domain.Permissions.Delete))
+                    {
+                        continue;
+                    }
+                    break;
+                case ActionButton.ActionTypes.Print:
+                    break;
+                default:
+                    break;
+            }
+            @Html.ActionLink(" ",
+                item.Action ?? item.Type.ToString(),
+                item.Controller,
+                new { @id = item.ObjectID },
+                new
+                {
+                    @class = "btn " + item.Type.ToString().ToLower(),
+                    title = item.Text ?? TestCard.Domain.Helpers.EnumHelper.GetDescription(item.Type)
+                })
         }
     </div>
 </td>

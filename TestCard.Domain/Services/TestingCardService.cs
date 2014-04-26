@@ -11,28 +11,20 @@ namespace TestCard.Domain.Services
 {
     public class TestingCardService : DomainServiceBase<TestingCard>
     {
-        public TestingCardService() { }
+        public TestingCardService(User currentUser)
+            : base(currentUser)
+        { }
 
-        public TestingCardService(TestCardContext context)
-            : base(context) { }
+        public TestingCardService(DomainServiceBase service)
+            : base(service) { }
 
         public TestingCard Get(int id, bool includeDetails)
         {
-             return _DbContext
-                    .TestingCards
-                    .Include(x => x.TestingCardDetails)
-                    .Where(x => x.TestingCardID == id)
-                    .FirstOrDefault();
-        }
-
-        public List<TestingCard> GetList(v_person person, DataFilterOption filter)
-        {
-            var type = (AccountTypes)person.AccountTypeID;
-            var personID = person.PersonID;
-
-            var result = GetAll().Where(x => x.ResponsiblePersonID == personID);
-
-            return result.SortAndFilter(filter).ToList();
+            return _DbContext
+                   .TestingCards
+                   .Include(x => x.TestingCardDetails)
+                   .Where(x => x.TestingCardID == id)
+                   .FirstOrDefault();
         }
 
         public bool SaveTestingCard(TestingCardChangeRequest request)
@@ -129,7 +121,7 @@ namespace TestCard.Domain.Services
             return true;
         }
 
-        public int SaveTestingCard(TestingCard testingCard, List<byte[]> images, v_person currentPerson)
+        public int SaveTestingCard(TestingCard testingCard, List<byte[]> images, User currentPerson)
         {
             List<string> savedFiles = new List<string>();
 
@@ -137,7 +129,7 @@ namespace TestCard.Domain.Services
             {
                 var now = DateTime.Now;
 
-                var codeService = new CodeService(_DbContext);
+                var codeService = new CodeService(this);
 
                 testingCard.Number = codeService.NextCode(CodeTypes.TestingCardOrderNumber);
                 if (testingCard.TestingCardNumber == null)

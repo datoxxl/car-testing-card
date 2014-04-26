@@ -15,18 +15,20 @@ namespace TestCard.Web.Controllers
     {
         public static object lockObject = new object();
 
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         public ActionResult List()
         {
             return View();
         }
 
+        [PermissionFilter(TestCard.Domain.Permissions.View)]
         public ActionResult View(int? id)
         {
             try
             {
-                using (var service = new PersonChangeRequestService())
+                using (var service = new PersonChangeRequestService(CurrentUser))
                 {
-                    var source = service.Get(id ?? -1);
+                    var source = service.Get(id ?? -1, true);
 
                     if (source != null)
                     {
@@ -55,6 +57,7 @@ namespace TestCard.Web.Controllers
         }
 
         [HttpPost]
+        [PermissionFilter(TestCard.Domain.Permissions.Edit)]
         public ActionResult ProcessRequest(int id, Domain.ConfirmStatuses status)
         {
             try
@@ -68,7 +71,7 @@ namespace TestCard.Web.Controllers
 
                         var saved = service.ChangeRequestStatus(id,
                             status,
-                            (Domain.AccountTypes)CurrentUser.AccountTypeID,
+                            CurrentUser.AccountType,
                             CurrentUser.PersonID,
                             ref alreadyProcessed,
                             ref notApprovedByQualityManager);
