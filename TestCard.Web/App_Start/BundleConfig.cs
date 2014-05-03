@@ -36,7 +36,7 @@ namespace TestCard.Web
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                         "~/Scripts/site.js",
                         "~/Scripts/pager.js",
-                        "~/Scripts/change-request-filter.js"
+                        "~/Scripts/list-filter.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/multupload").Include(

@@ -4,7 +4,7 @@
     margin: 0;
     font-family: 'Segoe UI' Verdana;
     font-size: 13px;
-    min-width: 410px;
+    min-width: 920px;
     min-height: 410px;
 }
 
@@ -69,7 +69,7 @@ fieldset ol
 
     fieldset ol li
     {
-        padding-bottom: 5px;
+        padding-bottom: 10px;
     }
 
 .x-form label
@@ -97,6 +97,7 @@ input[type="file"]
     padding: 5px;
     width: 300px;
     vertical-align: middle;
+    margin: 0;
 }
 
 textarea
@@ -262,21 +263,37 @@ div.watermark
 
 .x-loader
 {
-    height: 80px;
-    width: 80px;
+    height: 30px;
+    width: 30px;
     background-image: url(images/load.gif);
     background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
 }
 
     .x-loader.fixed-center
     {
-        margin: 10px auto;
-        position: absolute;
+        top: 3px;
+        left: 0;
+        margin-left: 5px;
+        position: fixed;
+    }
+
+    .x-loader.small
+    {
+        height: 16px;
+        width: 16px;
+        background-image: url(images/load-small.gif);
     }
 
 .x-clear
 {
     clear: both;
+}
+
+.x-left
+{
+    float: left;
 }
 
 .x-shadow
@@ -460,8 +477,10 @@ ul.x-toolbar
 
     ul.x-toolbar > li
     {
-        float: left;
+        /*float: left;*/
         padding: 0 15px;
+        display: table-cell;
+        vertical-align: top;
     }
 
 .x-toolbar-button
@@ -604,20 +623,19 @@ table.x-form
         display: inline;
     }
 
-    .x-actions
+.x-actions
+{
+}
+
+    .x-actions .approve
     {
-        
+        background-color: #60a917;
     }
 
-        .x-actions .approve
-        {
-            background-color: #60a917;
-        }
-
-        .x-actions .reject
-        {
-            background-color: #e51400;
-        }
+    .x-actions .reject
+    {
+        background-color: #e51400;
+    }
 
 
 .x-toolbar-sep-hor
@@ -676,6 +694,11 @@ table.x-form
         display: inline-block;
         width: 150px;
     }
+
+.x-table-cont
+{
+    overflow-x: auto;
+}
 
 table.x-table
 {
@@ -772,7 +795,7 @@ table.x-schedule
 ul.x-action-bar
 {
     list-style: none;
-    margin: 0;
+    margin: 0 0 10px 0;
     padding: 0;
     display: table;
 }
@@ -790,6 +813,7 @@ ul.x-action-bar
         border: 1px solid #e1e1e1;
         background-repeat: no-repeat;
         background-position: 5px center;
+        display: inline-block;
     }
 
         ul.x-action-bar .item.add
@@ -1065,6 +1089,11 @@ input.btn
         vertical-align: middle;
     }
 
+    .x-pager .x-loader
+    {
+        margin-left: 5px;
+    }
+
 .x-img-list
 {
 }
@@ -1109,7 +1138,13 @@ input.btn
 .x-list-filter
 {
     text-align: right;
+    margin: 10px 0;
 }
+
+    .x-list-filter .x-loader
+    {
+        margin-right: 5px;
+    }
 
 ol.logo-images
 {

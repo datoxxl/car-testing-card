@@ -1,48 +1,49 @@
 ﻿@model IEnumerable<TestCard.Web.Models.CompanyListModel>
-<table class="x-table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccreditationScope)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccreditationNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccreditationExpireDate)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
-    {
+<div class="x-table-cont">
+    <table class="x-table">
         <tr>
-            <td>
-                @Html.ActionLink(item.CompanyName, "View", "Company", new { @id = item.CompanyID }, null)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccreditationScope)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccreditationNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccreditationExpireDate)
-            </td>
-            @{ Html.RenderPartial("_ActionCell", new ActionCell
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccreditationScope)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccreditationNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccreditationExpireDate)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.CompanyName, "View", "Company", new { @id = item.CompanyID }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccreditationScope)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccreditationNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccreditationExpireDate)
+                </td>
+                @{ Html.RenderPartial("_ActionCell", new ActionCell
                {
                    EntityObject = TestCard.Domain.Objects.Company,
                    Items = new List<ActionButton> {
@@ -54,7 +55,8 @@
                         }
                     }
                }); }
-        </tr>
-    }
-</table>
+            </tr>
+        }
+    </table>
+</div>
 @{Html.Pager((IPagedList)Model, "Company", "Company");}

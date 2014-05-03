@@ -9,7 +9,8 @@
             new
             {
                 @class = "btn " + item.Type.ToString().ToLower(),
-                title = item.Text ?? TestCard.Domain.Helpers.EnumHelper.GetDescription(item.Type)
+                title = item.Text ?? TestCard.Domain.Helpers.EnumHelper.GetDescription(item.Type),
+                target = item.Target ?? "_self"
             })
     }
 </div>

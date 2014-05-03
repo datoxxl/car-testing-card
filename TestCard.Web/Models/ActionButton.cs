@@ -14,6 +14,8 @@ namespace TestCard.Web.Models
         public string Controller { get; set; }
         public ActionTypes Type { get; set; }
         public object ObjectID { get; set; }
+        //Html anchor target (e.g., _blank)
+        public string Target { get; set; }
 
         public enum ActionTypes { Add, Edit, Delete, Print }
     }

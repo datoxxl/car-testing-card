@@ -95,7 +95,7 @@ namespace TestCard.Web.Controllers
         }
 
         [PermissionFilter(Domain.Permissions.View, TestCard.Domain.Objects.TestingCard)]
-        public PartialViewResult TestingCard(int pageIndex = 1)
+        public PartialViewResult TestingCard(string testingCardFilter, int pageIndex = 1)
         {
             using (var service = new TestingCardService(CurrentUser))
             {
@@ -103,7 +103,9 @@ namespace TestCard.Web.Controllers
                 {
                     PageIndex = pageIndex,
                     MaximumRows = 10,
-                    SortByExpression = "EffectiveDate DESC"
+                    SortByExpression = "EffectiveDate DESC",
+                    FilterExpression = testingCardFilter == "company" || testingCardFilter == null 
+                        ? string.Format("Person.CompanyID == {0}", CurrentUser.CompanyID) : null
                 };
 
                 var list = AutoMapper.Mapper.Map<List<Models.TestingCardListModel>>(service.GetAll(filter, true));

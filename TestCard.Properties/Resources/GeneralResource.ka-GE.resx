@@ -444,4 +444,7 @@
   <data name="Print" xml:space="preserve">
     <value>ბეჭდვა</value>
   </data>
+  <data name="MyCompany" xml:space="preserve">
+    <value>ჩემი კომპანია</value>
+  </data>
 </root>

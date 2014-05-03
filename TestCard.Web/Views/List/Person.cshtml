@@ -1,49 +1,50 @@
 ﻿@model IEnumerable<TestCard.Web.Models.PersonListModel>
-<table class="x-table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IDNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccountTypeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Mobile)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="x-table-cont">
+    <table class="x-table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDNo)
-            </td>
-            <td>
-                @Html.ActionLink(item.FullName, "View", "Person", new { @id = item.PersonID }, null)
-            </td>
-            <td>
-                @Html.ActionLink(item.CompanyName, "View", "Company", new { @id = item.CompanyID }, null)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccountTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mobile)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            @{ Html.RenderPartial("_ActionCell", new ActionCell
+            <th>
+                @Html.DisplayNameFor(model => model.IDNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IDNo)
+                </td>
+                <td>
+                    @Html.ActionLink(item.FullName, "View", "Person", new { @id = item.PersonID }, null)
+                </td>
+                <td>
+                    @Html.ActionLink(item.CompanyName, "View", "Company", new { @id = item.CompanyID }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                @{ Html.RenderPartial("_ActionCell", new ActionCell
                {
                    EntityObject = TestCard.Domain.Objects.Person,
                    Items = new List<ActionButton> {
@@ -55,8 +56,8 @@
                         }
                    }
                }); }
-        </tr>
-    }
-
-</table>
+            </tr>
+        }
+    </table>
+</div>
 @{Html.Pager((IPagedList)Model, "Person", "Person");}

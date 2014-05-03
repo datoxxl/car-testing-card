@@ -67,6 +67,9 @@
 
             function get(page) {
                 $pageIndex.val(page);
+
+                $pager.find('.refresh').after(getLoader('small'));
+
                 $form.submit();
             }
         });

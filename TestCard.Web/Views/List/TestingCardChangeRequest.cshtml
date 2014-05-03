@@ -1,44 +1,45 @@
 ﻿@model IEnumerable<TestCard.Web.Models.TestingCardChangeRequestListModel>
 @{ Html.RenderPartial("_ChangeRequestFilter", new AjaxListModel { ActionName = "TestingCardChangeRequest" }); }
-<table class="x-table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AdministratorConfirmStatusName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QualityManagerConfirmStatusName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ResponsiblePersonFullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TestingCardNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="x-table-cont">
+    <table class="x-table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdministratorConfirmStatusName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QualityManagerConfirmStatusName)
-            </td>
-            <td>
-                @Html.ActionLink(item.ResponsiblePersonFullName, "View", "Person", new { @id = item.ResponsiblePersonID }, null)
-            </td>
-            <td>
-                @Html.ActionLink(item.TestingCardNumber, "View", "TestingCard", new { @id = item.TestingCardID }, null)
-            </td>
-            <td>
-                @item.CreateDate.Value.ToString(TestCard.Properties.Config.DateFormat)
-            </td>
-            @{ Html.RenderPartial("_RequestActionCell", new TestCard.Web.Models.RequestActionsModel
+            <th>
+                @Html.DisplayNameFor(model => model.AdministratorConfirmStatusName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QualityManagerConfirmStatusName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResponsiblePersonFullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestingCardNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdministratorConfirmStatusName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QualityManagerConfirmStatusName)
+                </td>
+                <td>
+                    @Html.ActionLink(item.ResponsiblePersonFullName, "View", "Person", new { @id = item.ResponsiblePersonID }, null)
+                </td>
+                <td>
+                    @Html.ActionLink(item.TestingCardNumber, "View", "TestingCard", new { @id = item.TestingCardID }, null)
+                </td>
+                <td>
+                    @item.CreateDate.Value.ToString(TestCard.Properties.Config.DateFormat)
+                </td>
+                @{ Html.RenderPartial("_RequestActionCell", new TestCard.Web.Models.RequestActionsModel
                 {
                     Action = "ProcessRequest",
                     Controller = "TestingCardChangeRequest",
@@ -46,8 +47,8 @@
                     ProcessedByQualityManager = item.ProcessedByQualityManager,
                     ProcessedByAdministrator = item.ProcessedByAdministrator
                 }); }
-        </tr>
-    }
-
-</table>
+            </tr>
+        }
+    </table>
+</div>
 @{Html.Pager((IPagedList)Model, "TestingCardChangeRequest", "TestingCardChangeRequest");}

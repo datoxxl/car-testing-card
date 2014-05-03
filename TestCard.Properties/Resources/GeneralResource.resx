@@ -444,4 +444,7 @@
   <data name="Print" xml:space="preserve">
     <value>Print</value>
   </data>
+  <data name="MyCompany" xml:space="preserve">
+    <value>My company</value>
+  </data>
 </root>

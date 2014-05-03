@@ -1,0 +1,20 @@
+﻿@model AjaxListModel
+@using (Ajax.BeginForm(Model.ActionName, Model.ControllerName ?? "List", ViewContext.GetCombinedRouteValues(null), new AjaxOptions
+{
+    UpdateTargetId = Model.ActionName,
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST"
+}))
+{
+    <div class="x-list-filter">
+        <select name="@Model.Filter.Name">
+            @foreach (var item in Model.Filter.Items)
+            {
+                <option value="@item.Value" @(Request.QueryString[Model.Filter.Name] == item.Value 
+                                                || !Request.QueryString.AllKeys.Contains(Model.Filter.Name) && item.Selected 
+                                                    ? "selected=true" : string.Empty)>@item.Name
+                </option>
+            }
+        </select>
+    </div>
+}

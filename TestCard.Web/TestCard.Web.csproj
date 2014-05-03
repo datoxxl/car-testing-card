@@ -166,6 +166,8 @@
     <Compile Include="Models\CompanyListModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\ActionCell.cs" />
+    <Compile Include="Models\FilterQuery.cs" />
+    <Compile Include="Models\ListFilter.cs" />
     <Compile Include="Models\TestingCardChangeRequestModel.cs" />
     <Compile Include="Models\PagedList.cs" />
     <Compile Include="Models\TestingCardChangeRequestListModel.cs" />
@@ -208,6 +210,7 @@
     <Content Include="Content\images\filter-delete.gif" />
     <Content Include="Content\images\info24.png" />
     <Content Include="Content\images\info32.png" />
+    <Content Include="Content\images\load-small.gif" />
     <Content Include="Content\images\load.gif" />
     <Content Include="Content\images\logIn16.png" />
     <Content Include="Content\images\note-add16.png" />
@@ -266,7 +269,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Photo.ashx" />
-    <Content Include="Scripts\change-request-filter.js" />
+    <Content Include="Scripts\list-filter.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.ka-GE.js" />
     <Content Include="Scripts\globalize\globalize.js" />
     <None Include="Properties\PublishProfiles\TestCard.pubxml" />
@@ -366,6 +369,7 @@
     <Content Include="Views\Shared\EditorTemplates\TestingStep.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TestingStep.cshtml" />
     <Content Include="Views\Shared\_FormActions.cshtml" />
+    <Content Include="Views\Shared\_ListFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,73 +1,113 @@
 ﻿@model IEnumerable<TestCard.Web.Models.TestingCardListModel>
-<table class="x-table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TestingCardNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EffectiveDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RespPersonFullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CarModel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CarNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CarSerialNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OwnerName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VIN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Valid)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="x-left">
+    @{ Html.RenderPartial("_ActionBar", new ActionBar
+       {
+           EntityObject = TestCard.Domain.Objects.TestingCard,
+           Items = new List<ActionButton>
+           {
+               new ActionButton { 
+                   Type = ActionButton.ActionTypes.Add, 
+                   Text = GeneralResource.Add,
+                   Url = Url.Action("Add", "TestingCard")
+               }
+           }
+       }); 
+    }
+</div>
+@{ Html.RenderPartial("_ListFilter", new AjaxListModel
+   {
+       ActionName = "TestingCard",
+       Filter = new ListFilter
+       {
+           Name = "TestingCardFilter",
+           Items = new List<ListFilter.Item> { 
+               new ListFilter.Item { Name = GeneralResource.All, Value = "all" },
+               new ListFilter.Item { Name = GeneralResource.MyCompany, Value = "company", Selected = true },
+           }
+       }
+   }); }
+<div class="x-table-cont">
+    <table class="x-table">
         <tr>
-            <td>
-                @Html.ActionLink(item.TestingCardNumber, "View", "TestingCard", new { @id = item.TestingCardID }, null)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EffectiveDate)
-            </td>
-            <td>
-                @Html.ActionLink(item.CompanyName, "View", "Company", new { @id = item.CompanyID }, null)
-            </td>
-            <td>
-                @Html.ActionLink(item.RespPersonFullName, "View", "Person", new { @id = item.ResponsiblePersonID }, null)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarModel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarSerialNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OwnerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VIN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Valid)
-            </td>
-            @{ Html.RenderPartial("_ActionCell", new ActionCell
+            <th>
+                @Html.DisplayNameFor(model => model.TestingCardNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EffectiveDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RespPersonFullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarSerialNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirnishNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirnishDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valid)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.TestingCardNumber, "View", "TestingCard", new { @id = item.TestingCardID }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EffectiveDate)
+                </td>
+                <td>
+                    @Html.ActionLink(item.CompanyName, "View", "Company", new { @id = item.CompanyID }, null)
+                </td>
+                <td>
+                    @Html.ActionLink(item.RespPersonFullName, "View", "Person", new { @id = item.ResponsiblePersonID }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarModel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarSerialNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirnishNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirnishDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valid)
+                </td>
+                @{ Html.RenderPartial("_ActionCell", new ActionCell
                {
                    EntityObject = TestCard.Domain.Objects.TestingCard,
                    Items = new List<ActionButton> {
@@ -82,12 +122,14 @@
                             Controller = "Print",
                             Action = "TestingCard",
                             ObjectID = item.TestingCardID,
-                            Type = ActionButton.ActionTypes.Print
+                            Type = ActionButton.ActionTypes.Print,
+                            Target = "_blank"
                         }
                     }
                }); }
 
-        </tr>
-    }
-</table>
+            </tr>
+        }
+    </table>
+</div>
 @{Html.Pager((IPagedList)Model, "TestingCard", "TestingCard");}

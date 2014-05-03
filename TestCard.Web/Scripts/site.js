@@ -6,6 +6,14 @@ $(function () {
     initValidation();
     initSimpleTabs();
 
+    $(document).ajaxStart(function () {
+        //$('body').append(getLoader().addClass('.fixed-center'));
+    });
+
+    $(document).ajaxComplete(function () {
+        $('.x-loader').remove();
+    });
+
     return;
 
     SetupScroll();
@@ -153,6 +161,16 @@ function formatString(str, replacements) {
     }
 
     return str;
+}
+
+function getLoader(css) {
+    var $loader = $('<span>').addClass('x-loader');
+
+    if (typeof css !== 'undefined') {
+        $loader.addClass(css);
+    }
+
+    return $loader;
 }
 
 function showPersonPopup(id) {

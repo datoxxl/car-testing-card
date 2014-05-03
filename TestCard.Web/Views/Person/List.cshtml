@@ -1,8 +1,7 @@
 ﻿@{
     ViewBag.Title = "List";
 }
-<p>
-    @{ Html.RenderPartial("_ActionBar", new ActionBar
+@{ Html.RenderPartial("_ActionBar", new ActionBar
        {
            EntityObject = TestCard.Domain.Objects.Person,
            Items = new List<ActionButton>
@@ -14,5 +13,4 @@
                }
             }
        }); }
-</p>
 @{ Html.RenderPartial("_AjaxList", new AjaxListModel { ActionName = "Person" }); }

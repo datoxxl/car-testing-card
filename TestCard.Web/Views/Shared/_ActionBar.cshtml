@@ -32,7 +32,7 @@
                 break;
         }
         <li>
-            <a href="@item.Url" class="item @item.Type.ToString().ToLower()">@item.Text</a>
+            <a href="@item.Url" class="item @item.Type.ToString().ToLower()"@(item.Target != null ? string.Format("target=\"{0}\"", item.Target) : string.Empty)>@item.Text</a>
         </li>   
     }
 </ul>
