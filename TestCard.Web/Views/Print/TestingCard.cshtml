@@ -5,7 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 <head>
-    <title></title>
+    <title>ბარათი N @Model.TestingCardNumber</title>
     <style>
         body, td
         {
@@ -39,21 +39,6 @@
                 margin: 0 10px;
             }
 
-        .content
-        {
-            border: 1px solid #000;
-            padding: 10px;
-            height: 35px;
-            text-align: center;
-        }
-
-        .title
-        {
-            display: inline-block;
-            text-align: center;
-            width: 100%;
-        }
-
         label
         {
             margin: 0 5px;
@@ -75,25 +60,39 @@
                 background: url("/content/images/check-black.png") no-repeat center;
             }
 
-        #accred-scope .title
+        .main-title
         {
             font-weight: bold;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
         }
 
-        #com-address
+        .box
         {
-            margin: 5px 100px;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
 
-            #com-address .title
+            .box .title
             {
                 font-size: 11px;
+                display: inline-block;
+                text-align: center;
+                width: 100%;
             }
 
-            #com-address .content
+            .box .content
             {
-                padding: 5px;
-                height: 25px;
+                border: 1px solid #000;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .box.n2
+            {
+                margin-left: 100px;
+                margin-right: 100px;
             }
 
         #car-details
@@ -260,20 +259,21 @@
                 <img src="/Home/GetImage/?id=@Model.AccreditationLogoFileName" />
             </div>
         </div>
-        <div id="accred-scope">
-            <span class="title">ავტოსატრანსპორტო საშუალების გზისთვი ვარგისობაზე ტესტირების ბარათი
-                N @Model.TestingCardNumber</span>
-            <div class="content">
-                @Model.CompanyAccreditationScope
-            </div>
-        </div>
-        <div id="com-address">
-            <span class="title">ავტოსატრანსპორტო საშუალების (ასს-ს) ტესტირების ცენტრის დასახელება,
-                მისამართი:</span>
+        <span class="main-title">ავტოსატრანსპორტო საშუალების გზისთვი ვარგისობაზე ტესტირების
+            ბარათი
+            N @Model.TestingCardNumber</span>
+        <div class="box n1">
             <div class="content">
                 @(Model.CompanyName + ", " + Model.CompanyAddress)
             </div>
-            <span class="title">ასს-ს ტესტირების ცენტრის აკრედიტაციის ნომერი: @Model.CompanyAccreditationNumber</span>
+            <span class="title">ავტოსატრანსპორტო საშუალების (ასს-ს) ტესტირების ცენტრის დასახელება,
+                მისამართი</span>
+        </div>
+        <div class="box n2">
+            <div class="content">
+                @Model.CompanyAccreditationNumber
+            </div>
+            <span class="title">ასს-ს ტესტირების ცენტრის აკრედიტაციის ნომერი</span>
         </div>
         <div id="testing">
             <div class="first">

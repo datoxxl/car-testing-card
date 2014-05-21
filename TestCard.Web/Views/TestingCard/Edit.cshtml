@@ -31,3 +31,10 @@
         }
     </div>
 </div>
+@section scripts
+{
+    @Scripts.Render("~/Scripts/geokbd.js");
+    <script type="text/javascript">
+        window.GeoKBD.map({ fields: 'OwnerName' });
+    </script>
+}

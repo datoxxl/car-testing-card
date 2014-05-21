@@ -43,6 +43,10 @@ namespace TestCard.Web
                         "~/Scripts/mult-upload.js"
                         ));
 
+            bundles.Add(new ScriptBundle("~/bundles/geokbd").Include(
+                        "~/Scripts/geokbd.js"
+                        ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

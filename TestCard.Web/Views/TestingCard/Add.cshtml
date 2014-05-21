@@ -41,4 +41,8 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/multupload")
+    @Scripts.Render("~/Scripts/geokbd.js");
+    <script type="text/javascript">
+        window.GeoKBD.map({ fields: 'OwnerName' });
+    </script>
 }

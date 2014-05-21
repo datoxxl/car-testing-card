@@ -213,6 +213,7 @@
     <Content Include="Content\images\load-small.gif" />
     <Content Include="Content\images\load.gif" />
     <Content Include="Content\images\logIn16.png" />
+    <Content Include="Content\images\logo.jpg" />
     <Content Include="Content\images\note-add16.png" />
     <Content Include="Content\images\note-delete16.png" />
     <Content Include="Content\images\note-edit16.png" />
@@ -269,6 +270,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Photo.ashx" />
+    <Content Include="Scripts\geokbd.js" />
     <Content Include="Scripts\list-filter.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.ka-GE.js" />
     <Content Include="Scripts\globalize\globalize.js" />
