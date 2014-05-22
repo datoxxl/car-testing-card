@@ -39,14 +39,6 @@ namespace TestCard.Web
                         "~/Scripts/list-filter.js"
                         ));
 
-            bundles.Add(new ScriptBundle("~/bundles/multupload").Include(
-                        "~/Scripts/mult-upload.js"
-                        ));
-
-            bundles.Add(new ScriptBundle("~/bundles/geokbd").Include(
-                        "~/Scripts/geokbd.js"
-                        ));
-
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

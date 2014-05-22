@@ -937,3 +937,28 @@ function initSimpleTabs() {
         $tabs.find(str.content).show();
     });
 }
+
+String.prototype.insertText = function (text, start, end) {
+    if (!end) end = start;
+
+    var first = this.substring(0, start);
+    var second = this.substring(end, this.length);
+
+    return first + text + second;
+}
+
+$.fn.selectRange = function (start, end) {
+    if (!end) end = start;
+    return this.each(function () {
+        if (this.setSelectionRange) {
+            this.focus();
+            this.setSelectionRange(start, end);
+        } else if (this.createTextRange) {
+            var range = this.createTextRange();
+            range.collapse(true);
+            range.moveEnd('character', end);
+            range.moveStart('character', start);
+            range.select();
+        }
+    });
+};

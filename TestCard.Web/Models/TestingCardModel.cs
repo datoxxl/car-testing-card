@@ -52,6 +52,9 @@ namespace TestCard.Web.Models
            ErrorMessageResourceName = "FillRequiredField",
            ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "CarNumber", ResourceType = typeof(GeneralResource))]
+        [RegularExpression("^[A-Z]{3}-[0-9]{3}$",
+            ErrorMessageResourceName = "InvalidCarNumber",
+            ErrorMessageResourceType = typeof(GeneralResource))]
         public string CarNumber { get; set; }
 
         [Required(ErrorMessage = "",

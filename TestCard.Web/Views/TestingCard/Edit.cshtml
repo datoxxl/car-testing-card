@@ -33,8 +33,10 @@
 </div>
 @section scripts
 {
-    @Scripts.Render("~/Scripts/geokbd.js");
+    @Scripts.Render("~/Scripts/geokbd.js")
+    @Scripts.Render("~/Scripts/testing-card.js")
     <script type="text/javascript">
         window.GeoKBD.map({ fields: 'OwnerName' });
+        $('#CarNumber').formatCarNumber();
     </script>
 }

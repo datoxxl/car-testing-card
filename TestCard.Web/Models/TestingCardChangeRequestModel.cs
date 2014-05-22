@@ -23,11 +23,11 @@ namespace TestCard.Web.Models
 
         public string Number { get; set; }
 
-         [StringLength(11,
-            MinimumLength = 11,
-            ErrorMessage = "",
-            ErrorMessageResourceName = "IdNumberMaxLengthError",
-            ErrorMessageResourceType = typeof(GeneralResource))]
+        [StringLength(11,
+           MinimumLength = 11,
+           ErrorMessage = "",
+           ErrorMessageResourceName = "IdNumberMaxLengthError",
+           ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "OwnerIDNo", ResourceType = typeof(GeneralResource))]
         public string OwnerIDNo { get; set; }
 
@@ -46,16 +46,28 @@ namespace TestCard.Web.Models
         [Display(Name = "Odometer", ResourceType = typeof(GeneralResource))]
         public decimal? Odometer { get; set; }
 
+        [Required(ErrorMessage = "",
+           ErrorMessageResourceName = "FillRequiredField",
+           ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "CardNumber", ResourceType = typeof(GeneralResource))]
         public string TestingCardNumber { get; set; }
 
+        [Required(ErrorMessage = "",
+           ErrorMessageResourceName = "FillRequiredField",
+           ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "VINCode", ResourceType = typeof(GeneralResource))]
         public string VIN { get; set; }
 
         [Display(Name = "CarModel", ResourceType = typeof(GeneralResource))]
         public string CarModel { get; set; }
 
+        [Required(ErrorMessage = "",
+           ErrorMessageResourceName = "FillRequiredField",
+           ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "CarNumber", ResourceType = typeof(GeneralResource))]
+        [RegularExpression("^[A-Z]{3}-[0-9]{3}$", 
+            ErrorMessageResourceName = "InvalidCarNumber", 
+            ErrorMessageResourceType = typeof(GeneralResource))]
         public string CarNumber { get; set; }
 
         [Display(Name = "CarSerialNo", ResourceType = typeof(GeneralResource))]

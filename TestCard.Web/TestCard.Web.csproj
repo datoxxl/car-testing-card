@@ -270,6 +270,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Photo.ashx" />
+    <Content Include="Scripts\testing-card.js" />
     <Content Include="Scripts\geokbd.js" />
     <Content Include="Scripts\list-filter.js" />
     <Content Include="Scripts\globalize\cultures\globalize.culture.ka-GE.js" />

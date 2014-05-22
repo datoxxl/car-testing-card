@@ -447,4 +447,7 @@
   <data name="MyCompany" xml:space="preserve">
     <value>ჩემი კომპანია</value>
   </data>
+  <data name="InvalidCarNumber" xml:space="preserve">
+    <value>ნომერი არასწორია</value>
+  </data>
 </root>
