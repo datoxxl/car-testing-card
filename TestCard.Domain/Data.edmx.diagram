@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7c1f67fd2bfa4a42a8678f56c29b767e" Name="Diagram1" ZoomLevel="95">
-        <EntityTypeShape EntityType="TestCardModel.AccountType" Width="1.5" PointX="3.75" PointY="34.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestCardModel.Company" Width="1.5" PointX="19.25" PointY="32.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestCardModel.CompanyChangeRequest" Width="1.875" PointX="27.5" PointY="36.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestCardModel.CompanyHistory" Width="1.5" PointX="21.5" PointY="43.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestCardModel.ConfirmStatus" Width="1.5" PointX="14" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestCardModel.AccountType" Width="1.5" PointX="3.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestCardModel.Company" Width="1.5" PointX="13.25" PointY="44.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestCardModel.CompanyChangeRequest" Width="1.875" PointX="15.5" PointY="46.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestCardModel.CompanyHistory" Width="1.5" PointX="18.5" PointY="48" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestCardModel.ConfirmStatus" Width="1.5" PointX="14" PointY="25.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.PersonDay" Width="1.5" PointX="13.25" PointY="32.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.PersonHistory" Width="1.5" PointX="6" PointY="38.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.PersonLeave" Width="1.5" PointX="13.25" PointY="52.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestCardModel.PersonLeaveChangeRequest" Width="1.5" PointX="13.25" PointY="44.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestCardModel.PersonLeaveChangeRequest" Width="1.5" PointX="19.25" PointY="32.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.PersonLeaveHistory" Width="1.5" PointX="13.25" PointY="55.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.PersonSchedule" Width="1.5" PointX="13.25" PointY="58.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TestCardModel.PersonScheduleHistory" Width="1.5" PointX="13.25" PointY="62.5" IsExpanded="true" />
@@ -79,7 +79,7 @@
         <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_Person1" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_Person3" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardHistory_Person" />
-        <EntityTypeShape EntityType="TestCardModel.PersonChangeRequest" Width="1.5" PointX="24.5" PointY="36.125" />
+        <EntityTypeShape EntityType="TestCardModel.PersonChangeRequest" Width="1.5" PointX="21.5" PointY="42.75" />
         <AssociationConnector Association="TestCardModel.FK_PersonChangeRequest_AccountType" />
         <AssociationConnector Association="TestCardModel.FK_PersonChangeRequest_Company" />
         <AssociationConnector Association="TestCardModel.FK_PersonChangeRequest_AdminConfirmStatus" />
@@ -104,21 +104,24 @@
         <AssociationConnector Association="TestCardModel.FK_PersonScheduleChangeRequestDetails_PersonScheduleChangeRequest" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_TestingCard" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCard" />
-        <EntityTypeShape EntityType="TestCardModel.Code" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TestCardModel.CodeType" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TestCardModel.Code" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="TestCardModel.CodeType" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="TestCardModel.TestingCardDetailHistory" Width="1.5" PointX="18.5" PointY="44.5" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardDetailHistory_TestingCard" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardDetailHistory_TestingCardHistory" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardDetailHistory_TestingSubStep" />
-        <EntityTypeShape EntityType="TestCardModel.ChangeRequestReason" Width="1.5" PointX="14" PointY="25" />
+        <EntityTypeShape EntityType="TestCardModel.ChangeRequestReason" Width="1.5" PointX="14" PointY="30" />
         <AssociationConnector Association="TestCardModel.FK_TestingCardChangeRequest_ChangeRequestReason" />
         <AssociationConnector Association="TestCardModel.FK_Company_File_AccreditationLogo" />
         <AssociationConnector Association="TestCardModel.FK_Company_File_CompanyLogo" />
-        <EntityTypeShape EntityType="TestCardModel.Permission" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TestCardModel.Permission" Width="1.5" PointX="4.75" PointY="4.75" />
         <EntityTypeShape EntityType="TestCardModel.Object" Width="1.5" PointX="3.75" PointY="28" />
         <EntityTypeShape EntityType="TestCardModel.ObjectPermission" Width="1.5" PointX="6" PointY="34.875" />
         <AssociationConnector Association="TestCardModel.FK_ObjectPermission_AccountType" />
         <AssociationConnector Association="TestCardModel.FK_ObjectPermission_Object" />
+        <EntityTypeShape EntityType="TestCardModel.Brand" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="TestCardModel.Model" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="TestCardModel.FK_Model_Brand" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

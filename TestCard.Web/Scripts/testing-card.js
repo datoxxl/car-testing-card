@@ -1,4 +1,44 @@
-﻿$.fn.formatCarNumber = function () {
+﻿function setupTestingCard(param) {
+
+    window.GeoKBD.map({ fields: 'OwnerName' });
+    $('#CarNumber').formatCarNumber();
+
+    var cache = {};
+
+    $("#CarBrand").autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+            var term = request.term;
+            if (term in cache) {
+                response(cache[term]);
+                return;
+            }
+
+            $.getJSON(param.brands, request, function (data, status, xhr) {
+                cache[term] = data;
+                response(data);
+            });
+        }
+    }).focus(function () {
+        $(this).autocomplete("search");
+    });;
+
+    $("#CarModel").autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+            var term = request.term;
+            request.brandName = $('#CarBrand').val();
+
+            $.getJSON(param.models, request, function (data, status, xhr) {
+                response(data);
+            });
+        }
+    }).focus(function () {
+        $(this).autocomplete("search");
+    });;
+}
+
+$.fn.formatCarNumber = function () {
     var C_AZ = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var C_09 = '0123456789';
 

@@ -42,6 +42,7 @@ namespace TestCard.Domain
         public Nullable<int> ResponsiblePersonID { get; set; }
         public Nullable<System.DateTime> EffectiveDate { get; set; }
         public Nullable<bool> IsFirstTesting { get; set; }
+        public string CarBrand { get; set; }
     
         public virtual ICollection<TestingCardDetail> TestingCardDetails { get; set; }
         public virtual ICollection<TestingCardFileChangeRequest> TestingCardFileChangeRequests { get; set; }

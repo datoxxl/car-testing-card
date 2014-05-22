@@ -57,5 +57,7 @@ namespace TestCard.Domain
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Object> Objects { get; set; }
         public DbSet<ObjectPermission> ObjectPermissions { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Model> Models { get; set; }
     }
 }

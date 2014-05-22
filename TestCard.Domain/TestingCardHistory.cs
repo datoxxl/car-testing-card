@@ -38,6 +38,7 @@ namespace TestCard.Domain
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string TestingCardNumber { get; set; }
         public Nullable<bool> IsFirstTesting { get; set; }
+        public string CarBrand { get; set; }
     
         public virtual TestingCard TestingCard { get; set; }
         public virtual Person Person { get; set; }

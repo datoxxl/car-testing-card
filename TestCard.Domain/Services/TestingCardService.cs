@@ -36,56 +36,45 @@ namespace TestCard.Domain.Services
             var card = Get(id);
 
             //Archive old person record
-            if (card != null)
+            var history = new TestingCardHistory
             {
-                var history = new TestingCardHistory
+                TestingCardID = card.TestingCardID,
+                Number = card.Number,
+                TestingCardNumber = card.TestingCardNumber,
+                VIN = card.VIN,
+                CarBrand = card.CarBrand,
+                CarModel = card.CarModel,
+                CarNumber = card.CarNumber,
+                CarSerialNo = card.CarSerialNo,
+                Odometer = card.Odometer,
+                OwnerName = card.OwnerName,
+                OwnerIDNo = card.OwnerIDNo,
+                IsValid = card.IsValid,
+                IsFirstTesting = card.IsFirstTesting,
+                FirnishNumber = card.FirnishNumber,
+                FirnishDate = card.FirnishDate,
+                Comment = card.Comment,
+                ResponsiblePersonID = card.ResponsiblePersonID,
+                EffectiveDate = card.EffectiveDate,
+                CreateDate = now
+            };
+
+            _DbContext.TestingCardHistories.Add(history);
+
+            foreach (var item in card.TestingCardDetails)
+            {
+                history.TestingCardDetailHistories.Add(new TestingCardDetailHistory
                 {
-                    TestingCardID = card.TestingCardID,
-                    Number = card.Number,
-                    TestingCardNumber = card.TestingCardNumber,
-                    VIN = card.VIN,
-                    CarModel = card.CarModel,
-                    CarNumber = card.CarNumber,
-                    CarSerialNo = card.CarSerialNo,
-                    Odometer = card.Odometer,
-                    OwnerName = card.OwnerName,
-                    OwnerIDNo = card.OwnerIDNo,
-                    IsValid = card.IsValid,
-                    IsFirstTesting = card.IsFirstTesting,
-                    FirnishNumber = card.FirnishNumber,
-                    FirnishDate = card.FirnishDate,
-                    Comment = card.Comment,
-                    ResponsiblePersonID = card.ResponsiblePersonID,
-                    EffectiveDate = card.EffectiveDate,
-                    CreateDate = now
-                };
-
-                _DbContext.TestingCardHistories.Add(history);
-
-                foreach (var item in card.TestingCardDetails)
-                {
-                    history.TestingCardDetailHistories.Add(new TestingCardDetailHistory
-                    {
-                        TestingCardID = item.TestingCardID,
-                        TestingSubStepID = item.TestingSubStepID,
-                        IsInvalid = item.IsInvalid,
-                        IsChecked = item.IsChecked
-                    });
-                }
-
-                Update(card);
+                    TestingCardID = item.TestingCardID,
+                    TestingSubStepID = item.TestingSubStepID,
+                    IsInvalid = item.IsInvalid,
+                    IsChecked = item.IsChecked
+                });
             }
-            //else
-            //{
-            //    card = new TestingCard();
-
-            //    card.EffectiveDate = request.EffectiveDate;
-
-            //    Add(card);
-            //}
 
             card.TestingCardNumber = request.TestingCardNumber;
             card.VIN = request.VIN;
+            card.CarBrand = request.CarBrand;
             card.CarModel = request.CarModel;
             card.CarNumber = request.CarNumber;
             card.CarSerialNo = request.CarSerialNo;
@@ -117,6 +106,8 @@ namespace TestCard.Domain.Services
             {
                 request.TestingCard = card;
             }
+
+            Update(card);
 
             return true;
         }
@@ -207,6 +198,29 @@ namespace TestCard.Domain.Services
             {
                 FileHelper.Delete(item);
             }
+        }
+
+        public override void Add(TestingCard entity)
+        {
+            BeforeSave(entity);
+
+            base.Add(entity);
+        }
+
+        public override void Update(TestingCard entity)
+        {
+            BeforeSave(entity);
+
+            base.Update(entity);
+        }
+
+        private void BeforeSave(TestingCard entity)
+        {
+            entity.CarBrand = entity.CarBrand.Trim();
+            entity.CarModel = entity.CarModel.Trim();
+
+            var service = new ModelService(this);
+            service.Save(entity.CarBrand, entity.CarModel);
         }
     }
 }

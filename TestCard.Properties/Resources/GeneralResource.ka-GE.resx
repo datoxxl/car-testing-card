@@ -307,7 +307,7 @@
     <value>ბარათის №</value>
   </data>
   <data name="CarModel" xml:space="preserve">
-    <value>ასს-ის მარკა მოდელი, ტიპი</value>
+    <value>ასს-ის მოდელი</value>
   </data>
   <data name="CarNumber" xml:space="preserve">
     <value>ასს-ის სახელმწიფო ნომერი</value>
@@ -449,5 +449,11 @@
   </data>
   <data name="InvalidCarNumber" xml:space="preserve">
     <value>ნომერი არასწორია</value>
+  </data>
+  <data name="CarBrand" xml:space="preserve">
+    <value>ასს-ის მარკა</value>
+  </data>
+  <data name="CarBrandAndModel" xml:space="preserve">
+    <value>ასს-ის მარკა, მოდელი</value>
   </data>
 </root>

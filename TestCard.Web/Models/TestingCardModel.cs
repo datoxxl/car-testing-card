@@ -45,8 +45,20 @@ namespace TestCard.Web.Models
         [Display(Name = "VINCode", ResourceType = typeof(GeneralResource))]
         public string VIN { get; set; }
 
+        [Display(Name = "CarBrand", ResourceType = typeof(GeneralResource))]
+        public string CarBrand { get; set; }
+
         [Display(Name = "CarModel", ResourceType = typeof(GeneralResource))]
         public string CarModel { get; set; }
+
+        [Display(Name = "CarBrandAndModel", ResourceType = typeof(GeneralResource))]
+        public string CarBrandAndModel
+        {
+            get
+            {
+                return string.Format("{0} {1}", CarBrand, CarModel);
+            }
+        }
 
         [Required(ErrorMessage = "",
            ErrorMessageResourceName = "FillRequiredField",

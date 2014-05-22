@@ -42,7 +42,7 @@
                 @Html.DisplayNameFor(model => model.RespPersonFullName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CarModel)
+                @Html.DisplayNameFor(model => model.CarBrandAndModel)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CarNumber)
@@ -84,7 +84,7 @@
                     @Html.ActionLink(item.RespPersonFullName, "View", "Person", new { @id = item.ResponsiblePersonID }, null)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CarModel)
+                    @Html.DisplayFor(modelItem => item.CarBrandAndModel)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CarNumber)

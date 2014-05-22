@@ -23,6 +23,11 @@
                         @Html.ValidationMessageFor(x => x.OwnerIDNo)
                     </li>*@
                     <li>
+                        @Html.LabelFor(x => x.CarBrand)
+                        @Html.TextBoxFor(x => x.CarBrand)
+                        @Html.ValidationMessageFor(x => x.CarBrand)
+                    </li>
+                    <li>
                         @Html.LabelFor(x => x.CarModel)
                         @Html.TextBoxFor(x => x.CarModel)
                         @Html.ValidationMessageFor(x => x.CarModel)

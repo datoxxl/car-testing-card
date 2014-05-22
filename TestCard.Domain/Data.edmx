@@ -7,6 +7,7 @@
     <Schema Namespace="CarTestingCardModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="CarTestingCardModelStoreContainer">
           <EntitySet Name="AccountType" EntityType="CarTestingCardModel.Store.AccountType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Brand" EntityType="CarTestingCardModel.Store.Brand" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ChangeRequestReason" EntityType="CarTestingCardModel.Store.ChangeRequestReason" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Code" EntityType="CarTestingCardModel.Store.Code" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CodeType" EntityType="CarTestingCardModel.Store.CodeType" store:Type="Tables" Schema="dbo" />
@@ -15,6 +16,7 @@
           <EntitySet Name="CompanyHistory" EntityType="CarTestingCardModel.Store.CompanyHistory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ConfirmStatus" EntityType="CarTestingCardModel.Store.ConfirmStatus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="File" EntityType="CarTestingCardModel.Store.File" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Model" EntityType="CarTestingCardModel.Store.Model" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Object" EntityType="CarTestingCardModel.Store.Object" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ObjectPermission" EntityType="CarTestingCardModel.Store.ObjectPermission" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Permission" EntityType="CarTestingCardModel.Store.Permission" store:Type="Tables" Schema="dbo" />
@@ -102,6 +104,10 @@
           <AssociationSet Name="FK_CompanyHistory_Person3" Association="CarTestingCardModel.Store.FK_CompanyHistory_Person3">
             <End Role="Person" EntitySet="Person" />
             <End Role="CompanyHistory" EntitySet="CompanyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Model_Brand" Association="CarTestingCardModel.Store.FK_Model_Brand">
+            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Model" EntitySet="Model" />
           </AssociationSet>
           <AssociationSet Name="FK_ObjectPermission_AccountType" Association="CarTestingCardModel.Store.FK_ObjectPermission_AccountType">
             <End Role="AccountType" EntitySet="AccountType" />
@@ -379,6 +385,16 @@
           <Property Name="AccountTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="AccountTypeName" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="BrandID" />
+          </Key>
+          <Property Name="BrandID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="CreatePersonID" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Visible" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="ChangeRequestReason">
           <Key>
             <PropertyRef Name="ChangeRequestReasonID" />
@@ -478,6 +494,17 @@
           <Property Name="FileID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="FileName" Type="nvarchar" MaxLength="500" />
           <Property Name="FilePath" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="ModelID" />
+          </Key>
+          <Property Name="ModelID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BrandID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="CreatePersonID" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Visible" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Object">
           <Key>
@@ -683,6 +710,7 @@
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
           <Property Name="TestingCardNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="VIN" Type="nvarchar" MaxLength="50" />
+          <Property Name="CarBrand" Type="nvarchar" MaxLength="200" />
           <Property Name="CarModel" Type="nvarchar" MaxLength="200" />
           <Property Name="CarNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="CarSerialNo" Type="nvarchar" MaxLength="50" />
@@ -708,6 +736,7 @@
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
           <Property Name="TestingCardNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="VIN" Type="nvarchar" MaxLength="50" />
+          <Property Name="CarBrand" Type="nvarchar" MaxLength="200" />
           <Property Name="CarModel" Type="nvarchar" MaxLength="200" />
           <Property Name="CarNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="CarSerialNo" Type="nvarchar" MaxLength="50" />
@@ -787,6 +816,7 @@
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
           <Property Name="TestingCardNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="VIN" Type="nvarchar" MaxLength="50" />
+          <Property Name="CarBrand" Type="nvarchar" MaxLength="200" />
           <Property Name="CarModel" Type="nvarchar" MaxLength="200" />
           <Property Name="CarNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="CarSerialNo" Type="nvarchar" MaxLength="50" />
@@ -1008,6 +1038,18 @@
             </Principal>
             <Dependent Role="CompanyHistory">
               <PropertyRef Name="ResponsiblePersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Model_Brand">
+          <End Role="Brand" Type="CarTestingCardModel.Store.Brand" Multiplicity="1" />
+          <End Role="Model" Type="CarTestingCardModel.Store.Model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="Model">
+              <PropertyRef Name="BrandID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2180,6 +2222,12 @@
             <End Role="Object" EntitySet="Objects" />
             <End Role="ObjectPermission" EntitySet="ObjectPermissions" />
           </AssociationSet>
+          <EntitySet Name="Brands" EntityType="TestCardModel.Brand" />
+          <EntitySet Name="Models" EntityType="TestCardModel.Model" />
+          <AssociationSet Name="FK_Model_Brand" Association="TestCardModel.FK_Model_Brand">
+            <End Role="Brand" EntitySet="Brands" />
+            <End Role="Model" EntitySet="Models" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountType">
           <Key>
@@ -2440,6 +2488,7 @@
           <NavigationProperty Name="TestingCardDetailChangeRequests" Relationship="TestCardModel.FK_TestingCardDetailChangeRequest_TestingCard" FromRole="TestingCard" ToRole="TestingCardDetailChangeRequest" />
           <NavigationProperty Name="TestingCardDetailHistories" Relationship="TestCardModel.FK_TestingCardDetailHistory_TestingCard" FromRole="TestingCard" ToRole="TestingCardDetailHistory" />
           <Property Type="Boolean" Name="IsFirstTesting" />
+          <Property Type="String" Name="CarBrand" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TestingCardChangeRequest">
           <Key>
@@ -2481,6 +2530,7 @@
           <Property Type="Int32" Name="ReasonID" />
           <Property Type="String" Name="ReasonDescription" MaxLength="2000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ChangeRequestReason" Relationship="TestCardModel.FK_TestingCardChangeRequest_ChangeRequestReason" FromRole="TestingCardChangeRequest" ToRole="ChangeRequestReason" />
+          <Property Type="String" Name="CarBrand" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TestingCardDetail">
           <Key>
@@ -2546,6 +2596,7 @@
           <Property Type="String" Name="TestingCardNumber" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TestingCardDetailHistories" Relationship="TestCardModel.FK_TestingCardDetailHistory_TestingCardHistory" FromRole="TestingCardHistory" ToRole="TestingCardDetailHistory" />
           <Property Type="Boolean" Name="IsFirstTesting" />
+          <Property Type="String" Name="CarBrand" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TestingStep">
           <Key>
@@ -3760,6 +3811,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="BrandID" />
+          </Key>
+          <Property Type="Int32" Name="BrandID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CreatePersonID" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <Property Type="Boolean" Name="Visible" Nullable="false" />
+          <NavigationProperty Name="Models" Relationship="TestCardModel.FK_Model_Brand" FromRole="Brand" ToRole="Model" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="ModelID" />
+          </Key>
+          <Property Type="Int32" Name="ModelID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BrandID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CreatePersonID" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <Property Type="Boolean" Name="Visible" Nullable="false" />
+          <NavigationProperty Name="Brand" Relationship="TestCardModel.FK_Model_Brand" FromRole="Model" ToRole="Brand" />
+        </EntityType>
+        <Association Name="FK_Model_Brand">
+          <End Type="TestCardModel.Brand" Role="Brand" Multiplicity="1" />
+          <End Type="TestCardModel.Model" Role="Model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="BrandID" />
+            </Principal>
+            <Dependent Role="Model">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3952,6 +4038,7 @@
           <EntitySetMapping Name="TestingCards">
             <EntityTypeMapping TypeName="TestCardModel.TestingCard">
               <MappingFragment StoreEntitySet="TestingCard">
+                <ScalarProperty Name="CarBrand" ColumnName="CarBrand" />
                 <ScalarProperty Name="IsFirstTesting" ColumnName="IsFirstTesting" />
                 <ScalarProperty Name="TestingCardID" ColumnName="TestingCardID" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
@@ -3975,6 +4062,7 @@
           <EntitySetMapping Name="TestingCardChangeRequests">
             <EntityTypeMapping TypeName="TestCardModel.TestingCardChangeRequest">
               <MappingFragment StoreEntitySet="TestingCardChangeRequest">
+                <ScalarProperty Name="CarBrand" ColumnName="CarBrand" />
                 <ScalarProperty Name="ReasonDescription" ColumnName="ReasonDescription" />
                 <ScalarProperty Name="ReasonID" ColumnName="ReasonID" />
                 <ScalarProperty Name="IsFirstTesting" ColumnName="IsFirstTesting" />
@@ -4038,6 +4126,7 @@
           <EntitySetMapping Name="TestingCardHistories">
             <EntityTypeMapping TypeName="TestCardModel.TestingCardHistory">
               <MappingFragment StoreEntitySet="TestingCardHistory">
+                <ScalarProperty Name="CarBrand" ColumnName="CarBrand" />
                 <ScalarProperty Name="IsFirstTesting" ColumnName="IsFirstTesting" />
                 <ScalarProperty Name="TestingCardNumber" ColumnName="TestingCardNumber" />
                 <ScalarProperty Name="TestingCardHistoryID" ColumnName="TestingCardHistoryID" />
@@ -4233,6 +4322,29 @@
                 <ScalarProperty Name="Permission" ColumnName="Permission" />
                 <ScalarProperty Name="ObjectID" ColumnName="ObjectID" />
                 <ScalarProperty Name="AccountTypeID" ColumnName="AccountTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="TestCardModel.Brand">
+              <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatePersonID" ColumnName="CreatePersonID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Models">
+            <EntityTypeMapping TypeName="TestCardModel.Model">
+              <MappingFragment StoreEntitySet="Model">
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatePersonID" ColumnName="CreatePersonID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

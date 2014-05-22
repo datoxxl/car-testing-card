@@ -50,6 +50,9 @@
     <Compile Include="AccountType.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="Brand.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="ChangeRequestReason.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
@@ -94,6 +97,9 @@
     <Compile Include="Helpers\DynamicLibrary.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Model.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="Object.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
@@ -141,6 +147,8 @@
     <Compile Include="Services\ChangeRequestReasonService.cs" />
     <Compile Include="Services\CodeService.cs" />
     <Compile Include="Services\CompanyService.cs" />
+    <Compile Include="Services\BrandService.cs" />
+    <Compile Include="Services\ModelService.cs" />
     <Compile Include="Services\TestingCardChangeRequestService.cs" />
     <Compile Include="Services\TestingStepService.cs" />
     <Compile Include="Services\DomainServiceBase.cs" />

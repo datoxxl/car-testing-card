@@ -37,7 +37,7 @@
                     @Html.ActionLink(item.TestingCardNumber, "View", "TestingCard", new { @id = item.TestingCardID }, null)
                 </td>
                 <td>
-                    @item.CreateDate.Value.ToString(TestCard.Properties.Config.DateFormat)
+                    @item.CreateDate.Value.ToString(TestCard.Properties.Config.DateTimeFormat)
                 </td>
                 @{ Html.RenderPartial("_RequestActionCell", new TestCard.Web.Models.RequestActionsModel
                 {

@@ -47,6 +47,7 @@ namespace TestCard.Domain
         public Nullable<bool> IsFirstTesting { get; set; }
         public Nullable<int> ReasonID { get; set; }
         public string ReasonDescription { get; set; }
+        public string CarBrand { get; set; }
     
         public virtual ConfirmStatus QualityManagerConfirmStatus { get; set; }
         public virtual ConfirmStatus AdminConfirmStatus { get; set; }

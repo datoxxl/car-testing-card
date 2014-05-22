@@ -132,7 +132,7 @@ namespace TestCard.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    using (var service = new TestingCardChangeRequestService())
+                    using (var service = new TestingCardChangeRequestService(CurrentUser))
                     {
                         var testingCard = AutoMapper.Mapper.Map<Domain.TestingCardChangeRequest>(model);
 

@@ -36,7 +36,11 @@
     @Scripts.Render("~/Scripts/geokbd.js")
     @Scripts.Render("~/Scripts/testing-card.js")
     <script type="text/javascript">
-        window.GeoKBD.map({ fields: 'OwnerName' });
-        $('#CarNumber').formatCarNumber();
+        $(function () {
+            setupTestingCard({
+                brands: '@Url.Action("GetBrands", "Ajax")',
+                models: '@Url.Action("GetModels", "Ajax")'
+            });
+        });
     </script>
 }

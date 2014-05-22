@@ -450,4 +450,10 @@
   <data name="InvalidCarNumber" xml:space="preserve">
     <value>Car number is invalid</value>
   </data>
+  <data name="CarBrand" xml:space="preserve">
+    <value>Car brand</value>
+  </data>
+  <data name="CarBrandAndModel" xml:space="preserve">
+    <value>Car brand, model</value>
+  </data>
 </root>

@@ -12,12 +12,18 @@ namespace TestCard.Web.Models
         public int? TestingCardID { get; set; }
         public int? TestingCardChangeRequestID { get; set; }
 
+        [Required(ErrorMessage = "",
+           ErrorMessageResourceName = "FillRequiredField",
+           ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "RequestReason", ResourceType = typeof(GeneralResource))]
         public int? ReasonID { get; set; }
 
         [Display(Name = "RequestReason", ResourceType = typeof(GeneralResource))]
         public string ReasonName { get; set; }
 
+        [Required(ErrorMessage = "",
+           ErrorMessageResourceName = "FillRequiredField",
+           ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "RequestExplanation", ResourceType = typeof(GeneralResource))]
         public string ReasonDescription { get; set; }
 
@@ -58,15 +64,27 @@ namespace TestCard.Web.Models
         [Display(Name = "VINCode", ResourceType = typeof(GeneralResource))]
         public string VIN { get; set; }
 
+        [Display(Name = "CarBrand", ResourceType = typeof(GeneralResource))]
+        public string CarBrand { get; set; }
+
         [Display(Name = "CarModel", ResourceType = typeof(GeneralResource))]
         public string CarModel { get; set; }
+
+        [Display(Name = "CarBrandAndModel", ResourceType = typeof(GeneralResource))]
+        public string CarBrandAndModel
+        {
+            get
+            {
+                return string.Format("{0} {1}", CarBrand, CarModel);
+            }
+        }
 
         [Required(ErrorMessage = "",
            ErrorMessageResourceName = "FillRequiredField",
            ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "CarNumber", ResourceType = typeof(GeneralResource))]
-        [RegularExpression("^[A-Z]{3}-[0-9]{3}$", 
-            ErrorMessageResourceName = "InvalidCarNumber", 
+        [RegularExpression("^[A-Z]{3}-[0-9]{3}$",
+            ErrorMessageResourceName = "InvalidCarNumber",
             ErrorMessageResourceType = typeof(GeneralResource))]
         public string CarNumber { get; set; }
 

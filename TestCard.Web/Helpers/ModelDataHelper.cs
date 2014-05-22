@@ -116,12 +116,9 @@ namespace TestCard.Web.Helpers
 
         public static void Populate(Models.TestingCardModel model)
         {
-            using (var service = new TestingStepService())
-            {
-                model.TestingSteps = AutoMapper.Mapper.Map<List<Models.TestingStep>>(service.GetAll(true));
-            }
+            model.TestingSteps = Populate(model.TestingSteps);
 
-            if(model.Images == null)
+            if (model.Images == null)
             {
                 model.Images = new List<string>();
             }
@@ -129,17 +126,34 @@ namespace TestCard.Web.Helpers
 
         public static void Populate(Models.TestingCardChangeRequestModel model)
         {
-            if (model.TestingSteps == null)
-            {
-                using (var service = new TestingStepService())
-                {
-                    model.TestingSteps = AutoMapper.Mapper.Map<List<Models.TestingStep>>(service.GetAll(true));
-                }
-            }
+            model.TestingSteps = Populate(model.TestingSteps);
 
             using (var service = new ChangeRequestReasonService())
             {
                 model.Reasons = new SelectList(service.GetAll().ToList(), "ChangeRequestReasonID", "Title");
+            }
+        }
+
+        private static List<Models.TestingStep> Populate(List<Models.TestingStep> model)
+        {
+            using (var service = new TestingStepService())
+            {
+                var list = AutoMapper.Mapper.Map<List<Models.TestingStep>>(service.GetAll(true));
+
+                if (model != null)
+                {
+                    var subSteps = list.SelectMany(x => x.TestingSubSteps);
+
+                    foreach (var item in model.SelectMany(x => x.TestingSubSteps))
+                    {
+                        var obj = subSteps.FirstOrDefault(x => x.TestingSubStepID == item.TestingSubStepID);
+
+                        obj.IsChecked = item.IsChecked;
+                        obj.IsInvalid = item.IsInvalid;
+                    }
+                }
+
+                return list;
             }
         }
     }
