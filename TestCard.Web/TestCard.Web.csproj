@@ -232,6 +232,7 @@
     <Content Include="Content\images\s.gif" />
     <Content Include="Content\images\sad.png" />
     <Content Include="Content\images\stats.png" />
+    <Content Include="Content\images\tool-sprites-dark.png" />
     <Content Include="Content\images\tool-sprites.png" />
     <Content Include="Content\images\users.png" />
     <Content Include="Content\images\user-edit.png" />
