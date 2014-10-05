@@ -83,7 +83,7 @@ namespace TestCard.Web.Models
            ErrorMessageResourceName = "FillRequiredField",
            ErrorMessageResourceType = typeof(GeneralResource))]
         [Display(Name = "CarNumber", ResourceType = typeof(GeneralResource))]
-        [RegularExpression("^[A-Z]{3}-[0-9]{3}$",
+        [RegularExpression("^[A-Z]{3}-[0-9]{3}$|^[A-Z]{2}-[0-9]{3}-[A-Z]{2}$",
             ErrorMessageResourceName = "InvalidCarNumber",
             ErrorMessageResourceType = typeof(GeneralResource))]
         public string CarNumber { get; set; }
@@ -97,8 +97,6 @@ namespace TestCard.Web.Models
         [Display(Name = "EffectiveDate", ResourceType = typeof(GeneralResource))]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime? EffectiveDate { get; set; }
-
-        public int? ResponsiblePersonID { get; set; }
 
         [Display(Name = "RespFullName", ResourceType = typeof(GeneralResource))]
         public string RespPersonFullName { get; set; }
