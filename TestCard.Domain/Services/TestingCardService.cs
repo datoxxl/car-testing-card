@@ -214,6 +214,22 @@ namespace TestCard.Domain.Services
             base.Update(entity);
         }
 
+        public override IQueryable<TestingCard> SecurityFilter(IQueryable<TestingCard> query)
+        {
+            switch (_CurrentUser.AccountType)
+            {
+                case AccountTypes.Administrator:
+                    break;
+                case AccountTypes.QualityManager:
+                case AccountTypes.Operator:
+                    query = query.Where(x => !(x.IsValid ?? false) || x.ResponsiblePersonID == _CurrentUser.PersonID);
+                    break;
+                default:
+                    break;
+            }
+            return base.SecurityFilter(query);
+        }
+
         private void BeforeSave(TestingCard entity)
         {
             entity.CarBrand = entity.CarBrand.Trim();
