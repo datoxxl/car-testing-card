@@ -156,6 +156,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Html\Pager.cs" />
+    <Compile Include="Helpers\MapperHelper.cs" />
     <Compile Include="Helpers\ModelDataHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\UrlHelper.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Models\TestingCardModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\TestingCardPrintModel.cs" />
     <Compile Include="Models\ToolbarButton.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\UserOptions.cs" />

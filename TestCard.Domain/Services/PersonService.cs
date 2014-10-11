@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 using TestCard.Domain.Helpers;
+using System.Data.Entity;
 
 namespace TestCard.Domain.Services
 {
@@ -106,6 +107,11 @@ namespace TestCard.Domain.Services
             }
 
             return true;
+        }
+
+        public override IQueryable<Person> GetAll(DataFilterOption option, bool secureObject = false)
+        {
+            return base.GetAll(option, secureObject).Include(x => x.Company).Include(x => x.AccountType);
         }
 
         public override IQueryable<Person> SecurityFilter(IQueryable<Person> query)

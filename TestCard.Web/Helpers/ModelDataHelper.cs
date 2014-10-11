@@ -114,20 +114,8 @@ namespace TestCard.Web.Helpers
             }
         }
 
-        public static void Populate(Models.TestingCardModel model)
-        {
-            model.TestingSteps = Populate(model.TestingSteps);
-
-            if (model.Images == null)
-            {
-                model.Images = new List<string>();
-            }
-        }
-
         public static void Populate(Models.TestingCardChangeRequestModel model)
         {
-            model.TestingSteps = Populate(model.TestingSteps);
-
             using (var service = new ChangeRequestReasonService())
             {
                 model.Reasons = new SelectList(service.GetAll().ToList(), "ChangeRequestReasonID", "Title");
@@ -138,22 +126,28 @@ namespace TestCard.Web.Helpers
         {
             using (var service = new TestingStepService())
             {
-                var list = AutoMapper.Mapper.Map<List<Models.TestingStep>>(service.GetAll(true));
+                var steps = service.GetAll(true);
 
-                if (model != null)
+                if (model == null)
                 {
-                    var subSteps = list.SelectMany(x => x.TestingSubSteps);
-
-                    foreach (var item in model.SelectMany(x => x.TestingSubSteps))
+                    AutoMapper.Mapper.Map(steps, model);
+                }
+                else
+                {
+                    foreach (var step in steps)
                     {
-                        var obj = subSteps.FirstOrDefault(x => x.TestingSubStepID == item.TestingSubStepID);
+                        var destStep = model.FirstOrDefault(x => x.TestingStepID == step.TestingStepID);
 
-                        obj.IsChecked = item.IsChecked;
-                        obj.IsInvalid = item.IsInvalid;
+                        AutoMapper.Mapper.Map(step, destStep);
+
+                        foreach (var subStep in step.TestingSubSteps)
+                        {
+                            AutoMapper.Mapper.Map(step, destStep.TestingSubSteps.FirstOrDefault(x => x.TestingSubStepID == subStep.TestingSubStepID));
+                        }
                     }
                 }
 
-                return list;
+                return model;
             }
         }
     }

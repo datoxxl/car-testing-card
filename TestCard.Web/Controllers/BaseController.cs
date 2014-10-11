@@ -126,34 +126,26 @@ namespace TestCard.Web.Controllers
 
         #region Model sources
 
-        protected Models.TestingCardModel GetTestingCardModel(int id)
+        protected Models.TestingCardModel GetTestingCardModel(int? id = null)
         {
             using (var service = new TestingCardService(CurrentUser))
             {
-                var source = service.Get(id, true);
-
-                if (source != null)
+                Domain.TestingCard card = null;
+                if (id.HasValue)
                 {
-                    var model = new Models.TestingCardModel();
-                    model = AutoMapper.Mapper.Map(source, model);
-                    var subSteps = AutoMapper.Mapper.Map<List<Models.TestingSubStep>>(source.TestingCardDetails);
-
-                    ModelDataHelper.Populate(model);
-
-                    model.TestingSteps.SelectMany(x => x.TestingSubSteps).ToList().ForEach(
-                        x =>
-                        {
-                            var item = subSteps.FirstOrDefault(y => y.TestingSubStepID == x.TestingSubStepID);
-                            x.IsInvalid = item.IsInvalid;
-                            x.IsChecked = item.IsChecked;
-                        }
-                    );
-
-                    return model;
+                    card = service.Get(id.Value, true);
                 }
-            }
 
-            return null;
+                if(card == null)
+                {
+                    card = new TestingCard();
+                }
+
+                var model = new Models.TestingCardModel();
+                AutoMapper.Mapper.Map(card, model);
+
+                return model;
+            }
         }
 
         #endregion

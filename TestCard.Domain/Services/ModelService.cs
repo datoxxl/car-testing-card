@@ -22,17 +22,17 @@ namespace TestCard.Domain.Services
                 .ToArray();
         }
 
-        public void Save(string carBrand, string carModel)
+        public void Add(string carBrand, string carModel)
         {
             var brandService = new BrandService(this);
-            var brand = brandService.Save(carBrand);
+            var brand = brandService.Add(carBrand);
 
-            if (brand != null && !string.IsNullOrEmpty(carModel) 
+            if (brand != null && !string.IsNullOrWhiteSpace(carModel) 
                 && !brand.Models.Any(x => x.Name.ToLower().Equals(carModel.ToLower())))
             {
                 var model = new Model
                 {
-                    Name = carModel,
+                    Name = carModel.Trim(),
                     CreateDate = DateTime.Now,
                     CreatePersonID = _CurrentUser.PersonID,
                     Visible = true

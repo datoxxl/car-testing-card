@@ -22,12 +22,14 @@ namespace TestCard.Domain.Services
                 .ToArray();
         }
 
-        public Brand Save(string carBrand)
+        public Brand Add(string carBrand)
         {
-            if(string.IsNullOrEmpty(carBrand))
+            if(string.IsNullOrWhiteSpace(carBrand))
             {
                 return null;
             }
+
+            carBrand = carBrand.Trim();
 
             var item = this.GetAll()
                 .Include(x => x.Models)

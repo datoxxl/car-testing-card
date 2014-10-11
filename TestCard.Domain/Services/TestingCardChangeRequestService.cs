@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestCard.Domain.Helpers;
+using System.Data.Entity;
 
 namespace TestCard.Domain.Services
 {
@@ -154,6 +155,14 @@ namespace TestCard.Domain.Services
             }
 
             return false;
+        }
+
+        public override IQueryable<TestingCardChangeRequest> GetAll(DataFilterOption option, bool secureObject = false)
+        {
+            return base.GetAll(option, secureObject)
+                .Include(x => x.ResponsiblePerson)
+                .Include(x => x.AdminConfirmStatus)
+                .Include(x => x.QualityManagerConfirmStatus);
         }
 
         public override IQueryable<TestingCardChangeRequest> SecurityFilter(IQueryable<TestingCardChangeRequest> query)

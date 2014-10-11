@@ -25,7 +25,8 @@ namespace TestCard.Web.Controllers
         {
             try
             {
-                var model = GetTestingCardModel(id ?? -1);
+                var model = GetTestingCardModel(id);
+
                 if (model != null)
                 {
                     return View(model);
@@ -46,8 +47,7 @@ namespace TestCard.Web.Controllers
         [PermissionFilter(TestCard.Domain.Permissions.Add)]
         public ActionResult Add()
         {
-            var model = new Models.TestingCardModel();
-            ModelDataHelper.Populate(model);
+            var model = GetTestingCardModel();
 
             return View(model);
         }
@@ -63,8 +63,6 @@ namespace TestCard.Web.Controllers
                     using (var service = new TestingCardService(CurrentUser))
                     {
                         var testingCard = AutoMapper.Mapper.Map<TestCard.Domain.TestingCard>(model);
-
-                        testingCard.TestingCardDetails = AutoMapper.Mapper.Map<List<TestCard.Domain.TestingCardDetail>>(model.TestingSteps.SelectMany(x => x.TestingSubSteps));
 
                         bool incorrectFormat = false;
 
@@ -90,8 +88,6 @@ namespace TestCard.Web.Controllers
                 SetErrorMessage();
             }
 
-            ModelDataHelper.Populate(model);
-
             return View(model);
         }
 
@@ -100,7 +96,7 @@ namespace TestCard.Web.Controllers
         {
             try
             {
-                var cardModel = GetTestingCardModel(id ?? -1);
+                var cardModel = GetTestingCardModel(id);
                 var model = new Models.TestingCardChangeRequestModel();
 
                 AutoMapper.Mapper.Map(cardModel, model);
@@ -135,8 +131,6 @@ namespace TestCard.Web.Controllers
                     using (var service = new TestingCardChangeRequestService(CurrentUser))
                     {
                         var testingCard = AutoMapper.Mapper.Map<Domain.TestingCardChangeRequest>(model);
-
-                        testingCard.TestingCardDetailChangeRequests = AutoMapper.Mapper.Map<List<TestCard.Domain.TestingCardDetailChangeRequest>>(model.TestingSteps.SelectMany(x => x.TestingSubSteps));
 
                         bool? hasUnconfirmedRequest = null;
                         var saved = service.SaveChangeRequest(testingCard, CurrentUser, ref hasUnconfirmedRequest);

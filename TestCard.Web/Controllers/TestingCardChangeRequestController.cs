@@ -34,17 +34,8 @@ namespace TestCard.Web.Controllers
                     {
                         var model = new Models.TestingCardChangeRequestModel();
                         model = AutoMapper.Mapper.Map(source, model);
-                        var subSteps = AutoMapper.Mapper.Map<List<Models.TestingSubStep>>(source.TestingCardDetailChangeRequests);
 
                         ModelDataHelper.Populate(model);
-
-                        model.TestingSteps.SelectMany(x => x.TestingSubSteps).ToList().ForEach(
-                            x =>
-                            {
-                                var item = subSteps.FirstOrDefault(y => y.TestingSubStepID == x.TestingSubStepID);
-                                x.IsInvalid = item.IsInvalid;
-                            }
-                        );
 
                         return View(model);
                     }

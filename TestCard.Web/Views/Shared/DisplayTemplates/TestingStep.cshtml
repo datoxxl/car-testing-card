@@ -11,7 +11,7 @@
                 <div>@Html.CheckBoxFor(x => Model.TestingSubSteps[j].IsChecked, new { disabled = "disabled" })
                 </div>
                 <div>
-                    @Html.Label(Model.TestingSubSteps[j].TestingSubStepName)
+                    @Html.LabelFor(x => Model.TestingSubSteps[j].IsInvalid, Model.TestingSubSteps[j].TestingSubStepName)
                 </div>
                 <div>
                     @Html.CheckBoxFor(x => Model.TestingSubSteps[j].IsInvalid, new { disabled = "disabled" })

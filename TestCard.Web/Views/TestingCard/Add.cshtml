@@ -19,16 +19,6 @@
                 </div>
                 <div id="images">
                     @{ Html.RenderPartial("_MultUpload"); }
-                    <div class="x-img-list">
-                        <ul>
-                            @foreach (var item in Model.Images)
-                            {
-                                <li>
-                                    <img src="@Url.ImageUrl(item)" />
-                                </li>
-                            }
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div class="x-actions">

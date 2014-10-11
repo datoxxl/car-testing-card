@@ -18,13 +18,31 @@ namespace TestCard.Domain.Services
         public TestingCardService(DomainServiceBase service)
             : base(service) { }
 
-        public TestingCard Get(int id, bool includeDetails)
+        public TestingCard Get(int id)
         {
             return _DbContext
                    .TestingCards
                    .Include(x => x.TestingCardDetails)
                    .Where(x => x.TestingCardID == id)
                    .FirstOrDefault();
+        }
+
+        public TestingCard GetForPrint(int id)
+        {
+            return _DbContext
+                   .TestingCards
+                   .Include(x => x.TestingCardDetails)
+                   .Include(x => x.Person)
+                   .Include(x => x.Person.Company)
+                   .Include(x => x.Person.Company.AccreditationLogoFile)
+                   .Include(x => x.Person.Company.CompanyLogoFile)
+                   .Where(x => x.TestingCardID == id)
+                   .FirstOrDefault();
+        }
+
+        public override IQueryable<TestingCard> GetAll(DataFilterOption option, bool secureObject = false)
+        {
+            return base.GetAll(option, secureObject).Include(x => x.Person.Company);
         }
 
         public bool SaveTestingCard(TestingCardChangeRequest request)
@@ -232,11 +250,8 @@ namespace TestCard.Domain.Services
 
         private void BeforeSave(TestingCard entity)
         {
-            entity.CarBrand = entity.CarBrand.Trim();
-            entity.CarModel = entity.CarModel.Trim();
-
             var service = new ModelService(this);
-            service.Save(entity.CarBrand, entity.CarModel);
+            service.Add(entity.CarBrand, entity.CarModel);
         }
     }
 }
