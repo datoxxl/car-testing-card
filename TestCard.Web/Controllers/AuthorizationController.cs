@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.ModelBinding;
+﻿using System.Web.ModelBinding;
 using System.Web.Mvc;
 using TestCard.Domain.Services;
 using TestCard.Properties.Resources;
 using TestCard.Web.Helpers;
+using TestCard.Web.Security;
 
 namespace TestCard.Web.Controllers
 {
@@ -22,17 +19,11 @@ namespace TestCard.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var service = new PersonService(CurrentUser))
+                var loggedIn = AppAuth.Login(model.IdNumber, model.Password);
+
+                if (loggedIn)
                 {
-                    var per = service.Login(model.IdNumber, model.Password);
-
-                    if (per != null)
-                    {
-                        CurrentUser = per;
-                        //TO DO: Authentication cookie Request.Cookies.Add(new HttpCookie("auth", per.PersonID));
-
-                        return RedirectTo(returnUrl);
-                    }
+                    return RedirectTo(returnUrl);
                 }
             }
 
@@ -42,7 +33,7 @@ namespace TestCard.Web.Controllers
 
         public ActionResult Logout()
         {
-            CurrentUser = null;
+            AppAuth.Logout();
 
             return RedirectTo();
         }
@@ -70,9 +61,9 @@ namespace TestCard.Web.Controllers
                         service.SaveChangeRequest(per, null, ref hasUnconfirmedRequest);
                     }
 
-                   SetSuccessMessage(GeneralResource.RegistrationComplete);
+                    SetSuccessMessage(GeneralResource.RegistrationComplete);
 
-                   return RedirectTo();
+                    return RedirectTo();
                 }
             }
             catch

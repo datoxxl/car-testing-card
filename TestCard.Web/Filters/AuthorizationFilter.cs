@@ -1,30 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
 using TestCard.Web.Controllers;
+using TestCard.Web.Security;
 
 namespace TestCard.Web.Filters
 {
-    public class AuthorizationFilter : ActionFilterAttribute
+    public class AuthorizationFilter : AuthorizeAttribute
     {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            var controller = filterContext.Controller as BaseController;
-
-            if (controller.CurrentUser != null)
+            if (AppAuth.CurrentUser == null)
             {
-                base.OnActionExecuting(filterContext);
-                return;
+                return false;
             }
 
-            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { 
-                { "controller", "Authorization" },
-                { "action", "Login" },
-                { "returnUrl", filterContext.HttpContext.Request.Url.PathAndQuery } 
-            });
+            return base.AuthorizeCore(httpContext);
+        }
+
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            if (filterContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                AppAuth.Logout();
+            }
+
+            base.HandleUnauthorizedRequest(filterContext);
         }
     }
 }

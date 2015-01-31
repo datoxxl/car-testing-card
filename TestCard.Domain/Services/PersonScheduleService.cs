@@ -8,7 +8,7 @@ namespace TestCard.Domain.Services
 {
     public class PersonScheduleService : DomainServiceBase<PersonSchedule>
     {
-        public PersonScheduleService(User currentUser)
+        public PersonScheduleService(PersonInfo currentUser)
             : base(currentUser) { }
 
         public PersonScheduleService(DomainServiceBase service)

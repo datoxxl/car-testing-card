@@ -12,10 +12,10 @@ namespace TestCard.Domain.Services
     {
         public TestingCardChangeRequestService() { }
 
-        public TestingCardChangeRequestService(User currentUser)
+        public TestingCardChangeRequestService(PersonInfo currentUser)
             : base(currentUser) { }
 
-        public bool SaveChangeRequest(TestingCardChangeRequest request, User currentPerson, ref bool? hasUnconfirmedRequest)
+        public bool SaveChangeRequest(TestingCardChangeRequest request, PersonInfo currentPerson, ref bool? hasUnconfirmedRequest)
         {
             var now = DateTime.Now;
             int? personID = null;

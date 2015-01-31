@@ -12,24 +12,21 @@ using System.Web.Mvc;
 using TestCard.Domain;
 using TestCard.Domain.Services;
 using TestCard.Web.Helpers;
+using TestCard.Web.Security;
 
 namespace TestCard.Web.Controllers
 {
     public class BaseController : Controller
     {
-        public User CurrentUser
+        public PersonInfo CurrentUser
         {
             get
             {
                 try
                 {
-                    return Session["CurrentUser"] as User;
+                    return AppAuth.CurrentUser;
                 }
                 catch { return null; }
-            }
-            set
-            {
-                Session["CurrentUser"] = value;
             }
         }
 

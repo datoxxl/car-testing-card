@@ -31,6 +31,7 @@
           <EntitySet Name="PersonScheduleChangeRequest" EntityType="CarTestingCardModel.Store.PersonScheduleChangeRequest" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PersonScheduleChangeRequestDetail" EntityType="CarTestingCardModel.Store.PersonScheduleChangeRequestDetail" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PersonScheduleHistory" EntityType="CarTestingCardModel.Store.PersonScheduleHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PersonSession" EntityType="CarTestingCardModel.Store.PersonSession" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestingCard" EntityType="CarTestingCardModel.Store.TestingCard" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestingCardChangeRequest" EntityType="CarTestingCardModel.Store.TestingCardChangeRequest" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestingCardDetail" EntityType="CarTestingCardModel.Store.TestingCardDetail" store:Type="Tables" Schema="dbo" />
@@ -701,6 +702,20 @@
           <Property Name="ResponsiblePersonID" Type="int" />
           <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PersonSession">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="SessionNumber" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="SessionNumber" Type="int" Nullable="false" />
+          <Property Name="SessionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SessionStart" Type="datetime" Nullable="false" />
+          <Property Name="SessionEnd" Type="datetime" />
+          <Property Name="LastSeenOn" Type="datetime" />
+          <Property Name="Duration" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="TestingCard">
           <Key>
@@ -2228,6 +2243,7 @@
             <End Role="Brand" EntitySet="Brands" />
             <End Role="Model" EntitySet="Models" />
           </AssociationSet>
+          <EntitySet Name="PersonSessions" EntityType="TestCardModel.PersonSession" />
           </EntityContainer>
         <EntityType Name="AccountType">
           <Key>
@@ -3846,6 +3862,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PersonSession">
+          <Key>
+            <PropertyRef Name="PersonID" />
+            <PropertyRef Name="SessionNumber" />
+          </Key>
+          <Property Type="Int32" Name="PersonID" Nullable="false" />
+          <Property Type="Int32" Name="SessionNumber" Nullable="false" />
+          <Property Type="Guid" Name="SessionID" Nullable="false" />
+          <Property Type="DateTime" Name="SessionStart" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="SessionEnd" Precision="3" />
+          <Property Type="DateTime" Name="LastSeenOn" Precision="3" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="Duration" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4345,6 +4375,20 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="BrandID" ColumnName="BrandID" />
                 <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonSessions">
+            <EntityTypeMapping TypeName="TestCardModel.PersonSession">
+              <MappingFragment StoreEntitySet="PersonSession">
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastSeenOn" ColumnName="LastSeenOn" />
+                <ScalarProperty Name="SessionEnd" ColumnName="SessionEnd" />
+                <ScalarProperty Name="SessionStart" ColumnName="SessionStart" />
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="SessionNumber" ColumnName="SessionNumber" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

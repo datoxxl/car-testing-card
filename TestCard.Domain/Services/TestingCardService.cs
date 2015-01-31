@@ -11,7 +11,7 @@ namespace TestCard.Domain.Services
 {
     public class TestingCardService : DomainServiceBase<TestingCard>
     {
-        public TestingCardService(User currentUser)
+        public TestingCardService(PersonInfo currentUser)
             : base(currentUser)
         { }
 
@@ -130,7 +130,7 @@ namespace TestCard.Domain.Services
             return true;
         }
 
-        public int SaveTestingCard(TestingCard testingCard, List<byte[]> images, User currentPerson)
+        public int SaveTestingCard(TestingCard testingCard, List<byte[]> images, PersonInfo currentPerson)
         {
             List<string> savedFiles = new List<string>();
 

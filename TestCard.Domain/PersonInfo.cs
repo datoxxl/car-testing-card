@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestCard.Domain
 {
-    public class User
+    public class PersonInfo
     {
         public int PersonID { get; set; }
         public string FirstName { get; set; }

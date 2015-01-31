@@ -11,42 +11,57 @@ namespace TestCard.Domain.Services
 {
     public class PersonService : DomainServiceBase<Person>
     {
-        public PersonService(User currentUser)
+        public PersonService() { }
+
+        public PersonService(PersonInfo currentUser)
             : base(currentUser) { }
 
         public PersonService(DomainServiceBase service)
             : base(service) { }
 
-        public User Login(string idNumber, string password)
+        public PersonInfo Login(string idNumber, string password)
         {
             var per = _DbContext.People
                 .FirstOrDefault(x => x.IDNo == idNumber && x.Password == password);
 
-            if (per != null)
+            return GetPersonInfo(per);
+        }
+
+        public PersonInfo GetPersonInfo(int personID)
+        {
+            var per = _DbContext.People
+                .FirstOrDefault(x => x.PersonID == personID);
+
+            return GetPersonInfo(per);
+        }
+
+        protected PersonInfo GetPersonInfo(Person per)
+        {
+            if (per == null)
             {
-                return new User
-                    {
-                        AccountType = (AccountTypes)per.AccountTypeID,
-                        AccountTypeName = per.AccountType.AccountTypeName,
-                        CompanyID = per.CompanyID,
-                        CompanyName = per.Company.CompanyName,
-                        EffectiveDate = per.EffectiveDate,
-                        Email = per.Email,
-                        FileID = per.FileID,
-                        FirstName = per.FirstName,
-                        IDNo = per.IDNo,
-                        LastName = per.LastName,
-                        Mobile = per.Mobile,
-                        Password = per.Password,
-                        PersonID = per.PersonID,
-                        ResponsiblePersonID = per.ResponsiblePersonID,
-                        SystemIDNo = per.SystemIDNo,
-                        Permissions = per.AccountType.ObjectPermissions
-                            .ToDictionary(x => (Objects)x.ObjectID, x => (Permissions)x.Permission)
-                    };
+                return null;
             }
 
-            return null;
+            return new PersonInfo
+            {
+                AccountType = (AccountTypes)per.AccountTypeID,
+                AccountTypeName = per.AccountType.AccountTypeName,
+                CompanyID = per.CompanyID,
+                CompanyName = per.Company.CompanyName,
+                EffectiveDate = per.EffectiveDate,
+                Email = per.Email,
+                FileID = per.FileID,
+                FirstName = per.FirstName,
+                IDNo = per.IDNo,
+                LastName = per.LastName,
+                Mobile = per.Mobile,
+                Password = per.Password,
+                PersonID = per.PersonID,
+                ResponsiblePersonID = per.ResponsiblePersonID,
+                SystemIDNo = per.SystemIDNo,
+                Permissions = per.AccountType.ObjectPermissions
+                    .ToDictionary(x => (Objects)x.ObjectID, x => (Permissions)x.Permission)
+            };
         }
 
         public bool SavePerson(PersonChangeRequest request)

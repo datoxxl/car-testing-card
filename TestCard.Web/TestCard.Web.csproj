@@ -168,7 +168,6 @@
     <Compile Include="Models\CompanyListModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\ActionCell.cs" />
-    <Compile Include="Models\FilterQuery.cs" />
     <Compile Include="Models\ListFilter.cs" />
     <Compile Include="Models\TestingCardChangeRequestModel.cs" />
     <Compile Include="Models\PagedList.cs" />
@@ -189,6 +188,8 @@
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\UserOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AppAuth.cs" />
+    <Compile Include="Security\PersonPrincipal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll">

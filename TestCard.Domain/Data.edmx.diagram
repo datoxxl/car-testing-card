@@ -122,6 +122,7 @@
         <EntityTypeShape EntityType="TestCardModel.Brand" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="TestCardModel.Model" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="TestCardModel.FK_Model_Brand" />
+        <EntityTypeShape EntityType="TestCardModel.PersonSession" Width="1.5" PointX="4.207809768713922" PointY="16.481572352574009" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

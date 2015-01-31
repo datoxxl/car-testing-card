@@ -13,7 +13,7 @@ namespace TestCard.Domain.Services
         public CompanyService()
         { }
 
-        public CompanyService(User currentUser)
+        public CompanyService(PersonInfo currentUser)
             : base(currentUser)
         { }
 

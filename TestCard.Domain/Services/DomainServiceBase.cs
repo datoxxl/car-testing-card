@@ -20,18 +20,18 @@ namespace TestCard.Domain.Services
         }
 
         protected readonly TestCardContext _DbContext;
-        protected readonly User _CurrentUser;
+        protected readonly PersonInfo _CurrentUser;
 
         public DomainServiceBase()
             : this(new TestCardContext(), null) { }
 
-        public DomainServiceBase(User currentUser)
+        public DomainServiceBase(PersonInfo currentUser)
             : this(new TestCardContext(), currentUser) { }
 
         public DomainServiceBase(DomainServiceBase service)
             : this(service._DbContext, service._CurrentUser) { }
 
-        public DomainServiceBase(TestCardContext context, User currentUser)
+        public DomainServiceBase(TestCardContext context, PersonInfo currentUser)
         {
             _DbContext = context;
             _CurrentUser = currentUser;
@@ -45,7 +45,7 @@ namespace TestCard.Domain.Services
             : base()
         { }
 
-        public DomainServiceBase(User currentUser)
+        public DomainServiceBase(PersonInfo currentUser)
             : base(currentUser)
         { }
 
