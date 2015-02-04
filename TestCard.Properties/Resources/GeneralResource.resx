@@ -324,8 +324,8 @@
   <data name="RespFullName" xml:space="preserve">
     <value>Resp. Full Name</value>
   </data>
-  <data name="Valid" xml:space="preserve">
-    <value>Valid</value>
+  <data name="IsValid" xml:space="preserve">
+    <value>Is valid</value>
   </data>
   <data name="VINCode" xml:space="preserve">
     <value>VIN Code</value>
@@ -455,5 +455,44 @@
   </data>
   <data name="CarBrandAndModel" xml:space="preserve">
     <value>Car brand, model</value>
+  </data>
+  <data name="UpdateStatistics" xml:space="preserve">
+    <value>Update Statistics</value>
+  </data>
+  <data name="CompanyStatistics" xml:space="preserve">
+    <value>Company statistics</value>
+  </data>
+  <data name="UserStatistics" xml:space="preserve">
+    <value>User statistics</value>
+  </data>
+  <data name="CardChangeRequestCount" xml:space="preserve">
+    <value>Card change request count</value>
+  </data>
+  <data name="CardCount" xml:space="preserve">
+    <value>Card count</value>
+  </data>
+  <data name="CardDailyAverage" xml:space="preserve">
+    <value>Card daily average</value>
+  </data>
+  <data name="FilledCardCount" xml:space="preserve">
+    <value>Filled card count</value>
+  </data>
+  <data name="Invalid" xml:space="preserve">
+    <value>Invalid</value>
+  </data>
+  <data name="OnlineTime" xml:space="preserve">
+    <value>Online time</value>
+  </data>
+  <data name="Primary" xml:space="preserve">
+    <value>Primary</value>
+  </data>
+  <data name="ScheduleChangeRequestCount" xml:space="preserve">
+    <value>Schedule change request count</value>
+  </data>
+  <data name="Secondary" xml:space="preserve">
+    <value>Secondary</value>
+  </data>
+  <data name="Valid" xml:space="preserve">
+    <value>Valid</value>
   </data>
 </root>

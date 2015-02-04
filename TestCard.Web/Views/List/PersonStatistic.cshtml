@@ -1,0 +1,87 @@
+﻿@model IEnumerable<TestCard.Web.Models.PersonStatisticListModel>
+<div class="x-table-cont">
+    <table class="x-table">
+        <thead>
+            <tr>
+                <th rowspan="2">
+                    @Html.DisplayNameFor(item => item.PersonFullName)
+                </th>
+                <th rowspan="2">
+                    @Html.DisplayNameFor(item => item.CompanyName)
+                </th>
+                <th rowspan="2">
+                    @Html.DisplayNameFor(item => item.ScheduleChangeRequestCnt)
+                </th>
+                <th rowspan="2">
+                    @Html.DisplayNameFor(item => item.FilledCardCnt)
+                </th>
+                <th rowspan="2">
+                    @Html.DisplayNameFor(item => item.TestingCardChangeRequestCnt)
+                </th>
+                <th rowspan="2">
+                    @Html.DisplayNameFor(item => item.TestingCardDailyAvg)
+                </th>
+                <th rowspan="2">
+                    @Html.DisplayNameFor(item => item.UserOnlineTime)
+                </th>
+                <th colspan="2">@GeneralResource.CardCount</th>
+                <th colspan="2">@GeneralResource.CardCount</th>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(item => item.ValidCardCnt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(item => item.InvalidCardCnt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(item => item.FirstTestingCnt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(item => item.SecondaryTestingCnt)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.PersonFullName, "View", "Person", new { @id = item.PersonID }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.CompanyName, "View", "Company", new { @id = item.CompanyID }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ScheduleChangeRequestCnt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FilledCardCnt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TestingCardChangeRequestCnt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TestingCardDailyAvg)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserOnlineTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValidCardCnt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InvalidCardCnt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstTestingCnt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SecondaryTestingCnt)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@{Html.Pager((IPagedList)Model, "PersonStatistic", "PersonStatistic");}

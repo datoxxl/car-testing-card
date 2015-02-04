@@ -60,5 +60,7 @@ namespace TestCard.Domain
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<PersonSession> PersonSessions { get; set; }
+        public DbSet<CompanyStatistic> CompanyStatistics { get; set; }
+        public DbSet<PersonStatistic> PersonStatistics { get; set; }
     }
 }

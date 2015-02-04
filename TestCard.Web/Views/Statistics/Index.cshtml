@@ -1,3 +1,48 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
+@if (ViewBag.AccountType != TestCard.Domain.AccountTypes.Operator)
+{
+    <span class="x-header">@GeneralResource.CompanyStatistics</span>
+    Html.RenderPartial("_ActionBar", new ActionBar
+       {
+           EntityObject = TestCard.Domain.Objects.Statistics,
+           Items = new List<ActionButton>
+           {
+               new ActionButton { 
+                   Type = ActionButton.ActionTypes.Edit, 
+                   Text = GeneralResource.UpdateStatistics,
+                   Url = Url.Action("RecalculateCompanyStatistics", "Statistics"),
+                   RequestType = ActionButton.RequestTypes.POST
+               }
+           }
+       });
+    Html.RenderPartial("_AjaxList", new AjaxListModel { ActionName = "CompanyStatistic" });
+}
+<span class="x-header">@GeneralResource.UserStatistics</span>
+@{ Html.RenderPartial("_ActionBar", new ActionBar
+       {
+           EntityObject = TestCard.Domain.Objects.Statistics,
+           Items = new List<ActionButton>
+           {
+               new ActionButton { 
+                   Type = ActionButton.ActionTypes.Edit, 
+                   Text = GeneralResource.UpdateStatistics,
+                   Url = Url.Action("RecalculatePersonStatistics", "Statistics"),
+                   RequestType = ActionButton.RequestTypes.POST
+               }
+           }
+       }); }
+@{ Html.RenderPartial("_AjaxList", new AjaxListModel { ActionName = "PersonStatistic" }); }
+@section scripts
+{
+    @Scripts.Render("~/Scripts/TableHelper.js")
+    <script type="text/javascript">
+        $(function () {
+            $("#company-stats").enhanceTable({
+                showSummaryRow: true,
+                columnConfig: [{ columnIndex: 0, type: "count" }]
+            });
+        });
+    </script>
+}

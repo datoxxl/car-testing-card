@@ -18,12 +18,12 @@ namespace TestCard.Web.Models
         [Display(Name = "RespFullName", ResourceType = typeof(GeneralResource))]
         public string RespPersonFullName { get; set; }
 
-        [Display(Name = "Valid", ResourceType = typeof(GeneralResource))]
+        [Display(Name = "IsValid", ResourceType = typeof(GeneralResource))]
         public string Valid
         {
             get
             {
-                return IsValid.HasValue && IsValid.Value ? GeneralResource.Valid : GeneralResource.NotValid;
+                return IsValid.HasValue && IsValid.Value ? GeneralResource.IsValid : GeneralResource.NotValid;
             }
             set { }
         }

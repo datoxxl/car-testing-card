@@ -16,7 +16,10 @@ namespace TestCard.Web.Models
         public object ObjectID { get; set; }
         //Html anchor target (e.g., _blank)
         public string Target { get; set; }
+        public RequestTypes RequestType { get; set; }
 
         public enum ActionTypes { Add, Edit, Delete, Print }
+
+        public enum RequestTypes { GET, POST }
     }
 }

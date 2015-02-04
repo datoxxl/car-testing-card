@@ -136,7 +136,7 @@ $.fn.formatCarNumber = function () {
             process(this, e.which);
         })
         .change(function () {
-            process(this)
+            process(this);
         });
     });
 };

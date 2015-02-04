@@ -14,6 +14,7 @@
           <EntitySet Name="Company" EntityType="CarTestingCardModel.Store.Company" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CompanyChangeRequest" EntityType="CarTestingCardModel.Store.CompanyChangeRequest" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CompanyHistory" EntityType="CarTestingCardModel.Store.CompanyHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyStatistic" EntityType="CarTestingCardModel.Store.CompanyStatistic" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ConfirmStatus" EntityType="CarTestingCardModel.Store.ConfirmStatus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="File" EntityType="CarTestingCardModel.Store.File" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Model" EntityType="CarTestingCardModel.Store.Model" store:Type="Tables" Schema="dbo" />
@@ -32,6 +33,7 @@
           <EntitySet Name="PersonScheduleChangeRequestDetail" EntityType="CarTestingCardModel.Store.PersonScheduleChangeRequestDetail" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PersonScheduleHistory" EntityType="CarTestingCardModel.Store.PersonScheduleHistory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PersonSession" EntityType="CarTestingCardModel.Store.PersonSession" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PersonStatistic" EntityType="CarTestingCardModel.Store.PersonStatistic" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestingCard" EntityType="CarTestingCardModel.Store.TestingCard" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestingCardChangeRequest" EntityType="CarTestingCardModel.Store.TestingCardChangeRequest" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestingCardDetail" EntityType="CarTestingCardModel.Store.TestingCardDetail" store:Type="Tables" Schema="dbo" />
@@ -105,6 +107,10 @@
           <AssociationSet Name="FK_CompanyHistory_Person3" Association="CarTestingCardModel.Store.FK_CompanyHistory_Person3">
             <End Role="Person" EntitySet="Person" />
             <End Role="CompanyHistory" EntitySet="CompanyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyStatistic_Company" Association="CarTestingCardModel.Store.FK_CompanyStatistic_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyStatistic" EntitySet="CompanyStatistic" />
           </AssociationSet>
           <AssociationSet Name="FK_Model_Brand" Association="CarTestingCardModel.Store.FK_Model_Brand">
             <End Role="Brand" EntitySet="Brand" />
@@ -281,6 +287,14 @@
           <AssociationSet Name="FK_PersonScheduleHistory_Person1" Association="CarTestingCardModel.Store.FK_PersonScheduleHistory_Person1">
             <End Role="Person" EntitySet="Person" />
             <End Role="PersonScheduleHistory" EntitySet="PersonScheduleHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonSession_Person" Association="CarTestingCardModel.Store.FK_PersonSession_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonSession" EntitySet="PersonSession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonStatistic_Person" Association="CarTestingCardModel.Store.FK_PersonStatistic_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonStatistic" EntitySet="PersonStatistic" />
           </AssociationSet>
           <AssociationSet Name="FK_TestingCard_Person" Association="CarTestingCardModel.Store.FK_TestingCard_Person">
             <End Role="Person" EntitySet="Person" />
@@ -480,6 +494,22 @@
           <Property Name="EffectiveDate" Type="datetime" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="CompanyStatistic">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="ScheduleChangeRequestCnt" Type="int" />
+          <Property Name="FilledCardCnt" Type="int" />
+          <Property Name="TestingCardChangeRequestCnt" Type="int" />
+          <Property Name="TestingCardDailyAvg" Type="decimal" Scale="2" />
+          <Property Name="UserOnlineTime" Type="int" />
+          <Property Name="ValidCardCnt" Type="int" />
+          <Property Name="InvalidCardCnt" Type="int" />
+          <Property Name="FirstTestingCnt" Type="int" />
+          <Property Name="SecondaryTestingCnt" Type="int" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="ConfirmStatus">
           <Key>
@@ -715,6 +745,22 @@
           <Property Name="SessionEnd" Type="datetime" />
           <Property Name="LastSeenOn" Type="datetime" />
           <Property Name="Duration" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonStatistic">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="ScheduleChangeRequestCnt" Type="int" />
+          <Property Name="FilledCardCnt" Type="int" />
+          <Property Name="TestingCardChangeRequestCnt" Type="int" />
+          <Property Name="TestingCardDailyAvg" Type="decimal" Scale="2" />
+          <Property Name="UserOnlineTime" Type="int" />
+          <Property Name="ValidCardCnt" Type="int" />
+          <Property Name="InvalidCardCnt" Type="int" />
+          <Property Name="FirstTestingCnt" Type="int" />
+          <Property Name="SecondaryTestingCnt" Type="int" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="TestingCard">
@@ -1053,6 +1099,18 @@
             </Principal>
             <Dependent Role="CompanyHistory">
               <PropertyRef Name="ResponsiblePersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyStatistic_Company">
+          <End Role="Company" Type="CarTestingCardModel.Store.Company" Multiplicity="1" />
+          <End Role="CompanyStatistic" Type="CarTestingCardModel.Store.CompanyStatistic" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="CompanyStatistic">
+              <PropertyRef Name="CompanyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1581,6 +1639,30 @@
             </Principal>
             <Dependent Role="PersonScheduleHistory">
               <PropertyRef Name="ResponsiblePersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonSession_Person">
+          <End Role="Person" Type="CarTestingCardModel.Store.Person" Multiplicity="1" />
+          <End Role="PersonSession" Type="CarTestingCardModel.Store.PersonSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonSession">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonStatistic_Person">
+          <End Role="Person" Type="CarTestingCardModel.Store.Person" Multiplicity="1" />
+          <End Role="PersonStatistic" Type="CarTestingCardModel.Store.PersonStatistic" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonStatistic">
+              <PropertyRef Name="PersonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2244,6 +2326,20 @@
             <End Role="Model" EntitySet="Models" />
           </AssociationSet>
           <EntitySet Name="PersonSessions" EntityType="TestCardModel.PersonSession" />
+          <EntitySet Name="CompanyStatistics" EntityType="TestCardModel.CompanyStatistic" />
+          <EntitySet Name="PersonStatistics" EntityType="TestCardModel.PersonStatistic" />
+          <AssociationSet Name="FK_CompanyStatistic_Company" Association="TestCardModel.FK_CompanyStatistic_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyStatistic" EntitySet="CompanyStatistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonStatistic_Person" Association="TestCardModel.FK_PersonStatistic_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonStatistic" EntitySet="PersonStatistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonSession_Person" Association="TestCardModel.FK_PersonSession_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonSession" EntitySet="PersonSessions" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccountType">
           <Key>
@@ -2282,6 +2378,7 @@
           <Property Type="Int32" Name="AccreditationLogoFileID" />
           <NavigationProperty Name="AccreditationLogoFile" Relationship="TestCardModel.FK_Company_File_AccreditationLogo" FromRole="Company" ToRole="File" />
           <NavigationProperty Name="CompanyLogoFile" Relationship="TestCardModel.FK_Company_File_CompanyLogo" FromRole="Company" ToRole="File" />
+          <NavigationProperty Name="CompanyStatistic" Relationship="TestCardModel.FK_CompanyStatistic_Company" FromRole="Company" ToRole="CompanyStatistic" />
         </EntityType>
         <EntityType Name="CompanyChangeRequest">
           <Key>
@@ -2956,6 +3053,8 @@
           <NavigationProperty Name="PersonScheduleChangeRequests1" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person1" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
           <NavigationProperty Name="PersonScheduleChangeRequests2" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person2" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
           <NavigationProperty Name="PersonScheduleChangeRequests3" Relationship="TestCardModel.FK_PersonScheduleChangeRequest_Person3" FromRole="Person" ToRole="PersonScheduleChangeRequest" />
+          <NavigationProperty Name="PersonStatistic" Relationship="TestCardModel.FK_PersonStatistic_Person" FromRole="Person" ToRole="PersonStatistic" />
+          <NavigationProperty Name="PersonSessions" Relationship="TestCardModel.FK_PersonSession_Person" FromRole="Person" ToRole="PersonSession" />
         </EntityType>
         <Association Name="FK_Person_AccountType">
           <End Type="TestCardModel.AccountType" Role="AccountType" Multiplicity="1" />
@@ -3875,7 +3974,78 @@
           <Property Type="DateTime" Name="LastSeenOn" Precision="3" />
           <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
           <Property Type="Int32" Name="Duration" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Person" Relationship="TestCardModel.FK_PersonSession_Person" FromRole="PersonSession" ToRole="Person" />
         </EntityType>
+        <EntityType Name="CompanyStatistic">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Type="Int32" Name="CompanyID" Nullable="false" />
+          <Property Type="Int32" Name="ScheduleChangeRequestCnt" />
+          <Property Type="Int32" Name="FilledCardCnt" />
+          <Property Type="Int32" Name="TestingCardChangeRequestCnt" />
+          <Property Type="Decimal" Name="TestingCardDailyAvg" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="UserOnlineTime" />
+          <Property Type="Int32" Name="ValidCardCnt" />
+          <Property Type="Int32" Name="InvalidCardCnt" />
+          <Property Type="Int32" Name="FirstTestingCnt" />
+          <Property Type="Int32" Name="SecondaryTestingCnt" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Company" Relationship="TestCardModel.FK_CompanyStatistic_Company" FromRole="CompanyStatistic" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="PersonStatistic">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Type="Int32" Name="PersonID" Nullable="false" />
+          <Property Type="Int32" Name="ScheduleChangeRequestCnt" />
+          <Property Type="Int32" Name="FilledCardCnt" />
+          <Property Type="Int32" Name="TestingCardChangeRequestCnt" />
+          <Property Type="Decimal" Name="TestingCardDailyAvg" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="UserOnlineTime" />
+          <Property Type="Int32" Name="ValidCardCnt" />
+          <Property Type="Int32" Name="InvalidCardCnt" />
+          <Property Type="Int32" Name="FirstTestingCnt" />
+          <Property Type="Int32" Name="SecondaryTestingCnt" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Person" Relationship="TestCardModel.FK_PersonStatistic_Person" FromRole="PersonStatistic" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_CompanyStatistic_Company">
+          <End Type="TestCardModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="TestCardModel.CompanyStatistic" Role="CompanyStatistic" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="CompanyStatistic">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonStatistic_Person">
+          <End Type="TestCardModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="TestCardModel.PersonStatistic" Role="PersonStatistic" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonStatistic">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonSession_Person">
+          <End Type="TestCardModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="TestCardModel.PersonSession" Role="PersonSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="PersonSession">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4392,7 +4562,41 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="CompanyStatistics">
+            <EntityTypeMapping TypeName="TestCardModel.CompanyStatistic">
+              <MappingFragment StoreEntitySet="CompanyStatistic">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="SecondaryTestingCnt" ColumnName="SecondaryTestingCnt" />
+                <ScalarProperty Name="FirstTestingCnt" ColumnName="FirstTestingCnt" />
+                <ScalarProperty Name="InvalidCardCnt" ColumnName="InvalidCardCnt" />
+                <ScalarProperty Name="ValidCardCnt" ColumnName="ValidCardCnt" />
+                <ScalarProperty Name="UserOnlineTime" ColumnName="UserOnlineTime" />
+                <ScalarProperty Name="TestingCardDailyAvg" ColumnName="TestingCardDailyAvg" />
+                <ScalarProperty Name="TestingCardChangeRequestCnt" ColumnName="TestingCardChangeRequestCnt" />
+                <ScalarProperty Name="FilledCardCnt" ColumnName="FilledCardCnt" />
+                <ScalarProperty Name="ScheduleChangeRequestCnt" ColumnName="ScheduleChangeRequestCnt" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonStatistics">
+            <EntityTypeMapping TypeName="TestCardModel.PersonStatistic">
+              <MappingFragment StoreEntitySet="PersonStatistic">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="SecondaryTestingCnt" ColumnName="SecondaryTestingCnt" />
+                <ScalarProperty Name="FirstTestingCnt" ColumnName="FirstTestingCnt" />
+                <ScalarProperty Name="InvalidCardCnt" ColumnName="InvalidCardCnt" />
+                <ScalarProperty Name="ValidCardCnt" ColumnName="ValidCardCnt" />
+                <ScalarProperty Name="UserOnlineTime" ColumnName="UserOnlineTime" />
+                <ScalarProperty Name="TestingCardDailyAvg" ColumnName="TestingCardDailyAvg" />
+                <ScalarProperty Name="TestingCardChangeRequestCnt" ColumnName="TestingCardChangeRequestCnt" />
+                <ScalarProperty Name="FilledCardCnt" ColumnName="FilledCardCnt" />
+                <ScalarProperty Name="ScheduleChangeRequestCnt" ColumnName="ScheduleChangeRequestCnt" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

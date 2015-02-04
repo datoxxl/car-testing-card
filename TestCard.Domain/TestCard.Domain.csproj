@@ -71,6 +71,9 @@
     <Compile Include="CompanyHistory.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="CompanyStatistic.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="ConfirmStatus.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
@@ -106,6 +109,7 @@
     <Compile Include="ObjectPermission.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="Partial\Person.cs" />
     <Compile Include="Permission.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
@@ -145,12 +149,17 @@
     <Compile Include="PersonSession.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
+    <Compile Include="PersonStatistic.cs">
+      <DependentUpon>Data.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountTypeService.cs" />
     <Compile Include="Services\ChangeRequestReasonService.cs" />
     <Compile Include="Services\CodeService.cs" />
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="Services\BrandService.cs" />
+    <Compile Include="Services\CompanyStatisticService.cs" />
+    <Compile Include="Services\PersonStatisticService.cs" />
     <Compile Include="Services\ModelService.cs" />
     <Compile Include="Services\PersonSessionService.cs" />
     <Compile Include="Services\TestingCardChangeRequestService.cs" />
@@ -161,6 +170,7 @@
     <Compile Include="Services\PersonScheduleService.cs" />
     <Compile Include="Services\PersonService.cs" />
     <Compile Include="Services\TestingCardService.cs" />
+    <Compile Include="PersonInfo.cs" />
     <Compile Include="TestingCard.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
@@ -188,7 +198,6 @@
     <Compile Include="TestingSubStep.cs">
       <DependentUpon>Data.tt</DependentUpon>
     </Compile>
-    <Compile Include="PersonInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

@@ -17,6 +17,10 @@ namespace TestCard.Domain.Services
             : base(currentUser)
         { }
 
+        public CompanyService(DomainServiceBase service)
+            : base(service)
+        { }
+
         public bool SaveCompany(Company company, int responsiblePersonID, byte[] companyLogo, byte[] accreditationLogo)
         {
             string[] filePath = new string[2];

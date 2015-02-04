@@ -32,7 +32,16 @@
                 break;
         }
         <li>
-            <a href="@item.Url" class="item @item.Type.ToString().ToLower()"@(item.Target != null ? string.Format("target=\"{0}\"", item.Target) : string.Empty)>@item.Text</a>
+            @if (item.RequestType == ActionButton.RequestTypes.GET)
+            {
+                <a href="@item.Url" class="item @item.Type.ToString().ToLower()"@(item.Target != null ? string.Format("target=\"{0}\"", item.Target) : string.Empty)>@item.Text</a>
+            }
+            else
+            {
+                <form action="@item.Url" method="post">
+                    <input type="submit" value="@item.Text" class="item @item.Type.ToString().ToLower()" />
+                </form>
+            }
         </li>   
     }
 </ul>

@@ -12,16 +12,19 @@ namespace TestCard.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class PersonSession
+    public partial class PersonStatistic
     {
         public int PersonID { get; set; }
-        public int SessionNumber { get; set; }
-        public System.Guid SessionID { get; set; }
-        public System.DateTime SessionStart { get; set; }
-        public Nullable<System.DateTime> SessionEnd { get; set; }
-        public Nullable<System.DateTime> LastSeenOn { get; set; }
+        public Nullable<int> ScheduleChangeRequestCnt { get; set; }
+        public Nullable<int> FilledCardCnt { get; set; }
+        public Nullable<int> TestingCardChangeRequestCnt { get; set; }
+        public Nullable<decimal> TestingCardDailyAvg { get; set; }
+        public Nullable<int> UserOnlineTime { get; set; }
+        public Nullable<int> ValidCardCnt { get; set; }
+        public Nullable<int> InvalidCardCnt { get; set; }
+        public Nullable<int> FirstTestingCnt { get; set; }
+        public Nullable<int> SecondaryTestingCnt { get; set; }
         public System.DateTime CreateDate { get; set; }
-        public Nullable<int> Duration { get; set; }
     
         public virtual Person Person { get; set; }
     }

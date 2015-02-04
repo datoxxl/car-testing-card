@@ -27,7 +27,7 @@ namespace TestCard.Web
 
         protected void Application_PostRequestHandlerExecute(object sender, EventArgs args)
         {
-            AppAuth.LogSession();
+            //AppAuth.LogSession();
         } 
 
         protected void Session_OnEnd(Object sender, EventArgs e)

@@ -17,14 +17,7 @@
 @{ Html.RenderPartial("_ListFilter", new AjaxListModel
    {
        ActionName = "TestingCard",
-       Filter = new ListFilter
-       {
-           Name = "TestingCardFilter",
-           Items = new List<ListFilter.Item> { 
-               new ListFilter.Item { Name = GeneralResource.All, Value = "all" },
-               new ListFilter.Item { Name = GeneralResource.MyCompany, Value = "company", Selected = true },
-           }
-       }
+       Filter = ((IFilteredList)Model).Filter
    }); }
 <div class="x-table-cont">
     <table class="x-table">

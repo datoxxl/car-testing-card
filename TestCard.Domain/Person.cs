@@ -56,6 +56,7 @@ namespace TestCard.Domain
             this.PersonScheduleChangeRequests1 = new HashSet<PersonScheduleChangeRequest>();
             this.PersonScheduleChangeRequests2 = new HashSet<PersonScheduleChangeRequest>();
             this.PersonScheduleChangeRequests3 = new HashSet<PersonScheduleChangeRequest>();
+            this.PersonSessions = new HashSet<PersonSession>();
         }
     
         public int PersonID { get; set; }
@@ -116,5 +117,7 @@ namespace TestCard.Domain
         public virtual ICollection<PersonScheduleChangeRequest> PersonScheduleChangeRequests1 { get; set; }
         public virtual ICollection<PersonScheduleChangeRequest> PersonScheduleChangeRequests2 { get; set; }
         public virtual ICollection<PersonScheduleChangeRequest> PersonScheduleChangeRequests3 { get; set; }
+        public virtual PersonStatistic PersonStatistic { get; set; }
+        public virtual ICollection<PersonSession> PersonSessions { get; set; }
     }
 }

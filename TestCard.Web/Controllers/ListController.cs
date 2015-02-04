@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TestCard.Domain.Helpers;
 using TestCard.Domain.Services;
+using TestCard.Properties.Resources;
 using TestCard.Web.Filters;
 
 namespace TestCard.Web.Controllers
@@ -32,7 +33,7 @@ namespace TestCard.Web.Controllers
                     FilterExpression = filterExpression
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.PersonListModel>>(service.GetAll(filter, true).ToList());
+                var list = AutoMapper.Mapper.Map<Models.ModelList<Models.PersonListModel>>(service.GetAll(filter, true).ToList());
 
                 return PartialView(new Models.PagedList<Models.PersonListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
@@ -50,7 +51,7 @@ namespace TestCard.Web.Controllers
                     SortByExpression = "CompanyName"
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.CompanyListModel>>(service.GetAll(filter, true).ToList());
+                var list = AutoMapper.Mapper.Map<Models.ModelList<Models.CompanyListModel>>(service.GetAll(filter, true).ToList());
 
                 return PartialView(new Models.PagedList<Models.CompanyListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
@@ -69,7 +70,7 @@ namespace TestCard.Web.Controllers
                     FilterExpression = GetChangeRequestFilter(showAll)
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.PersonChangeRequestListModel>>(service.GetAll(filter, true));
+                var list = AutoMapper.Mapper.Map<Models.ModelList<Models.PersonChangeRequestListModel>>(service.GetAll(filter, true));
 
                 return PartialView(new Models.PagedList<Models.PersonChangeRequestListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
@@ -88,15 +89,17 @@ namespace TestCard.Web.Controllers
                     FilterExpression = GetChangeRequestFilter(showAll)
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.PersonScheduleChangeRequestListModel>>(service.GetAll(filter, true));
+                var list = AutoMapper.Mapper.Map<Models.ModelList<Models.PersonScheduleChangeRequestListModel>>(service.GetAll(filter, true));
 
                 return PartialView(new Models.PagedList<Models.PersonScheduleChangeRequestListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
         }
 
         [PermissionFilter(Domain.Permissions.View, TestCard.Domain.Objects.TestingCard)]
-        public PartialViewResult TestingCard(string testingCardFilter, int pageIndex = 1)
+        public PartialViewResult TestingCard(int? companyID, int pageIndex = 1)
         {
+            companyID = companyID ?? CurrentUser.CompanyID;
+
             using (var service = new TestingCardService(CurrentUser))
             {
                 var filter = new DataFilterOption
@@ -104,11 +107,37 @@ namespace TestCard.Web.Controllers
                     PageIndex = pageIndex,
                     MaximumRows = 10,
                     SortByExpression = "EffectiveDate DESC",
-                    FilterExpression = testingCardFilter == "company" || testingCardFilter == null 
-                        ? string.Format("Person.CompanyID == {0}", CurrentUser.CompanyID) : null
+                    FilterExpression = companyID != -1
+                        ? string.Format("Person.CompanyID == {0}", companyID) : null
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.TestingCardListModel>>(service.GetAll(filter, true));
+                var list = AutoMapper.Mapper.Map<Models.ModelList<Models.TestingCardListModel>>(service.GetAll(filter, true));
+
+                if (CurrentUser.AccountType == Domain.AccountTypes.Administrator)
+                {
+                    var filterItems = new List<Models.ListFilter.Item>();
+
+                    using (var companyService = new CompanyService(service))
+                    {
+                        filterItems.AddRange(companyService.GetAll()
+                            .Select(x => new { x.CompanyID, x.CompanyName })
+                            .ToList()
+                            .Select(x => new Models.ListFilter.Item
+                        {
+                            Name = x.CompanyName,
+                            Value = x.CompanyID.ToString(),
+                            Selected = x.CompanyID == CurrentUser.CompanyID
+                        }));
+                    }
+
+                    filterItems.Add(new Models.ListFilter.Item { Name = GeneralResource.All, Value = "-1" });
+
+                    list.Filter = new Models.ListFilter
+                    {
+                        Name = "CompanyID",
+                        Items = filterItems
+                    };
+                }
 
                 return PartialView(new Models.PagedList<Models.TestingCardListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
@@ -127,9 +156,45 @@ namespace TestCard.Web.Controllers
                     FilterExpression = GetChangeRequestFilter(showAll)
                 };
 
-                var list = AutoMapper.Mapper.Map<List<Models.TestingCardChangeRequestListModel>>(service.GetAll(filter, true));
+                var list = AutoMapper.Mapper.Map<Models.ModelList<Models.TestingCardChangeRequestListModel>>(service.GetAll(filter, true));
 
                 return PartialView(new Models.PagedList<Models.TestingCardChangeRequestListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
+            }
+        }
+
+        [PermissionFilter(Domain.Permissions.View, TestCard.Domain.Objects.Statistics)]
+        public PartialViewResult CompanyStatistic(int pageIndex = 1)
+        {
+            using (var service = new CompanyStatisticService(CurrentUser))
+            {
+                var filter = new DataFilterOption
+                {
+                    PageIndex = pageIndex,
+                    MaximumRows = int.MaxValue,
+                    SortByExpression = "Company.CompanyName"
+                };
+
+                var list = AutoMapper.Mapper.Map<Models.ModelList<Models.CompanyStatisticListModel>>(service.GetAll(filter, true).ToList());
+
+                return PartialView(new Models.PagedList<Models.CompanyStatisticListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
+            }
+        }
+
+        [PermissionFilter(Domain.Permissions.View, TestCard.Domain.Objects.Statistics)]
+        public PartialViewResult PersonStatistic(int pageIndex = 1)
+        {
+            using (var service = new PersonStatisticService(CurrentUser))
+            {
+                var filter = new DataFilterOption
+                {
+                    PageIndex = pageIndex,
+                    MaximumRows = 10,
+                    SortByExpression = "Person.Company.CompanyName"
+                };
+
+                var list = AutoMapper.Mapper.Map<Models.ModelList<Models.PersonStatisticListModel>>(service.GetAll(filter, true).ToList());
+
+                return PartialView(new Models.PagedList<Models.PersonStatisticListModel>(list, filter.PageIndex, filter.MaximumRows, filter.TotalRowCount));
             }
         }
 

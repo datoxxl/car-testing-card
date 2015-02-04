@@ -46,5 +46,6 @@ namespace TestCard.Domain
         public virtual ICollection<PersonChangeRequest> PersonChangeRequests { get; set; }
         public virtual File AccreditationLogoFile { get; set; }
         public virtual File CompanyLogoFile { get; set; }
+        public virtual CompanyStatistic CompanyStatistic { get; set; }
     }
 }

@@ -53,9 +53,16 @@ namespace TestCard.Domain.Services
             : base(service)
         { }
 
-        public virtual IQueryable<T> GetAll()
+        public virtual IQueryable<T> GetAll(bool secureObject = false)
         {
-            return _DbContext.Set<T>();
+            var query = _DbContext.Set<T>().AsQueryable();
+
+            if (secureObject)
+            {
+                query = SecurityFilter(query);
+            }
+
+            return query;
         }
 
         public virtual IQueryable<T> GetAll(DataFilterOption option, bool secureObject = false)

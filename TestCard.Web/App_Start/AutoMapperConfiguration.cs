@@ -98,7 +98,7 @@ namespace TestCard.Web
             Mapper.CreateMap<Domain.TestingCard, Models.TestingCardListModel>()
                .ForMember(dest => dest.CompanyName, src => src.MapFrom(x => x.Person.Company.CompanyName))
                .ForMember(dest => dest.CompanyID, src => src.MapFrom(x => x.Person.CompanyID))
-               .ForMember(dest => dest.RespPersonFullName, src => src.MapFrom(x => x.Person.FirstName + " " + x.Person.LastName));
+               .ForMember(dest => dest.RespPersonFullName, src => src.MapFrom(x => x.Person.FullName));
             Mapper.CreateMap<Domain.TestingCard, Models.TestingCardModel>()
                .ForMember(dest => dest.TestingSteps, src => src.MapFrom(x => x.TestingCardDetails));
 
@@ -112,7 +112,7 @@ namespace TestCard.Web
                 .ForMember(dest => dest.CompanyAddress, src => src.MapFrom(x => x.Person.Company.Address))
                 .ForMember(dest => dest.CompanyLogoFileName, src => src.MapFrom(x => x.Person.Company.CompanyLogoFile.FileName))
                 .ForMember(dest => dest.AccreditationLogoFileName, src => src.MapFrom(x => x.Person.Company.AccreditationLogoFile.FileName))
-                .ForMember(dest => dest.RespPersonFullName, src => src.MapFrom(x => x.Person.FirstName + " " + x.Person.LastName));
+                .ForMember(dest => dest.RespPersonFullName, src => src.MapFrom(x => x.Person.FullName));
 
             Mapper.CreateMap<Domain.TestingStep, Models.TestingStep>();
             Mapper.CreateMap<Domain.TestingSubStep, Models.TestingSubStep>();
@@ -130,6 +130,14 @@ namespace TestCard.Web
                 .ForMember(dest => dest.TestingSubStepName, src => src.Ignore()); ;
             Mapper.CreateMap<ICollection<Domain.TestingCardDetailChangeRequest>, List<Models.TestingStep>>()
                 .ConstructTestingCardDetails();
+
+            Mapper.CreateMap<Domain.CompanyStatistic, Models.CompanyStatisticListModel>()
+                .ForMember(dest => dest.CompanyName, src => src.MapFrom(x => x.Company.CompanyName));
+
+            Mapper.CreateMap<Domain.PersonStatistic, Models.PersonStatisticListModel>()
+                .ForMember(dest => dest.PersonFullName, src => src.MapFrom(x => x.Person.FullName))
+                .ForMember(dest => dest.CompanyID, src => src.MapFrom(x => x.Person.CompanyID))
+                .ForMember(dest => dest.CompanyName, src => src.MapFrom(x => x.Person.Company.CompanyName));
         }
     }
 }

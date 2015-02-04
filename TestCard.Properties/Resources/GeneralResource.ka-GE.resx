@@ -324,7 +324,7 @@
   <data name="RespFullName" xml:space="preserve">
     <value>გამცემი</value>
   </data>
-  <data name="Valid" xml:space="preserve">
+  <data name="IsValid" xml:space="preserve">
     <value>ვარგისია</value>
   </data>
   <data name="VINCode" xml:space="preserve">
@@ -455,5 +455,44 @@
   </data>
   <data name="CarBrandAndModel" xml:space="preserve">
     <value>ასს-ის მარკა, მოდელი</value>
+  </data>
+  <data name="UpdateStatistics" xml:space="preserve">
+    <value>სტატისტიკის განახლება</value>
+  </data>
+  <data name="CompanyStatistics" xml:space="preserve">
+    <value>კომპანიების სტატისტიკა</value>
+  </data>
+  <data name="UserStatistics" xml:space="preserve">
+    <value>მომხმარებლების სტატისტიკა</value>
+  </data>
+  <data name="CardChangeRequestCount" xml:space="preserve">
+    <value>ცვლილებაზე მოთხოვნილი ბარათების რაოდენობა</value>
+  </data>
+  <data name="CardCount" xml:space="preserve">
+    <value>ბარათების რაოდენობა</value>
+  </data>
+  <data name="CardDailyAverage" xml:space="preserve">
+    <value>საშუალო ბარათების რაოდენობა დღის მანძილზე</value>
+  </data>
+  <data name="FilledCardCount" xml:space="preserve">
+    <value>შევსებული ბარათების რაოდენობა</value>
+  </data>
+  <data name="Invalid" xml:space="preserve">
+    <value>უვარგისი</value>
+  </data>
+  <data name="OnlineTime" xml:space="preserve">
+    <value>სერვერზე ყოფნის დრო</value>
+  </data>
+  <data name="Primary" xml:space="preserve">
+    <value>პირველადი</value>
+  </data>
+  <data name="ScheduleChangeRequestCount" xml:space="preserve">
+    <value>გრაფიკში შეტანილი ცვლილებების რაოდენობა</value>
+  </data>
+  <data name="Secondary" xml:space="preserve">
+    <value>მეორადი</value>
+  </data>
+  <data name="Valid" xml:space="preserve">
+    <value>ვარგისი</value>
   </data>
 </root>
